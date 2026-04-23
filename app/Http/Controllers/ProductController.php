@@ -10,7 +10,8 @@ class ProductController extends Controller
 {
      public function index()
     {
-        $products = Product::orderBy('name')->get();
+        $branchId = auth()->user()->branch_id;
+        $products = Product::where('branch_id', $branchId)->orderBy('name')->get();
         $services = Service::orderBy('name')->get();
 
         return view('products.index', compact('products', 'services'));
@@ -32,6 +33,7 @@ class ProductController extends Controller
             'price'           => $request->price,
             'stock_quantity'  => $request->stock_quantity,
             'alert_threshold' => $request->alert_threshold ?? 10,
+            'branch_id'       => auth()->user()->branch_id,
         ]);
 
         return back()->with('success', 'Produit créé avec succès.');
@@ -53,6 +55,7 @@ class ProductController extends Controller
             'price'           => $request->price,
             'stock_quantity'  => $request->stock_quantity,
             'alert_threshold' => $request->alert_threshold ?? 10,
+            'branch_id'       => auth()->user()->branch_id,
         ]);
 
         return back()->with('success', 'Produit mis à jour avec succès.');
@@ -60,6 +63,9 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
+        if ($product->branch_id !== auth()->user()->branch_id) {
+            return back()->with('error', 'Vous n\'avez pas la permission de supprimer ce produit.');
+        }
         $product->delete();
         return back()->with('success', 'Produit supprimé.');
     }

@@ -9,18 +9,19 @@ use Carbon\Carbon;
 
 class StockMovementController extends Controller
 {
-   public function index()
+    public function index()
     {
-        $products = Product::orderBy('name')->get();
+        $branchId = auth()->user()->branch_id;
+        $products = Product::where('branch_id', $branchId)->orderBy('name')->get();
 
         // KPIs
         $criticalCount     = $products->filter(fn($p) => $p->stock_quantity < ($p->alert_threshold ?? 0))->count();
         $stockValue        = $products->sum(fn($p) => $p->stock_quantity * $p->price);
-        $recentMovements   = StockMovement::where('created_at', '>=', Carbon::now()->subDays(30))->count();
-        $recentMovementsData = StockMovement::with('product')
-                                ->latest()
-                                ->take(8)
-                                ->get();
+        $recentMovements   = StockMovement::where('branch_id', $branchId)->where('created_at', '>=', Carbon::now()->subDays(30))->count();
+        $recentMovementsData = StockMovement::where('branch_id', $branchId)->with('product')
+            ->latest()
+            ->take(8)
+            ->get();
 
         return view('stock.stock', compact(
             'products',
@@ -33,8 +34,40 @@ class StockMovementController extends Controller
 
     public function movements()
     {
-        $movements = StockMovement::with('product')->latest()->paginate(30);
-        return view('stock.movements', compact('movements'));
+        $branchId = auth()->user()->branch_id;
+        $last30   = Carbon::now()->subDays(30);
+
+        $movements = StockMovement::where('branch_id', $branchId)
+            ->with(['product'])
+            ->latest()
+            ->paginate(20);
+
+        $products = Product::where('branch_id', $branchId)
+            ->orderBy('name')
+            ->get();
+
+        $totalMovements = StockMovement::where('branch_id', $branchId)->count();
+
+        $inCount  = StockMovement::where('branch_id', $branchId)->where('type', 'in')->where('created_at', '>=', $last30)->count();
+        $inQty    = StockMovement::where('branch_id', $branchId)->where('type', 'in')->where('created_at', '>=', $last30)->sum('quantity');
+
+        $outCount = StockMovement::where('branch_id', $branchId)->where('type', 'out')->where('created_at', '>=', $last30)->count();
+        $outQty   = StockMovement::where('branch_id', $branchId)->where('type', 'out')->where('created_at', '>=', $last30)->sum('quantity');
+
+        $lossCount = StockMovement::where('branch_id', $branchId)->where('type', 'loss')->where('created_at', '>=', $last30)->count();
+        $lossQty   = StockMovement::where('branch_id', $branchId)->where('type', 'loss')->where('created_at', '>=', $last30)->sum('quantity');
+
+        return view('stock.movements', compact(
+            'movements',
+            'products',
+            'totalMovements',
+            'inCount',
+            'inQty',
+            'outCount',
+            'outQty',
+            'lossCount',
+            'lossQty'
+        ));
     }
 
     public function storeMovement(Request $request)
@@ -45,7 +78,7 @@ class StockMovementController extends Controller
             'quantity'   => 'required|integer|min:1',
             'reason'     => 'nullable|string|max:255',
         ]);
-
+        $userBranchId = auth()->user()->branch_id;
         $product = Product::findOrFail($request->product_id);
 
         // Vérifier stock suffisant pour sortie/perte
@@ -59,6 +92,7 @@ class StockMovementController extends Controller
             'type'       => $request->type,
             'quantity'   => $request->quantity,
             'reason'     => $request->reason,
+            'branch_id'  => $userBranchId,
         ]);
 
         // Mettre à jour le stock produit
@@ -69,35 +103,5 @@ class StockMovementController extends Controller
         }
 
         return back()->with('success', 'Mouvement de stock enregistré avec succès.');
-    }
-
-    public function create()
-    {
-        // Logique pour afficher le formulaire de création d'un mouvement de stock
-    }
-
-    public function store(Request $request)
-    {
-        // Logique pour enregistrer un nouveau mouvement de stock
-    }
-
-    public function show($id)
-    {
-        // Logique pour afficher les détails d'un mouvement de stock spécifique
-    }
-
-    public function edit($id)
-    {
-        // Logique pour afficher le formulaire d'édition d'un mouvement de stock
-    }
-
-    public function update(Request $request, $id)
-    {
-        // Logique pour mettre à jour un mouvement de stock existant
-    }
-
-    public function destroy($id)
-    {
-        // Logique pour supprimer un mouvement de stock
     }
 }

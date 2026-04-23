@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('sale_id')->constrained()->cascadeOnDelete();
             $table->string('invoice_number')->unique();
             $table->decimal('total_amount', 10, 2);
+            $table->foreignId('branch_id')->constrained()->cascadeOnDelete();
             $table->timestamp('issued_at');
             $table->timestamps();
         });

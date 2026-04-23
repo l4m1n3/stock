@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\StockMovementController;
 use App\Http\Controllers\InvoiceController;
@@ -10,7 +11,7 @@ use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('finances.index');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
@@ -52,6 +53,13 @@ Route::prefix('services')->name('services.')->group(function () {
     Route::put('/{service}',   [ServiceController::class, 'update'])->name('update');
     Route::delete('/{service}', [ServiceController::class, 'destroy'])->name('destroy');
 });
+// ── Finances & Rapports ───────────────────────────────────────────────────
+Route::prefix('finances')->name('expenses.')->group(function () {
+    Route::get('/',                      [ExpenseController::class, 'index'])->name('index');
+    Route::post('/depenses',             [ExpenseController::class, 'storeExpense'])->name('store');
+    Route::delete('/depenses/{expense}', [ExpenseController::class, 'destroyExpense'])->name('destroy');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

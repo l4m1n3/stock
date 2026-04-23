@@ -17,6 +17,7 @@ return new class extends Migration
             $table->enum('type', ['in', 'out', 'loss']);
             $table->integer('quantity');
             $table->text('reason')->nullable();
+            $table->foreignId('branch_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

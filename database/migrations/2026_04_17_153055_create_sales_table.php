@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->decimal('total_amount', 10, 2);
             $table->enum('payment_method', ['amana', 'nita', 'cash']);
+            $table->foreignId('branch_id')->constrained()->cascadeOnDelete();
             $table->timestamp('sold_at');
             $table->timestamps();
         });

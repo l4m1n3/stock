@@ -17,6 +17,7 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->enum('type', ['livraison', 'materiel', 'salaire', 'autre']);
             $table->date('expense_date');
+            $table->foreignId('branch_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

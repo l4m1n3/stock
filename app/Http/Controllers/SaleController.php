@@ -19,7 +19,12 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $products = Product::where('stock_quantity', '>=', 0)->orderBy('name')->get();
+        $branchId = auth()->user()->branch_id;
+        $products = Product::query()
+            ->where('branch_id', $branchId)
+            ->where('stock_quantity', '>=', 0)
+            ->orderBy('name')
+            ->get();
         $services = Service::orderBy('name')->get();
 
         return view('pos.pos', compact('products', 'services'));
@@ -34,7 +39,7 @@ class SaleController extends Controller
             'payment_method' => 'required|in:amana,nita,cash',
             'cart_data'      => 'required|json',
         ]);
-
+        $branchId = auth()->user()->branch_id;
         $cartData = json_decode($request->cart_data, true);
 
         if (empty($cartData)) {
@@ -52,6 +57,7 @@ class SaleController extends Controller
                 'total_amount'   => $totalAmount,
                 'payment_method' => $request->payment_method,
                 'sold_at'        => now(),
+                'branch_id'      => auth()->user()->branch_id,
             ]);
 
             // 3. Enregistrer chaque ligne du panier
@@ -76,8 +82,8 @@ class SaleController extends Controller
                         'type'       => 'out',
                         'quantity'   => $line['qty'],
                         'reason'     => 'Vente #' . $sale->id,
+                        'branch_id'  => auth()->user()->branch_id,
                     ]);
-
                 } elseif ($line['type'] === 'service') {
                     // Ligne service
                     SaleService::create([
@@ -94,11 +100,12 @@ class SaleController extends Controller
                 'invoice_number' => 'INV-' . str_pad($sale->id, 6, '0', STR_PAD_LEFT),
                 'total_amount'   => $totalAmount,
                 'issued_at'      => now(),
+                'branch_id'      => auth()->user()->branch_id,
             ]);
         });
 
         return redirect()->back()
-                         ->with('success', 'Vente enregistrée et facture générée avec succès.');
+            ->with('success', 'Vente enregistrée et facture générée avec succès.');
     }
 
     /**
@@ -107,8 +114,8 @@ class SaleController extends Controller
     public function history()
     {
         $sales = Sale::with(['invoice', 'user'])
-                     ->latest('sold_at')
-                     ->paginate(20);
+            ->latest('sold_at')
+            ->paginate(20);
 
         return view('sales.history', compact('sales'));
     }
