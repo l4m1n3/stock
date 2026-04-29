@@ -12,11 +12,11 @@ class ServiceController extends Controller
     {
         $request->validate([
             'name'  => 'required|string|max:255',
-            'type'  => 'required|in:simple,semi_prive,prive',
+            // 'type'  => 'nullable|string|max:255',
             'price' => 'required|numeric|min:0',
         ]);
 
-        Service::create($request->only('name', 'type', 'price'));
+        Service::create($request->only('name', 'price'));
 
         return back()->with('success', 'Service créé avec succès.');
     }
@@ -25,11 +25,11 @@ class ServiceController extends Controller
     {
         $request->validate([
             'name'  => 'required|string|max:255',
-            'type'  => 'required|in:simple,semi_prive,prive',
+            // 'type'  => 'nullable|string|max:255',
             'price' => 'required|numeric|min:0',
         ]);
 
-        $service->update($request->only('name', 'type', 'price'));
+        $service->update($request->only('name', 'price'));
 
         return back()->with('success', 'Service mis à jour avec succès.');
     }

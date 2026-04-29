@@ -166,13 +166,25 @@ body {
         </div>
 
         <div class="info">
-            <table>
-                <tr>
-                    <td>Vente #{{ $invoice->sale_id }}</td>
-                    <td class="right">{{ $invoice->sale->payment_method ?? 'cash' }}</td>
-                </tr>
-            </table>
-        </div>
+    <table>
+        <tr>
+            <td>Vente #{{ $invoice->sale_id }}</td>
+            <td class="right">
+                @php
+                    $payLabels = [
+                        'cash'          => 'Espèces',
+                        'amana'         => 'Amana',
+                        'nita'          => 'Nita',
+                        'western_union' => 'Western Union',
+                        'moneygram'     => 'MoneyGram',
+                        'wave'          => 'Wave',
+                    ];
+                @endphp
+                {{ $payLabels[$invoice->sale->payment_method ?? 'cash'] ?? $invoice->sale->payment_method }}
+            </td>
+        </tr>
+    </table>
+</div>
 
         <table class="items-table">
             <thead>
@@ -196,10 +208,19 @@ body {
 
             @foreach($invoice->sale->saleServices ?? [] as $svc)
             <tr>
-                <td>{{ $svc->service->name ?? '-' }}</td>
+                <td>{{ $svc->service->name ?? '-' }} {{ $svc->service->type ?? '' }}</td>
                 <td>1</td>
                 <td>{{ number_format($svc->price, 0, ',', ' ') }}</td>
                 <td>{{ number_format($svc->price, 0, ',', ' ') }}</td>
+            </tr>
+            @endforeach
+
+            @foreach($invoice->sale->saleConfections ?? [] as $sc)
+            <tr>
+                <td>{{ $sc->confection->name ?? '-' }}</td>
+                <td>{{ $sc->quantity }}</td>
+                <td>{{ number_format($sc->unit_price, 0, ',', ' ') }}</td>
+                <td>{{ number_format($sc->total_price, 0, ',', ' ') }}</td>
             </tr>
             @endforeach
 
@@ -255,7 +276,19 @@ body {
             <table>
                 <tr>
                     <td>Vente #{{ $invoice->sale_id }}</td>
-                    <td class="right">{{ $invoice->sale->payment_method ?? 'cash' }}</td>
+                    <td class="right">
+                        @php
+                            $payLabels = [
+                                'cash'          => 'Espèces',
+                                'amana'         => 'Amana',
+                                'nita'          => 'Nita',
+                                'western_union' => 'Western Union',
+                                'moneygram'     => 'MoneyGram',
+                                'wave'          => 'Wave',
+                            ];
+                        @endphp
+                        {{ $payLabels[$invoice->sale->payment_method ?? 'cash'] ?? $invoice->sale->payment_method }}
+                    </td>
                 </tr>
             </table>
         </div>
@@ -288,7 +321,15 @@ body {
                 <td>{{ number_format($svc->price, 0, ',', ' ') }}</td>
             </tr>
             @endforeach
-
+            
+            @foreach($invoice->sale->saleConfections ?? [] as $sc)
+            <tr>
+                <td>{{ $sc->confection->name ?? '-' }}</td>
+                <td>{{ $sc->quantity }}</td>
+                <td>{{ number_format($sc->unit_price, 0, ',', ' ') }}</td>
+                <td>{{ number_format($sc->total_price, 0, ',', ' ') }}</td>
+            </tr>
+            @endforeach
             </tbody>
         </table>
 

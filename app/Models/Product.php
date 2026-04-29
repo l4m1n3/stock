@@ -17,4 +17,11 @@ class Product extends Model
     {
         return $this->belongsTo(Branch::class);
     }
+
+    public function confections()
+    {
+        return $this->belongsToMany(Confection::class, 'confection_products')
+            ->withPivot('quantity')
+            ->withTimestamps();
+    }
 }

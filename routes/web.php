@@ -8,6 +8,7 @@ use App\Http\Controllers\StockMovementController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ConfectionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -59,6 +60,11 @@ Route::prefix('finances')->name('expenses.')->group(function () {
     Route::post('/depenses',             [ExpenseController::class, 'storeExpense'])->name('store');
     Route::delete('/depenses/{expense}', [ExpenseController::class, 'destroyExpense'])->name('destroy');
 });
+
+// Confections
+Route::post('/confections',            [ConfectionController::class, 'store'])->name('confections.store');
+Route::put('/confections/{confection}', [ConfectionController::class, 'update'])->name('confections.update');
+Route::delete('/confections/{confection}', [ConfectionController::class, 'destroy'])->name('confections.destroy');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

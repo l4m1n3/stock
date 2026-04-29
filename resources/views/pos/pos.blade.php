@@ -320,6 +320,7 @@
             <button class="pos-tab active" onclick="posTab(this,'all')">Tout</button>
             <button class="pos-tab" onclick="posTab(this,'produit')">Produits</button>
             <button class="pos-tab" onclick="posTab(this,'service')">Services</button>
+            <button class="pos-tab" onclick="posTab(this,'confection')">Confections</button>
         </div>
 
         <div class="pos-items" id="pos-items-list"></div>
@@ -346,15 +347,24 @@
 
         <div class="pos-payment">
             <div class="pay-label">Mode de paiement</div>
-            <div class="pay-methods">
+           <div class="pay-methods" style="grid-template-columns: repeat(3, 1fr);">
                 <button class="pay-btn selected" onclick="posSelectPay(this,'cash')">
-                    <span class="pay-icon">💵</span> Espèces
+                    <span class="pay-icon"></span> Espèces
                 </button>
                 <button class="pay-btn" onclick="posSelectPay(this,'amana')">
-                    <span class="pay-icon">📱</span> Amana
+                    <span class="pay-icon"></span> Amanata
                 </button>
                 <button class="pay-btn" onclick="posSelectPay(this,'nita')">
-                    <span class="pay-icon">💳</span> Nita
+                    <span class="pay-icon"></span> MyNita
+                </button>
+                <button class="pay-btn" onclick="posSelectPay(this,'western_union')">
+                    <span class="pay-icon"></span> Western Union
+                </button>
+                <button class="pay-btn" onclick="posSelectPay(this,'moneygram')">
+                    <span class="pay-icon"></span> MoneyGram
+                </button>
+                <button class="pay-btn" onclick="posSelectPay(this,'wave')">
+                    <span class="pay-icon"></span> Wave
                 </button>
             </div>
 
@@ -423,6 +433,17 @@ const posCatalog = [
         serviceType: @json($s->type)
     },
     @endforeach
+    @foreach($confections as $c)
+{
+    id: 'c{{ $c->id }}',
+    name: @json($c->name),
+    type: 'confection',
+    price: {{ $c->total_price }},
+    stock: {{ $c->products->min('stock_quantity') ?? 0 }},
+    dbId: {{ $c->id }},
+    composition: @json($c->products->map(fn($p) => ['name' => $p->name, 'qty' => $p->pivot->quantity]))
+},
+@endforeach
 ];
 
 // ─── État ───────────────────────────────────────────────────────────────────
@@ -436,7 +457,12 @@ function posFmt(n) {
 }
 
 function posStockBadge(item) {
-    if (item.type === 'service') return '<span class="badge-stock badge-purple">Service</span>';
+    if (item.type === 'service')     return '<span class="badge-stock badge-purple">Service</span>';
+    if (item.type === 'confection') {
+        if (item.stock === 0) return '<span class="badge-stock badge-red">Composants épuisés</span>';
+        if (item.stock <= 3)  return `<span class="badge-stock badge-amber">Stock limité (${item.stock})</span>`;
+        return '<span class="badge-stock badge-green">Disponible</span>';
+    }
     if (item.stock > 5)  return `<span class="badge-stock badge-green">En stock (${item.stock})</span>`;
     if (item.stock > 0)  return `<span class="badge-stock badge-amber">Limité (${item.stock})</span>`;
     return '<span class="badge-stock badge-red">Rupture</span>';
@@ -453,14 +479,19 @@ function posRenderItems() {
     document.getElementById('item-count').textContent = filtered.length + ' articles';
     document.getElementById('pos-items-list').innerHTML = filtered.map(i => `
         <div class="pos-item">
-            <div>
+            <div style="flex:1;">
                 <div class="pos-item-name">${i.name}</div>
                 <div class="pos-item-meta">${posStockBadge(i)}</div>
+                ${i.type === 'confection' && i.composition?.length
+                    ? `<div style="font-size:11px;color:#b0a0d0;margin-top:3px;">
+                        ${i.composition.map(c => `${c.name} ×${c.qty}`).join(' · ')}
+                    </div>`
+                    : ''}
             </div>
             <div style="display:flex;align-items:center;gap:8px;">
                 <span class="pos-item-price">${posFmt(i.price)}</span>
                 <button class="pos-add-btn" onclick="posAddToCart('${i.id}')"
-                    ${i.type === 'produit' && i.stock === 0 ? 'disabled' : ''}>+</button>
+                    ${(i.type === 'produit' || i.type === 'confection') && i.stock === 0 ? 'disabled' : ''}>+</button>
             </div>
         </div>
     `).join('');
@@ -543,7 +574,14 @@ function posSelectPay(el, method) {
     el.classList.add('selected');
 }
 
-const payLabels = { cash: 'Espèces', amana: 'Amana Mobile Money', nita: 'Nita' };
+const payLabels = {
+    cash:          'Espèces',
+    amana:         'Amanata',
+    nita:          'MyNita',
+    western_union: 'Western Union',
+    moneygram:     'MoneyGram',
+    wave:          'Wave',
+};
 
 // ─── Checkout ────────────────────────────────────────────────────────────────
 function posCheckout() {

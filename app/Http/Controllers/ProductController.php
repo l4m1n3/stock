@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Service;
+use App\Models\Confection;
 
 class ProductController extends Controller
 {
@@ -13,8 +14,8 @@ class ProductController extends Controller
         $branchId = auth()->user()->branch_id;
         $products = Product::where('branch_id', $branchId)->orderBy('name')->get();
         $services = Service::orderBy('name')->get();
-
-        return view('products.index', compact('products', 'services'));
+        $confections = Confection::where('branch_id', $branchId)->orderBy('name')->get();
+        return view('products.index', compact('products', 'services', 'confections'));
     }
 
     public function store(Request $request)

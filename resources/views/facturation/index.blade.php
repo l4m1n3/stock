@@ -187,6 +187,9 @@
                 <option value="cash">Espèces</option>
                 <option value="amana">Amana</option>
                 <option value="nita">Nita</option>
+                <option value="western_union">Western Union</option>
+                <option value="moneygram">MoneyGram</option>
+                <option value="wave">Wave</option>
             </select>
         </div>
     </div>
@@ -205,11 +208,14 @@
             </thead>
             <tbody id="inv-tbody">
                 @foreach($invoices as $invoice)
-                @php
+               @php
                     $payBadges = [
-                        'cash'  => '<span class="badge-pay pay-cash"><i class="fas fa-money-bill"></i> Espèces</span>',
-                        'amana' => '<span class="badge-pay pay-amana"><i class="fas fa-mobile-alt"></i> Amana</span>',
-                        'nita'  => '<span class="badge-pay pay-nita"><i class="fas fa-credit-card"></i> Nita</span>',
+                        'cash'          => '<span class="badge-pay pay-cash"> Espèces</span>',
+                        'amana'         => '<span class="badge-pay pay-amana"> Amana</span>',
+                        'nita'          => '<span class="badge-pay pay-nita"> Nita</span>',
+                        'western_union' => '<span class="badge-pay" style="background:#FEF3C7;color:#92400E;"> Western Union</span>',
+                        'moneygram'     => '<span class="badge-pay" style="background:#FCE7F3;color:#9D174D;"> MoneyGram</span>',
+                        'wave'          => '<span class="badge-pay" style="background:#E0F2FE;color:#0369A1;"> Wave</span>',
                     ];
                 @endphp
                 <tr data-inv="{{ strtolower($invoice->invoice_number) }}"
@@ -352,6 +358,14 @@ function invFilter() {
         row.style.display = (invMatch && payMatch) ? '' : 'none';
     });
 }
+const payLabels = {
+    cash:          'Espèces',
+    amana:         'Amana Mobile Money',
+    nita:          'Nita',
+    western_union: 'Western Union',
+    moneygram:     'MoneyGram',
+    wave:          'Wave',
+};
 
 function showInvoice(id) {
     const inv = invoicesData[id];
@@ -359,12 +373,14 @@ function showInvoice(id) {
 
     document.getElementById('pv-number').textContent = inv.invoice_number;
     document.getElementById('pv-date').textContent   = inv.issued_at;
-    document.getElementById('pv-pay').textContent    = { cash: 'Espèces', amana: 'Amana', nita: 'Nita' }[inv.payment_method] || inv.payment_method;
+    document.getElementById('pv-pay').textContent    = payLabels[inv.payment_method] || inv.payment_method;
+
+    const typeIcons = { produit: '📦', service: '🌸', confection: '🎀' };
 
     const tbody = document.getElementById('pv-items-body');
     tbody.innerHTML = inv.items.map(item => `
         <tr>
-            <td>${item.name}</td>
+            <td>${typeIcons[item.type] ?? ''} ${item.name}</td>
             <td style="text-align:center;">${item.qty}</td>
             <td style="text-align:right;">${item.unit_price.toLocaleString('fr-FR')} FCFA</td>
             <td style="text-align:right;font-weight:600;">${item.total.toLocaleString('fr-FR')} FCFA</td>
@@ -379,6 +395,32 @@ function showInvoice(id) {
     zone.classList.add('show');
     zone.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+// function showInvoice(id) {
+//     const inv = invoicesData[id];
+//     if (!inv) return;
+
+//     document.getElementById('pv-number').textContent = inv.invoice_number;
+//     document.getElementById('pv-date').textContent   = inv.issued_at;
+//     document.getElementById('pv-pay').textContent    = { cash: 'Espèces', amana: 'Amana', nita: 'Nita' }[inv.payment_method] || inv.payment_method;
+
+//     const tbody = document.getElementById('pv-items-body');
+//     tbody.innerHTML = inv.items.map(item => `
+//         <tr>
+//             <td>${item.name}</td>
+//             <td style="text-align:center;">${item.qty}</td>
+//             <td style="text-align:right;">${item.unit_price.toLocaleString('fr-FR')} FCFA</td>
+//             <td style="text-align:right;font-weight:600;">${item.total.toLocaleString('fr-FR')} FCFA</td>
+//         </tr>
+//     `).join('');
+
+//     document.getElementById('pv-subtotal').textContent = inv.total_amount.toLocaleString('fr-FR') + ' FCFA';
+//     document.getElementById('pv-total').textContent    = inv.total_amount.toLocaleString('fr-FR') + ' FCFA';
+//     document.getElementById('pv-pdf-btn').onclick = () => window.open(`/factures/${id}/pdf`, '_blank');
+
+//     const zone = document.getElementById('print-zone');
+//     zone.classList.add('show');
+//     zone.scrollIntoView({ behavior: 'smooth', block: 'start' });
+// }
 </script>
 
 @endsection

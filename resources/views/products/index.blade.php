@@ -280,6 +280,9 @@
     <button class="tab-nav-btn" onclick="switchSection(this,'services')">
         <i class="fas fa-concierge-bell me-1"></i> Services ({{ $services->count() }})
     </button>
+    <button class="tab-nav-btn" onclick="switchSection(this,'confections')">
+        <i class="fas fa-concierge-bell me-1"></i> Confections ({{ $confections->count() }})
+    </button>
 </div>
 
 {{-- ══════════════════════ SECTION PRODUITS ══════════════════════ --}}
@@ -485,6 +488,94 @@
         </div>
     </div>
 </div>
+{{-- ══════════════════════ SECTION CONFECTIONS ══════════════════════ --}}
+<div id="section-confections" style="display:none;">
+    <div class="panel">
+        <div class="panel-header">
+            <span class="panel-title">
+                <i class="fas fa-scissors me-2" style="color:var(--violet);"></i>Catalogue Confections
+            </span>
+            <div class="toolbar">
+                <input type="text" id="conf-search" placeholder="Rechercher..." oninput="filterConfections()">
+            </div>
+        </div>
+
+        <div style="overflow-x:auto;">
+            <table class="svc-table">
+                <thead>
+                    <tr>
+                        <th>Confection</th>
+                        <th>Composition</th>
+                        <th>Prix confection</th>
+                        <th>Prix total estimé</th>
+                        <th>Date création</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="conf-tbody">
+                    @forelse($confections as $confection)
+                    <tr data-name="{{ strtolower($confection->name) }}">
+                        <td>
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <span style="font-size:20px;">🎀</span>
+                                <div>
+                                    <div style="font-weight:600;">{{ $confection->name }}</div>
+                                    <div style="font-size:12px;color:#9e8fc0;">
+                                        {{ $confection->description ?? 'Aucune description' }}
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            @if($confection->products->count())
+                                <div style="display:flex;flex-wrap:wrap;gap:4px;">
+                                @foreach($confection->products as $p)
+                                    <span class="badge-type type-simple" style="font-size:11px;">
+                                        {{ $p->name }} ×{{ $p->pivot->quantity }}
+                                    </span>
+                                @endforeach
+                                </div>
+                            @else
+                                <span style="color:#b0a0d0;font-size:13px;">Aucun produit</span>
+                            @endif
+                        </td>
+                        <td style="font-weight:700;color:var(--violet);">
+                            {{ number_format($confection->making_price, 0, ',', ' ') }} FCFA
+                        </td>
+                        <td style="font-weight:700;color:#3B6D11;">
+                            {{ number_format($confection->total_price, 0, ',', ' ') }} FCFA
+                        </td>
+                        <td style="font-size:13px;color:#9e8fc0;">
+                            {{ $confection->created_at->format('d/m/Y') }}
+                        </td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn-icon" onclick="editConfection({{ $confection->id }})" title="Modifier">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                                <button class="btn-icon danger" title="Supprimer"
+                                    onclick="confirmDelete({{ $confection->id }}, 'confection')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr><td colspan="6">
+                        <div class="empty-state">
+                            <div class="empty-icon">🎀</div>
+                            <p>Aucune confection enregistrée</p>
+                            <button class="btn-violet mt-2" data-bs-toggle="modal" data-bs-target="#modalConfection">
+                                + Ajouter la première confection
+                            </button>
+                        </div>
+                    </td></tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 {{-- ══════════════════════ MODAL : Nouveau/Edit Produit ══════════════════════ --}}
 <div class="modal fade" id="modalProduct" tabindex="-1">
@@ -561,19 +652,78 @@
                                placeholder="Ex: Bouquet privé avec livraison" required>
                     </div>
                     <div class="form-row">
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label class="form-label-s">Type de service *</label>
                             <select class="form-control-s" name="type" id="s-type" required>
                                 <option value="simple">🌸 Simple</option>
                                 <option value="semi_prive">💐 Semi-privé</option>
                                 <option value="prive">👑 Privé</option>
                             </select>
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <label class="form-label-s">Prix (FCFA) *</label>
                             <input type="number" class="form-control-s" name="price" id="s-price"
                                    placeholder="0" min="0" step="500" required>
                         </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 px-4 pb-4">
+                    <button type="button" class="btn btn-light rounded-3 px-4" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn-violet px-4">
+                        <i class="fas fa-check me-1"></i> Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{-- ══════════════════════ MODAL : Nouvelle/Edit Confection ══════════════════════ --}}
+<div class="modal fade" id="modalConfection" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header-violet d-flex align-items-center justify-content-between">
+                <h5 class="text-white fw-bold mb-0" id="modal-confection-title">
+                    <i class="fas fa-scissors me-2"></i>Nouvelle confection
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="confection-form" action="{{ route('confections.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="_method" id="confection-method" value="POST">
+                <div class="modal-body p-4">
+                    <div class="form-group">
+                        <label class="form-label-s">Nom de la confection *</label>
+                        <input type="text" class="form-control-s" name="name" id="c-name"
+                               placeholder="Ex: Bouquet mariage romantique" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label-s">Description</label>
+                        <textarea class="form-control-s" name="description" id="c-description"
+                                  rows="2" placeholder="Description..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label-s">Prix de confection (main-d'œuvre) (FCFA) *</label>
+                        <input type="number" class="form-control-s" name="making_price" id="c-making-price"
+                               placeholder="0" min="0" step="500" required>
+                    </div>
+
+                    {{-- Composition en produits --}}
+                    <div class="form-group">
+                        <label class="form-label-s">Composition (produits)</label>
+                        <div id="confection-products-list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px;">
+                            {{-- Lignes ajoutées dynamiquement --}}
+                        </div>
+                        <button type="button" class="btn-card" style="width:auto;padding:7px 16px;"
+                                onclick="addConfectionProductRow()">
+                            <i class="fas fa-plus"></i> Ajouter un produit
+                        </button>
+                    </div>
+
+                    {{-- Récap prix total --}}
+                    <div style="background:#f7f4ff;border-radius:10px;padding:12px 16px;margin-top:8px;display:flex;justify-content:space-between;align-items:center;">
+                        <span style="font-size:13px;color:#9e8fc0;font-weight:600;">Prix total estimé</span>
+                        <span id="conf-total-price" style="font-size:18px;font-weight:800;color:var(--violet);">0 FCFA</span>
                     </div>
                 </div>
                 <div class="modal-footer border-0 px-4 pb-4">
@@ -726,7 +876,7 @@ function editService(id) {
     document.getElementById('service-method').value = 'PUT';
     document.getElementById('service-edit-id').value = id;
     document.getElementById('s-name').value  = s.name;
-    document.getElementById('s-type').value  = s.type;
+    // document.getElementById('s-type').value  = s.type;
     document.getElementById('s-price').value = s.price;
     new bootstrap.Modal(document.getElementById('modalService')).show();
 }
@@ -752,6 +902,108 @@ function confirmDelete(id, type) {
     t.style.display = 'block';
     setTimeout(() => t.style.display = 'none', 3000);
 @endif
+
+// ── Données confections ──────────────────────────────────────────────────────
+const confectionsData = @json($confections->load('products')->keyBy('id'));
+
+// ── Tab confections ──────────────────────────────────────────────────────────
+// Mettre à jour switchSection pour gérer la 3e section :
+function switchSection(btn, section) {
+    document.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('section-produits').style.display   = section === 'produits'    ? '' : 'none';
+    document.getElementById('section-services').style.display   = section === 'services'    ? '' : 'none';
+    document.getElementById('section-confections').style.display = section === 'confections' ? '' : 'none';
+}
+
+// ── Filtre confections ───────────────────────────────────────────────────────
+function filterConfections() {
+    const q = document.getElementById('conf-search').value.toLowerCase();
+    document.querySelectorAll('#conf-tbody tr').forEach(row => {
+        row.style.display = (row.dataset.name && row.dataset.name.includes(q)) ? '' : 'none';
+    });
+}
+
+// ── Composition : ajouter une ligne produit ──────────────────────────────────
+function addConfectionProductRow(productId = '', quantity = 1) {
+    const list = document.getElementById('confection-products-list');
+    const idx  = list.children.length;
+    const options = Object.values(productsData).map(p =>
+        `<option value="${p.id}" data-price="${p.price}" ${p.id == productId ? 'selected' : ''}>${p.name} — ${Number(p.price).toLocaleString()} FCFA</option>`
+    ).join('');
+
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;gap:8px;align-items:center;';
+    row.innerHTML = `
+        <select class="form-control-s conf-product-select" name="products[${idx}][id]"
+                style="flex:1;" onchange="recalcConfTotal()">
+            <option value="">— Choisir un produit —</option>
+            ${options}
+        </select>
+        <input type="number" class="form-control-s conf-qty-input" name="products[${idx}][quantity]"
+               value="${quantity}" min="1" style="width:80px;" oninput="recalcConfTotal()">
+        <button type="button" class="btn-icon danger" onclick="this.parentElement.remove();recalcConfTotal();"
+                style="flex-shrink:0;"><i class="fas fa-times"></i></button>
+    `;
+    list.appendChild(row);
+    recalcConfTotal();
+}
+
+function recalcConfTotal() {
+    let total = parseFloat(document.getElementById('c-making-price').value) || 0;
+    document.querySelectorAll('#confection-products-list > div').forEach(row => {
+        const sel = row.querySelector('.conf-product-select');
+        const qty = parseFloat(row.querySelector('.conf-qty-input').value) || 0;
+        if (sel && sel.value) {
+            const price = parseFloat(sel.selectedOptions[0]?.dataset.price) || 0;
+            total += price * qty;
+        }
+    });
+    document.getElementById('conf-total-price').textContent = total.toLocaleString('fr-FR') + ' FCFA';
+}
+
+// Recalc quand making_price change
+document.getElementById('c-making-price')?.addEventListener('input', recalcConfTotal);
+
+// ── Edit confection ──────────────────────────────────────────────────────────
+function editConfection(id) {
+    const c = confectionsData[id];
+    if (!c) return;
+    document.getElementById('modal-confection-title').innerHTML = '<i class="fas fa-pen me-2"></i>Modifier ' + c.name;
+    document.getElementById('confection-form').action = `/confections/${id}`;
+    document.getElementById('confection-method').value = 'PUT';
+    document.getElementById('c-name').value          = c.name;
+    document.getElementById('c-description').value   = c.description || '';
+    document.getElementById('c-making-price').value  = c.making_price;
+
+    // Vider et recharger les lignes produits
+    document.getElementById('confection-products-list').innerHTML = '';
+    if (c.products) {
+        c.products.forEach(p => addConfectionProductRow(p.id, p.pivot.quantity));
+    }
+    recalcConfTotal();
+    new bootstrap.Modal(document.getElementById('modalConfection')).show();
+}
+
+// ── Réinitialiser le modal confection à l'ouverture (nouveau) ───────────────
+document.getElementById('modalConfection').addEventListener('show.bs.modal', function(e) {
+    if (!e.relatedTarget) return; // vient de editConfection, déjà peuplé
+    document.getElementById('modal-confection-title').innerHTML = '<i class="fas fa-scissors me-2"></i>Nouvelle confection';
+    document.getElementById('confection-form').action = "{{ route('confections.store') }}";
+    document.getElementById('confection-method').value = 'POST';
+    document.getElementById('c-name').value = '';
+    document.getElementById('c-description').value = '';
+    document.getElementById('c-making-price').value = '';
+    document.getElementById('confection-products-list').innerHTML = '';
+    recalcConfTotal();
+});
+
+// ── Étendre confirmDelete pour les confections ───────────────────────────────
+function confirmDelete(id, type) {
+    const urls = { product: `/produits/${id}`, service: `/services/${id}`, confection: `/confections/${id}` };
+    document.getElementById('delete-form').action = urls[type];
+    new bootstrap.Modal(document.getElementById('modalDelete')).show();
+}
 </script>
 
 @endsection

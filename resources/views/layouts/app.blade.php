@@ -435,7 +435,7 @@
             </button>
         </form>
 
-        <div class="sidebar-version">Ilyken Manager • Niamey 2026</div>
+        <div class="sidebar-version">Ilyken Manager • 2026</div>
     </div>
 
 </div>

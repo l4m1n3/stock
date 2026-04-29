@@ -28,5 +28,11 @@ class Sale extends Model
     public function saleServices()
     {
         return $this->hasMany(SaleService::class);
+    }   
+
+    public function saleConfections()
+    {
+        return $this->hasMany(SaleConfection::class);
     }
+     
 }
