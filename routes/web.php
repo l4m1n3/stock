@@ -9,6 +9,9 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ConfectionController;
+use App\Http\Controllers\PurchaseOrderController;
+use App\Http\Controllers\SupplierController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -65,6 +68,17 @@ Route::prefix('finances')->name('expenses.')->group(function () {
 Route::post('/confections',            [ConfectionController::class, 'store'])->name('confections.store');
 Route::put('/confections/{confection}', [ConfectionController::class, 'update'])->name('confections.update');
 Route::delete('/confections/{confection}', [ConfectionController::class, 'destroy'])->name('confections.destroy');
+// Fournisseurs
+Route::resource('fournisseurs', SupplierController::class)->except(['show', 'edit', 'create']);
+
+// Bons de commande / réapprovisionnement
+// web.php — ordre important
+Route::get('/reapprovisionnement',                        [PurchaseOrderController::class, 'index'])->name('purchases.index');
+Route::post('/reapprovisionnement',                       [PurchaseOrderController::class, 'store'])->name('purchases.store');
+Route::get('/reapprovisionnement/{order}/items',          [PurchaseOrderController::class, 'getItems'])->name('purchases.items');   // ← avant show
+Route::get('/reapprovisionnement/{order}',                [PurchaseOrderController::class, 'show'])->name('purchases.show');
+Route::post('/reapprovisionnement/{order}/recevoir',      [PurchaseOrderController::class, 'receive'])->name('purchases.receive');
+Route::post('/reapprovisionnement/{order}/annuler',       [PurchaseOrderController::class, 'cancel'])->name('purchases.cancel');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

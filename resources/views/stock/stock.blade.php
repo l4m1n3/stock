@@ -192,7 +192,12 @@
     .mvt-reason  { font-size: 12px; color: #9e8fc0; }
     .mvt-qty     { font-size: 14px; font-weight: 700; }
     .mvt-date    { font-size: 12px; color: #b0a0d0; white-space: nowrap; }
-
+/* Dans le bloc <style> de la vue stock */
+.marge-positive { color: #3B6D11; font-weight: 600; }
+.marge-negative { color: #A32D2D; font-weight: 600; }
+.marge-neutral  { color: #9e8fc0; font-size: 12px; }
+.prix-achat     { font-size: 13px; color: #5a4a7a; font-weight: 600; }
+.prix-vente     { font-size: 13px; color: var(--violet); font-weight: 700; }
     @media (max-width: 768px) {
         .kpi-grid { grid-template-columns: 1fr 1fr; }
         .form-row { grid-template-columns: 1fr; }
@@ -234,6 +239,20 @@
         <div class="kpi-value" style="color:var(--violet);">{{ number_format($stockValue, 0, ',', ' ') }}</div>
         <div class="kpi-sub">FCFA estimé</div>
     </div>
+    {{-- Remplacer le KPI "Valeur stock" ou en ajouter un 5e --}}
+    <div class="kpi-card">
+        <div class="kpi-label">Marge moyenne</div>
+        <div class="kpi-value" style="color:#3B6D11;">
+            @php
+                $margeProduits = $products->filter(fn($p) => $p->margin !== null);
+                $margeMoy = $margeProduits->count() > 0
+                    ? round($margeProduits->avg('margin'), 1)
+                    : null;
+            @endphp
+            {{ $margeMoy !== null ? $margeMoy . '%' : '—' }}
+        </div>
+        <div class="kpi-sub">sur {{ $margeProduits->count() }} produits achetés</div>
+    </div>
     <div class="kpi-card">
         <div class="kpi-label">Mouvements (30j)</div>
         <div class="kpi-value">{{ $recentMovements }}</div>
@@ -262,7 +281,9 @@
             <thead>
                 <tr>
                     <th>Produit</th>
-                    <th>Prix unitaire</th>
+                    <th>Prix achat</th>
+                    <th>Prix vente</th>
+                    <th>Marge</th>
                     <th>Quantité</th>
                     <th>Seuil alerte</th>
                     <th>Statut</th>
@@ -277,17 +298,13 @@
                         ? min(100, round($product->stock_quantity / $product->alert_threshold * 100))
                         : 100;
                     if ($product->stock_quantity === 0) {
-                        $statusKey = 'rupture';
-                        $barColor  = '#7F77DD';
+                        $statusKey = 'rupture'; $barColor = '#7F77DD';
                     } elseif ($product->stock_quantity < $product->alert_threshold * 0.5) {
-                        $statusKey = 'critical';
-                        $barColor  = '#E24B4A';
+                        $statusKey = 'critical'; $barColor = '#E24B4A';
                     } elseif ($product->stock_quantity < $product->alert_threshold) {
-                        $statusKey = 'low';
-                        $barColor  = '#EF9F27';
+                        $statusKey = 'low'; $barColor = '#EF9F27';
                     } else {
-                        $statusKey = 'ok';
-                        $barColor  = '#639922';
+                        $statusKey = 'ok'; $barColor = '#639922';
                     }
                     $badges = [
                         'ok'       => '<span class="badge-status badge-ok"><span class="status-dot dot-ok"></span>OK</span>',
@@ -297,13 +314,51 @@
                     ];
                 @endphp
                 <tr data-status="{{ $statusKey }}" data-name="{{ strtolower($product->name) }}">
+
+                    {{-- Produit --}}
                     <td>
                         <div style="font-weight:600;">{{ $product->name }}</div>
                         <div style="font-size:11px;color:#9e8fc0;">{{ $product->description ?? '—' }}</div>
                     </td>
-                    <td style="font-weight:600;color:var(--violet);">
-                        {{ number_format($product->price, 0, ',', ' ') }} FCFA
+
+                    {{-- Prix achat --}}
+                    <td>
+                        @if($product->last_purchase_price)
+                            <span class="prix-achat">
+                                {{ number_format($product->last_purchase_price, 0, ',', ' ') }} FCFA
+                            </span>
+                            <div style="font-size:11px;color:#b0a0d0;">dernier achat</div>
+                        @else
+                            <span style="color:#c0b0d8;font-size:13px;">—</span>
+                        @endif
                     </td>
+
+                    {{-- Prix vente --}}
+                    <td>
+                        <span class="prix-vente">
+                            {{ number_format($product->price, 0, ',', ' ') }} FCFA
+                        </span>
+                    </td>
+
+                    {{-- Marge --}}
+                    <td>
+                        @if($product->margin !== null)
+                            @if($product->margin > 0)
+                                <span class="marge-positive">+{{ $product->margin }}%</span>
+                            @elseif($product->margin < 0)
+                                <span class="marge-negative">{{ $product->margin }}%</span>
+                            @else
+                                <span class="marge-neutral">0%</span>
+                            @endif
+                            <div style="font-size:11px;color:#b0a0d0;">
+                                +{{ number_format($product->price - $product->last_purchase_price, 0, ',', ' ') }} FCFA/u
+                            </div>
+                        @else
+                            <span class="marge-neutral">—</span>
+                        @endif
+                    </td>
+
+                    {{-- Quantité --}}
                     <td>
                         <div class="stock-bar-wrap">
                             <span class="stock-qty" style="color:{{ $barColor }};">{{ $product->stock_quantity }}</span>
@@ -312,9 +367,17 @@
                             </div>
                         </div>
                     </td>
+
+                    {{-- Seuil --}}
                     <td style="color:#9e8fc0;">{{ $product->alert_threshold ?? '—' }}</td>
+
+                    {{-- Statut --}}
                     <td>{!! $badges[$statusKey] !!}</td>
+
+                    {{-- MAJ --}}
                     <td style="color:#b0a0d0;font-size:13px;">{{ $product->updated_at->format('d/m/Y') }}</td>
+
+                    {{-- Actions --}}
                     <td>
                         <div class="action-btns">
                             <button class="btn-icon" title="Entrée stock"

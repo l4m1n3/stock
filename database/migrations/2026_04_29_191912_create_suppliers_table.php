@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('expenses', function (Blueprint $table) {
+        Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->decimal('amount', 10, 2);
-            $table->string('type', 20)->default('autre');
-            $table->date('expense_date');
-            // status des dépenses : payé ou non payé
-            $table->string('status', 20)->default('non payé');
+            $table->string('name');
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->text('address')->nullable();
             $table->foreignId('branch_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('expenses');
+        Schema::dropIfExists('suppliers');
     }
 };

@@ -37,6 +37,7 @@
             flex-direction: column;
             padding: 0;
             box-shadow: 4px 0 24px rgba(75,29,149,0.18);
+            overflow-y: auto;
         }
 
         /* Logo zone */
@@ -44,6 +45,7 @@
             padding: 28px 24px 20px 24px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             margin-bottom: 12px;
+            flex-shrink: 0;
         }
         .sidebar-logo-title {
             font-size: 24px;
@@ -125,6 +127,7 @@
             font-weight: 700;
             padding: 2px 7px;
             border-radius: 99px;
+            flex-shrink: 0;
         }
 
         /* Footer sidebar */
@@ -132,6 +135,7 @@
             padding: 16px 20px;
             border-top: 1px solid rgba(255,255,255,0.1);
             margin-top: auto;
+            flex-shrink: 0;
         }
         .sidebar-footer-user {
             display: flex;
@@ -149,6 +153,33 @@
         .sidebar-user-name  { font-size: 13px; font-weight: 600; color: white; line-height: 1.2; }
         .sidebar-user-role  { font-size: 11px; color: rgba(255,255,255,0.5); }
         .sidebar-version    { font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 10px; }
+
+        .sidebar-logout-btn {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: none;
+            background: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.8);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.15s;
+            margin-top: 12px;
+        }
+        .sidebar-logout-btn:hover {
+            background: #E24B4A;
+            color: #fff;
+        }
+
+        /* Scrollbar sidebar */
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-track { background: transparent; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
 
         /* ══════════════════════ MAIN CONTENT ══════════════════════ */
         .main-content {
@@ -179,53 +210,6 @@
             align-items: center;
             gap: 18px;
         }
-        .topbar-search {
-            position: relative;
-        }
-        .topbar-search input {
-            padding: 8px 14px 8px 36px;
-            border-radius: 10px;
-            border: none;
-            background: rgba(255,255,255,0.18);
-            color: white;
-            font-size: 13px;
-            width: 240px;
-            outline: none;
-            transition: background 0.2s, width 0.2s;
-        }
-        .topbar-search input::placeholder { color: rgba(255,255,255,0.6); }
-        .topbar-search input:focus {
-            background: rgba(255,255,255,0.28);
-            width: 280px;
-        }
-        .topbar-search i {
-            position: absolute;
-            left: 11px; top: 50%;
-            transform: translateY(-50%);
-            color: rgba(255,255,255,0.65);
-            font-size: 13px;
-        }
-        .topbar-icon-btn {
-            width: 36px; height: 36px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 15px;
-            cursor: pointer;
-            border: none;
-            transition: background 0.15s;
-            position: relative;
-            text-decoration: none;
-        }
-        .topbar-icon-btn:hover { background: rgba(255,255,255,0.25); color: white; }
-        .topbar-notif-dot {
-            position: absolute;
-            top: 6px; right: 7px;
-            width: 7px; height: 7px;
-            background: #E24B4A;
-            border-radius: 50%;
-            border: 1.5px solid transparent;
-        }
         .topbar-user {
             display: flex;
             align-items: center;
@@ -242,6 +226,19 @@
         }
         .topbar-user-name  { font-size: 13px; font-weight: 600; color: white; line-height: 1.2; }
         .topbar-user-role  { font-size: 11px; color: rgba(255,255,255,0.65); }
+
+        /* Bouton hamburger mobile */
+        .topbar-menu-btn {
+            display: none;
+            width: 36px; height: 36px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            align-items: center; justify-content: center;
+            color: white; font-size: 16px;
+            cursor: pointer; border: none;
+            transition: background 0.15s;
+        }
+        .topbar-menu-btn:hover { background: rgba(255,255,255,0.25); }
 
         /* ══════════════════════ ALERTS SESSION ══════════════════════ */
         .session-alert {
@@ -294,37 +291,25 @@
             background-color: #f0ebff;
             color: var(--violet);
         }
-        .sidebar-logout-btn {
-    width: 100%;
-    padding: 10px 14px;
-    border-radius: 10px;
-    border: none;
-    background: #FCEBEB;
-    color: #A32D2D;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: all 0.15s;
-}
 
-.sidebar-logout-btn:hover {
-    background: #E24B4A;
-    color: #fff;
-}
-
-        /* Scrollbar sidebar */
-        .sidebar::-webkit-scrollbar { width: 4px; }
-        .sidebar::-webkit-scrollbar-track { background: transparent; }
-        .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+        /* Overlay mobile */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+        }
+        .sidebar-overlay.show { display: block; }
 
         @media (max-width: 768px) {
-            .sidebar { transform: translateX(-100%); transition: transform 0.3s; }
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+            }
             .sidebar.open { transform: translateX(0); }
-            .main-content { margin-left: 0; padding: 16px; }
+            .main-content { margin-left: 0; padding: 14px; }
+            .topbar-menu-btn { display: flex; }
         }
     </style>
 
@@ -332,8 +317,11 @@
 </head>
 <body>
 
+{{-- Overlay mobile --}}
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
 {{-- ══════════════════════ SIDEBAR ══════════════════════ --}}
-<div class="sidebar">
+<div class="sidebar" id="sidebar">
 
     {{-- Logo --}}
     <div class="sidebar-logo">
@@ -382,6 +370,16 @@
         </li>
 
         <li class="nav-item">
+            <a href="{{ route('purchases.index') }}"
+               class="nav-link {{ request()->routeIs('purchases.*') ? 'active' : '' }}">
+                <i class="fas fa-truck-ramp-box"></i> Réapprovisionnement
+                @if(isset($pendingOrdersCount) && $pendingOrdersCount > 0)
+                    <span class="nav-badge">{{ $pendingOrdersCount }}</span>
+                @endif
+            </a>
+        </li>
+
+        <li class="nav-item">
             <a href="{{ route('invoices.index') }}"
                class="nav-link {{ request()->routeIs('invoices.*') ? 'active' : '' }}">
                 <i class="fas fa-file-invoice"></i> Facturation
@@ -400,20 +398,13 @@
         <li class="nav-section">Admin</li>
 
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
                 <i class="fas fa-users"></i> Utilisateurs
             </a>
         </li>
 
-        {{-- <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="fas fa-gear"></i> Paramètres
-            </a>
-        </li> --}}
-
     </ul>
 
-    {{-- Footer user --}}
     {{-- Footer user --}}
     <div class="sidebar-footer">
         <div class="sidebar-footer-user">
@@ -422,16 +413,14 @@
             </div>
             <div>
                 <div class="sidebar-user-name">{{ auth()->user()->name ?? 'Utilisateur' }}</div>
-                <div class="sidebar-user-role">{{ auth()->user()->role ?? 'Utilisateur' }}</div>
+                <div class="sidebar-user-role">{{ ucfirst(auth()->user()->role ?? 'Utilisateur') }}</div>
             </div>
         </div>
 
-        {{-- Bouton déconnexion --}}
-        <form method="POST" action="{{ route('logout') }}" style="margin-top:12px;">
+        <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit" class="sidebar-logout-btn">
-                <i class="fas fa-sign-out-alt"></i>
-                Déconnexion
+                <i class="fas fa-sign-out-alt"></i> Déconnexion
             </button>
         </form>
 
@@ -445,34 +434,22 @@
 
     {{-- Topbar --}}
     <div class="topbar">
-        <h4 class="topbar-title">
-            @yield('page-title', 'Ilyken Manager')
-        </h4>
+        <div style="display:flex;align-items:center;gap:12px;">
+            <button class="topbar-menu-btn" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h4 class="topbar-title">@yield('page-title', 'Ilyken Manager')</h4>
+        </div>
         <div class="topbar-right">
-
-            {{-- Recherche --}}
-            {{-- <div class="topbar-search">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Rechercher produit, vente...">
-            </div> --}}
-
-            {{-- Notification
-            <button class="topbar-icon-btn">
-                <i class="fas fa-bell"></i>
-                <span class="topbar-notif-dot"></span>
-            </button> --}}
-
-            {{-- User --}}
             <div class="topbar-user">
                 <div class="topbar-avatar">
                     {{ strtoupper(substr(auth()->user()->name ?? 'U', 0, 1)) }}
                 </div>
                 <div>
                     <div class="topbar-user-name">{{ auth()->user()->name ?? 'Utilisateur' }}</div>
-                    <div class="topbar-user-role">{{ auth()->user()->role ?? 'Utilisateur' }}</div>
+                    <div class="topbar-user-role">{{ ucfirst(auth()->user()->role ?? 'Utilisateur') }}</div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -512,7 +489,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
 <script>
-    // Auto-dismiss session alerts
+    // ── Auto-dismiss session alerts ──────────────────────────────────────────
     document.querySelectorAll('.session-alert').forEach(el => {
         setTimeout(() => {
             el.style.transition = 'opacity 0.4s';
@@ -521,7 +498,20 @@
         }, 4000);
     });
 
-    // salesChart guard (dashboard uniquement)
+    // ── Sidebar mobile ────────────────────────────────────────────────────────
+    function toggleSidebar() {
+        const sidebar  = document.getElementById('sidebar');
+        const overlay  = document.getElementById('sidebar-overlay');
+        const isOpen   = sidebar.classList.contains('open');
+        sidebar.classList.toggle('open', !isOpen);
+        overlay.classList.toggle('show', !isOpen);
+    }
+    function closeSidebar() {
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('sidebar-overlay').classList.remove('show');
+    }
+
+    // ── salesChart guard (dashboard uniquement) ───────────────────────────────
     const salesChartEl = document.getElementById('salesChart');
     if (salesChartEl) {
         new Chart(salesChartEl, {
