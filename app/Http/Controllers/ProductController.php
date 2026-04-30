@@ -9,12 +9,23 @@ use App\Models\Confection;
 
 class ProductController extends Controller
 {
-     public function index()
+    public function index()
     {
-        $branchId = auth()->user()->branch_id;
-        $products = Product::where('branch_id', $branchId)->orderBy('name')->get();
-        $services = Service::orderBy('name')->get();
+        $branchId    = auth()->user()->branch_id;
+        $products    = Product::where('branch_id', $branchId)->orderBy('name')->get();
+        $services    = Service::orderBy('name')->get();
         $confections = Confection::where('branch_id', $branchId)->orderBy('name')->get();
+
+        // ✅ FIX : extraire en scalaires — ->count() ne s'interpole pas dans une string
+        $pCount = $products->count();
+        $sCount = $services->count();
+        $cCount = $confections->count();
+
+        activity_log(
+            'view_products',
+            "Consultation produits/services/confections : {$pCount} produits, {$sCount} services, {$cCount} confections"
+        );
+
         return view('products.index', compact('products', 'services', 'confections'));
     }
 
@@ -37,6 +48,7 @@ class ProductController extends Controller
             'branch_id'       => auth()->user()->branch_id,
         ]);
 
+        activity_log('product_created', "Produit créé : {$request->name}");
         return back()->with('success', 'Produit créé avec succès.');
     }
 
@@ -59,6 +71,7 @@ class ProductController extends Controller
             'branch_id'       => auth()->user()->branch_id,
         ]);
 
+        activity_log('product_updated', "Produit mis à jour : {$product->name}");
         return back()->with('success', 'Produit mis à jour avec succès.');
     }
 
@@ -67,7 +80,9 @@ class ProductController extends Controller
         if ($product->branch_id !== auth()->user()->branch_id) {
             return back()->with('error', 'Vous n\'avez pas la permission de supprimer ce produit.');
         }
+
         $product->delete();
+        activity_log('product_deleted', "Produit supprimé : {$product->name}");
         return back()->with('success', 'Produit supprimé.');
     }
 }

@@ -34,7 +34,7 @@ class ConfectionController extends Controller
                 ]);
             }
         }
-
+        activity_log('confection_created', "Confection créée : {$confection->name}");
         return back()->with('success', 'Confection créée avec succès.');
     }
 
@@ -68,7 +68,7 @@ class ConfectionController extends Controller
             }
         }
         $confection->products()->sync($sync);
-
+        activity_log('confection_updated', "Confection mise à jour : {$confection->name}");
         return back()->with('success', 'Confection mise à jour avec succès.');
     }
 
@@ -79,6 +79,7 @@ class ConfectionController extends Controller
         }
 
         $confection->delete();
+        activity_log('confection_deleted', "Confection supprimée : {$confection->name}");
         return back()->with('success', 'Confection supprimée.');
     }
 }

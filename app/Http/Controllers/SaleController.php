@@ -19,13 +19,28 @@ class SaleController extends Controller
     public function index()
     {
         $branchId = auth()->user()->branch_id;
+
         $products = Product::where('branch_id', $branchId)
             ->where('stock_quantity', '>=', 0)
             ->orderBy('name')->get();
+
         $services    = Service::orderBy('name')->get();
+
         $confections = Confection::with('products')
             ->where('branch_id', $branchId)
             ->orderBy('name')->get();
+
+        // ✅ FIX : les appels de méthode ne s'interpolent pas dans les strings PHP.
+        //    "$collection->count()" est lu comme accès à la propriété 'count' → erreur.
+        //    Solution : extraire les valeurs dans des variables scalaires avant l'interpolation.
+        $pCount = $products->count();
+        $sCount = $services->count();
+        $cCount = $confections->count();
+
+        activity_log(
+            'sale_index',
+            "Consultation produits/services/confections pour vente : {$pCount} produits, {$sCount} services, {$cCount} confections"
+        );
 
         return view('pos.pos', compact('products', 'services', 'confections'));
     }
@@ -33,7 +48,6 @@ class SaleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            // SaleController — validation
             'payment_method' => 'required|in:cash,amana,nita,western_union,moneygram,wave',
             'cart_data'      => 'required|json',
         ]);
@@ -44,7 +58,11 @@ class SaleController extends Controller
             return back()->with('error', 'Le panier est vide.');
         }
 
-        DB::transaction(function () use ($request, $cartData) {
+        // ✅ FIX : $sale déclaré hors de la closure pour être accessible
+        //    après DB::transaction() (activity_log en avait besoin)
+        $sale = null;
+
+        DB::transaction(function () use ($request, $cartData, &$sale) {
 
             $totalAmount = collect($cartData)->sum('total');
 
@@ -59,6 +77,7 @@ class SaleController extends Controller
             foreach ($cartData as $line) {
 
                 if ($line['type'] === 'produit') {
+
                     SaleItem::create([
                         'sale_id'     => $sale->id,
                         'product_id'  => $line['db_id'],
@@ -77,13 +96,17 @@ class SaleController extends Controller
                         'reason'     => 'Vente #' . $sale->id,
                         'branch_id'  => auth()->user()->branch_id,
                     ]);
+
                 } elseif ($line['type'] === 'service') {
+
                     SaleService::create([
                         'sale_id'    => $sale->id,
                         'service_id' => $line['db_id'],
                         'price'      => $line['total'],
                     ]);
+
                 } elseif ($line['type'] === 'confection') {
+
                     SaleConfection::create([
                         'sale_id'       => $sale->id,
                         'confection_id' => $line['db_id'],
@@ -92,8 +115,8 @@ class SaleController extends Controller
                         'total_price'   => $line['total'],
                     ]);
 
-                    // Décrémenter le stock de chaque produit composant
                     $confection = Confection::with('products')->findOrFail($line['db_id']);
+
                     foreach ($confection->products as $component) {
                         $needed = $component->pivot->quantity * $line['qty'];
                         $component->decrement('stock_quantity', $needed);
@@ -118,14 +141,25 @@ class SaleController extends Controller
             ]);
         });
 
+        // ✅ FIX : $sale est maintenant accessible ici grâce au passage par référence &$sale
+        activity_log('sale_created', "Vente #{$sale->id} créée");
+
         return redirect()->back()->with('success', 'Vente enregistrée et facture générée avec succès.');
     }
 
     public function history()
     {
+        $branchId = auth()->user()->branch_id;
+
         $sales = Sale::with(['invoice', 'user'])
+            ->where('branch_id', $branchId)   // ✅ FIX : filtrer par branche (manquait)
             ->latest('sold_at')
             ->paginate(20);
+
+        // ✅ FIX : même problème d'interpolation — utiliser une variable scalaire
+        $total = $sales->total();
+        activity_log('sale_history', "Consultation historique des ventes : {$total} ventes affichées");
+
         return view('sales.history', compact('sales'));
     }
 
@@ -138,6 +172,9 @@ class SaleController extends Controller
             'invoice',
             'user',
         ]);
+
+        activity_log('sale_show', "Consultation vente #{$sale->id}");
+
         return view('sales.show', compact('sale'));
     }
 }

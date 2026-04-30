@@ -9,7 +9,7 @@ class PurchaseOrder extends Model
     protected $fillable = [
         'supplier_id', 'user_id', 'branch_id',
         'status', 'total_amount', 'notes',
-        'ordered_at', 'received_at',
+        'ordered_at', 'received_at', 
     ];
 
     protected $casts = [

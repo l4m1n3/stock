@@ -8,7 +8,7 @@ use App\Models\Service;
 
 class ServiceController extends Controller
 {
-     public function store(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'name'  => 'required|string|max:255',
@@ -16,7 +16,8 @@ class ServiceController extends Controller
             'price' => 'required|numeric|min:0',
         ]);
 
-        Service::create($request->only('name', 'price'));
+        $service = Service::create($request->only('name', 'price'));
+        activity_log('service_created', "Service créé : {$service->name}");
 
         return back()->with('success', 'Service créé avec succès.');
     }
@@ -30,6 +31,7 @@ class ServiceController extends Controller
         ]);
 
         $service->update($request->only('name', 'price'));
+        activity_log('service_updated', "Service mis à jour : {$service->name}");
 
         return back()->with('success', 'Service mis à jour avec succès.');
     }
@@ -37,6 +39,7 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
         $service->delete();
+        activity_log('service_deleted', "Service supprimé : {$service->name}");
         return back()->with('success', 'Service supprimé.');
     }
 }

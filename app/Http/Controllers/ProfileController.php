@@ -16,6 +16,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+           activity_log('view_profile', "Consultation profil : {$request->user()->email}");
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
@@ -34,6 +35,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
+        activity_log('profile_updated', "Profil mis à jour : {$request->user()->email}");
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
@@ -55,6 +57,7 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
+        activity_log('user_deleted', "Compte supprimé : {$user->email}");
         return Redirect::to('/');
     }
 }

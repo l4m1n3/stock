@@ -241,6 +241,9 @@
         <button class="btn-violet" data-bs-toggle="modal" data-bs-target="#modalProduct">
             <i class="fas fa-plus"></i> Nouveau produit
         </button>
+         <button class="btn-violet" data-bs-toggle="modal" data-bs-target="#modalConfection">
+            <i class="fas fa-plus"></i>  Nouvelle confection
+        </button>
     </div>
 </div>
 

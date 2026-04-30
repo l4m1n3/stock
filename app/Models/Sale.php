@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Sale extends Model
 {
     // Sale.php
-    protected $fillable = ['user_id', 'total_amount', 'payment_method', 'sold_at','branch_id'];
+    protected $fillable = ['user_id', 'total_amount', 'payment_method', 'sold_at', 'branch_id'];
+      protected $casts = [
+        // ✅ Sans ce cast, sold_at reste une string brute depuis la BDD
+        'sold_at' => 'datetime',
+    ];
 
-     public function branch()
+    public function branch()
     {
         return $this->belongsTo(Branch::class);
     }
@@ -28,11 +32,24 @@ class Sale extends Model
     public function saleServices()
     {
         return $this->hasMany(SaleService::class);
-    }   
+    }
 
     public function saleConfections()
     {
         return $this->hasMany(SaleConfection::class);
     }
-     
+     public function services()
+    {
+        return $this->hasMany(SaleService::class);
+    }
+ 
+    public function confections()
+    {
+        return $this->hasMany(SaleConfection::class);
+    }
+ 
+    public function invoice()
+    {
+        return $this->hasOne(Invoice::class);
+    }
 }

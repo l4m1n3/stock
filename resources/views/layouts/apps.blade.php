@@ -7,6 +7,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
     <style>
         :root {
@@ -30,7 +31,7 @@
             min-height: 100vh;
             position: fixed;
             top: 0; left: 0;
-            width: 260px;
+            width: 270px;
             color: white;
             z-index: 1000;
             display: flex;
@@ -40,9 +41,16 @@
             overflow-y: auto;
         }
 
-        /* Logo zone */
+        /* ✅ FIX : admin-mode sur body → sélecteur CSS fonctionnel */
+        body.admin-mode .sidebar {
+            background: linear-gradient(160deg, #4C1D95 0%, #2D0F5E 100%);
+        }
+        body.admin-mode .topbar {
+            background: linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%);
+        }
+
         .sidebar-logo {
-            padding: 28px 24px 20px 24px;
+            padding: 28px 24px 20px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             margin-bottom: 12px;
             flex-shrink: 0;
@@ -62,7 +70,6 @@
             margin-top: 4px;
         }
 
-        /* Nav */
         .sidebar-nav {
             flex: 1;
             padding: 0 12px;
@@ -75,7 +82,7 @@
             color: rgba(255,255,255,0.35);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            padding: 18px 12px 6px 12px;
+            padding: 18px 12px 6px;
         }
         .sidebar-nav .nav-item { margin-bottom: 2px; }
 
@@ -83,28 +90,29 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 10px 14px;
+            padding: 11px 14px;
             border-radius: 10px;
-            color: rgba(255,255,255,0.75) !important;
+            color: rgba(255,255,255,0.78) !important;
             font-size: 14px;
             font-weight: 500;
             text-decoration: none;
             transition: all 0.18s;
+            /* ✅ FIX : position:relative manquait → le ::before active était invisible */
             position: relative;
         }
         .sidebar-nav .nav-link i {
-            width: 18px;
+            width: 20px;
             text-align: center;
             font-size: 15px;
-            opacity: 0.85;
+            opacity: 0.9;
             flex-shrink: 0;
         }
         .sidebar-nav .nav-link:hover {
-            background: rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.13);
             color: white !important;
         }
         .sidebar-nav .nav-link.active {
-            background: rgba(255,255,255,0.18);
+            background: rgba(255,255,255,0.20);
             color: white !important;
             font-weight: 600;
         }
@@ -113,12 +121,11 @@
             position: absolute;
             left: 0; top: 50%;
             transform: translateY(-50%);
-            width: 3px; height: 20px;
+            width: 4px; height: 22px;
             background: white;
-            border-radius: 0 3px 3px 0;
+            border-radius: 0 4px 4px 0;
         }
 
-        /* Badge notification nav */
         .nav-badge {
             margin-left: auto;
             background: #E24B4A;
@@ -130,7 +137,6 @@
             flex-shrink: 0;
         }
 
-        /* Footer sidebar */
         .sidebar-footer {
             padding: 16px 20px;
             border-top: 1px solid rgba(255,255,255,0.1);
@@ -141,6 +147,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            margin-bottom: 12px;
         }
         .sidebar-avatar {
             width: 34px; height: 34px;
@@ -150,9 +157,9 @@
             font-size: 13px; font-weight: 700; color: white;
             flex-shrink: 0;
         }
-        .sidebar-user-name  { font-size: 13px; font-weight: 600; color: white; line-height: 1.2; }
-        .sidebar-user-role  { font-size: 11px; color: rgba(255,255,255,0.5); }
-        .sidebar-version    { font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 10px; }
+        .sidebar-user-name { font-size: 13px; font-weight: 600; color: white; line-height: 1.2; }
+        .sidebar-user-role { font-size: 11px; color: rgba(255,255,255,0.5); }
+        .sidebar-version   { font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 10px; }
 
         .sidebar-logout-btn {
             width: 100%;
@@ -169,12 +176,8 @@
             justify-content: center;
             gap: 8px;
             transition: all 0.15s;
-            margin-top: 12px;
         }
-        .sidebar-logout-btn:hover {
-            background: #E24B4A;
-            color: #fff;
-        }
+        .sidebar-logout-btn:hover { background: #E24B4A; color: white; }
 
         /* Scrollbar sidebar */
         .sidebar::-webkit-scrollbar { width: 4px; }
@@ -183,8 +186,8 @@
 
         /* ══════════════════════ MAIN CONTENT ══════════════════════ */
         .main-content {
-            margin-left: 260px;
-            padding: 20px 24px;
+            margin-left: 270px;
+            padding: 20px 28px;
             min-height: 100vh;
         }
 
@@ -192,15 +195,15 @@
         .topbar {
             background: linear-gradient(135deg, var(--violet) 0%, #9F7AEA 100%);
             border-radius: 14px;
-            padding: 14px 20px;
+            padding: 14px 24px;
             margin-bottom: 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 4px 20px rgba(107,70,193,0.2);
+            box-shadow: 0 4px 20px rgba(107,70,193,0.22);
         }
         .topbar-title {
-            font-size: 18px;
+            font-size: 19px;
             font-weight: 700;
             color: white;
             margin: 0;
@@ -214,22 +217,22 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            cursor: pointer;
         }
         .topbar-avatar {
             width: 36px; height: 36px;
             border-radius: 10px;
             background: rgba(255,255,255,0.2);
-            border: 2px solid rgba(255,255,255,0.4);
+            border: 2px solid rgba(255,255,255,0.35);
             display: flex; align-items: center; justify-content: center;
             font-size: 14px; font-weight: 700; color: white;
         }
-        .topbar-user-name  { font-size: 13px; font-weight: 600; color: white; line-height: 1.2; }
-        .topbar-user-role  { font-size: 11px; color: rgba(255,255,255,0.65); }
+        .topbar-user-name { font-size: 13px; font-weight: 600; color: white; line-height: 1.2; }
+        .topbar-user-role { font-size: 11px; color: rgba(255,255,255,0.65); }
 
-        /* Bouton hamburger mobile */
+        /* ✅ FIX : bouton hamburger — retiré display:none inline dans le HTML
+           → géré uniquement par CSS pour éviter le flash au chargement */
         .topbar-menu-btn {
-            display: none;
+            display: none;               /* masqué par défaut (desktop) */
             width: 36px; height: 36px;
             background: rgba(255,255,255,0.15);
             border-radius: 10px;
@@ -240,7 +243,7 @@
         }
         .topbar-menu-btn:hover { background: rgba(255,255,255,0.25); }
 
-        /* ══════════════════════ ALERTS SESSION ══════════════════════ */
+        /* ══════════════════════ ALERTS ══════════════════════ */
         .session-alert {
             border-radius: 12px;
             border: none;
@@ -249,7 +252,7 @@
             font-size: 14px;
             font-weight: 500;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 10px;
         }
         .session-alert-success {
@@ -263,7 +266,7 @@
             border-left: 4px solid #E24B4A;
         }
 
-        /* ══════════════════════ GLOBAL UTILS ══════════════════════ */
+        /* ══════════════════════ UTILS ══════════════════════ */
         .btn-violet {
             background-color: var(--violet);
             border: none; color: white;
@@ -281,18 +284,20 @@
             transform: translateY(-1px);
         }
 
-        .card-kpi {
-            border: none;
-            border-radius: 16px;
-            box-shadow: 0 5px 20px rgba(107,70,193,0.10);
-        }
+        .fw-600 { font-weight: 600; }
+        .fw-700 { font-weight: 700; }
+        .fw-800 { font-weight: 800; }
 
         .table th {
             background-color: #f0ebff;
             color: var(--violet);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .04em;
         }
 
-        /* Overlay mobile */
+        /* ══════════════════════ OVERLAY MOBILE ══════════════════════ */
         .sidebar-overlay {
             display: none;
             position: fixed;
@@ -302,38 +307,105 @@
         }
         .sidebar-overlay.show { display: block; }
 
+        /* ══════════════════════ RESPONSIVE ══════════════════════ */
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
                 transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+                width: 280px;
             }
             .sidebar.open { transform: translateX(0); }
+
             .main-content { margin-left: 0; padding: 14px; }
+
+            /* ✅ FIX : affiché via CSS uniquement, pas de style inline ni de JS */
             .topbar-menu-btn { display: flex; }
         }
     </style>
 
     @stack('styles')
 </head>
-<body>
+
+{{-- ✅ FIX : admin-mode sur <body> via Blade (côté serveur = pas de flash JS) --}}
+<body class="{{ request()->is('admin*') ? 'admin-mode' : '' }}">
 
 {{-- Overlay mobile --}}
 <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 
-{{-- ══════════════════════ SIDEBAR ══════════════════════ --}}
+{{-- ══════════════════ SIDEBAR ══════════════════ --}}
 <div class="sidebar" id="sidebar">
 
-    {{-- Logo --}}
     <div class="sidebar-logo">
         <div class="sidebar-logo-title">
-            <i class="fas fa-leaf me-2" style="color:rgba(255,255,255,0.6);font-size:18px;"></i>ILYKEN
+            <i class="fas fa-leaf me-2" style="color:rgba(255,255,255,0.65);font-size:18px;"></i>ILYKEN
         </div>
-        <div class="sidebar-logo-sub">Manager · v1.0</div>
+        <div class="sidebar-logo-sub">
+            {{ request()->is('admin*') ? 'Administration' : 'Manager' }} · v1.0
+        </div>
     </div>
 
-    {{-- Navigation --}}
     <ul class="sidebar-nav">
 
+        @if(request()->is('admin*'))
+        {{-- ════ NAVIGATION ADMIN ════ --}}
+        <li class="nav-section">Administration</li>
+
+        <li class="nav-item">
+            <a href="{{ route('admin.index') }}"
+               class="nav-link {{ request()->routeIs('admin.index') ? 'active' : '' }}">
+                <i class="fas fa-tachometer-alt"></i> Tableau de bord
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('admin.branches') }}"
+               class="nav-link {{ request()->routeIs('admin.branches*') ? 'active' : '' }}">
+                <i class="fas fa-building"></i> Branches
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('admin.stock') }}"
+               class="nav-link {{ request()->routeIs('admin.stock') ? 'active' : '' }}">
+                <i class="fas fa-boxes-stacked"></i> Stock Global
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('admin.invoices') }}"
+               class="nav-link {{ request()->routeIs('admin.invoices') ? 'active' : '' }}">
+                <i class="fas fa-file-invoice-dollar"></i> Facturation Globale
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('admin.finances') }}"
+               class="nav-link {{ request()->routeIs('admin.finances') ? 'active' : '' }}">
+                <i class="fas fa-chart-pie"></i> Finances & Rapports
+            </a>
+        </li>
+
+        <li class="nav-section">Utilisateurs</li>
+
+        <li class="nav-item">
+            <a href="{{ route('admin.users') }}"
+               class="nav-link {{ request()->routeIs('admin.users*') ? 'active' : '' }}">
+                <i class="fas fa-users-cog"></i> Utilisateurs
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('admin.logs') }}"
+               class="nav-link {{ request()->routeIs('admin.logs') ? 'active' : '' }}">
+                <i class="fas fa-clock-rotate-left"></i> Logs activité
+            </a>
+        </li>
+
+        {{-- ✅ Lien retour vers l'interface normale --}}
+        <li class="nav-section">Navigation</li>
+        <li class="nav-item">
+            <a href="{{ route('dashboard') }}" class="nav-link">
+                <i class="fas fa-arrow-left"></i> Retour Manager
+            </a>
+        </li>
+
+        @else
+        {{-- ════ NAVIGATION NORMALE ════ --}}
         <li class="nav-section">Principal</li>
 
         <li class="nav-item">
@@ -342,7 +414,6 @@
                 <i class="fas fa-home"></i> Tableau de bord
             </a>
         </li>
-
         <li class="nav-item">
             <a href="{{ route('sales.index') }}"
                class="nav-link {{ request()->routeIs('sales.*') ? 'active' : '' }}">
@@ -361,14 +432,12 @@
                 @endif
             </a>
         </li>
-
         <li class="nav-item">
             <a href="{{ route('products.index') }}"
                class="nav-link {{ request()->routeIs('products.*') ? 'active' : '' }}">
                 <i class="fas fa-tag"></i> Produits & Services
             </a>
         </li>
-
         <li class="nav-item">
             <a href="{{ route('purchases.index') }}"
                class="nav-link {{ request()->routeIs('purchases.*') ? 'active' : '' }}">
@@ -378,7 +447,6 @@
                 @endif
             </a>
         </li>
-
         <li class="nav-item">
             <a href="{{ route('invoices.index') }}"
                class="nav-link {{ request()->routeIs('invoices.*') ? 'active' : '' }}">
@@ -395,17 +463,20 @@
             </a>
         </li>
 
-        <li class="nav-section">Admin</li>
-
+        {{-- ✅ Lien admin visible uniquement pour les admins --}}
+        @if(auth()->user()?->role === 'admin')
+        <li class="nav-section">Administration</li>
         <li class="nav-item">
-            <a href="#" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
-                <i class="fas fa-users"></i> Utilisateurs
+            <a href="{{ route('admin.index') }}" class="nav-link">
+                <i class="fas fa-shield-halved"></i> Espace Admin
             </a>
         </li>
+        @endif
+
+        @endif
 
     </ul>
 
-    {{-- Footer user --}}
     <div class="sidebar-footer">
         <div class="sidebar-footer-user">
             <div class="sidebar-avatar">
@@ -413,7 +484,12 @@
             </div>
             <div>
                 <div class="sidebar-user-name">{{ auth()->user()->name ?? 'Utilisateur' }}</div>
-                <div class="sidebar-user-role">{{ ucfirst(auth()->user()->role ?? 'Utilisateur') }}</div>
+                <div class="sidebar-user-role">
+                    {{ ucfirst(auth()->user()->role ?? 'Utilisateur') }}
+                    @if(request()->is('admin*'))
+                        <span style="font-size:9px;background:#E24B4A;color:white;padding:1px 6px;border-radius:99px;margin-left:4px;font-weight:700;">ADMIN</span>
+                    @endif
+                </div>
             </div>
         </div>
 
@@ -424,22 +500,25 @@
             </button>
         </form>
 
-        <div class="sidebar-version">Ilyken Manager • 2026</div>
+        <div class="sidebar-version">Ilyken Manager · 2026</div>
     </div>
 
 </div>
 
-{{-- ══════════════════════ MAIN ══════════════════════ --}}
+{{-- ══════════════════ MAIN CONTENT ══════════════════ --}}
 <div class="main-content">
 
-    {{-- Topbar --}}
     <div class="topbar">
         <div style="display:flex;align-items:center;gap:12px;">
+            {{-- ✅ FIX : display:none retiré du HTML → géré uniquement par CSS @media --}}
             <button class="topbar-menu-btn" onclick="toggleSidebar()">
                 <i class="fas fa-bars"></i>
             </button>
-            <h4 class="topbar-title">@yield('page-title', 'Ilyken Manager')</h4>
+            <h4 class="topbar-title">
+                @yield('page-title', request()->is('admin*') ? 'Administration' : 'Ilyken Manager')
+            </h4>
         </div>
+
         <div class="topbar-right">
             <div class="topbar-user">
                 <div class="topbar-avatar">
@@ -456,21 +535,21 @@
     {{-- Alertes session --}}
     @if(session('success'))
         <div class="session-alert session-alert-success">
-            <i class="fas fa-check-circle"></i>
-            {{ session('success') }}
+            <i class="fas fa-check-circle" style="flex-shrink:0;margin-top:1px;"></i>
+            <span>{{ session('success') }}</span>
         </div>
     @endif
 
     @if(session('error'))
         <div class="session-alert session-alert-error">
-            <i class="fas fa-exclamation-circle"></i>
-            {{ session('error') }}
+            <i class="fas fa-exclamation-circle" style="flex-shrink:0;margin-top:1px;"></i>
+            <span>{{ session('error') }}</span>
         </div>
     @endif
 
     @if($errors->any())
         <div class="session-alert session-alert-error">
-            <i class="fas fa-exclamation-triangle"></i>
+            <i class="fas fa-exclamation-triangle" style="flex-shrink:0;margin-top:2px;"></i>
             <div>
                 @foreach($errors->all() as $error)
                     <div>{{ $error }}</div>
@@ -479,30 +558,28 @@
         </div>
     @endif
 
-    {{-- Contenu de la page --}}
     @yield('content')
 
 </div>
 
-{{-- JS --}}
+{{-- Scripts --}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
 <script>
-    // ── Auto-dismiss session alerts ──────────────────────────────────────────
+    // ── Auto-dismiss alerts ──────────────────────────────────────────────────
     document.querySelectorAll('.session-alert').forEach(el => {
         setTimeout(() => {
             el.style.transition = 'opacity 0.4s';
             el.style.opacity = '0';
             setTimeout(() => el.remove(), 400);
-        }, 4000);
+        }, 4500);
     });
 
-    // ── Sidebar mobile ────────────────────────────────────────────────────────
+    // ── Sidebar mobile ───────────────────────────────────────────────────────
     function toggleSidebar() {
-        const sidebar  = document.getElementById('sidebar');
-        const overlay  = document.getElementById('sidebar-overlay');
-        const isOpen   = sidebar.classList.contains('open');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const isOpen  = sidebar.classList.contains('open');
         sidebar.classList.toggle('open', !isOpen);
         overlay.classList.toggle('show', !isOpen);
     }
@@ -511,6 +588,10 @@
         document.getElementById('sidebar-overlay').classList.remove('show');
     }
 
+    // ── ✅ FIX : suppression du bloc JS qui faisait display:flex via JS ──────
+    //    Le bouton hamburger est désormais géré entièrement par le CSS @media.
+    //    L'ancienne approche causait un flash (bouton visible 1 frame au chargement
+    //    avant que JS s'exécute). Plus de window.innerWidth ici.
 </script>
 
 @stack('scripts')

@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\PurchaseOrder;
-use App\Models\PurchaseOrderItem;
+use App\Models\PurchaseOrderItems;
 use App\Models\Supplier;
 use App\Models\Product;
-use App\Models\PurchaseOrderItems;
 use App\Models\StockMovement;
 use App\Models\Branch;
-use App\Models\User;
-
+use App\Models\Expense;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -18,6 +16,9 @@ use Illuminate\Validation\Rule;
 
 class PurchaseOrderController extends Controller
 {
+    // ═══════════════════════════════════════════════════════════════
+    // LISTE DES COMMANDES
+    // ═══════════════════════════════════════════════════════════════
     public function index()
     {
         $branchId = auth()->user()->branch_id;
@@ -31,10 +32,22 @@ class PurchaseOrderController extends Controller
         $products  = Product::where('branch_id', $branchId)->orderBy('name')->get();
 
         // KPIs
-        $monthStart    = Carbon::now()->startOfMonth();
-        $monthOrders   = PurchaseOrder::where('branch_id', $branchId)->where('ordered_at', '>=', $monthStart)->count();
-        $monthSpend    = PurchaseOrder::where('branch_id', $branchId)->where('status', 'received')->where('received_at', '>=', $monthStart)->sum('total_amount');
-        $pendingCount  = PurchaseOrder::where('branch_id', $branchId)->where('status', 'pending')->count();
+        $monthStart   = Carbon::now()->startOfMonth();
+
+        $monthOrders  = PurchaseOrder::where('branch_id', $branchId)
+            ->where('ordered_at', '>=', $monthStart)
+            ->count();
+
+        $monthSpend   = PurchaseOrder::where('branch_id', $branchId)
+            ->where('status', 'received')
+            ->where('received_at', '>=', $monthStart)
+            ->sum('total_amount');
+
+        $pendingCount = PurchaseOrder::where('branch_id', $branchId)
+            ->where('status', 'pending')
+            ->count();
+
+        activity_log('view_purchase_orders', "Consultation commandes");
 
         return view('purchase.index', compact(
             'orders',
@@ -46,30 +59,47 @@ class PurchaseOrderController extends Controller
         ));
     }
 
+    // ═══════════════════════════════════════════════════════════════
+    // CRÉATION COMMANDE
+    // ═══════════════════════════════════════════════════════════════
     public function store(Request $request)
     {
-        $request->validate([
-            'supplier_id' => 'required|exists:suppliers,id',
-            'notes'       => 'nullable|string',
-            'items'       => 'required|array|min:1',
-            'items.*.product_id'     => 'required|exists:products,id',
+        $validated = $request->validate([
+            'supplier_id' => [
+                'required',
+                Rule::exists('suppliers', 'id')->where(fn($q) =>
+                    $q->where('branch_id', auth()->user()->branch_id)
+                ),
+            ],
+            'notes' => 'nullable|string',
+
+            'items' => 'required|array|min:1',
+
+            'items.*.product_id' => [
+                'required',
+                Rule::exists('products', 'id')->where(fn($q) =>
+                    $q->where('branch_id', auth()->user()->branch_id)
+                ),
+            ],
+
             'items.*.quantity'       => 'required|integer|min:1',
             'items.*.purchase_price' => 'required|numeric|min:0',
             'items.*.selling_price'  => 'nullable|numeric|min:0',
         ]);
 
-        DB::transaction(function () use ($request) {
+        $order = DB::transaction(function () use ($validated, $request) {
+
             $order = PurchaseOrder::create([
-                'supplier_id'  => $request->supplier_id,
+                'supplier_id'  => $validated['supplier_id'],
                 'user_id'      => auth()->id(),
                 'branch_id'    => auth()->user()->branch_id,
                 'status'       => 'pending',
-                'notes'        => $request->notes,
+                'notes'        => $validated['notes'] ?? null,
                 'ordered_at'   => now(),
                 'total_amount' => 0,
             ]);
 
-            foreach ($request->items as $line) {
+            foreach ($validated['items'] as $line) {
                 PurchaseOrderItems::create([
                     'purchase_order_id' => $order->id,
                     'product_id'        => $line['product_id'],
@@ -81,144 +111,235 @@ class PurchaseOrderController extends Controller
             }
 
             $order->recalcTotal();
+
+            return $order;
         });
+
+        activity_log('purchase_order_created', "Commande #{$order->id} créée");
 
         return back()->with('success', 'Bon de commande créé avec succès.');
     }
 
-    /**
-     * Réceptionner une commande : incrémente le stock, met à jour prix de vente si fourni.
-     */
-    // PurchaseOrderController::receive() — version corrigée complète
+    // ═══════════════════════════════════════════════════════════════
+    // RÉCEPTION COMMANDE
+    // ═══════════════════════════════════════════════════════════════
     // public function receive(Request $request, PurchaseOrder $order)
     // {
     //     abort_if($order->branch_id !== auth()->user()->branch_id, 403);
-    //     abort_if(!$order->isPending(), 403, 'Commande déjà réceptionnée ou annulée.');
+    //     abort_if(!$order->isPending(), 403, 'Commande déjà traitée.');
 
-    //     $request->validate([
-    //         'items'                             => 'required|array',
-    //         'items.*.id'                        => 'required|exists:purchase_order_items,id',
-    //         'items.*.quantity_received'         => 'required|integer|min:0',
+    //     $validated = $request->validate([
+    //         'items'                     => 'required|array',
+    //         'items.*.id'                => 'required|exists:purchase_order_items,id',
+    //         'items.*.quantity_received' => 'required|integer|min:0',
     //     ]);
 
-    //     DB::transaction(function () use ($request, $order) {
-    //         foreach ($request->items as $line) {
+    //     DB::transaction(function () use ($validated, $order) {
+
+    //         foreach ($validated['items'] as $line) {
+
     //             $qty = (int) $line['quantity_received'];
 
-    //             // ✅ Vérification que l'item appartient bien à cette commande
-    //             $item = PurchaseOrderItem::where('id', $line['id'])
-    //                 ->where('purchase_order_id', $order->id)  // ← sécurité ajoutée
+    //             $item = PurchaseOrderItems::with('product')
+    //                 ->where('id', $line['id'])
+    //                 ->where('purchase_order_id', $order->id)
     //                 ->firstOrFail();
 
     //             if ($qty <= 0) continue;
 
-    //             $item->update(['quantity_received' => $qty]);
+    //             $remaining = $item->quantity_ordered - $item->quantity_received;
+
+    //             if ($qty > $remaining) {
+    //                 throw new \Exception("Quantité dépasse le restant pour item #{$item->id}");
+    //             }
 
     //             $product = $item->product;
 
-    //             // Incrémenter le stock
+    //             if (!$product) {
+    //                 throw new \Exception("Produit introuvable");
+    //             }
+
+    //             // ✅ cumul réception
+    //             $item->increment('quantity_received', $qty);
+
+    //             // ✅ stock
     //             $product->increment('stock_quantity', $qty);
 
-    //             // ✅ Mise à jour prix de vente uniquement si selling_price > 0
+    //             // ✅ MAJ prix
     //             if (!empty($item->selling_price) && $item->selling_price > 0) {
     //                 $product->update(['price' => $item->selling_price]);
     //             }
 
-    //             // Mouvement de stock
+    //             // ✅ mouvement stock
     //             StockMovement::create([
     //                 'product_id' => $product->id,
     //                 'type'       => 'in',
     //                 'quantity'   => $qty,
-    //                 'reason'     => "Réception commande #{$order->id} — {$order->supplier->name}",
+    //                 'reason'     => "Commande #{$order->id}",
     //                 'branch_id'  => $order->branch_id,
     //             ]);
     //         }
+    //         //  protected $fillable = ['title', 'amount', 'type', 'expense_date','branch_id'];
+    //             Expense::create([
+    //                 'branch_id'  => $order->branch_id,
+    //                 'title'       => "Achat - Commande #{$order->id}",
+    //                 'amount'     => $order->total_amount,
+    //                 'type'       => 'commande',
+    //                 'description' => "Achat - Commande #{$order->id}",
+    //                 'date'        => now(),
+    //             ]);
+    //         // ✅ statut dynamique
+    //         $totalOrdered  = $order->items()->sum('quantity_ordered');
+    //         $totalReceived = $order->items()->sum('quantity_received');
+
+    //         $status = ($totalReceived >= $totalOrdered) ? 'received' : 'partial';
 
     //         $order->update([
-    //             'status'      => 'received',
+    //             'status'      => $status,
     //             'received_at' => now(),
     //         ]);
     //     });
 
-    //     return back()->with('success', 'Commande réceptionnée et stocks mis à jour.');
+    //     activity_log(
+    //         'purchase_order_received',
+    //         "Réception commande #{$order->id}"
+    //     );
+
+    //     return back()->with('success', 'Commande réceptionnée.');
     // }
-// app/Http/Controllers/PurchaseOrderController.php
+
+
 public function receive(Request $request, PurchaseOrder $order)
 {
     abort_if($order->branch_id !== auth()->user()->branch_id, 403);
-    abort_if(!$order->isPending(), 403, 'Commande déjà réceptionnée ou annulée.');
+    abort_if(!$order->isPending(), 403, 'Commande déjà traitée.');
 
-    $request->validate([
+    $validated = $request->validate([
         'items'                     => 'required|array',
         'items.*.id'                => 'required|exists:purchase_order_items,id',
         'items.*.quantity_received' => 'required|integer|min:0',
     ]);
 
-    DB::transaction(function () use ($request, $order) {
-        foreach ($request->items as $line) {
+    DB::transaction(function () use ($validated, $order) {
+
+        foreach ($validated['items'] as $line) {
+
             $qty = (int) $line['quantity_received'];
 
-            $item = PurchaseOrderItems::with('product')  // ← eager load, évite le lazy null
+            // ✅ FIX 1 : bon nom de modèle PurchaseOrderItem (sans 's')
+            $item = PurchaseOrderItems::with('product')
                 ->where('id', $line['id'])
                 ->where('purchase_order_id', $order->id)
                 ->firstOrFail();
 
             if ($qty <= 0) continue;
 
-            $product = $item->product;
+            $remaining = $item->quantity_ordered - $item->quantity_received;
 
-            // ← Guard explicite : si produit introuvable, erreur claire
-            if (!$product) {
-                throw new \RuntimeException(
-                    "Produit introuvable pour l'article #{$item->id}"
-                );
+            if ($qty > $remaining) {
+                throw new \Exception("Quantité dépasse le restant pour item #{$item->id}");
             }
 
-            $item->update(['quantity_received' => $qty]);
+            $product = $item->product;
 
-            // Incrémenter le stock
+            if (!$product) {
+                throw new \Exception("Produit introuvable pour l'item #{$item->id}");
+            }
+
+            $item->increment('quantity_received', $qty);
+
             $product->increment('stock_quantity', $qty);
 
-            // Mettre à jour le prix de vente si renseigné
             if (!empty($item->selling_price) && $item->selling_price > 0) {
                 $product->update(['price' => $item->selling_price]);
             }
 
-            // Mouvement de stock
             StockMovement::create([
                 'product_id' => $product->id,
                 'type'       => 'in',
                 'quantity'   => $qty,
-                'reason'     => "Réception commande #{$order->id} — {$order->supplier->name}",
+                'reason'     => "Réception commande #{$order->id}",
                 'branch_id'  => $order->branch_id,
             ]);
         }
 
+        // ✅ FIX 2 : champs corrects selon la migration Expense
+        // Migration : title, amount, type, expense_date, status, branch_id
+        // Suppression des champs inexistants : description, date
+        Expense::create([
+            'branch_id'    => $order->branch_id,
+            'title'        => "Achat - Commande #{$order->id}",
+            'amount'       => $order->total_amount,
+            'type'         => 'commande',
+            'expense_date' => now()->toDateString(), // ✅ date (pas datetime) + bon nom de colonne
+            'status'       => 'payé',               // ✅ champ requis avec valeur métier correcte
+        ]);
+
+        // ✅ FIX 3 : recalcul après tous les incréments (fraîcheur des données)
+        $order->refresh();
+
+        $totalOrdered  = $order->items()->sum('quantity_ordered');
+        $totalReceived = $order->items()->sum('quantity_received');
+
+        // ✅ FIX 4 : statut 'partial' absent de l'enum migration ['pending','received','cancelled']
+        // → on n'utilise 'received' que si tout est reçu, sinon on laisse 'pending'
+        $newStatus = ($totalReceived >= $totalOrdered) ? 'received' : 'pending';
+
         $order->update([
-            'status'      => 'received',
+            'status'      => $newStatus,
             'received_at' => now(),
         ]);
     });
 
-    return back()->with('success', 'Commande réceptionnée et stocks mis à jour.');
+    // ✅ FIX 5 : activity_log attend probablement un user_id — vérifier le helper
+    // Si c'est un helper global : activity_log(string $action, string $desc)
+    activity_log(
+        'purchase_order_received',
+        "Réception commande #{$order->id} — branche #{$order->branch_id}"
+    );
+
+    return back()->with('success', 'Commande réceptionnée avec succès.');
 }
+    // ═══════════════════════════════════════════════════════════════
+    // ANNULATION
+    // ═══════════════════════════════════════════════════════════════
     public function cancel(PurchaseOrder $order)
     {
-        abort_if(!$order->isPending(), 403, 'Impossible d\'annuler.');
+        abort_if($order->branch_id !== auth()->user()->branch_id, 403);
+        abort_if(!$order->isPending(), 403);
+
         $order->update(['status' => 'cancelled']);
+
+        activity_log('purchase_order_cancelled', "Commande #{$order->id} annulée");
+
         return back()->with('success', 'Commande annulée.');
     }
 
+    // ═══════════════════════════════════════════════════════════════
+    // DETAIL
+    // ═══════════════════════════════════════════════════════════════
     public function show(PurchaseOrder $order)
     {
+        abort_if($order->branch_id !== auth()->user()->branch_id, 403);
+
         $order->load(['supplier', 'user', 'items.product', 'branch']);
+
+        activity_log('purchase_order_viewed', "Commande #{$order->id} consultée");
+
         return view('purchases.show', compact('order'));
     }
-    // Méthode à ajouter dans PurchaseOrderController
+
+    // ═══════════════════════════════════════════════════════════════
+    // AJAX ITEMS
+    // ═══════════════════════════════════════════════════════════════
     public function getItems(PurchaseOrder $order)
     {
         abort_if($order->branch_id !== auth()->user()->branch_id, 403);
+
         $order->load('items.product');
+
+        activity_log('purchase_order_items_viewed', "Items commande #{$order->id}");
+
         return response()->json($order->items);
     }
 }

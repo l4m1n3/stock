@@ -77,6 +77,7 @@ class StockMovementController extends Controller
         $recentMovementsData = \App\Models\StockMovement::with('product')
             ->where('branch_id', $branchId)
             ->latest()->take(10)->get();
+        activity_log('stock_movements', "Consultation mouvements de stock : $recentMovements mouvements récents, $criticalCount produits critiques");
 
         return view('stock.stock', compact(
             'products',
@@ -110,6 +111,7 @@ class StockMovementController extends Controller
 
         $lossCount = StockMovement::where('branch_id', $branchId)->where('type', 'loss')->where('created_at', '>=', $last30)->count();
         $lossQty   = StockMovement::where('branch_id', $branchId)->where('type', 'loss')->where('created_at', '>=', $last30)->sum('quantity');
+        activity_log('stock_movements', "Consultation mouvements de stock : $recentMovements mouvements récents, $criticalCount produits critiques");
 
         return view('stock.movements', compact(
             'movements',
@@ -155,6 +157,7 @@ class StockMovementController extends Controller
         } else {
             $product->decrement('stock_quantity', $request->quantity);
         }
+        activity_log('stock_movement_created', "Mouvement de stock enregistré pour le produit #{$product->id}");
 
         return back()->with('success', 'Mouvement de stock enregistré avec succès.');
     }

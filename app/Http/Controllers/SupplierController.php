@@ -11,6 +11,7 @@ class SupplierController extends Controller
     {
         $branchId  = auth()->user()->branch_id;
         $suppliers = Supplier::where('branch_id', $branchId)->orderBy('name')->get();
+        activity_log('suppliers_index', "Consultation fournisseurs : $suppliers->count() fournisseurs affichés");
         return view('suppliers.index', compact('suppliers'));
     }
 
@@ -27,6 +28,10 @@ class SupplierController extends Controller
             'branch_id' => auth()->user()->branch_id,
         ]);
 
+        $supplier = Supplier::create([...$request->only('name', 'phone', 'email', 'address'),
+            'branch_id' => auth()->user()->branch_id,
+        ]);
+        activity_log('supplier_created', "Fournisseur créé : {$supplier->name}");
         return back()->with('success', 'Fournisseur ajouté.');
     }
 
@@ -40,12 +45,14 @@ class SupplierController extends Controller
         ]);
 
         $supplier->update($request->only('name', 'phone', 'email', 'address'));
+        activity_log('supplier_updated', "Fournisseur mis à jour : {$supplier->name}");
         return back()->with('success', 'Fournisseur mis à jour.');
     }
 
     public function destroy(Supplier $supplier)
     {
         $supplier->delete();
+        activity_log('supplier_deleted', "Fournisseur supprimé : {$supplier->name}");
         return back()->with('success', 'Fournisseur supprimé.');
     }
 }

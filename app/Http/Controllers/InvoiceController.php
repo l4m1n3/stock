@@ -87,10 +87,13 @@ class InvoiceController extends Controller
                     'items'          => $items,
                 ];
             });
-
+        activity_log('invoices_viewed', "Consultation factures : {$invoices->total()} factures, CA du mois $monthRevenue");
         return view('facturation.index', compact(
-            'invoices', 'monthCount', 'monthRevenue',
-            'uninvoicedSales', 'invoicesData'
+            'invoices',
+            'monthCount',
+            'monthRevenue',
+            'uninvoicedSales',
+            'invoicesData'
         ));
     }
 
@@ -109,7 +112,7 @@ class InvoiceController extends Controller
                 'isHtml5ParserEnabled' => true,
                 'isRemoteEnabled'      => true,
             ]);
-
+        activity_log('invoice_pdf_generated', "PDF facture générée : {$invoice->invoice_number}");
         return $pdf->download($invoice->invoice_number . '.pdf');
     }
 }

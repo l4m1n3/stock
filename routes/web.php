@@ -13,6 +13,48 @@ use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\SupplierController;
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\LogController;
+
+// Login
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+
+// Logout
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+Route::get('logs', [LogController::class, 'index'])->name('logs');
+    // Dashboard admin
+    Route::get('/',               [AdminController::class, 'index'])->name('index');
+
+    // Branches
+    Route::get('branches',                    [AdminController::class, 'branches'])->name('branches');
+    Route::get('branches/create',             [AdminController::class, 'createBranch'])->name('branches.create');
+    Route::post('branches',                   [AdminController::class, 'storeBranch'])->name('branches.store');
+    Route::get('branches/{branch}/edit',      [AdminController::class, 'editBranch'])->name('branches.edit');
+    Route::put('branches/{branch}',           [AdminController::class, 'updateBranch'])->name('branches.update');
+    Route::delete('branches/{branch}',        [AdminController::class, 'destroyBranch'])->name('branches.destroy');
+
+    // Stock global
+    Route::get('stock',                       [AdminController::class, 'stock'])->name('stock');
+
+    // Facturation globale
+    Route::get('invoices',                    [AdminController::class, 'invoices'])->name('invoices');
+
+    // Finances & Rapports
+    Route::get('finances',                    [AdminController::class, 'finances'])->name('finances');
+
+    // Utilisateurs
+    Route::get('users',                       [AdminController::class, 'users'])->name('users');
+    Route::get('users/create',                [AdminController::class, 'createUser'])->name('users.create');
+    Route::post('users',                      [AdminController::class, 'storeUser'])->name('users.store');
+    Route::get('users/{user}/edit',           [AdminController::class, 'editUser'])->name('users.edit');
+    Route::put('users/{user}',                [AdminController::class, 'updateUser'])->name('users.update');
+    Route::delete('users/{user}',             [AdminController::class, 'destroyUser'])->name('users.destroy');
+    Route::post('users/{user}/reset-password',[AdminController::class, 'resetPassword'])->name('users.reset-password');
+});
 
 Route::get('/', function () {
     return view('auth.login');
