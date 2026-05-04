@@ -263,9 +263,7 @@ public function receive(Request $request, PurchaseOrder $order)
             ]);
         }
 
-        // ✅ FIX 2 : champs corrects selon la migration Expense
-        // Migration : title, amount, type, expense_date, status, branch_id
-        // Suppression des champs inexistants : description, date
+        // ✅ FIX 2 : modèle Expense avec champs adaptés (date au lieu de datetime, type et status requis)
         Expense::create([
             'branch_id'    => $order->branch_id,
             'title'        => "Achat - Commande #{$order->id}",

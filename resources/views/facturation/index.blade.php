@@ -234,11 +234,8 @@
                                 <i class="fas fa-eye"></i>
                             </button>
                             <a href="{{ route('invoices.pdf', $invoice->id) }}" class="btn-icon" title="Télécharger PDF" target="_blank">
-                                <i class="fas fa-file-pdf"></i>
-                            </a>
-                            <button class="btn-icon" title="Imprimer" onclick="printInvoice({{ $invoice->id }})">
                                 <i class="fas fa-print"></i>
-                            </button>
+                            </a>
                         </div>
                     </td>
                 </tr>
@@ -299,11 +296,8 @@
             <i class="fas fa-times me-1"></i> Fermer
         </button>
         <div class="d-flex gap-2">
-            <button class="btn-outline-violet" onclick="window.print()">
-                <i class="fas fa-print me-1"></i> Imprimer
-            </button>
             <button class="btn-violet" id="pv-pdf-btn">
-                <i class="fas fa-file-pdf me-1"></i> PDF
+                <i class="fas fa-file-pdf me-1"></i> Imprimer
             </button>
         </div>
     </div>

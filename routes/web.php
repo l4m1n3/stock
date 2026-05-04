@@ -11,11 +11,11 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ConfectionController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\SupplierController;
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\LogController;
+use App\Http\Controllers\PaieController;
 
 // Login
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -42,10 +42,9 @@ Route::get('logs', [LogController::class, 'index'])->name('logs');
 
     // Facturation globale
     Route::get('invoices',                    [AdminController::class, 'invoices'])->name('invoices');
-
     // Finances & Rapports
     Route::get('finances',                    [AdminController::class, 'finances'])->name('finances');
-
+    Route::get('finances/pdf',                    [AdminController::class, 'exportPdf'])->name('finances.pdf');
     // Utilisateurs
     Route::get('users',                       [AdminController::class, 'users'])->name('users');
     Route::get('users/create',                [AdminController::class, 'createUser'])->name('users.create');
@@ -54,6 +53,13 @@ Route::get('logs', [LogController::class, 'index'])->name('logs');
     Route::put('users/{user}',                [AdminController::class, 'updateUser'])->name('users.update');
     Route::delete('users/{user}',             [AdminController::class, 'destroyUser'])->name('users.destroy');
     Route::post('users/{user}/reset-password',[AdminController::class, 'resetPassword'])->name('users.reset-password');
+
+     Route::get('/paie', [PaieController::class, 'index'])->name('paie.index');
+    Route::post('/paie', [PaieController::class, 'store'])->name('paie.store');
+    Route::put('/paie/{paie}', [PaieController::class, 'update'])->name('paie.update');
+    Route::delete('/paie/{paie}', [PaieController::class, 'destroy'])->name('paie.destroy');
+    Route::get('/paie/pdf', [PaieController::class, 'pdf'])->name('paie.pdf');
+    Route::get('/paie/fiche/{user}', [PaieController::class, 'generateFichePaiement'])->name('paies.fiche');
 });
 
 Route::get('/', function () {
@@ -103,7 +109,14 @@ Route::prefix('services')->name('services.')->group(function () {
 Route::prefix('finances')->name('expenses.')->group(function () {
     Route::get('/',                      [ExpenseController::class, 'index'])->name('index');
     Route::post('/depenses',             [ExpenseController::class, 'storeExpense'])->name('store');
+     // ✏️ Modifier une dépense
+    Route::put('/{expense}', [ExpenseController::class, 'updateExpense'])
+        ->name('update');
     Route::delete('/depenses/{expense}', [ExpenseController::class, 'destroyExpense'])->name('destroy');
+    Route::get('/depenses/export', [ExpenseController::class, 'export'])
+    ->name('export');
+    Route::get('/export-global', [ExpenseController::class, 'exportFinance'])
+    ->name('Globalexport');
 });
 
 // Confections

@@ -45,8 +45,8 @@ body {
 
 /* ===== HEADER ===== */
 .header {
-    background: #6B46C1;
-    color: #fff;
+    background: #fff;
+    color: #000000;
     padding: 5px;
     border-radius: 4px;
 }
@@ -83,8 +83,8 @@ body {
 }
 
 .items-table th {
-    background: #6B46C1;
-    color: #fff;
+    background: #f9f9f9;
+    color: #000000;
     padding: 3px;
     font-size: 8px;
 }
@@ -123,8 +123,8 @@ body {
 }
 
 .total-final {
-    background: #6B46C1;
-    color: #fff;
+    background: #f9f9f9;
+    color: #000000;
     font-weight: bold;
 }
 
@@ -151,6 +151,9 @@ body {
         <div class="header">
             <table>
                 <tr>
+                      <td style="width: 20%; text-align: left; border: none;">
+                         <img src="data:image/jpeg;base64,{{ $logo }}" style="height:60px;">
+                    </td>
                     <td>
                         <div class="logo">ILYKEN</div>
                         Niamey<br>
@@ -159,7 +162,9 @@ body {
                     <td class="right">
                         <strong>FACTURE</strong><br>
                         {{ $invoice->invoice_number }}<br>
-                        {{ \Carbon\Carbon::parse($invoice->issued_at)->format('d/m/Y H:i') }}
+                        {{ \Carbon\Carbon::parse($invoice->issued_at)->format('d/m/Y H:i') }}<br>
+                        <strong>Caissier</strong>
+                        {{ $invoice->sale->user ? ' - ' . $invoice->sale->user->name : '' }}
                     </td>
                 </tr>
             </table>
@@ -196,7 +201,7 @@ body {
                 </tr>
             </thead>
             <tbody>
-
+ 
             @foreach($invoice->sale->saleItems ?? [] as $item)
             <tr>
                 <td>{{ $item->product->name ?? '-' }}</td>
@@ -258,6 +263,9 @@ body {
         <div class="header">
             <table>
                 <tr>
+                      <td style="width: 20%; text-align: left; border: none;">
+                            <img src="data:image/jpeg;base64,{{ $logo }}" style="height: 60px;">
+                        </td>
                     <td>
                         <div class="logo">ILYKEN</div>
                         Niamey<br>
@@ -266,7 +274,9 @@ body {
                     <td class="right">
                         <strong>FACTURE</strong><br>
                         {{ $invoice->invoice_number }}<br>
-                        {{ \Carbon\Carbon::parse($invoice->issued_at)->format('d/m/Y H:i') }}
+                        {{ \Carbon\Carbon::parse($invoice->issued_at)->format('d/m/Y H:i') }}<br>
+                          <strong>Caissier</strong>
+                        {{ $invoice->sale->user ? ' - ' . $invoice->sale->user->name : '' }}
                     </td>
                 </tr>
             </table>

@@ -11,8 +11,11 @@ use App\Models\SaleConfection;
 use App\Models\Invoice;
 use App\Models\StockMovement;
 use App\Models\Confection;
+use App\Models\Expense;
+use App\Models\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log as FacadesLog;
 
 class SaleController extends Controller
 {
@@ -47,6 +50,8 @@ class SaleController extends Controller
 
     public function store(Request $request)
     {
+
+    try {
         $request->validate([
             'payment_method' => 'required|in:cash,amana,nita,western_union,moneygram,wave',
             'cart_data'      => 'required|json',
@@ -58,12 +63,11 @@ class SaleController extends Controller
             return back()->with('error', 'Le panier est vide.');
         }
 
-        // ✅ FIX : $sale déclaré hors de la closure pour être accessible
-        //    après DB::transaction() (activity_log en avait besoin)
+      
         $sale = null;
 
         DB::transaction(function () use ($request, $cartData, &$sale) {
-
+ 
             $totalAmount = collect($cartData)->sum('total');
 
             $sale = Sale::create([
@@ -98,13 +102,25 @@ class SaleController extends Controller
                     ]);
 
                 } elseif ($line['type'] === 'service') {
-
+                $service = Service::findOrFail($line['db_id']);
+                // dd($service->is_delivery);
                     SaleService::create([
                         'sale_id'    => $sale->id,
                         'service_id' => $line['db_id'],
                         'price'      => $line['total'],
                     ]);
+                // 🚀 NOUVEAU : si c'est une livraison → créer une dépense pending
+                    if ($service->is_delivery) {
 
+                        Expense::create([
+                            'title'        => 'Frais livraison - Vente #' . $sale->id,
+                            'amount'       => $line['total'], // 🔥 directement le prix du service
+                            'type'         => 'livraison',
+                            'expense_date' => now(),
+                            'status'       => 'pending', // 🔥 CRUCIAL
+                            'branch_id'    => auth()->user()->branch_id,
+                        ]);
+                    }
                 } elseif ($line['type'] === 'confection') {
 
                     SaleConfection::create([
@@ -145,6 +161,12 @@ class SaleController extends Controller
         activity_log('sale_created', "Vente #{$sale->id} créée");
 
         return redirect()->back()->with('success', 'Vente enregistrée et facture générée avec succès.');
+        } catch (\Throwable $th) {
+        FacadesLog::error('Erreur lors de la création de la vente : ' . $th->getMessage(), [
+            'stack' => $th->getTraceAsString(),
+        ]);
+        return back()->with('error', 'Une erreur est survenue lors de l\'enregistrement de la vente. Veuillez réessayer.');
+    }
     }
 
     public function history()
@@ -177,4 +199,4 @@ class SaleController extends Controller
 
         return view('sales.show', compact('sale'));
     }
-}
+} 

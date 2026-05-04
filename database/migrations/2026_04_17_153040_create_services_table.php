@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->enum('type', ['simple', 'semi_prive', 'prive']);
             $table->decimal('price', 10, 2);
+            $table->boolean('is_delivery')->default(false);
             $table->timestamps();
         });
     }

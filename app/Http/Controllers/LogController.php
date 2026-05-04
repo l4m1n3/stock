@@ -11,7 +11,7 @@ class LogController extends Controller
     {
         $logs = ActivityLog::with('user')
             ->latest()
-            ->paginate(20);
+            ->paginate(100);
 
         return view('admin.logs.index', compact('logs'));
     }

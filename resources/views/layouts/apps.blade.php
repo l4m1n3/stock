@@ -380,6 +380,12 @@
                 <i class="fas fa-chart-pie"></i> Finances & Rapports
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('admin.paie.index') }}"
+               class="nav-link {{ request()->routeIs('admin.paie') ? 'active' : '' }}">
+                <i class="fas fa-money-bill-wave"></i> Paie
+            </a>
+        </li>
 
         <li class="nav-section">Utilisateurs</li>
 
@@ -393,14 +399,6 @@
             <a href="{{ route('admin.logs') }}"
                class="nav-link {{ request()->routeIs('admin.logs') ? 'active' : '' }}">
                 <i class="fas fa-clock-rotate-left"></i> Logs activité
-            </a>
-        </li>
-
-        {{-- ✅ Lien retour vers l'interface normale --}}
-        <li class="nav-section">Navigation</li>
-        <li class="nav-item">
-            <a href="{{ route('dashboard') }}" class="nav-link">
-                <i class="fas fa-arrow-left"></i> Retour Manager
             </a>
         </li>
 

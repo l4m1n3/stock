@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -238,86 +239,309 @@ class AdminController extends Controller
     //  FINANCES & RAPPORTS GLOBAUX
     // ═══════════════════════════════════════════════════════════════
 
-    public function finances(Request $request)
+    // public function finances(Request $request)
+    // {
+    //     $year     = $request->year ?? now()->year;
+    //     $branchId = $request->branch_id;
+
+    //     // Revenus par mois
+    //     $revenueByMonth = Sale::selectRaw('MONTH(sold_at) as month, SUM(total_amount) as total')
+    //         ->whereYear('sold_at', $year)
+    //         ->when($branchId, fn($q) => $q->where('branch_id', $branchId))
+    //         ->groupBy('month')
+    //         ->pluck('total', 'month');
+
+    //     // Dépenses par mois
+    //     $expensesByMonth = Expense::selectRaw('MONTH(expense_date) as month, SUM(amount) as total')
+    //         ->whereYear('expense_date', $year)
+    //         ->when($branchId, fn($q) => $q->where('branch_id', $branchId))
+    //         ->groupBy('month')
+    //         ->pluck('total', 'month');
+
+    //     // Construire tableau 12 mois
+    //     $months = [];
+    //     for ($m = 1; $m <= 12; $m++) {
+    //         $rev  = $revenueByMonth[$m] ?? 0;
+    //         $exp  = $expensesByMonth[$m] ?? 0;
+    //         $months[] = [
+    //             'label'    => now()->setMonth($m)->format('M'),
+    //             'revenue'  => $rev,
+    //             'expenses' => $exp,
+    //             'profit'   => $rev - $exp,
+    //         ];
+    //     }
+
+    //     // KPI annuels
+    //     $annualRevenue  = array_sum(array_column($months, 'revenue'));
+    //     $annualExpenses = array_sum(array_column($months, 'expenses'));
+    //     $annualProfit   = $annualRevenue - $annualExpenses;
+    //     $margin         = $annualRevenue > 0 ? round(($annualProfit / $annualRevenue) * 100, 1) : 0;
+
+    //     // Dépenses par type
+    //     $expensesByType = Expense::selectRaw('type, SUM(amount) as total')
+    //         ->whereYear('expense_date', $year)
+    //         ->when($branchId, fn($q) => $q->where('branch_id', $branchId))
+    //         ->groupBy('type')
+    //         ->pluck('total', 'type');
+
+    //     // Revenus par mode de paiement
+    //     $salesByPayment = Sale::selectRaw('payment_method, SUM(total_amount) as total')
+    //         ->whereYear('sold_at', $year)
+    //         ->when($branchId, fn($q) => $q->where('branch_id', $branchId))
+    //         ->groupBy('payment_method')
+    //         ->pluck('total', 'payment_method');
+
+    //     // Situation par branche
+    //     $branchesSituation = Branch::withSum(['sales' => fn($q) => $q->whereYear('sold_at', $year)], 'total_amount')
+    //         ->withSum(['expenses' => fn($q) => $q->whereYear('expense_date', $year)], 'amount')
+    //         ->get()
+    //         ->map(function ($b) {
+    //             $b->profit = ($b->sales_sum_total_amount ?? 0) - ($b->expenses_sum_amount ?? 0);
+    //             return $b;
+    //         });
+
+    //     $branches = Branch::orderBy('name')->get();
+    //     $years    = range(now()->year, now()->year - 3);
+
+    //     return view('admin.finances.index', compact(
+    //         'months',
+    //         'annualRevenue',
+    //         'annualExpenses',
+    //         'annualProfit',
+    //         'margin',
+    //         'expensesByType',
+    //         'salesByPayment',
+    //         'branchesSituation',
+    //         'branches',
+    //         'years',
+    //         'year',
+    //         'branchId'
+    //     ));
+    // }
+ public function finances(Request $request)
     {
-        $year     = $request->year ?? now()->year;
-        $branchId = $request->branch_id;
-
-        // Revenus par mois
-        $revenueByMonth = Sale::selectRaw('MONTH(sold_at) as month, SUM(total_amount) as total')
-            ->whereYear('sold_at', $year)
-            ->when($branchId, fn($q) => $q->where('branch_id', $branchId))
-            ->groupBy('month')
-            ->pluck('total', 'month');
-
-        // Dépenses par mois
-        $expensesByMonth = Expense::selectRaw('MONTH(expense_date) as month, SUM(amount) as total')
-            ->whereYear('expense_date', $year)
-            ->when($branchId, fn($q) => $q->where('branch_id', $branchId))
-            ->groupBy('month')
-            ->pluck('total', 'month');
-
-        // Construire tableau 12 mois
-        $months = [];
-        for ($m = 1; $m <= 12; $m++) {
-            $rev  = $revenueByMonth[$m] ?? 0;
-            $exp  = $expensesByMonth[$m] ?? 0;
-            $months[] = [
-                'label'    => now()->setMonth($m)->format('M'),
-                'revenue'  => $rev,
-                'expenses' => $exp,
-                'profit'   => $rev - $exp,
-            ];
-        }
-
-        // KPI annuels
-        $annualRevenue  = array_sum(array_column($months, 'revenue'));
-        $annualExpenses = array_sum(array_column($months, 'expenses'));
-        $annualProfit   = $annualRevenue - $annualExpenses;
-        $margin         = $annualRevenue > 0 ? round(($annualProfit / $annualRevenue) * 100, 1) : 0;
-
-        // Dépenses par type
-        $expensesByType = Expense::selectRaw('type, SUM(amount) as total')
-            ->whereYear('expense_date', $year)
-            ->when($branchId, fn($q) => $q->where('branch_id', $branchId))
-            ->groupBy('type')
-            ->pluck('total', 'type');
-
-        // Revenus par mode de paiement
-        $salesByPayment = Sale::selectRaw('payment_method, SUM(total_amount) as total')
-            ->whereYear('sold_at', $year)
-            ->when($branchId, fn($q) => $q->where('branch_id', $branchId))
-            ->groupBy('payment_method')
-            ->pluck('total', 'payment_method');
-
-        // Situation par branche
-        $branchesSituation = Branch::withSum(['sales' => fn($q) => $q->whereYear('sold_at', $year)], 'total_amount')
-            ->withSum(['expenses' => fn($q) => $q->whereYear('expense_date', $year)], 'amount')
-            ->get()
-            ->map(function ($b) {
-                $b->profit = ($b->sales_sum_total_amount ?? 0) - ($b->expenses_sum_amount ?? 0);
-                return $b;
-            });
+        $branchId = $request->get('branch_id');   // null = toutes branches
+        $year     = (int) $request->get('year', now()->year);
 
         $branches = Branch::orderBy('name')->get();
-        $years    = range(now()->year, now()->year - 3);
+        $years    = range(now()->year, now()->year - 4);
+
+        // ── Helpers de requête ──────────────────────────────────────
+        $invoiceQ = fn() => Invoice::query()
+            ->when($branchId, fn($q) => $q->where('branch_id', $branchId));
+
+        $expenseQ = fn() => Expense::query()
+            ->when($branchId, fn($q) => $q->where('branch_id', $branchId));
+
+        $saleQ = fn() => Sale::query()
+            ->when($branchId, fn($q) => $q->where('branch_id', $branchId));
+
+        // ── Plages de dates ─────────────────────────────────────────
+        $today      = Carbon::today();
+        $weekStart  = Carbon::now()->startOfWeek();
+        $monthStart = Carbon::now()->startOfMonth();
+        $yearStart  = Carbon::create($year)->startOfYear();
+        $yearEnd    = Carbon::create($year)->endOfYear();
+
+        // ══════════════════════════════════════════════════════
+        // APERÇUS PAR PÉRIODE
+        // ══════════════════════════════════════════════════════
+
+        // ── Aujourd'hui ─────────────────────────────────────────────
+        $day = [
+            'revenue'  => (float) $invoiceQ()->whereDate('issued_at', $today)->sum('total_amount'),
+            'expenses' => (float) $expenseQ()->whereDate('expense_date', $today)->sum('amount'),
+            'sales'    => $saleQ()->whereDate('sold_at', $today)->count(),
+        ];
+        $day['profit'] = $day['revenue'] - $day['expenses'];
+
+        // ── Cette semaine ───────────────────────────────────────────
+        $week = [
+            'revenue'  => (float) $invoiceQ()->where('issued_at', '>=', $weekStart)->sum('total_amount'),
+            'expenses' => (float) $expenseQ()->where('expense_date', '>=', $weekStart->toDateString())->sum('amount'),
+            'sales'    => $saleQ()->where('sold_at', '>=', $weekStart)->count(),
+        ];
+        $week['profit'] = $week['revenue'] - $week['expenses'];
+
+        // ── Ce mois ─────────────────────────────────────────────────
+        $month = [
+            'revenue'  => (float) $invoiceQ()->where('issued_at', '>=', $monthStart)->sum('total_amount'),
+            'expenses' => (float) $expenseQ()->where('expense_date', '>=', $monthStart->toDateString())->sum('amount'),
+            'sales'    => $saleQ()->where('sold_at', '>=', $monthStart)->count(),
+        ];
+        $month['profit'] = $month['revenue'] - $month['expenses'];
+
+        // ── Année sélectionnée ───────────────────────────────────────
+        $annual = [
+            'revenue'  => (float) $invoiceQ()->whereBetween('issued_at', [$yearStart, $yearEnd])->sum('total_amount'),
+            'expenses' => (float) $expenseQ()->whereBetween('expense_date', [$yearStart->toDateString(), $yearEnd->toDateString()])->sum('amount'),
+            'sales'    => $saleQ()->whereBetween('sold_at', [$yearStart, $yearEnd])->count(),
+        ];
+        $annual['profit'] = $annual['revenue'] - $annual['expenses'];
+        $annual['margin'] = $annual['revenue'] > 0
+            ? round(($annual['profit'] / $annual['revenue']) * 100, 1)
+            : 0;
+
+        // ── Graphique mensuel (année sélectionnée) ───────────────────
+        $months = collect(range(1, 12))->map(function ($m) use ($year, $invoiceQ, $expenseQ, $branchId) {
+            $start = Carbon::create($year, $m, 1)->startOfMonth();
+            $end   = $start->copy()->endOfMonth();
+
+            $revenue  = (float) $invoiceQ()->whereBetween('issued_at', [$start, $end])->sum('total_amount');
+            $expenses = (float) $expenseQ()->whereBetween('expense_date', [$start->toDateString(), $end->toDateString()])->sum('amount');
+
+            return [
+                'label'    => $start->translatedFormat('M'),
+                'revenue'  => $revenue,
+                'expenses' => $expenses,
+                'profit'   => $revenue - $expenses,
+            ];
+        });
+
+        // ── Dépenses par type (année) ────────────────────────────────
+        $expensesByType = $expenseQ()
+            ->whereBetween('expense_date', [$yearStart->toDateString(), $yearEnd->toDateString()])
+            ->select('type', DB::raw('SUM(amount) as total'))
+            ->groupBy('type')
+            ->orderByDesc('total')
+            ->get()
+            ->pluck('total', 'type')
+            ->map(fn($v) => (float) $v);
+
+        // ── Revenus par mode de paiement (année) ─────────────────────
+        $salesByPayment = $saleQ()
+            ->whereBetween('sold_at', [$yearStart, $yearEnd])
+            ->select('payment_method', DB::raw('SUM(total_amount) as total'))
+            ->groupBy('payment_method')
+            ->get()
+            ->pluck('total', 'payment_method')
+            ->map(fn($v) => (float) $v);
+
+        // ── Situation par branche (année) ────────────────────────────
+        $branchesSituation = Branch::with([
+            'sales' => fn($q) => $q->whereBetween('sold_at', [$yearStart, $yearEnd]),
+            'expenses' => fn($q) => $q->whereBetween('expense_date', [$yearStart->toDateString(), $yearEnd->toDateString()]),
+        ])
+        ->withSum(['sales as sales_sum_total_amount' => fn($q) => $q->whereBetween('sold_at', [$yearStart, $yearEnd])], 'total_amount')
+        ->withSum(['expenses as expenses_sum_amount'  => fn($q) => $q->whereBetween('expense_date', [$yearStart->toDateString(), $yearEnd->toDateString()])], 'amount')
+        ->get()
+        ->each(function ($b) {
+            $b->profit = ($b->sales_sum_total_amount ?? 0) - ($b->expenses_sum_amount ?? 0);
+        });
+
+        activity_log('admin_finances_viewed', "Admin — consultation finances année $year");
 
         return view('admin.finances.index', compact(
+            'day', 'week', 'month', 'annual',
             'months',
-            'annualRevenue',
-            'annualExpenses',
-            'annualProfit',
-            'margin',
             'expensesByType',
             'salesByPayment',
             'branchesSituation',
             'branches',
             'years',
             'year',
-            'branchId'
+            'branchId',
         ));
     }
 
+    // ═══════════════════════════════════════════════════════════════
+    // EXPORT PDF — appelé via GET /admin/finances/pdf?period=...&year=...
+    // ═══════════════════════════════════════════════════════════════
+    public function exportPdf(Request $request)
+    {
+        $period   = $request->get('period', 'month');   // day|week|month|year
+        $branchId = $request->get('branch_id');
+        $year     = (int) $request->get('year', now()->year);
+        $branchName = $branchId
+            ? Branch::findOrFail($branchId)->name
+            : 'Toutes les branches';
+
+        // ── Plage selon la période ──────────────────────────────────
+        [$start, $end, $periodLabel] = match ($period) {
+            'day'   => [Carbon::today(),                Carbon::today()->endOfDay(),     'Journée du ' . Carbon::today()->format('d/m/Y')],
+            'week'  => [Carbon::now()->startOfWeek(),   Carbon::now()->endOfWeek(),      'Semaine du ' . Carbon::now()->startOfWeek()->format('d/m') . ' au ' . Carbon::now()->endOfWeek()->format('d/m/Y')],
+            'year'  => [Carbon::create($year)->startOfYear(), Carbon::create($year)->endOfYear(), "Année $year"],
+            default => [Carbon::now()->startOfMonth(),  Carbon::now()->endOfMonth(),     Carbon::now()->translatedFormat('F Y')],
+        };
+
+        $invoiceQ = fn() => Invoice::query()->when($branchId, fn($q) => $q->where('branch_id', $branchId));
+        $expenseQ = fn() => Expense::query()->when($branchId, fn($q) => $q->where('branch_id', $branchId));
+        $saleQ    = fn() => Sale::query()->when($branchId, fn($q) => $q->where('branch_id', $branchId));
+
+        $startDate = $period === 'day' ? $start->toDateString() : $start->toDateString();
+        $endDate   = $end->toDateString();
+
+        $revenue  = (float) $invoiceQ()->whereBetween('issued_at', [$start, $end])->sum('total_amount');
+        $expenses = (float) $expenseQ()->whereBetween('expense_date', [$startDate, $endDate])->sum('amount');
+        $profit   = $revenue - $expenses;
+        $margin   = $revenue > 0 ? round(($profit / $revenue) * 100, 1) : 0;
+        $sales    = $saleQ()->whereBetween('sold_at', [$start, $end])->count();
+        $avgTicket= $sales > 0 ? round($revenue / $sales) : 0;
+
+        $expensesByType = $expenseQ()
+            ->whereBetween('expense_date', [$startDate, $endDate])
+            ->select('type', DB::raw('SUM(amount) as total'))
+            ->groupBy('type')
+            ->orderByDesc('total')
+            ->get();
+
+        $salesByPayment = $saleQ()
+            ->whereBetween('sold_at', [$start, $end])
+            ->select('payment_method', DB::raw('SUM(total_amount) as total'))
+            ->groupBy('payment_method')
+            ->orderByDesc('total')
+            ->get();
+
+        $branchesSituation = Branch::withSum(
+                ['sales as rev' => fn($q) => $q->whereBetween('sold_at', [$start, $end])],
+                'total_amount'
+            )
+            ->withSum(
+                ['expenses as exp' => fn($q) => $q->whereBetween('expense_date', [$startDate, $endDate])],
+                'amount'
+            )
+            ->get()
+            ->each(fn($b) => $b->profit = ($b->rev ?? 0) - ($b->exp ?? 0));
+
+        $payLabels = ['cash' => 'Espèces', 'amana' => 'Amana', 'nita' => 'Nita',
+                      'western_union' => 'Western Union', 'moneygram' => 'MoneyGram', 'wave' => 'Wave'];
+        $typeLabels = ['livraison' => 'Livraison', 'materiel' => 'Matériel',
+                       'salaire' => 'Salaires', 'commande' => 'Commandes', 'autre' => 'Autre'];
+
+        activity_log('admin_finances_pdf', "Export PDF finances — période $period");
+
+        // ── Rendu HTML → wkhtmltopdf via Blade view ─────────────────
+        $html = view('admin.finances.pdf', compact(
+            'periodLabel', 'branchName',
+            'revenue', 'expenses', 'profit', 'margin', 'sales', 'avgTicket',
+            'expensesByType', 'salesByPayment', 'branchesSituation',
+            'payLabels', 'typeLabels'
+        ))->render();
+
+        // ── Génération PDF avec wkhtmltopdf (disponible sur le serveur) ──
+        $tmpHtml = tempnam(sys_get_temp_dir(), 'fin_') . '.html';
+        $tmpPdf  = tempnam(sys_get_temp_dir(), 'fin_') . '.pdf';
+        file_put_contents($tmpHtml, $html);
+
+        $cmd = sprintf(
+            'wkhtmltopdf --page-size A4 --margin-top 10mm --margin-bottom 10mm --margin-left 12mm --margin-right 12mm --encoding UTF-8 --quiet %s %s 2>&1',
+            escapeshellarg($tmpHtml),
+            escapeshellarg($tmpPdf)
+        );
+        exec($cmd, $out, $code);
+
+        if ($code !== 0 || !file_exists($tmpPdf)) {
+            // Fallback : retourner le HTML si wkhtmltopdf indisponible
+            return response($html, 200)->header('Content-Type', 'text/html');
+        }
+
+        $filename = 'rapport_finances_' . $period . '_' . now()->format('Ymd') . '.pdf';
+
+        return response()->download($tmpPdf, $filename, [
+            'Content-Type'        => 'application/pdf',
+            'Content-Disposition' => "attachment; filename=\"$filename\"",
+        ])->deleteFileAfterSend(true);
+    }
     // ═══════════════════════════════════════════════════════════════
     //  GESTION DES UTILISATEURS
     // ═══════════════════════════════════════════════════════════════

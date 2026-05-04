@@ -394,15 +394,6 @@
                 <i class="fas fa-chart-line"></i> Finances & Rapports
             </a>
         </li>
-
-        <li class="nav-section">Admin</li>
-
-        <li class="nav-item">
-            <a href="#" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
-                <i class="fas fa-users"></i> Utilisateurs
-            </a>
-        </li>
-
     </ul>
 
     {{-- Footer user --}}

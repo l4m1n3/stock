@@ -10,29 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class StockMovementController extends Controller
 {
-    // public function index()
-    // {
-    //     $branchId = auth()->user()->branch_id;
-    //     $products = Product::where('branch_id', $branchId)->orderBy('name')->get();
-
-    //     // KPIs
-    //     $criticalCount     = $products->filter(fn($p) => $p->stock_quantity < ($p->alert_threshold ?? 0))->count();
-    //     $stockValue        = $products->sum(fn($p) => $p->stock_quantity * $p->price);
-    //     $recentMovements   = StockMovement::where('branch_id', $branchId)->where('created_at', '>=', Carbon::now()->subDays(30))->count();
-    //     $recentMovementsData = StockMovement::where('branch_id', $branchId)->with('product')
-    //         ->latest()
-    //         ->take(8)
-    //         ->get();
-
-    //     return view('stock.stock', compact(
-    //         'products',
-    //         'criticalCount',
-    //         'stockValue',
-    //         'recentMovements',
-    //         'recentMovementsData'
-    //     ));
-    // }
-    // Dans la méthode index() du StockController
     public function index()
     {
         $branchId = auth()->user()->branch_id;
@@ -111,6 +88,13 @@ class StockMovementController extends Controller
 
         $lossCount = StockMovement::where('branch_id', $branchId)->where('type', 'loss')->where('created_at', '>=', $last30)->count();
         $lossQty   = StockMovement::where('branch_id', $branchId)->where('type', 'loss')->where('created_at', '>=', $last30)->sum('quantity');
+        $recentMovements = StockMovement::where('branch_id', $branchId)
+            ->where('created_at', '>=', $last30)
+            ->count();
+
+        $criticalCount = Product::where('branch_id', $branchId)
+            ->where('stock_quantity', '<=', 5) // adapte le seuil
+            ->count();
         activity_log('stock_movements', "Consultation mouvements de stock : $recentMovements mouvements récents, $criticalCount produits critiques");
 
         return view('stock.movements', compact(

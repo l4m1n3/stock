@@ -105,13 +105,15 @@ class InvoiceController extends Controller
             'sale.saleConfections.confection',   // ← ajout
             'sale.user',
         ]);
+  $logo = base64_encode(file_get_contents(public_path('logo.jpeg')));
 
-        $pdf = PDF::loadView('facturation.pdf', compact('invoice'))
+        $pdf = PDF::loadView('facturation.pdf', compact('invoice', 'logo'))
             ->setPaper('A4', 'portrait')
             ->setOptions([
                 'isHtml5ParserEnabled' => true,
                 'isRemoteEnabled'      => true,
             ]);
+            
         activity_log('invoice_pdf_generated', "PDF facture générée : {$invoice->invoice_number}");
         return $pdf->download($invoice->invoice_number . '.pdf');
     }

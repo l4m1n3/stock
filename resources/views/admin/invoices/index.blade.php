@@ -77,7 +77,7 @@
                     <th>Vendeur</th>
                     <th>Branche</th>
                     <th class="text-end">Total</th>
-                    <th class="text-center" width="120">Actions</th>
+                    {{-- <th class="text-center" width="120">Actions</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -92,16 +92,16 @@
                         </span>
                     </td>
                     <td class="text-end fw-700">{{ number_format($invoice->total_amount, 0, ',', ' ') }} FCFA</td>
-                    <td class="text-center">
+                    {{-- <td class="text-center">
                         <div class="d-flex justify-content-center gap-1">
 
-                            {{-- ✅ FIX : route avec paramètre --}}
+                            {{-- ✅ FIX : route avec paramètre 
                             <a href=""
                                class="btn btn-sm btn-outline-primary" style="border-radius:7px;" title="Voir">
                                 <i class="fas fa-eye"></i>
                             </a>
 
-                            {{-- ✅ FIX : route avec paramètre --}}
+                            {{-- ✅ FIX : route avec paramètre 
                             <form method="POST" action=""
                                   onsubmit="return confirm('Supprimer la facture {{ $invoice->invoice_number }} ?')">
                                 @csrf @method('DELETE')
@@ -111,7 +111,7 @@
                             </form>
 
                         </div>
-                    </td>
+                    </td> --}}
                 </tr>
                 @empty
                 <tr>

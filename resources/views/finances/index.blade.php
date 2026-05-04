@@ -242,11 +242,18 @@
     </div>
     <div class="d-flex align-items-center gap-3">
         <div class="period-nav" id="period-nav">
+            <button class="period-btn" onclick="setPeriod(this,'day')">Aujourd'hui</button>
             <button class="period-btn" onclick="setPeriod(this,'week')">7 jours</button>
             <button class="period-btn active" onclick="setPeriod(this,'month')">Ce mois</button>
             <button class="period-btn" onclick="setPeriod(this,'quarter')">Trimestre</button>
             <button class="period-btn" onclick="setPeriod(this,'year')">Année</button>
         </div>
+        <a href="{{ route('expenses.Globalexport', ['period' => $period]) }}" class="btn-violet">
+            <i class="fas fa-chart-bar"></i> Export rapport financier
+        </a>
+        <a href="{{ route('expenses.export', ['period' => $period]) }}" class="btn-outline-violet">
+            <i class="fas fa-file-excel"></i> Export Excel
+        </a>
         <button class="btn-violet" data-bs-toggle="modal" data-bs-target="#modalDepense">
             <i class="fas fa-plus"></i> Nouvelle dépense
         </button>
@@ -255,6 +262,25 @@
 
 {{-- ── KPIs ── --}}
 <div class="kpi-grid">
+    <div class="kpi-card violet">
+        <div class="kpi-icon" style="background:#EEEDFE;">
+            <i class="fas fa-wallet" style="color:#6B46C1;"></i>
+        </div>
+        <div class="kpi-label">Cash disponible</div>
+        <div class="kpi-value">
+            {{ number_format($cashAvailable, 0, ',', ' ') }}
+        </div>
+        <div class="kpi-sub">FCFA en caisse</div>
+    </div>
+    <div class="kpi-card violet">
+        <div class="kpi-icon" style="background:#EEEDFE;">
+            <i class="fas fa-cash-register" style="color:var(--violet);"></i>
+        </div>
+        <div class="kpi-label">Depenses Caisse</div>
+        <div class="kpi-value">{{ number_format($totalPaidcaisse, 0, ',', ' ') }}</div>
+        {{-- <div class="kpi-sub"></div> --}}
+        {{-- <div class="kpi-trend trend-up">↑ {{ $revenueGrowth }}% vs mois préc.</div> --}}
+    </div>
     <div class="kpi-card violet">
         <div class="kpi-icon" style="background:#EEEDFE;">
             <i class="fas fa-cash-register" style="color:var(--violet);"></i>
@@ -287,7 +313,7 @@
             {{ $profit >= 0 ? '↑ Positif' : '↓ Déficit' }}
         </div>
     </div>
-    <div class="kpi-card amber">
+    {{-- <div class="kpi-card amber">
         <div class="kpi-icon" style="background:#FAEEDA;">
             <i class="fas fa-receipt" style="color:#EF9F27;"></i>
         </div>
@@ -295,7 +321,7 @@
         <div class="kpi-value" style="color:#BA7517;">{{ number_format($avgTicket, 0, ',', ' ') }}</div>
         <div class="kpi-sub">FCFA / vente</div>
         <div class="kpi-trend trend-up">{{ $salesCount }} ventes</div>
-    </div>
+    </div> --}}
 </div>
 
 {{-- ── Graphiques ── --}}
@@ -394,6 +420,7 @@
                         <th>Type</th>
                         <th>Montant</th>
                         <th>Date</th>
+                        <th>Statut</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -414,7 +441,17 @@
                             {{ \Carbon\Carbon::parse($exp->expense_date)->format('d/m/Y') }}
                         </td>
                         <td>
+                            <span class="badge {{ $exp->status === 'payé' ? 'bg-success' : 'bg-warning' }}">
+                                {{ $exp->status === 'payé' ? 'Payé' : 'Non payé' }}
+                            </span>
+                        </td>
+                        <td>
                             <div class="action-btns">
+                                {{-- modal trigger for edit can be added here in the future --}}
+                               <button class="btn-icon"
+                                    onclick="openEditExpense({{ $exp }})">
+                                    <i class="fas fa-pencil"></i>
+                                </button>
                                 <button class="btn-icon danger" title="Supprimer"
                                     onclick="deleteExpense({{ $exp->id }})">
                                     <i class="fas fa-trash"></i>
@@ -539,10 +576,31 @@
                             </select>
                         </div>
                     </div>
+                     <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label-s">Date *</label>
+                            <input type="date" class="form-control-s" name="expense_date"
+                                value="{{ now()->format('Y-m-d') }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label-s">Status *</label>
+                            <select class="form-control-s" name="status" required>
+                                <option value="" >Status Paiement</option>
+                                <option value="payé">payé</option>
+                                <option value="non payé">non payé</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-group">
-                        <label class="form-label-s">Date *</label>
-                        <input type="date" class="form-control-s" name="expense_date"
-                               value="{{ now()->format('Y-m-d') }}" required>
+                            <label class="form-label-s">Methode de Paiement *</label>
+                            <select class="form-control-s" name="payment_method" required>
+                                <option value="cash">Cash</option>
+                                <option value="amana">Amana</option>
+                                <option value="nita">Nita</option>
+                                <option value="western_union">Western Union</option>
+                                <option value="moneygram">MoneyGram</option>
+                                <option value="wave">Wave</option>
+                            </select>
                     </div>
                 </div>
                 <div class="modal-footer border-0 px-4 pb-4">
@@ -555,7 +613,92 @@
         </div>
     </div>
 </div>
+{{-- --modal modifier dépense can be added in the future, reusing the same form with pre-filled values-- --}}
+<div class="modal fade" id="modalEditExp" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
 
+            <div class="modal-header-violet d-flex justify-content-between align-items-center">
+                <h5 class="text-white fw-bold mb-0">
+                    <i class="fas fa-pencil me-2"></i>Modifier dépense
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <form id="edit-exp-form" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="modal-body p-4">
+
+                    <div class="form-group">
+                        <label class="form-label-s">Intitulé *</label>
+                        <input type="text" class="form-control-s" name="title" id="edit-title" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label-s">Montant *</label>
+                            <input type="number" class="form-control-s" name="amount" id="edit-amount" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label-s">Type *</label>
+                            <select class="form-control-s" name="type" id="edit-type" required>
+                                <option value="livraison">🚚 Livraison</option>
+                                <option value="materiel">🔧 Matériel</option>
+                                <option value="salaire">👤 Salaire</option>
+                                <option value="autre">📦 Autre</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label-s">Date *</label>
+                            <input type="date" class="form-control-s" name="expense_date" id="edit-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label-s">Status *</label>
+                            <select class="form-control-s" name="status" id="edit-status" required>
+                                <option value="payé">payé</option>
+                                <option value="non payé">non payé</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label-s">Paiement Method</label>
+                        <select class="form-control-s" name="payment_method" id="edit-payment-method" required>
+                            <option value="cash">Cash</option>
+                            <option value="amana">Amana</option>
+                            <option value="nita">Nita</option>
+                            <option value="western_union">Western Union</option>
+                            <option value="moneygram">MoneyGram</option>
+                            <option value="wave">Wave</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-footer border-0 px-4 pb-4">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn-violet">
+                        <i class="fas fa-check me-1"></i> Enregistrer
+                    </button>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- <div class="modal-footer border-0 px-4 pb-4">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn-violet">
+                        <i class="fas fa-check me-1"></i> Enregistrer
+                    </button>
+                </div> --}}
+
+            </form>
+        </div>
+    </div>
+</div>
 {{-- ── Modal suppression ── --}}
 <div class="modal fade" id="modalDeleteExp" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-sm">
@@ -729,7 +872,25 @@ function setPeriod(btn, period) {
     btn.classList.add('active');
     window.location.href = `{{ route('expenses.index') }}?period=${period}`;
 }
+function openEditExpense(exp) {
 
+    document.getElementById('edit-title').value = exp.title ?? '';
+    document.getElementById('edit-amount').value = exp.amount ?? '';
+    document.getElementById('edit-type').value = exp.type ?? 'autre';
+    document.getElementById('edit-payment-method').value = exp.payment_method ?? 'cash';
+
+    if (document.getElementById('edit-date')) {
+        document.getElementById('edit-date').value = exp.expense_date ?? '';
+    }
+
+    if (document.getElementById('edit-status')) {
+        document.getElementById('edit-status').value = exp.status ?? 'non payé';
+    }
+
+    document.getElementById('edit-exp-form').action = `/finances/${exp.id}`;
+
+    new bootstrap.Modal(document.getElementById('modalEditExp')).show();
+}
 // ── Toast session ─────────────────────────────────────────────────────────────
 @if(session('success'))
     const t = document.getElementById('fin-toast');
