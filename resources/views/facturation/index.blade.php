@@ -70,12 +70,18 @@
     .pay-amana { background: var(--violet-light); color: var(--violet); }
     .pay-nita  { background: #FAEEDA; color: #854F0B; }
 
+    /* Client cell */
+    .client-cell-name  { font-weight: 600; font-size: 13px; color: #2d2d2d; }
+    .client-cell-phone { font-size: 11px; color: #9e8fc0; margin-top: 2px; }
+    .client-anon       { font-size: 12px; color: #c4b5e0; font-style: italic; }
+
     .action-btns { display: flex; gap: 6px; }
     .btn-icon {
         width: 30px; height: 30px; border-radius: 8px;
         border: 1px solid #e0d9f7; background: #faf8ff;
         cursor: pointer; display: flex; align-items: center; justify-content: center;
         color: #9e8fc0; font-size: 13px; transition: all 0.15s;
+        text-decoration: none;
     }
     .btn-icon:hover { background: var(--violet-light); color: var(--violet); border-color: var(--violet); }
 
@@ -96,7 +102,7 @@
     }
     .btn-outline-violet:hover { background: var(--violet-light); }
 
-    /* Aperçu facture (offscreen print) */
+    /* Aperçu facture */
     .invoice-preview {
         background: #fff; border-radius: 16px;
         border: 1px solid #e8e4f7; padding: 32px;
@@ -120,6 +126,17 @@
     }
     .inv-total-line { display: flex; justify-content: space-between; font-size: 14px; color: #9e8fc0; margin-bottom: 6px; }
     .inv-total-final { display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; color: var(--violet); padding-top: 10px; border-top: 1px solid #e0d9f7; margin-top: 4px; }
+
+    /* Client dans aperçu */
+    .pv-client-box {
+        display: inline-flex; align-items: center; gap: 8px;
+        background: #f7f4ff; border: 1px solid #e0d9f7;
+        border-radius: 10px; padding: 8px 14px;
+        font-size: 13px; margin-bottom: 16px;
+    }
+    .pv-client-box .pv-client-icon { color: var(--violet); font-size: 14px; }
+    .pv-client-name  { font-weight: 700; color: #2d2d2d; }
+    .pv-client-phone { color: #9e8fc0; margin-left: 6px; font-size: 12px; }
 
     /* Modal */
     .modal-content { border-radius: 16px; border: none; }
@@ -181,7 +198,7 @@
     <div class="panel-header">
         <span class="panel-title"><i class="fas fa-file-invoice me-2" style="color:var(--violet);"></i>Liste des factures</span>
         <div class="toolbar">
-            <input type="text" id="inv-search" placeholder="N° facture, montant..." oninput="invFilter()">
+            <input type="text" id="inv-search" placeholder="N° facture, client..." oninput="invFilter()">
             <select id="inv-pay-filter" onchange="invFilter()">
                 <option value="">Tous paiements</option>
                 <option value="cash">Espèces</option>
@@ -200,6 +217,7 @@
                 <tr>
                     <th>N° Facture</th>
                     <th>Date émission</th>
+                    <th>Client</th>
                     <th>Montant</th>
                     <th>Paiement</th>
                     <th>Caissier</th>
@@ -208,23 +226,35 @@
             </thead>
             <tbody id="inv-tbody">
                 @foreach($invoices as $invoice)
-               @php
+                @php
                     $payBadges = [
-                        'cash'          => '<span class="badge-pay pay-cash"> Espèces</span>',
-                        'amana'         => '<span class="badge-pay pay-amana"> Amana</span>',
-                        'nita'          => '<span class="badge-pay pay-nita"> Nita</span>',
-                        'western_union' => '<span class="badge-pay" style="background:#FEF3C7;color:#92400E;"> Western Union</span>',
-                        'moneygram'     => '<span class="badge-pay" style="background:#FCE7F3;color:#9D174D;"> MoneyGram</span>',
-                        'wave'          => '<span class="badge-pay" style="background:#E0F2FE;color:#0369A1;"> Wave</span>',
+                        'cash'          => '<span class="badge-pay pay-cash">Espèces</span>',
+                        'amana'         => '<span class="badge-pay pay-amana">Amana</span>',
+                        'nita'          => '<span class="badge-pay pay-nita">Nita</span>',
+                        'western_union' => '<span class="badge-pay" style="background:#FEF3C7;color:#92400E;">Western Union</span>',
+                        'moneygram'     => '<span class="badge-pay" style="background:#FCE7F3;color:#9D174D;">MoneyGram</span>',
+                        'wave'          => '<span class="badge-pay" style="background:#E0F2FE;color:#0369A1;">Wave</span>',
                     ];
+                    $clientName = $invoice->sale->client->name ?? null;
+                    $clientPhone = $invoice->sale->client->phone ?? null;
                 @endphp
-                <tr data-inv="{{ strtolower($invoice->invoice_number) }}"
+                <tr data-inv="{{ strtolower($invoice->invoice_number) }} {{ strtolower($clientName ?? '') }}"
                     data-pay="{{ $invoice->sale->payment_method ?? '' }}"
                     onclick="showInvoice({{ $invoice->id }})">
                     <td>
                         <span style="font-weight:700;color:var(--violet);">{{ $invoice->invoice_number }}</span>
                     </td>
                     <td style="color:#9e8fc0;">{{ \Carbon\Carbon::parse($invoice->issued_at)->format('d/m/Y H:i') }}</td>
+                    <td>
+                        @if($clientName)
+                            <div class="client-cell-name">{{ $clientName }}</div>
+                            @if($clientPhone)
+                                <div class="client-cell-phone"><i class="fas fa-phone" style="font-size:10px;"></i> {{ $clientPhone }}</div>
+                            @endif
+                        @else
+                            <span class="client-anon">Anonyme</span>
+                        @endif
+                    </td>
                     <td style="font-weight:700;">{{ number_format($invoice->total_amount, 0, ',', ' ') }} <span style="font-size:12px;color:#9e8fc0;">FCFA</span></td>
                     <td>{!! $payBadges[$invoice->sale->payment_method ?? 'cash'] ?? '' !!}</td>
                     <td style="font-size:13px;color:#5a4a7a;">{{ $invoice->sale->user->name ?? '—' }}</td>
@@ -233,7 +263,7 @@
                             <button class="btn-icon" title="Aperçu" onclick="showInvoice({{ $invoice->id }})">
                                 <i class="fas fa-eye"></i>
                             </button>
-                            <a href="{{ route('invoices.pdf', $invoice->id) }}" class="btn-icon" title="Télécharger PDF" target="_blank">
+                            <a href="{{ route('invoices.pdf', $invoice->id) }}" class="btn-icon" title="Imprimer PDF" target="_blank">
                                 <i class="fas fa-print"></i>
                             </a>
                         </div>
@@ -250,15 +280,14 @@
     </div>
 </div>
 
-{{-- Zone aperçu facture imprimable --}}
-<div id="print-zone" class="invoice-preview" id="invoice-detail-panel">
-    <div class="d-flex justify-content-between align-items-start mb-4">
+{{-- Zone aperçu facture --}}
+<div id="print-zone" class="invoice-preview">
+    <div class="d-flex justify-content-between align-items-start mb-3">
         <div>
             <div class="inv-logo">ILYKEN</div>
             <div class="inv-meta">
                 Niamey, Niger<br>
-                Tel: +227 XX XX XX XX<br>
-                ilyken@email.com
+                Tel: +227 97 04 11 47
             </div>
         </div>
         <div class="text-end">
@@ -270,9 +299,12 @@
         </div>
     </div>
 
+    {{-- Bloc client dans l'aperçu --}}
+    <div id="pv-client-wrapper"></div>
+
     <hr style="border-color:#f0ebff;">
 
-    <table class="inv-items-table" id="pv-items-table">
+    <table class="inv-items-table">
         <thead>
             <tr>
                 <th>Désignation</th>
@@ -303,7 +335,7 @@
     </div>
 </div>
 
-{{-- Modal nouvelle facture manuelle --}}
+{{-- Modal nouvelle facture --}}
 <div class="modal fade" id="modalNewInvoice" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -317,7 +349,7 @@
                     <a href="{{ route('sales.index') }}" style="color:var(--violet);font-weight:600;">Point de Vente</a>.
                     Vous pouvez aussi sélectionner une vente existante à facturer manuellement.
                 </p>
-                <label class="form-label-s" style="font-size:13px;font-weight:600;color:#5a4a7a;margin-bottom:5px;display:block;">
+                <label style="font-size:13px;font-weight:600;color:#5a4a7a;margin-bottom:5px;display:block;">
                     Rattacher à une vente
                 </label>
                 <select style="width:100%;padding:9px 14px;border:1px solid #e0d9f7;border-radius:10px;font-size:14px;color:#2d2d2d;outline:none;">
@@ -340,8 +372,16 @@
 </div>
 
 <script>
-// Données factures injectées pour l'aperçu JS
 const invoicesData = @json($invoicesData);
+
+const payLabels = {
+    cash:          'Espèces',
+    amana:         'Amana Mobile Money',
+    nita:          'Nita',
+    western_union: 'Western Union',
+    moneygram:     'MoneyGram',
+    wave:          'Wave',
+};
 
 function invFilter() {
     const q = document.getElementById('inv-search').value.toLowerCase();
@@ -352,14 +392,6 @@ function invFilter() {
         row.style.display = (invMatch && payMatch) ? '' : 'none';
     });
 }
-const payLabels = {
-    cash:          'Espèces',
-    amana:         'Amana Mobile Money',
-    nita:          'Nita',
-    western_union: 'Western Union',
-    moneygram:     'MoneyGram',
-    wave:          'Wave',
-};
 
 function showInvoice(id) {
     const inv = invoicesData[id];
@@ -368,6 +400,23 @@ function showInvoice(id) {
     document.getElementById('pv-number').textContent = inv.invoice_number;
     document.getElementById('pv-date').textContent   = inv.issued_at;
     document.getElementById('pv-pay').textContent    = payLabels[inv.payment_method] || inv.payment_method;
+
+    // Bloc client
+    const clientWrapper = document.getElementById('pv-client-wrapper');
+    if (inv.client_name) {
+        clientWrapper.innerHTML = `
+            <div class="pv-client-box">
+                <span class="pv-client-icon"><i class="fas fa-user"></i></span>
+                <span class="pv-client-name">${inv.client_name}</span>
+                ${inv.client_phone ? `<span class="pv-client-phone"><i class="fas fa-phone" style="font-size:11px;"></i> ${inv.client_phone}</span>` : ''}
+            </div>`;
+    } else {
+        clientWrapper.innerHTML = `
+            <div class="pv-client-box" style="color:#b0a0d0;">
+                <span class="pv-client-icon"><i class="fas fa-user-slash"></i></span>
+                <span style="font-style:italic;">Vente anonyme</span>
+            </div>`;
+    }
 
     const typeIcons = { produit: '📦', service: '🌸', confection: '🎀' };
 
@@ -389,32 +438,6 @@ function showInvoice(id) {
     zone.classList.add('show');
     zone.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-// function showInvoice(id) {
-//     const inv = invoicesData[id];
-//     if (!inv) return;
-
-//     document.getElementById('pv-number').textContent = inv.invoice_number;
-//     document.getElementById('pv-date').textContent   = inv.issued_at;
-//     document.getElementById('pv-pay').textContent    = { cash: 'Espèces', amana: 'Amana', nita: 'Nita' }[inv.payment_method] || inv.payment_method;
-
-//     const tbody = document.getElementById('pv-items-body');
-//     tbody.innerHTML = inv.items.map(item => `
-//         <tr>
-//             <td>${item.name}</td>
-//             <td style="text-align:center;">${item.qty}</td>
-//             <td style="text-align:right;">${item.unit_price.toLocaleString('fr-FR')} FCFA</td>
-//             <td style="text-align:right;font-weight:600;">${item.total.toLocaleString('fr-FR')} FCFA</td>
-//         </tr>
-//     `).join('');
-
-//     document.getElementById('pv-subtotal').textContent = inv.total_amount.toLocaleString('fr-FR') + ' FCFA';
-//     document.getElementById('pv-total').textContent    = inv.total_amount.toLocaleString('fr-FR') + ' FCFA';
-//     document.getElementById('pv-pdf-btn').onclick = () => window.open(`/factures/${id}/pdf`, '_blank');
-
-//     const zone = document.getElementById('print-zone');
-//     zone.classList.add('show');
-//     zone.scrollIntoView({ behavior: 'smooth', block: 'start' });
-// }
 </script>
 
 @endsection

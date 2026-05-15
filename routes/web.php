@@ -16,6 +16,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\PaieController;
+use App\Http\Controllers\ClientController;
 
 // Login
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -25,7 +26,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-Route::get('logs', [LogController::class, 'index'])->name('logs');
+    Route::get('logs', [LogController::class, 'index'])->name('logs');
     // Dashboard admin
     Route::get('/',               [AdminController::class, 'index'])->name('index');
 
@@ -52,14 +53,18 @@ Route::get('logs', [LogController::class, 'index'])->name('logs');
     Route::get('users/{user}/edit',           [AdminController::class, 'editUser'])->name('users.edit');
     Route::put('users/{user}',                [AdminController::class, 'updateUser'])->name('users.update');
     Route::delete('users/{user}',             [AdminController::class, 'destroyUser'])->name('users.destroy');
-    Route::post('users/{user}/reset-password',[AdminController::class, 'resetPassword'])->name('users.reset-password');
+    Route::post('users/{user}/reset-password', [AdminController::class, 'resetPassword'])->name('users.reset-password');
 
-     Route::get('/paie', [PaieController::class, 'index'])->name('paie.index');
+    Route::get('/paie', [PaieController::class, 'index'])->name('paie.index');
     Route::post('/paie', [PaieController::class, 'store'])->name('paie.store');
     Route::put('/paie/{paie}', [PaieController::class, 'update'])->name('paie.update');
     Route::delete('/paie/{paie}', [PaieController::class, 'destroy'])->name('paie.destroy');
     Route::get('/paie/pdf', [PaieController::class, 'pdf'])->name('paie.pdf');
     Route::get('/paie/fiche/{user}', [PaieController::class, 'generateFichePaiement'])->name('paies.fiche');
+
+    Route::resource('clients', ClientController::class);
+    Route::get('clients/export', [ClientController::class, 'export'])->name('clients.export');
+    Route::resource('clients', ClientController::class)->except(['create', 'edit']);
 });
 
 Route::get('/', function () {
@@ -109,14 +114,14 @@ Route::prefix('services')->name('services.')->group(function () {
 Route::prefix('finances')->name('expenses.')->group(function () {
     Route::get('/',                      [ExpenseController::class, 'index'])->name('index');
     Route::post('/depenses',             [ExpenseController::class, 'storeExpense'])->name('store');
-     // ✏️ Modifier une dépense
+    // ✏️ Modifier une dépense
     Route::put('/{expense}', [ExpenseController::class, 'updateExpense'])
         ->name('update');
     Route::delete('/depenses/{expense}', [ExpenseController::class, 'destroyExpense'])->name('destroy');
     Route::get('/depenses/export', [ExpenseController::class, 'export'])
-    ->name('export');
+        ->name('export');
     Route::get('/export-global', [ExpenseController::class, 'exportFinance'])
-    ->name('Globalexport');
+        ->name('Globalexport');
 });
 
 // Confections

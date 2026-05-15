@@ -26,7 +26,7 @@ body {
 
 /* ===== RECEIPT ===== */
 .receipt {
-    height: 120mm; /* 🔥 clé pour tenir sur une page */
+    height: 120mm;
     padding: 6mm;
     box-sizing: border-box;
     overflow: hidden;
@@ -73,6 +73,25 @@ body {
 
 .info table {
     width: 100%;
+}
+
+.client-block {
+    font-size: 8px;
+    color: #2d2d2d;
+    margin: 2px 0 3px 0;
+    padding: 3px 5px;
+    background: #f9f7ff;
+    border-left: 2px solid #6B46C1;
+    border-radius: 2px;
+}
+
+.client-block .client-name {
+    font-weight: bold;
+    color: #4a2e9e;
+}
+
+.client-block .client-phone {
+    color: #7a6aaa;
 }
 
 /* ===== TABLE ===== */
@@ -143,7 +162,7 @@ body {
 
 <div class="page">
 
-    <!-- ================= REÇU 1 ================= -->
+    <!-- ================= REÇU 1 — COPIE CLIENT ================= -->
     <div class="receipt">
 
         <div style="text-align:right; color:#6B46C1;">Copie client</div>
@@ -151,8 +170,8 @@ body {
         <div class="header">
             <table>
                 <tr>
-                      <td style="width: 20%; text-align: left; border: none;">
-                         <img src="data:image/jpeg;base64,{{ $logo }}" style="height:60px;">
+                    <td style="width: 20%; text-align: left; border: none;">
+                        <img src="data:image/jpeg;base64,{{ $logo }}" style="height:60px;">
                     </td>
                     <td>
                         <div class="logo">ILYKEN</div>
@@ -170,26 +189,36 @@ body {
             </table>
         </div>
 
+        {{-- Client --}}
+        @if($invoice->sale->client)
+        <div class="client-block">
+            <span class="client-name">{{ $invoice->sale->client->name }}</span>
+            @if($invoice->sale->client->phone)
+                &nbsp;·&nbsp;<span class="client-phone">{{ $invoice->sale->client->phone }}</span>
+            @endif
+        </div>
+        @endif
+
         <div class="info">
-    <table>
-        <tr>
-            <td>Vente #{{ $invoice->sale_id }}</td>
-            <td class="right">
-                @php
-                    $payLabels = [
-                        'cash'          => 'Espèces',
-                        'amana'         => 'Amana',
-                        'nita'          => 'Nita',
-                        'western_union' => 'Western Union',
-                        'moneygram'     => 'MoneyGram',
-                        'wave'          => 'Wave',
-                    ];
-                @endphp
-                {{ $payLabels[$invoice->sale->payment_method ?? 'cash'] ?? $invoice->sale->payment_method }}
-            </td>
-        </tr>
-    </table>
-</div>
+            <table>
+                <tr>
+                    <td>Vente #{{ $invoice->sale_id }}</td>
+                    <td class="right">
+                        @php
+                            $payLabels = [
+                                'cash'          => 'Espèces',
+                                'amana'         => 'Amana',
+                                'nita'          => 'Nita',
+                                'western_union' => 'Western Union',
+                                'moneygram'     => 'MoneyGram',
+                                'wave'          => 'Wave',
+                            ];
+                        @endphp
+                        {{ $payLabels[$invoice->sale->payment_method ?? 'cash'] ?? $invoice->sale->payment_method }}
+                    </td>
+                </tr>
+            </table>
+        </div>
 
         <table class="items-table">
             <thead>
@@ -201,7 +230,7 @@ body {
                 </tr>
             </thead>
             <tbody>
- 
+
             @foreach($invoice->sale->saleItems ?? [] as $item)
             <tr>
                 <td>{{ $item->product->name ?? '-' }}</td>
@@ -254,18 +283,17 @@ body {
     <!-- ================= SEPARATEUR ================= -->
     <div class="separator">✂ ✂ ✂</div>
 
-    <!-- ================= REÇU 2 ================= -->
+    <!-- ================= REÇU 2 — COPIE CAISSE ================= -->
     <div class="receipt">
 
         <div style="text-align:right; color:#6B46C1;">Copie caisse</div>
 
-        <!-- (contenu identique) -->
         <div class="header">
             <table>
                 <tr>
-                      <td style="width: 20%; text-align: left; border: none;">
-                            <img src="data:image/jpeg;base64,{{ $logo }}" style="height: 60px;">
-                        </td>
+                    <td style="width: 20%; text-align: left; border: none;">
+                        <img src="data:image/jpeg;base64,{{ $logo }}" style="height: 60px;">
+                    </td>
                     <td>
                         <div class="logo">ILYKEN</div>
                         Niamey<br>
@@ -275,12 +303,22 @@ body {
                         <strong>FACTURE</strong><br>
                         {{ $invoice->invoice_number }}<br>
                         {{ \Carbon\Carbon::parse($invoice->issued_at)->format('d/m/Y H:i') }}<br>
-                          <strong>Caissier</strong>
+                        <strong>Caissier</strong>
                         {{ $invoice->sale->user ? ' - ' . $invoice->sale->user->name : '' }}
                     </td>
                 </tr>
             </table>
         </div>
+
+        {{-- Client --}}
+        @if($invoice->sale->client)
+        <div class="client-block">
+            <span class="client-name">{{ $invoice->sale->client->name }}</span>
+            @if($invoice->sale->client->phone)
+                &nbsp;·&nbsp;<span class="client-phone">{{ $invoice->sale->client->phone }}</span>
+            @endif
+        </div>
+        @endif
 
         <div class="info">
             <table>
@@ -331,7 +369,7 @@ body {
                 <td>{{ number_format($svc->price, 0, ',', ' ') }}</td>
             </tr>
             @endforeach
-            
+
             @foreach($invoice->sale->saleConfections ?? [] as $sc)
             <tr>
                 <td>{{ $sc->confection->name ?? '-' }}</td>
@@ -340,6 +378,7 @@ body {
                 <td>{{ number_format($sc->total_price, 0, ',', ' ') }}</td>
             </tr>
             @endforeach
+
             </tbody>
         </table>
 

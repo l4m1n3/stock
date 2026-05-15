@@ -374,6 +374,13 @@
                 <i class="fas fa-file-invoice-dollar"></i> Facturation Globale
             </a>
         </li>
+         {{-- ✅ NOUVEAU : Clients --}}
+        <li class="nav-item">
+            <a href="{{ route('admin.clients.index') }}"
+            class="nav-link {{ request()->routeIs('admin.clients.*') ? 'active' : '' }}">
+                <i class="fas fa-users"></i> Clients
+            </a>
+        </li>
         <li class="nav-item">
             <a href="{{ route('admin.finances') }}"
                class="nav-link {{ request()->routeIs('admin.finances') ? 'active' : '' }}">
@@ -451,6 +458,7 @@
                 <i class="fas fa-file-invoice"></i> Facturation
             </a>
         </li>
+       
 
         <li class="nav-section">Rapports</li>
 
