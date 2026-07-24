@@ -387,7 +387,7 @@
                             <button class="btn-icon" title="Sortie / perte"
                                 onclick="prefillSortie({{ $product->id }}, '{{ addslashes($product->name) }}')">
                                 <i class="fas fa-minus"></i>
-                            </button>
+                            </button> 
                             <button class="btn-icon" title="Modifier">
                                 <i class="fas fa-pen"></i>
                             </button>

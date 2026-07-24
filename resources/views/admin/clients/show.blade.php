@@ -29,12 +29,7 @@
                 <h1 class="profile-name">{{ $client->name }}</h1>
                 <span class="tier-badge"
                       style="background:{{ $client->tier_bg }};color:{{ $client->tier_color }};">
-                    @switch($client->tier)
-                        @case('vip')    <i class="fas fa-crown me-1"></i>VIP   @break
-                        @case('gold')   <i class="fas fa-star me-1"></i>Gold   @break
-                        @case('silver') <i class="fas fa-circle me-1"></i>Silver @break
-                        @default        <i class="fas fa-circle me-1"></i>Bronze
-                    @endswitch
+                   
                 </span>
             </div>
             <div class="profile-meta">
@@ -76,35 +71,33 @@
     <div class="col-6 col-md-3">
         <div class="stat-card">
             <div class="stat-label"><i class="fas fa-coins me-1"></i> Total dépensé</div>
-            <div class="stat-val">{{ number_format($client->total_spent / 1000, 0, ',', ' ') }}k</div>
+            <div class="stat-val">{{ number_format($totalSpent / 1000, 0, ',', ' ') }}k</div>
             <div class="stat-sub">FCFA cumulé</div>
         </div>
     </div>
     <div class="col-6 col-md-3">
         <div class="stat-card">
             <div class="stat-label"><i class="fas fa-receipt me-1"></i> Visites</div>
-            <div class="stat-val">{{ $client->total_visits }}</div>
+            <div class="stat-val">{{ $totalVisits }}</div>
             <div class="stat-sub">achats enregistrés</div>
         </div>
     </div>
-    <div class="col-6 col-md-3">
+    {{-- <div class="col-6 col-md-3">
         <div class="stat-card">
             <div class="stat-label"><i class="fas fa-chart-line me-1"></i> Panier moyen</div>
             <div class="stat-val">
-                {{ $client->total_visits > 0
-                    ? number_format($client->total_spent / $client->total_visits / 1000, 0, ',', ' ')
-                    : 0 }}k
+                {{ number_format($avgTicket / 1000, 0, ',', ' ') }}k
             </div>
             <div class="stat-sub">FCFA / visite</div>
         </div>
-    </div>
+    </div> --}}
     <div class="col-6 col-md-3">
         <div class="stat-card">
             <div class="stat-label"><i class="fas fa-calendar-check me-1"></i> Dernière visite</div>
             <div class="stat-val" style="font-size:15px;">
-                {{ $client->sales->first()?->created_at->diffForHumans() ?? '—' }}
+                {{ $lastVisit?->created_at->diffForHumans() ?? '—' }}
             </div>
-            <div class="stat-sub">{{ $client->sales->first()?->created_at->format('d/m/Y') ?? '' }}</div>
+            <div class="stat-sub">{{ $lastVisit?->created_at->format('d/m/Y') ?? '' }}</div>
         </div>
     </div>
 </div>
@@ -159,7 +152,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($client->sales as $sale)
+                        @forelse($sales as $sale)
                         <tr>
                             <td style="font-size:13px;color:#888;">
                                 {{ $sale->created_at->format('d/m/Y') }}
@@ -171,7 +164,7 @@
                                 @endif
                             </td>
                             <td class="text-end" style="font-size:13px;font-weight:600;">
-                                {{ number_format($sale->total_price, 0, ',', ' ') }} FCFA
+                                {{ number_format($sale->total_amount, 0, ',', ' ') }} FCFA
                             </td>
                         </tr>
                         @empty
@@ -185,7 +178,7 @@
                     </tbody>
                 </table>
             </div>
-            @if($client->sales->count() === 20)
+            @if($sales->count() === 20)
                 <div class="px-3 py-2 border-top" style="font-size:11px;color:#aaa;">
                     Affichage des 20 achats les plus récents uniquement.
                 </div>

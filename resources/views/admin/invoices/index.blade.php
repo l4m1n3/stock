@@ -76,8 +76,11 @@
                     <th>Date</th>
                     <th>Vendeur</th>
                     <th>Branche</th>
+                    <th>Mode paiement</th>
+                    <th>Status</th>
                     <th class="text-end">Total</th>
-                    {{-- <th class="text-center" width="120">Actions</th> --}}
+                    <th class="text-center">Actions</th>
+                   
                 </tr>
             </thead>
             <tbody>
@@ -91,27 +94,30 @@
                             {{ $invoice->branch->name ?? '—' }}
                         </span>
                     </td>
+                    <td >{{ $invoice->sale->payment_method ?? '—' }}</td>
+                    <td>
+                        @if($invoice->status === 'active')
+                            <span class="badge bg-success">Payée</span>
+                        @elseif($invoice->status === 'cancelled')
+                            <span class="badge bg-danger">Annulée</span>
+                        @else
+                            <span class="badge bg-secondary">{{ ucfirst($invoice->status) }}</span>
+                        @endif
+                    </td>
                     <td class="text-end fw-700">{{ number_format($invoice->total_amount, 0, ',', ' ') }} FCFA</td>
-                    {{-- <td class="text-center">
+                    <td class="text-center">
                         <div class="d-flex justify-content-center gap-1">
-
-                            {{-- ✅ FIX : route avec paramètre 
-                            <a href=""
-                               class="btn btn-sm btn-outline-primary" style="border-radius:7px;" title="Voir">
-                                <i class="fas fa-eye"></i>
-                            </a>
-
-                            {{-- ✅ FIX : route avec paramètre 
-                            <form method="POST" action=""
-                                  onsubmit="return confirm('Supprimer la facture {{ $invoice->invoice_number }} ?')">
-                                @csrf @method('DELETE')
-                                <button class="btn btn-sm btn-outline-danger" style="border-radius:7px;" title="Supprimer">
-                                    <i class="fas fa-trash"></i>
+                            {{-- ✅ FIX : route avec paramètre --}}
+                            <form method="POST" action="{{ route('admin.invoices.cancel', $invoice->id) }}"
+                                  onsubmit="return confirm('Annuler la facture {{ $invoice->invoice_number }} ?')">
+                                @csrf @method('POST')
+                                <button class="btn btn-sm btn-outline-danger" style="border-radius:7px;" title="Annuler">
+                                    <i class="fas fa-ban"></i>
                                 </button>
                             </form>
 
                         </div>
-                    </td> --}}
+                    </td>
                 </tr>
                 @empty
                 <tr>

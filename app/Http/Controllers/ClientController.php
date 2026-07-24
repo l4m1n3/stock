@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Branch;
+use App\Models\SaleItem;
+use App\Models\Sale;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ClientController extends Controller
@@ -13,15 +15,30 @@ class ClientController extends Controller
     public function index(Request $request)
     {
         $query = Client::with('branch')
-            ->when($request->search, fn($q, $s) =>
-                $q->where('name', 'like', "%$s%")->orWhere('phone', 'like', "%$s%"))
-            ->when($request->branch_id, fn($q, $b) =>
-                $q->where('branch_id', $b))
-            ->orderBy(match ($request->sort) {
-                'visits' => 'total_visits',
-                'name'   => 'name',
-                default  => 'total_spent',
-            }, $request->sort === 'name' ? 'asc' : 'desc');
+            ->withSum('sales as total_spent', 'total_amount')
+            ->withCount('sales as total_visits')
+
+            ->when($request->search, function ($q, $s) {
+                $q->where(function ($q) use ($s) {
+                    $q->where('name', 'like', "%$s%")
+                        ->orWhere('phone', 'like', "%$s%");
+                });
+            })
+
+            ->when(
+                $request->branch_id,
+                fn($q, $b) =>
+                $q->where('branch_id', $b)
+            )
+
+            ->orderBy(
+                match ($request->sort) {
+                    'visits' => 'total_visits',
+                    'name'   => 'name',
+                    default  => 'total_spent',
+                },
+                $request->sort === 'name' ? 'asc' : 'desc'
+            );
 
         $clients = $query->paginate(15)->withQueryString();
 
@@ -56,22 +73,41 @@ class ClientController extends Controller
     // ── SHOW ──────────────────────────────────────────────────────────────────
     public function show(Client $client)
     {
-        $client->load(['branch', 'sales' => fn($q) => $q->latest()->limit(20)]);
+        $client->load(['branch']);
+        $totalSpent = Sale::where('client_id', $client->id)
+            ->sum('total_amount');
 
-        // Spending by month for the last 6 months
-        $spendingByMonth = $client->sales()
-            ->selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, SUM(total_price) as total')
+        $totalVisits = Sale::where('client_id', $client->id)->count();
+
+        $lastVisit = Sale::where('client_id', $client->id)
+            ->latest('created_at')
+            ->first();
+
+        $avgTicket = $totalVisits > 0 ? $totalSpent / $totalVisits : 0;
+
+        $sales = Sale::where('client_id', $client->id)
+            ->latest()
+            ->limit(20)
+            ->get();
+
+        $spendingByMonth = Sale::where('client_id', $client->id)
             ->where('created_at', '>=', now()->subMonths(6))
+            ->selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month')
+            ->selectRaw('SUM(total_amount) as total')
             ->groupBy('month')
             ->orderBy('month')
             ->pluck('total', 'month');
 
         return view('admin.clients.show', [
             'client'          => $client,
+            'totalSpent'      => $totalSpent,
+            'totalVisits'     => $totalVisits,
+            'avgTicket'       => $avgTicket,
+            'lastVisit'       => $lastVisit,
+            'sales'           => $sales,
             'spendingByMonth' => $spendingByMonth,
         ]);
     }
-
     // ── UPDATE ────────────────────────────────────────────────────────────────
     public function update(Request $request, Client $client)
     {
@@ -118,9 +154,16 @@ class ClientController extends Controller
 
             // Header row
             fputcsv($handle, [
-                'ID', 'Nom', 'Téléphone', 'Adresse',
-                'Agence', 'Visites', 'Total dépensé (FCFA)',
-                'Niveau', 'Notes', 'Créé le',
+                'ID',
+                'Nom',
+                'Téléphone',
+                'Adresse',
+                'Agence',
+                'Visites',
+                'Total dépensé (FCFA)',
+                // 'Niveau',
+                'Notes',
+                'Créé le',
             ], ';');
 
             foreach ($clients as $client) {
@@ -132,7 +175,7 @@ class ClientController extends Controller
                     $client->branch->name,
                     $client->total_visits,
                     number_format($client->total_spent, 2, ',', ' '),
-                    $client->tier,
+                    // $client->tier,
                     $client->notes ?? '',
                     $client->created_at->format('d/m/Y'),
                 ], ';');

@@ -8,7 +8,6 @@
     :root { --violet: #6B46C1; --violet-light: #EEEDFE; --violet-hover: #5A3AA6; }
 
     .inv-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
-    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
     .kpi-card {
         background: #fff; border-radius: 14px;
         border: 1px solid #e8e4f7; padding: 18px 20px;
@@ -17,6 +16,12 @@
     .kpi-label { font-size: 12px; font-weight: 600; color: #9e8fc0; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
     .kpi-value { font-size: 26px; font-weight: 700; color: #2d2d2d; line-height: 1; }
     .kpi-sub   { font-size: 12px; color: #b0a0d0; margin-top: 4px; }
+
+    .section-label {
+        font-size: 12px; font-weight: 600; color: #9e8fc0;
+        text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px;
+        display: flex; align-items: center; gap: 6px;
+    }
 
     .panel {
         background: #fff; border-radius: 16px;
@@ -46,7 +51,6 @@
         background: #faf8ff; color: #2d2d2d; outline: none; cursor: pointer;
     }
 
-    /* Table */
     .inv-table { width: 100%; border-collapse: collapse; }
     .inv-table thead tr { background: #f7f4ff; }
     .inv-table th {
@@ -70,7 +74,6 @@
     .pay-amana { background: var(--violet-light); color: var(--violet); }
     .pay-nita  { background: #FAEEDA; color: #854F0B; }
 
-    /* Client cell */
     .client-cell-name  { font-weight: 600; font-size: 13px; color: #2d2d2d; }
     .client-cell-phone { font-size: 11px; color: #9e8fc0; margin-top: 2px; }
     .client-anon       { font-size: 12px; color: #c4b5e0; font-style: italic; }
@@ -102,11 +105,10 @@
     }
     .btn-outline-violet:hover { background: var(--violet-light); }
 
-    /* Aperçu facture */
     .invoice-preview {
         background: #fff; border-radius: 16px;
         border: 1px solid #e8e4f7; padding: 32px;
-        display: none;
+        display: none; margin-bottom: 24px;
     }
     .invoice-preview.show { display: block; }
     .inv-logo { font-size: 22px; font-weight: 800; color: var(--violet); letter-spacing: -0.5px; }
@@ -124,21 +126,19 @@
         background: #faf8ff; border-radius: 12px; padding: 16px 24px;
         border: 1px solid #e0d9f7; min-width: 240px;
     }
-    .inv-total-line { display: flex; justify-content: space-between; font-size: 14px; color: #9e8fc0; margin-bottom: 6px; }
+    .inv-total-line  { display: flex; justify-content: space-between; font-size: 14px; color: #9e8fc0; margin-bottom: 6px; }
     .inv-total-final { display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; color: var(--violet); padding-top: 10px; border-top: 1px solid #e0d9f7; margin-top: 4px; }
 
-    /* Client dans aperçu */
     .pv-client-box {
         display: inline-flex; align-items: center; gap: 8px;
         background: #f7f4ff; border: 1px solid #e0d9f7;
         border-radius: 10px; padding: 8px 14px;
         font-size: 13px; margin-bottom: 16px;
     }
-    .pv-client-box .pv-client-icon { color: var(--violet); font-size: 14px; }
+    .pv-client-icon  { color: var(--violet); font-size: 14px; }
     .pv-client-name  { font-weight: 700; color: #2d2d2d; }
     .pv-client-phone { color: #9e8fc0; margin-left: 6px; font-size: 12px; }
 
-    /* Modal */
     .modal-content { border-radius: 16px; border: none; }
     .modal-header-violet {
         background: linear-gradient(135deg, #6B46C1, #9F7AEA);
@@ -150,53 +150,158 @@
         #print-zone, #print-zone * { visibility: visible; }
         #print-zone { position: absolute; top: 0; left: 0; width: 100%; }
     }
-    @media (max-width: 768px) { .kpi-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 768px) {
+        .kpi-grid { grid-template-columns: 1fr 1fr; }
+    }
 </style>
+
+@php
+$payLabels = [
+    'cash'          => ['label' => 'Espèces',       'icon' => 'fa-money-bill-wave'],
+    'amana'         => ['label' => 'Amanata',       'icon' => 'fa-mobile-alt'],
+    'nita'          => ['label' => 'MyNita',        'icon' => 'fa-mobile'],
+    'western_union' => ['label' => 'Western Union', 'icon' => 'fa-globe'],
+    'moneygram'     => ['label' => 'MoneyGram',     'icon' => 'fa-credit-card'],
+    'wave'          => ['label' => 'Wave',          'icon' => 'fa-water'],
+];
+@endphp
 
 {{-- Header --}}
 <div class="inv-header">
     <div>
         <h4 class="fw-bold mb-0">Facturation</h4>
-        <small class="text-muted">Toutes les factures — {{ now()->format('d/m/Y') }}</small>
+        <small class="text-muted">
+            @if($isStaff)
+                Vos factures du jour — {{ now()->format('d/m/Y') }}
+            @else
+                Toutes les factures — {{ now()->format('d/m/Y') }}
+            @endif
+        </small>
     </div>
     <div class="d-flex gap-2">
         <button class="btn-outline-violet" onclick="window.print()">
             <i class="fas fa-print"></i> Imprimer
         </button>
+        @if(!$isStaff)
         <button class="btn-violet" data-bs-toggle="modal" data-bs-target="#modalNewInvoice">
             <i class="fas fa-plus"></i> Nouvelle facture
         </button>
+        @endif
     </div>
 </div>
 
-{{-- KPIs --}}
-<div class="kpi-grid">
-    <div class="kpi-card">
-        <div class="kpi-label">Total factures</div>
-        <div class="kpi-value">{{ $invoices->total() }}</div>
-        <div class="kpi-sub">toutes périodes</div>
+{{-- ── KPIs du JOUR (tous les rôles) ───────────────────────────────────── --}}
+<div class="section-label">
+    <i class="fas fa-calendar-day"></i> Aujourd'hui — {{ now()->format('d/m/Y') }}
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:14px;">
+
+    <div class="kpi-card" style="border-left:3px solid var(--violet);">
+        <div class="kpi-label"><i class="fas fa-file-invoice me-1"></i> Factures</div>
+        <div class="kpi-value" style="color:var(--violet);">{{ $dayCount }}</div>
+        <div class="kpi-sub">émise(s) aujourd'hui</div>
     </div>
+
+    <div class="kpi-card" style="border-left:3px solid #3B6D11;">
+        <div class="kpi-label"><i class="fas fa-coins me-1"></i> CA du jour</div>
+        <div class="kpi-value" style="color:#3B6D11;">{{ number_format($dayRevenue, 0, ',', ' ') }}</div>
+        <div class="kpi-sub">FCFA encaissés</div>
+    </div>
+
     <div class="kpi-card">
-        <div class="kpi-label">Ce mois</div>
+        <div class="kpi-label"><i class="fas fa-receipt me-1"></i> Ticket moyen</div>
+        <div class="kpi-value">
+            {{ $dayCount > 0 ? number_format($dayRevenue / $dayCount, 0, ',', ' ') : '0' }}
+        </div>
+        <div class="kpi-sub">FCFA / vente</div>
+    </div>
+
+</div>
+
+{{-- Totaux du jour par moyen de paiement --}}
+@if($dayByPayment->isNotEmpty())
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:28px;">
+    @foreach($dayByPayment as $method => $row)
+    <div class="kpi-card" style="padding:14px 16px;">
+        <div class="kpi-label" style="font-size:11px;">
+            <i class="fas {{ $payLabels[$method]['icon'] ?? 'fa-money-bill' }} me-1"></i>
+            {{ $payLabels[$method]['label'] ?? $method }}
+        </div>
+        <div class="kpi-value" style="font-size:18px;">
+            {{ number_format($row->total, 0, ',', ' ') }}
+            <span style="font-size:12px;font-weight:400;color:#b0a0d0;">FCFA</span>
+        </div>
+        <div class="kpi-sub">{{ $row->count }} facture(s)</div>
+    </div>
+    @endforeach
+</div>
+@else
+<div style="margin-bottom:28px;padding:12px 16px;background:#faf8ff;border-radius:12px;border:1px dashed #e0d9f7;color:#b0a0d0;font-size:13px;font-style:italic;">
+    <i class="fas fa-info-circle me-1"></i> Aucune vente enregistrée aujourd'hui.
+</div>
+@endif
+
+{{-- ── KPIs du MOIS (admin/manager uniquement) ─────────────────────────── --}}
+@if(!$isStaff)
+<div class="section-label" style="margin-top:8px;">
+    <i class="fas fa-calendar-alt"></i> Ce mois — {{ now()->format('F Y') }}
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:14px;">
+
+    <div class="kpi-card" style="background:#faf8ff;border-left:3px solid var(--violet);">
+        <div class="kpi-label"><i class="fas fa-file-invoice me-1"></i> Factures</div>
         <div class="kpi-value" style="color:var(--violet);">{{ $monthCount }}</div>
-        <div class="kpi-sub">factures émises</div>
+        <div class="kpi-sub">émises ce mois</div>
     </div>
-    <div class="kpi-card">
-        <div class="kpi-label">CA ce mois</div>
+
+    <div class="kpi-card" style="background:#faf8ff;border-left:3px solid #3B6D11;">
+        <div class="kpi-label"><i class="fas fa-coins me-1"></i> CA du mois</div>
         <div class="kpi-value" style="color:#3B6D11;">{{ number_format($monthRevenue, 0, ',', ' ') }}</div>
         <div class="kpi-sub">FCFA encaissés</div>
     </div>
-    <div class="kpi-card">
-        <div class="kpi-label">Ticket moyen</div>
-        <div class="kpi-value">{{ $monthCount > 0 ? number_format($monthRevenue / $monthCount, 0, ',', ' ') : '0' }}</div>
+
+    <div class="kpi-card" style="background:#faf8ff;">
+        <div class="kpi-label"><i class="fas fa-receipt me-1"></i> Ticket moyen</div>
+        <div class="kpi-value">
+            {{ $monthCount > 0 ? number_format($monthRevenue / $monthCount, 0, ',', ' ') : '0' }}
+        </div>
         <div class="kpi-sub">FCFA / vente</div>
     </div>
+
 </div>
 
-{{-- Table factures --}}
+{{-- Totaux du mois par moyen de paiement --}}
+@if($monthByPayment->isNotEmpty())
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:28px;">
+    @foreach($monthByPayment as $method => $row)
+    <div class="kpi-card" style="padding:14px 16px;background:#faf8ff;">
+        <div class="kpi-label" style="font-size:11px;">
+            <i class="fas {{ $payLabels[$method]['icon'] ?? 'fa-money-bill' }} me-1"></i>
+            {{ $payLabels[$method]['label'] ?? $method }}
+        </div>
+        <div class="kpi-value" style="font-size:18px;">
+            {{ number_format($row->total, 0, ',', ' ') }}
+            <span style="font-size:12px;font-weight:400;color:#b0a0d0;">FCFA</span>
+        </div>
+        <div class="kpi-sub">{{ $row->count }} facture(s)</div>
+    </div>
+    @endforeach
+</div>
+@endif
+@endif
+
+{{-- ── Table des factures ───────────────────────────────────────────────── --}}
 <div class="panel">
     <div class="panel-header">
-        <span class="panel-title"><i class="fas fa-file-invoice me-2" style="color:var(--violet);"></i>Liste des factures</span>
+        <span class="panel-title">
+            <i class="fas fa-file-invoice me-2" style="color:var(--violet);"></i>
+            Liste des factures
+            @if($isStaff)
+                <span style="font-size:12px;font-weight:400;color:#9e8fc0;margin-left:8px;">
+                    <i class="fas fa-calendar-day me-1"></i> Aujourd'hui uniquement
+                </span>
+            @endif
+        </span>
         <div class="toolbar">
             <input type="text" id="inv-search" placeholder="N° facture, client..." oninput="invFilter()">
             <select id="inv-pay-filter" onchange="invFilter()">
@@ -235,7 +340,7 @@
                         'moneygram'     => '<span class="badge-pay" style="background:#FCE7F3;color:#9D174D;">MoneyGram</span>',
                         'wave'          => '<span class="badge-pay" style="background:#E0F2FE;color:#0369A1;">Wave</span>',
                     ];
-                    $clientName = $invoice->sale->client->name ?? null;
+                    $clientName  = $invoice->sale->client->name  ?? null;
                     $clientPhone = $invoice->sale->client->phone ?? null;
                 @endphp
                 <tr data-inv="{{ strtolower($invoice->invoice_number) }} {{ strtolower($clientName ?? '') }}"
@@ -255,7 +360,10 @@
                             <span class="client-anon">Anonyme</span>
                         @endif
                     </td>
-                    <td style="font-weight:700;">{{ number_format($invoice->total_amount, 0, ',', ' ') }} <span style="font-size:12px;color:#9e8fc0;">FCFA</span></td>
+                    <td style="font-weight:700;">
+                        {{ number_format($invoice->total_amount, 0, ',', ' ') }}
+                        <span style="font-size:12px;color:#9e8fc0;">FCFA</span>
+                    </td>
                     <td>{!! $payBadges[$invoice->sale->payment_method ?? 'cash'] ?? '' !!}</td>
                     <td style="font-size:13px;color:#5a4a7a;">{{ $invoice->sale->user->name ?? '—' }}</td>
                     <td onclick="event.stopPropagation()">
@@ -266,6 +374,15 @@
                             <a href="{{ route('invoices.pdf', $invoice->id) }}" class="btn-icon" title="Imprimer PDF" target="_blank">
                                 <i class="fas fa-print"></i>
                             </a>
+                            @if(!$isStaff)
+                            <form action="{{ route('invoices.destroy', $invoice->id) }}" method="POST"
+                                  onsubmit="return confirm('Supprimer cette facture et la vente liée ?')">
+                                @csrf @method('DELETE')
+                                <button type="submit" class="btn-icon" title="Supprimer" style="color:#E24B4A;border-color:#fca5a5;">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                            @endif
                         </div>
                     </td>
                 </tr>
@@ -274,21 +391,17 @@
         </table>
     </div>
 
-    {{-- Pagination --}}
     <div class="px-4 py-3 border-top" style="border-color:#f0ebff!important;">
         {{ $invoices->links() }}
     </div>
 </div>
 
-{{-- Zone aperçu facture --}}
+{{-- Zone aperçu / impression --}}
 <div id="print-zone" class="invoice-preview">
     <div class="d-flex justify-content-between align-items-start mb-3">
         <div>
             <div class="inv-logo">ILYKEN</div>
-            <div class="inv-meta">
-                Niamey, Niger<br>
-                Tel: +227 97 04 11 47
-            </div>
+            <div class="inv-meta">Niamey, Niger<br>Tel: +227 97 04 11 47</div>
         </div>
         <div class="text-end">
             <div style="font-size:22px;font-weight:800;color:#2d2d2d;" id="pv-number">—</div>
@@ -299,7 +412,6 @@
         </div>
     </div>
 
-    {{-- Bloc client dans l'aperçu --}}
     <div id="pv-client-wrapper"></div>
 
     <hr style="border-color:#f0ebff;">
@@ -327,15 +439,14 @@
         <button class="btn-outline-violet" onclick="document.getElementById('print-zone').classList.remove('show')">
             <i class="fas fa-times me-1"></i> Fermer
         </button>
-        <div class="d-flex gap-2">
-            <button class="btn-violet" id="pv-pdf-btn">
-                <i class="fas fa-file-pdf me-1"></i> Imprimer
-            </button>
-        </div>
+        <button class="btn-violet" id="pv-pdf-btn">
+            <i class="fas fa-file-pdf me-1"></i> Imprimer
+        </button>
     </div>
 </div>
 
-{{-- Modal nouvelle facture --}}
+{{-- Modal nouvelle facture (admin/manager uniquement) --}}
+@if(!$isStaff)
 <div class="modal fade" id="modalNewInvoice" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -370,6 +481,7 @@
         </div>
     </div>
 </div>
+@endif
 
 <script>
 const invoicesData = @json($invoicesData);
@@ -401,7 +513,6 @@ function showInvoice(id) {
     document.getElementById('pv-date').textContent   = inv.issued_at;
     document.getElementById('pv-pay').textContent    = payLabels[inv.payment_method] || inv.payment_method;
 
-    // Bloc client
     const clientWrapper = document.getElementById('pv-client-wrapper');
     if (inv.client_name) {
         clientWrapper.innerHTML = `
@@ -420,8 +531,7 @@ function showInvoice(id) {
 
     const typeIcons = { produit: '📦', service: '🌸', confection: '🎀' };
 
-    const tbody = document.getElementById('pv-items-body');
-    tbody.innerHTML = inv.items.map(item => `
+    document.getElementById('pv-items-body').innerHTML = inv.items.map(item => `
         <tr>
             <td>${typeIcons[item.type] ?? ''} ${item.name}</td>
             <td style="text-align:center;">${item.qty}</td>

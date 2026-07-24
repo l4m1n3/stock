@@ -180,7 +180,7 @@
             @else
                 0 client
             @endif
-        </span>
+        </span> 
         @if($clients->hasPages())
             {{ $clients->appends(request()->query())->links('pagination::bootstrap-5') }}
         @endif

@@ -10,11 +10,14 @@ use App\Models\Invoice;
 use App\Models\Expense;
 use App\Models\StockMovement;
 use App\Models\PurchaseOrder;
+use App\Models\ServiceSchedule;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AdminController extends Controller
 {
@@ -234,6 +237,14 @@ class AdminController extends Controller
             'monthAmount'
         ));
     }
+    
+     public function destroyInvoices(Request $request, Invoice $invoice)
+    {
+        
+        $invoice->sale?->delete(); // supprime la vente liée
+        $invoice->delete();
+        return back()->with('success', 'Facture supprimée.');
+    }
 
     // ═══════════════════════════════════════════════════════════════
     //  FINANCES & RAPPORTS GLOBAUX
@@ -447,27 +458,43 @@ class AdminController extends Controller
     // ═══════════════════════════════════════════════════════════════
     // EXPORT PDF — appelé via GET /admin/finances/pdf?period=...&year=...
     // ═══════════════════════════════════════════════════════════════
-    public function exportPdf(Request $request)
+   public function exportPdf(Request $request)
     {
-        $period   = $request->get('period', 'month');   // day|week|month|year
+        $period   = $request->get('period', 'month');   // day|week|month|year|custom
         $branchId = $request->get('branch_id');
         $year     = (int) $request->get('year', now()->year);
+        $startDateParam = $request->get('start_date');
+        $endDateParam   = $request->get('end_date');
+
         $branchName = $branchId
             ? Branch::findOrFail($branchId)->name
             : 'Toutes les branches';
 
         // ── Plage selon la période ──────────────────────────────────
-        [$start, $end, $periodLabel] = match ($period) {
-            'day'   => [Carbon::today(),                Carbon::today()->endOfDay(),     'Journée du ' . Carbon::today()->format('d/m/Y')],
-            'week'  => [Carbon::now()->startOfWeek(),   Carbon::now()->endOfWeek(),      'Semaine du ' . Carbon::now()->startOfWeek()->format('d/m') . ' au ' . Carbon::now()->endOfWeek()->format('d/m/Y')],
-            'year'  => [Carbon::create($year)->startOfYear(), Carbon::create($year)->endOfYear(), "Année $year"],
-            default => [Carbon::now()->startOfMonth(),  Carbon::now()->endOfMonth(),     Carbon::now()->translatedFormat('F Y')],
-        };
+        if ($period === 'custom' && $startDateParam && $endDateParam) {
+            $start = Carbon::parse($startDateParam)->startOfDay();
+            $end   = Carbon::parse($endDateParam)->endOfDay();
+            $periodLabel = 'Du ' . $start->format('d/m/Y') . ' au ' . $end->format('d/m/Y');
+        } else {
+            // Fallback si "custom" est demandé sans dates valides
+            if ($period === 'custom') {
+                $period = 'month';
+            }
+
+            [$start, $end, $periodLabel] = match ($period) {
+                'day'   => [Carbon::today(),                Carbon::today()->endOfDay(),     'Journée du ' . Carbon::today()->format('d/m/Y')],
+                'week'  => [Carbon::now()->startOfWeek(),   Carbon::now()->endOfWeek(),      'Semaine du ' . Carbon::now()->startOfWeek()->format('d/m') . ' au ' . Carbon::now()->endOfWeek()->format('d/m/Y')],
+                'year'  => [Carbon::create($year)->startOfYear(), Carbon::create($year)->endOfYear(), "Année $year"],
+                default => [Carbon::now()->startOfMonth(),  Carbon::now()->endOfMonth(),     Carbon::now()->translatedFormat('F Y')],
+            };
+        }
 
         $invoiceQ = fn() => Invoice::query()->when($branchId, fn($q) => $q->where('branch_id', $branchId));
         $expenseQ = fn() => Expense::query()->when($branchId, fn($q) => $q->where('branch_id', $branchId));
         $saleQ    = fn() => Sale::query()->when($branchId, fn($q) => $q->where('branch_id', $branchId));
 
+        $startDate = $start->toDateString();
+        $endDate   = $end->toDateString();
         $startDate = $period === 'day' ? $start->toDateString() : $start->toDateString();
         $endDate   = $end->toDateString();
 
@@ -476,7 +503,7 @@ class AdminController extends Controller
         $profit   = $revenue - $expenses;
         $margin   = $revenue > 0 ? round(($profit / $revenue) * 100, 1) : 0;
         $sales    = $saleQ()->whereBetween('sold_at', [$start, $end])->count();
-        $avgTicket= $sales > 0 ? round($revenue / $sales) : 0;
+        $avgTicket = $sales > 0 ? round($revenue / $sales) : 0;
 
         $expensesByType = $expenseQ()
             ->whereBetween('expense_date', [$startDate, $endDate])
@@ -493,9 +520,9 @@ class AdminController extends Controller
             ->get();
 
         $branchesSituation = Branch::withSum(
-                ['sales as rev' => fn($q) => $q->whereBetween('sold_at', [$start, $end])],
-                'total_amount'
-            )
+            ['sales as rev' => fn($q) => $q->whereBetween('sold_at', [$start, $end])],
+            'total_amount'
+        )
             ->withSum(
                 ['expenses as exp' => fn($q) => $q->whereBetween('expense_date', [$startDate, $endDate])],
                 'amount'
@@ -503,44 +530,52 @@ class AdminController extends Controller
             ->get()
             ->each(fn($b) => $b->profit = ($b->rev ?? 0) - ($b->exp ?? 0));
 
-        $payLabels = ['cash' => 'Espèces', 'amana' => 'Amana', 'nita' => 'Nita',
-                      'western_union' => 'Western Union', 'moneygram' => 'MoneyGram', 'wave' => 'Wave'];
-        $typeLabels = ['livraison' => 'Livraison', 'materiel' => 'Matériel',
-                       'salaire' => 'Salaires', 'commande' => 'Commandes', 'autre' => 'Autre'];
+        $payLabels = [
+            'cash' => 'Espèces',
+            'amana' => 'Amana',
+            'nita' => 'Nita',
+            'western_union' => 'Western Union',
+            'moneygram' => 'MoneyGram',
+            'wave' => 'Wave'
+        ];
+        $typeLabels = [
+            'livraison' => 'Livraison',
+            'materiel' => 'Matériel',
+            'salaire' => 'Salaires',
+            'commande' => 'Commandes',
+            'autre' => 'Autre'
+        ];
 
         activity_log('admin_finances_pdf', "Export PDF finances — période $period");
 
         // ── Rendu HTML → wkhtmltopdf via Blade view ─────────────────
         $html = view('admin.finances.pdf', compact(
-            'periodLabel', 'branchName',
-            'revenue', 'expenses', 'profit', 'margin', 'sales', 'avgTicket',
-            'expensesByType', 'salesByPayment', 'branchesSituation',
-            'payLabels', 'typeLabels'
+            'periodLabel',
+            'branchName',
+            'revenue',
+            'expenses',
+            'profit',
+            'margin',
+            'sales',
+            'avgTicket',
+            'expensesByType',
+            'salesByPayment',
+            'branchesSituation',
+            'payLabels',
+            'typeLabels'
         ))->render();
 
-        // ── Génération PDF avec wkhtmltopdf (disponible sur le serveur) ──
-        $tmpHtml = tempnam(sys_get_temp_dir(), 'fin_') . '.html';
-        $tmpPdf  = tempnam(sys_get_temp_dir(), 'fin_') . '.pdf';
-        file_put_contents($tmpHtml, $html);
-
-        $cmd = sprintf(
-            'wkhtmltopdf --page-size A4 --margin-top 10mm --margin-bottom 10mm --margin-left 12mm --margin-right 12mm --encoding UTF-8 --quiet %s %s 2>&1',
-            escapeshellarg($tmpHtml),
-            escapeshellarg($tmpPdf)
-        );
-        exec($cmd, $out, $code);
-
-        if ($code !== 0 || !file_exists($tmpPdf)) {
-            // Fallback : retourner le HTML si wkhtmltopdf indisponible
-            return response($html, 200)->header('Content-Type', 'text/html');
-        }
-
+               $pdf = Pdf::loadHTML($html)
+            ->setPaper('a4', 'portrait')
+            ->setOptions([
+                'isRemoteEnabled'   => true,
+                'isHtml5ParserEnabled' => true,
+                'defaultFont'       => 'DejaVu Sans', // bonne prise en charge des accents FR
+            ]);
+        
         $filename = 'rapport_finances_' . $period . '_' . now()->format('Ymd') . '.pdf';
-
-        return response()->download($tmpPdf, $filename, [
-            'Content-Type'        => 'application/pdf',
-            'Content-Disposition' => "attachment; filename=\"$filename\"",
-        ])->deleteFileAfterSend(true);
+        
+        return $pdf->download($filename);
     }
     // ═══════════════════════════════════════════════════════════════
     //  GESTION DES UTILISATEURS
@@ -658,5 +693,163 @@ class AdminController extends Controller
         $user->update(['password' => Hash::make($request->password)]);
 
         return back()->with('success', 'Mot de passe réinitialisé.');
+    }
+    
+    
+// ═══════════════════════════════════════════════════════════════
+//  PLANIFICATION DES PRESTATIONS (admin)
+// ═══════════════════════════════════════════════════════════════
+
+public function schedules(Request $request)
+{
+    $query = ServiceSchedule::with(['service', 'sale'])
+        ->orderBy('scheduled_date', 'desc')
+        ->orderBy('scheduled_time', 'asc');
+
+    // Filtres
+    if ($request->filled('status')) {
+        $query->where('status', $request->status);
+    }
+    if ($request->filled('date')) {
+        $query->whereDate('scheduled_date', $request->date);
+    }
+    if ($request->filled('service_id')) {
+        $query->where('service_id', $request->service_id);
+    }
+    if ($request->filled('search')) {
+        $search = $request->search;
+        $query->where(function ($q) use ($search) {
+            $q->where('client_name', 'like', "%{$search}%")
+              ->orWhere('contact_number', 'like', "%{$search}%")
+              ->orWhere('address', 'like', "%{$search}%")
+              ->orWhereHas('service', fn($s) => $s->where('name', 'like', "%{$search}%"));
+        });
+    }
+
+    $schedules = $query->paginate(20)->withQueryString();
+    $services  = Service::orderBy('name')->get();
+
+    // Stats globales
+    $stats = [
+        'total'     => ServiceSchedule::count(),
+        'pending'   => ServiceSchedule::where('status', 'pending')->count(),
+        'confirmed' => ServiceSchedule::where('status', 'confirmed')->count(),
+        'completed' => ServiceSchedule::where('status', 'completed')->count(),
+        'cancelled' => ServiceSchedule::where('status', 'cancelled')->count(),
+        'today'     => ServiceSchedule::whereDate('scheduled_date', today())->count(),
+    ];
+
+    activity_log('admin_schedules_viewed', 'Admin — consultation planification prestations');
+
+    return view('admin.schedules.index', compact('schedules', 'services', 'stats'));
+}
+
+public function createSchedule()
+{
+    $services = Service::whereNot('name', 'Livraison')
+            ->orderBy('name')
+            ->get();
+    $sales= Sale::with('client')->latest()->take(50)->get();
+
+    return view('admin.schedules.create', compact('services', 'sales'));
+}
+
+public function storeSchedule(Request $request)
+{
+    $validated = $request->validate([
+        'service_id'     => 'required|exists:services,id',
+        'sale_id'        => 'nullable|exists:sales,id',
+        'client_name'    => 'nullable|string|max:255',
+        'contact_number' => 'required|string|max:30',
+        'address'        => 'required|string|max:1000',
+        'scheduled_date' => 'required|date',
+        'scheduled_time' => 'nullable|date_format:H:i',
+        'status'         => 'required|in:pending,confirmed,completed,cancelled',
+        'notes'          => 'nullable|string|max:2000',
+    ]);
+
+    ServiceSchedule::create($validated);
+
+    activity_log('admin_schedule_created', 'Admin — nouvelle prestation planifiée');
+
+    return redirect()->route('admin.schedules')
+        ->with('success', 'Prestation planifiée avec succès.');
+}
+
+public function showSchedule(ServiceSchedule $schedule)
+{
+    $schedule->load(['service', 'sale']);
+    return view('admin.schedules.show', compact('schedule'));
+}
+
+public function editSchedule(ServiceSchedule $schedule)
+{
+    $services = Service::whereNot('name', 'Livraison')
+            ->orderBy('name')
+            ->get();
+    $sales= Sale::with('client')->latest()->take(50)->get();
+
+    return view('admin.schedules.edit', compact('schedule', 'services', 'sales'));
+}
+
+public function updateSchedule(Request $request, ServiceSchedule $schedule)
+{
+    $validated = $request->validate([
+        'service_id'     => 'required|exists:services,id',
+        'sale_id'        => 'nullable|exists:sales,id',
+        'client_name'    => 'nullable|string|max:255',
+        'contact_number' => 'required|string|max:30',
+        'address'        => 'required|string|max:1000',
+        'scheduled_date' => 'required|date',
+        'scheduled_time' => 'nullable|date_format:H:i',
+        'status'         => 'required|in:pending,confirmed,completed,cancelled',
+        'notes'          => 'nullable|string|max:2000',
+    ]);
+
+    $schedule->update($validated);
+
+    activity_log('admin_schedule_updated', "Admin — prestation #{$schedule->id} mise à jour");
+
+    return redirect()->route('admin.schedules')
+        ->with('success', 'Prestation mise à jour avec succès.');
+}
+
+public function destroySchedule(ServiceSchedule $schedule)
+{
+    $id = $schedule->id;
+    $schedule->delete();
+
+    activity_log('admin_schedule_deleted', "Admin — prestation #{$id} supprimée");
+
+    return redirect()->route('admin.schedules')
+        ->with('success', 'Prestation supprimée.');
+}
+
+public function updateScheduleStatus(Request $request, ServiceSchedule $schedule)
+{
+    $request->validate([
+        'status' => 'required|in:pending,confirmed,completed,cancelled',
+    ]);
+
+    $schedule->update(['status' => $request->status]);
+
+    activity_log('admin_schedule_status', "Admin — statut prestation #{$schedule->id} → {$request->status}");
+
+    return back()->with('success', 'Statut mis à jour.');
+}
+
+ public function cancelInvoice(Invoice $invoice)
+    {
+        if ($invoice->status === 'cancelled') {
+            return redirect()->back()->with('error', 'Cette facture est déjà annulée.');
+        }
+
+        if ($invoice) {
+            $invoice->update(['status' => 'cancelled']);
+            activity_log('invoice_cancelled', "Facture annulée : {$invoice->invoice_number}");
+            return redirect()->back()->with('success', 'Facture annulée avec succès.');
+        }
+        Log::error("Tentative d'annulation de facture échouée : facture introuvable (ID: {$invoice->id})");
+        return redirect()->back()->with('error', 'Seules les factures payées en espèces peuvent être annulées.');
     }
 }

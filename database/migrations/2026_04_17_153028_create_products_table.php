@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('price', 10, 2);
             $table->integer('stock_quantity')->default(0);
             $table->foreignId('branch_id')->constrained();
+            $table->integer('alert_threshold')->default(5);
             $table->timestamps();
         });
     }

@@ -17,6 +17,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\PaieController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ServiceScheduleController;
 
 // Login
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -43,6 +44,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     // Facturation globale
     Route::get('invoices',                    [AdminController::class, 'invoices'])->name('invoices');
+    Route::delete('invoices/{invoice}',             [AdminController::class, 'destroyInvoices'])->name('invoices.destroy');
+    Route::post('invoices/{invoice}/cancel',             [AdminController::class, 'cancelInvoice'])->name('invoices.cancel');
     // Finances & Rapports
     Route::get('finances',                    [AdminController::class, 'finances'])->name('finances');
     Route::get('finances/pdf',                    [AdminController::class, 'exportPdf'])->name('finances.pdf');
@@ -62,9 +65,22 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/paie/pdf', [PaieController::class, 'pdf'])->name('paie.pdf');
     Route::get('/paie/fiche/{user}', [PaieController::class, 'generateFichePaiement'])->name('paies.fiche');
 
-    Route::resource('clients', ClientController::class);
     Route::get('clients/export', [ClientController::class, 'export'])->name('clients.export');
+    Route::resource('clients', ClientController::class);
     Route::resource('clients', ClientController::class)->except(['create', 'edit']);
+    // ── Planification des prestations ──────────────────────────
+    Route::get('schedules',                     [AdminController::class, 'schedules'])->name('schedules');
+    Route::get('schedules/create',              [AdminController::class, 'createSchedule'])->name('schedules.create');
+    Route::post('schedules',                     [AdminController::class, 'storeSchedule'])->name('schedules.store');
+    Route::get('schedules/{schedule}',          [AdminController::class, 'showSchedule'])->name('schedules.show');
+    Route::get('schedules/{schedule}/edit',     [AdminController::class, 'editSchedule'])->name('schedules.edit');
+    Route::put('schedules/{schedule}',          [AdminController::class, 'updateSchedule'])->name('schedules.update');
+    Route::delete('schedules/{schedule}',        [AdminController::class, 'destroySchedule'])->name('schedules.destroy');
+    Route::patch('schedules/{schedule}/status',  [AdminController::class, 'updateScheduleStatus'])->name('schedules.update-status');
+    Route::get(
+        '/service-schedules/{serviceSchedule}/print',
+        [ServiceScheduleController::class, 'printSingle']
+    )->name('service-schedules.print-single');
 });
 
 Route::get('/', function () {
@@ -114,7 +130,7 @@ Route::prefix('services')->name('services.')->group(function () {
 Route::prefix('finances')->name('expenses.')->group(function () {
     Route::get('/',                      [ExpenseController::class, 'index'])->name('index');
     Route::post('/depenses',             [ExpenseController::class, 'storeExpense'])->name('store');
-    // ✏️ Modifier une dépense
+  
     Route::put('/{expense}', [ExpenseController::class, 'updateExpense'])
         ->name('update');
     Route::delete('/depenses/{expense}', [ExpenseController::class, 'destroyExpense'])->name('destroy');
@@ -122,6 +138,8 @@ Route::prefix('finances')->name('expenses.')->group(function () {
         ->name('export');
     Route::get('/export-global', [ExpenseController::class, 'exportFinance'])
         ->name('Globalexport');
+    Route::post('/cash-transfer', [ExpenseController::class, 'transferCash'])
+        ->name('cash.transfer');
 });
 
 // Confections
@@ -132,7 +150,7 @@ Route::delete('/confections/{confection}', [ConfectionController::class, 'destro
 Route::resource('fournisseurs', SupplierController::class)->except(['show', 'edit', 'create']);
 
 // Bons de commande / réapprovisionnement
-// web.php — ordre important
+
 Route::get('/reapprovisionnement',                        [PurchaseOrderController::class, 'index'])->name('purchases.index');
 Route::post('/reapprovisionnement',                       [PurchaseOrderController::class, 'store'])->name('purchases.store');
 Route::get('/reapprovisionnement/{order}/items',          [PurchaseOrderController::class, 'getItems'])->name('purchases.items');   // ← avant show
@@ -146,4 +164,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['auth'])->group(function () {
+
+    // CRUD principal
+    Route::resource('service-schedules', ServiceScheduleController::class);
+    Route::get('/service-schedules/print', [ServiceScheduleController::class, 'print'])
+        ->name('service-schedules.print');
+    Route::get(
+        '/service-schedules/{serviceSchedule}/print',
+        [ServiceScheduleController::class, 'printSingle']
+    )->name('service-schedules.print-single');
+
+
+    // Mise à jour rapide du statut (PATCH)
+    Route::patch(
+        'service-schedules/{serviceSchedule}/status',
+        [ServiceScheduleController::class, 'updateStatus']
+    )->name('service-schedules.update-status');
+});
 require __DIR__ . '/auth.php';

@@ -393,7 +393,12 @@
                 <i class="fas fa-money-bill-wave"></i> Paie
             </a>
         </li>
-
+        <li class="nav-item">
+            <a href="{{ route('admin.schedules') }}"
+               class="nav-link {{ request()->routeIs('admin.schedules*') ? 'active' : '' }}">
+                <i class="fas fa-calendar-check"></i> Prestations planifiées
+            </a>
+        </li>   
         <li class="nav-section">Utilisateurs</li>
 
         <li class="nav-item">

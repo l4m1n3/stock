@@ -234,26 +234,88 @@
 
 <div id="fin-toast">✓ Dépense enregistrée</div>
 
+@if(session('error'))
+<div id="fin-toast-error" style="position:fixed;top:20px;right:20px;background:#A32D2D;color:white;padding:12px 22px;border-radius:12px;font-size:14px;font-weight:500;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,0.15);">
+    ✕ {{ session('error') }}
+</div>
+<script>setTimeout(() => document.getElementById('fin-toast-error')?.remove(), 4000);</script>
+@endif
+
 {{-- ── Header ── --}}
 <div class="fin-header">
     <div>
         <h4 class="fw-bold mb-0">Finances & Rapports</h4>
-        <small class="text-muted">Tableau de bord financier — {{ now()->format('d/m/Y') }}</small>
+        <small class="text-muted">
+            @if($isStaff)
+                Dépenses du jour — {{ now()->format('d/m/Y') }}
+            @else
+                Tableau de bord financier — {{ now()->format('d/m/Y') }}
+            @endif
+        </small>
     </div>
     <div class="d-flex align-items-center gap-3">
-        <div class="period-nav" id="period-nav">
-            <button class="period-btn" onclick="setPeriod(this,'day')">Aujourd'hui</button>
-            <button class="period-btn" onclick="setPeriod(this,'week')">7 jours</button>
-            <button class="period-btn active" onclick="setPeriod(this,'month')">Ce mois</button>
-            <button class="period-btn" onclick="setPeriod(this,'quarter')">Trimestre</button>
-            <button class="period-btn" onclick="setPeriod(this,'year')">Année</button>
-        </div>
-        <a href="{{ route('expenses.Globalexport', ['period' => $period]) }}" class="btn-violet">
+
+    {{-- ── Sélecteur période + plage personnalisée ── --}}
+@if(!$isStaff)
+<div style="display:flex; flex-direction:column; gap:8px;">
+
+    <div class="period-nav" id="period-nav">
+        <button class="period-btn {{ $period === 'day'     ? 'active' : '' }}" onclick="setPeriod(this,'day')">Aujourd'hui</button>
+        <button class="period-btn {{ $period === 'week'    ? 'active' : '' }}" onclick="setPeriod(this,'week')">7 jours</button>
+        <button class="period-btn {{ $period === 'month'   ? 'active' : '' }}" onclick="setPeriod(this,'month')">Ce mois</button>
+        <button class="period-btn {{ $period === 'quarter' ? 'active' : '' }}" onclick="setPeriod(this,'quarter')">Trimestre</button>
+        <button class="period-btn {{ $period === 'year'    ? 'active' : '' }}" onclick="setPeriod(this,'year')">Année</button>
+        <button class="period-btn {{ $period === 'custom'  ? 'active' : '' }}" onclick="toggleCustomRange(this)">
+            <i class="fas fa-calendar-alt"></i> Personnalisé
+        </button>
+    </div>
+
+    {{-- Panneau plage personnalisée : sous les périodes ── --}}
+    <div id="custom-range-box"
+         style="display:{{ $period === 'custom' ? 'flex' : 'none' }};
+                align-items:center; gap:10px; flex-wrap:wrap;
+                background:#faf8ff; border:1px solid #e8e4f7;
+                border-radius:12px; padding:12px 16px;">
+
+        <span style="font-size:12px;font-weight:600;color:#9e8fc0;white-space:nowrap;">
+            <i class="fas fa-calendar-day me-1"></i> Du
+        </span>
+        <input type="date" id="custom-start"
+               value="{{ $startDate ?? '' }}"
+               class="form-control-s" style="width:160px;padding:7px 12px;">
+
+        <span style="font-size:12px;font-weight:600;color:#9e8fc0;">au</span>
+
+        <input type="date" id="custom-end"
+               value="{{ $endDate ?? '' }}"
+               class="form-control-s" style="width:160px;padding:7px 12px;">
+
+        <button class="btn-violet" style="padding:7px 16px;" onclick="applyCustomRange()">
+            <i class="fas fa-check"></i> Appliquer
+        </button>
+
+        <button class="btn-icon" title="Fermer" onclick="closeCustomRange()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+</div>
+@endif
+
+        @if(!$isStaff)
+       <a href="{{ route('expenses.Globalexport', ['period' => $period, 'start_date' => $startDate ?? null, 'end_date' => $endDate ?? null]) }}" class="btn-violet">
             <i class="fas fa-chart-bar"></i> Export rapport financier
         </a>
-        <a href="{{ route('expenses.export', ['period' => $period]) }}" class="btn-outline-violet">
+        <a href="{{ route('expenses.export', ['period' => $period, 'start_date' => $startDate ?? null, 'end_date' => $endDate ?? null]) }}" class="btn-outline-violet">
             <i class="fas fa-file-excel"></i> Export Excel
         </a>
+        @endif
+        <button class="btn-outline-violet"
+                data-bs-toggle="modal"
+                data-bs-target="#modalTransfer">
+            <i class="fas fa-money-bill-transfer"></i>
+            Transfert
+        </button>
         <button class="btn-violet" data-bs-toggle="modal" data-bs-target="#modalDepense">
             <i class="fas fa-plus"></i> Nouvelle dépense
         </button>
@@ -267,84 +329,94 @@
             <i class="fas fa-wallet" style="color:#6B46C1;"></i>
         </div>
         <div class="kpi-label">Cash disponible</div>
-        <div class="kpi-value">
-            {{ number_format($cashAvailable, 0, ',', ' ') }}
-        </div>
+        <div class="kpi-value">{{ number_format($cashAvailable, 0, ',', ' ') }}</div>
         <div class="kpi-sub">FCFA en caisse</div>
     </div>
+
+    <div class="kpi-card violet">
+        <div class="kpi-icon" style="background:#EEEDFE;">
+            <i class="fas fa-university" style="color:var(--violet);"></i>
+        </div>
+        <div class="kpi-label">Solde Amana</div>
+        <div class="kpi-value">{{ number_format($amanaBalance, 0, ',', ' ') }}</div>
+    </div>
+
+    <div class="kpi-card violet">
+        <div class="kpi-icon" style="background:#EEEDFE;">
+            <i class="fas fa-university" style="color:var(--violet);"></i>
+        </div>
+        <div class="kpi-label">Solde Nita</div>
+        <div class="kpi-value">{{ number_format($nitaBalance, 0, ',', ' ') }}</div>
+    </div>
+
     <div class="kpi-card violet">
         <div class="kpi-icon" style="background:#EEEDFE;">
             <i class="fas fa-cash-register" style="color:var(--violet);"></i>
         </div>
-        <div class="kpi-label">Depenses Caisse</div>
+        <div class="kpi-label">Dépenses caisse</div>
         <div class="kpi-value">{{ number_format($totalPaidcaisse, 0, ',', ' ') }}</div>
-        {{-- <div class="kpi-sub"></div> --}}
-        {{-- <div class="kpi-trend trend-up">↑ {{ $revenueGrowth }}% vs mois préc.</div> --}}
     </div>
+
+    {{-- CA et bénéfice : masqués pour staff --}}
+    @if(!$isStaff)
     <div class="kpi-card violet">
         <div class="kpi-icon" style="background:#EEEDFE;">
             <i class="fas fa-cash-register" style="color:var(--violet);"></i>
         </div>
         <div class="kpi-label">Chiffre d'affaires</div>
         <div class="kpi-value">{{ number_format($totalRevenue, 0, ',', ' ') }}</div>
-        <div class="kpi-sub">FCFA ce mois</div>
-        <div class="kpi-trend trend-up">↑ {{ $revenueGrowth }}% vs mois préc.</div>
+        <div class="kpi-sub">FCFA — {{ $period === 'day' ? "aujourd'hui" : ($period === 'week' ? 'cette semaine' : ($period === 'month' ? 'ce mois' : ($period === 'quarter' ? 'ce trimestre' : 'cette année'))) }}</div>
+        <div class="kpi-trend trend-up">↑ {{ $revenueGrowth }}% vs période préc.</div>
     </div>
+    @endif
+
     <div class="kpi-card red">
         <div class="kpi-icon" style="background:#FCEBEB;">
             <i class="fas fa-arrow-trend-down" style="color:#E24B4A;"></i>
         </div>
         <div class="kpi-label">Dépenses totales</div>
         <div class="kpi-value" style="color:#E24B4A;">{{ number_format($totalExpenses, 0, ',', ' ') }}</div>
-        <div class="kpi-sub">FCFA ce mois</div>
-        <div class="kpi-trend trend-down">{{ $expenseCount }} opérations</div>
+        <div class="kpi-sub">FCFA</div>
+        <div class="kpi-trend trend-down">{{ $expenseCount }} opération(s)</div>
     </div>
+
+    @if(!$isStaff)
     <div class="kpi-card green">
         <div class="kpi-icon" style="background:#EAF3DE;">
             <i class="fas fa-sack-dollar" style="color:#639922;"></i>
         </div>
         <div class="kpi-label">Bénéfice net</div>
-        @php $profit = $totalRevenue - $totalExpenses; @endphp
         <div class="kpi-value" style="color:{{ $profit >= 0 ? '#639922' : '#E24B4A' }};">
             {{ number_format($profit, 0, ',', ' ') }}
         </div>
-        <div class="kpi-sub">FCFA ce mois</div>
+        <div class="kpi-sub">FCFA</div>
         <div class="kpi-trend {{ $profit >= 0 ? 'trend-up' : 'trend-down' }}">
             {{ $profit >= 0 ? '↑ Positif' : '↓ Déficit' }}
         </div>
     </div>
-    {{-- <div class="kpi-card amber">
-        <div class="kpi-icon" style="background:#FAEEDA;">
-            <i class="fas fa-receipt" style="color:#EF9F27;"></i>
-        </div>
-        <div class="kpi-label">Ticket moyen</div>
-        <div class="kpi-value" style="color:#BA7517;">{{ number_format($avgTicket, 0, ',', ' ') }}</div>
-        <div class="kpi-sub">FCFA / vente</div>
-        <div class="kpi-trend trend-up">{{ $salesCount }} ventes</div>
-    </div> --}}
+    @endif
 </div>
+
+{{-- ── Indicateur de période pour le staff ── --}}
+@if($isStaff)
+<div style="margin-bottom:20px;padding:10px 16px;background:#faf8ff;border-radius:12px;border:1px solid #e8e4f7;font-size:13px;color:#9e8fc0;">
+    <i class="fas fa-calendar-day me-2" style="color:var(--violet);"></i>
+    Vos indicateurs (CA, caisse) portent sur <strong style="color:var(--violet);">aujourd'hui</strong>.
+    La liste ci-dessous inclut vos dépenses des <strong style="color:var(--violet);">30 derniers jours</strong> pour correction éventuelle du statut.
+</div>
+{{-- ── Dépenses de la veille (staff uniquement) ── --}}
+<div class="kpi-card amber" style="margin-bottom:20px;">
+    <div class="kpi-icon" style="background:#FDF3E3;">
+        <i class="fas fa-history" style="color:#EF9F27;"></i>
+    </div>
+    <div class="kpi-label">Dépenses de la veille</div>
+    <div class="kpi-value" style="color:#EF9F27;">{{ number_format($depenseVeille, 0, ',', ' ') }}</div>
+    <div class="kpi-sub">FCFA — {{ \Carbon\Carbon::yesterday()->format('d/m/Y') }}</div>
+</div>
+@endif
 
 {{-- ── Graphiques ── --}}
 <div class="three-col">
-
-    {{-- Graphique CA vs Dépenses --}}
-    {{-- <div class="panel">
-        <div class="panel-header">
-            <span class="panel-title">
-                <i class="fas fa-chart-line me-2" style="color:var(--violet);"></i>
-                Évolution CA & Dépenses
-            </span>
-            <div style="display:flex;gap:14px;font-size:12px;">
-                <span><span style="display:inline-block;width:10px;height:10px;background:var(--violet);border-radius:50%;margin-right:4px;"></span>CA</span>
-                <span><span style="display:inline-block;width:10px;height:10px;background:#E24B4A;border-radius:50%;margin-right:4px;"></span>Dépenses</span>
-            </div>
-        </div>
-        <div class="chart-wrap">
-            <div class="chart-container">
-                <canvas id="revenueChart"></canvas>
-            </div>
-        </div>
-    </div> --}}
 
     {{-- Répartition dépenses par catégorie ── --}}
     <div class="panel">
@@ -420,6 +492,7 @@
                         <th>Type</th>
                         <th>Montant</th>
                         <th>Date</th>
+                        <th>Users</th>
                         <th>Statut</th>
                         <th></th>
                     </tr>
@@ -440,6 +513,9 @@
                         <td style="font-size:12px;color:#9e8fc0;">
                             {{ \Carbon\Carbon::parse($exp->expense_date)->format('d/m/Y') }}
                         </td>
+                        <td style="font-size:12px;color:#9e8fc0;">
+                            {{ $exp->user->name ?? '—' }}
+                        </td>
                         <td>
                             <span class="badge {{ $exp->status === 'payé' ? 'bg-success' : 'bg-warning' }}">
                                 {{ $exp->status === 'payé' ? 'Payé' : 'Non payé' }}
@@ -447,9 +523,8 @@
                         </td>
                         <td>
                             <div class="action-btns">
-                                {{-- modal trigger for edit can be added here in the future --}}
                                <button class="btn-icon"
-                                    onclick="openEditExpense({{ $exp }})">
+                                    onclick='openEditExpense(@json($exp))'>
                                     <i class="fas fa-pencil"></i>
                                 </button>
                                 <button class="btn-icon danger" title="Supprimer"
@@ -460,7 +535,7 @@
                         </td>
                     </tr>
                     @empty
-                    <tr><td colspan="5" style="padding:40px;text-align:center;color:#b0a0d0;">
+                    <tr><td colspan="7" style="padding:40px;text-align:center;color:#b0a0d0;">
                         Aucune dépense enregistrée
                     </td></tr>
                     @endforelse
@@ -468,7 +543,9 @@
             </table>
         </div>
         <div class="px-4 py-3" style="border-top:1px solid #f0ebff;">
-            {{ $expenses->links() }}
+             @if($expenses->hasPages())
+                {{ $expenses->links('pagination::bootstrap-5') }}
+            @endif
         </div>
     </div>
 
@@ -477,7 +554,7 @@
         <div class="panel-header">
             <span class="panel-title">
                 <i class="fas fa-trophy me-2" style="color:#EF9F27;"></i>
-                Top ventes du mois
+                Top ventes
             </span>
         </div>
 
@@ -493,7 +570,7 @@
                 <div class="top-amt">{{ number_format($p->total_revenue, 0, ',', ' ') }} FCFA</div>
             </div>
             @empty
-            <div style="padding:20px;text-align:center;color:#b0a0d0;font-size:13px;">Aucune vente ce mois</div>
+            <div style="padding:20px;text-align:center;color:#b0a0d0;font-size:13px;">Aucune vente </div>
             @endforelse
         </div>
 
@@ -509,14 +586,14 @@
                 <div class="top-amt">{{ number_format($s->total_revenue, 0, ',', ' ') }} FCFA</div>
             </div>
             @empty
-            <div style="padding:20px;text-align:center;color:#b0a0d0;font-size:13px;">Aucun service ce mois</div>
+            <div style="padding:20px;text-align:center;color:#b0a0d0;font-size:13px;">Aucun service </div>
             @endforelse
         </div>
 
         {{-- Solde ── --}}
         <div style="margin:12px 16px;border-radius:12px;background:{{ $profit >= 0 ? '#EAF3DE' : '#FCEBEB' }};border:1px solid {{ $profit >= 0 ? '#c0dd97' : '#F7C1C1' }};">
             <div class="solde-box">
-                <div class="solde-label">Solde net du mois</div>
+                <div class="solde-label">Solde net </div>
                 <div class="solde-value" style="color:{{ $profit >= 0 ? '#3B6D11' : '#A32D2D' }};">
                     {{ $profit >= 0 ? '+' : '' }}{{ number_format($profit, 0, ',', ' ') }} FCFA
                 </div>
@@ -527,20 +604,61 @@
 
 </div>
 
-{{-- ── Paiements par méthode ── --}}
-{{-- <div class="panel">
+{{-- ── Historique des transferts ── --}}
+<div class="panel">
     <div class="panel-header">
         <span class="panel-title">
-            <i class="fas fa-credit-card me-2" style="color:var(--violet);"></i>
-            Répartition par mode de paiement
+            <i class="fas fa-money-bill-transfer me-2" style="color:var(--violet);"></i>
+            Historique des transferts
         </span>
     </div>
-    <div style="padding:20px;">
-        <div class="chart-container" style="height:200px;">
-            <canvas id="paymentChart"></canvas>
-        </div>
+    <div style="overflow-x:auto;">
+        <table class="exp-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>De</th>
+                    <th></th>
+                    <th>Vers</th>
+                    <th>Montant</th>
+                    <th>Note</th>
+                    <th>Par</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php
+                    $methodLabels = [
+                        'cash' => '💵 Caisse', 'amana' => '🏦 Amana', 'nita' => '🏦 Nita',
+                    ];
+                @endphp
+                @forelse($transfers as $t)
+                <tr>
+                    <td style="font-size:12px;color:#9e8fc0;">
+                        {{ $t->created_at->format('d/m/Y H:i') }}
+                    </td>
+                    <td>{{ $methodLabels[$t->from_method] ?? $t->from_method }}</td>
+                    <td><i class="fas fa-arrow-right" style="color:#b0a0d0;"></i></td>
+                    <td>{{ $methodLabels[$t->to_method] ?? $t->to_method }}</td>
+                    <td style="font-weight:700;color:var(--violet);">
+                        {{ number_format($t->amount, 0, ',', ' ') }} FCFA
+                    </td>
+                    <td style="font-size:12px;color:#9e8fc0;">{{ $t->note ?? '—' }}</td>
+                    <td style="font-size:12px;color:#9e8fc0;">{{ $t->user->name ?? '—' }}</td>
+                </tr>
+                @empty
+                <tr><td colspan="7" style="padding:40px;text-align:center;color:#b0a0d0;">
+                    Aucun transfert sur cette période
+                </td></tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
-</div> --}}
+    <div class="px-4 py-3" style="border-top:1px solid #f0ebff;">
+        @if($transfers->hasPages())
+            {{ $transfers->links('pagination::bootstrap-5') }}
+        @endif
+    </div>
+</div>
 
 {{-- ── Modal Nouvelle Dépense ── --}}
 <div class="modal fade" id="modalDepense" tabindex="-1">
@@ -564,7 +682,7 @@
                         <div class="form-group">
                             <label class="form-label-s">Montant (FCFA) *</label>
                             <input type="number" class="form-control-s" name="amount"
-                                   placeholder="0" min="0" step="500" required>
+                                   placeholder="0" min="0" step="1" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label-s">Type *</label>
@@ -613,7 +731,8 @@
         </div>
     </div>
 </div>
-{{-- --modal modifier dépense can be added in the future, reusing the same form with pre-filled values-- --}}
+
+{{-- Modal modifier dépense --}}
 <div class="modal fade" id="modalEditExp" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -683,22 +802,12 @@
                     <button type="submit" class="btn-violet">
                         <i class="fas fa-check me-1"></i> Enregistrer
                     </button>
-                            </select>
-                        </div>
-                    </div>
                 </div>
-
-                {{-- <div class="modal-footer border-0 px-4 pb-4">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn-violet">
-                        <i class="fas fa-check me-1"></i> Enregistrer
-                    </button>
-                </div> --}}
-
             </form>
         </div>
     </div>
 </div>
+
 {{-- ── Modal suppression ── --}}
 <div class="modal fade" id="modalDeleteExp" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-sm">
@@ -722,69 +831,105 @@
     </div>
 </div>
 
-<script>
-// ── Données injectées depuis Laravel ────────────────────────────────────────
-const chartLabels    = @json($chartLabels);
-const chartRevenue   = @json($chartRevenue);
-const chartExpenses  = @json($chartExpenses);
-const paymentData    = @json($paymentData);
-const expenseDonutData = @json($expenseDonutData);
+{{-- ── Modal Transfert de fonds ── --}}
+<div class="modal fade" id="modalTransfer" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
 
-// ── Graphique CA vs Dépenses ─────────────────────────────────────────────────
-const revenueCtx = document.getElementById('revenueChart').getContext('2d');
-new Chart(revenueCtx, {
-    type: 'line',
-    data: {
-        labels: chartLabels,
-        datasets: [
-            {
-                label: 'CA',
-                data: chartRevenue,
-                borderColor: '#6B46C1',
-                backgroundColor: 'rgba(107,70,193,0.08)',
-                borderWidth: 2.5,
-                tension: 0.4,
-                fill: true,
-                pointBackgroundColor: '#6B46C1',
-                pointRadius: 4,
-            },
-            {
-                label: 'Dépenses',
-                data: chartExpenses,
-                borderColor: '#E24B4A',
-                backgroundColor: 'rgba(226,75,74,0.06)',
-                borderWidth: 2,
-                tension: 0.4,
-                fill: true,
-                pointBackgroundColor: '#E24B4A',
-                pointRadius: 4,
-                borderDash: [6, 3],
-            }
-        ]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: { display: false },
-            tooltip: {
-                callbacks: {
-                    label: ctx => ctx.dataset.label + ' : ' + ctx.parsed.y.toLocaleString('fr-FR') + ' FCFA'
-                }
-            }
-        },
-        scales: {
-            y: {
-                grid: { color: '#f7f4ff' },
-                ticks: {
-                    color: '#9e8fc0',
-                    callback: v => (v / 1000) + 'k'
-                }
-            },
-            x: { grid: { display: false }, ticks: { color: '#9e8fc0' } }
-        }
-    }
-});
+            <div class="modal-header-violet d-flex align-items-center justify-content-between">
+                <h5 class="text-white fw-bold mb-0">
+                    <i class="fas fa-money-bill-transfer me-2"></i>
+                    Transfert de fonds
+                </h5>
+
+                <button type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal">
+                </button>
+            </div>
+
+            <form action="{{ route('expenses.cash.transfer') }}" method="POST">
+                @csrf
+
+                <div class="modal-body p-4">
+
+                    {{-- Montant --}}
+                    <div class="form-group">
+                        <label class="form-label-s">Montant à transférer *</label>
+
+                        <input type="number"
+                               name="amount"
+                               class="form-control-s"
+                               placeholder="0 FCFA"
+                               min="0"
+                               step="1"
+                               required>
+                    </div>
+
+                    {{-- Source / destination — limité à l'enum réel (cash, amana, nita) --}}
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label class="form-label-s">Depuis *</label>
+
+                            <select name="from_method"
+                                    class="form-control-s"
+                                    required>
+                                <option value="">Choisir</option>
+                                <option value="cash">💵 Caisse</option>
+                                <option value="amana">🏦 Amana</option>
+                                <option value="nita">🏦 Nita</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label-s">Vers *</label>
+
+                            <select name="to_method"
+                                    class="form-control-s"
+                                    required>
+                                <option value="">Choisir</option>
+                                <option value="cash">💵 Caisse</option>
+                                <option value="amana">🏦 Amana</option>
+                                <option value="nita">🏦 Nita</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    {{-- Référence --}}
+                    <div class="form-group">
+                        <label class="form-label-s">Référence / Note</label>
+
+                        <textarea name="note"
+                                  rows="3"
+                                  class="form-control-s"
+                                  placeholder="Ex: dépôt caisse vers compte Nita..."></textarea>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer border-0 px-4 pb-4">
+
+                    <button type="button"
+                            class="btn btn-light rounded-3 px-4"
+                            data-bs-dismiss="modal">
+                        Annuler
+                    </button>
+
+                    <button type="submit" class="btn-violet px-4">
+                        <i class="fas fa-check me-1"></i>
+                        Effectuer le transfert
+                    </button>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
 
 // ── Donut dépenses ───────────────────────────────────────────────────────────
 const donutCtx = document.getElementById('expenseDonut').getContext('2d');
@@ -814,41 +959,6 @@ new Chart(donutCtx, {
     }
 });
 
-// ── Barres modes de paiement ─────────────────────────────────────────────────
-const payCtx = document.getElementById('paymentChart').getContext('2d');
-new Chart(payCtx, {
-    type: 'bar',
-    data: {
-        labels: paymentData.labels,
-        datasets: [{
-            label: 'Montant encaissé (FCFA)',
-            data: paymentData.values,
-            backgroundColor: ['#6B46C1', '#EF9F27', '#639922'],
-            borderRadius: 8,
-            borderSkipped: false,
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: { display: false },
-            tooltip: {
-                callbacks: {
-                    label: ctx => ctx.parsed.y.toLocaleString('fr-FR') + ' FCFA'
-                }
-            }
-        },
-        scales: {
-            y: {
-                grid: { color: '#f7f4ff' },
-                ticks: { color: '#9e8fc0', callback: v => (v / 1000) + 'k' }
-            },
-            x: { grid: { display: false }, ticks: { color: '#9e8fc0' } }
-        }
-    }
-});
-
 // ── Filtre dépenses ──────────────────────────────────────────────────────────
 function filterExpenses() {
     const q = document.getElementById('exp-search').value.toLowerCase();
@@ -871,6 +981,40 @@ function setPeriod(btn, period) {
     document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     window.location.href = `{{ route('expenses.index') }}?period=${period}`;
+}
+function toggleCustomRange(btn) {
+    document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const box = document.getElementById('custom-range-box');
+    box.style.display = box.style.display === 'none' ? 'flex' : 'none';
+}
+
+function closeCustomRange() {
+    document.getElementById('custom-range-box').style.display = 'none';
+    document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+    const current = "{{ $period }}";
+    document.querySelectorAll('.period-btn').forEach(b => {
+        if (b.getAttribute('onclick')?.includes(`'${current}'`)) {
+            b.classList.add('active');
+        }
+    });
+}
+
+function applyCustomRange() {
+    const start = document.getElementById('custom-start').value;
+    const end = document.getElementById('custom-end').value;
+
+    if (!start || !end) {
+        alert('Veuillez sélectionner une date de début et une date de fin.');
+        return;
+    }
+    if (start > end) {
+        alert('La date de début doit être antérieure à la date de fin.');
+        return;
+    }
+
+    window.location.href =
+        `{{ route('expenses.index') }}?period=custom&start_date=${start}&end_date=${end}`;
 }
 function openEditExpense(exp) {
 

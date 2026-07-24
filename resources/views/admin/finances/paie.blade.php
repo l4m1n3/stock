@@ -146,10 +146,10 @@
         </button>
     </div>
 {{-- ================= GRAPHIQUE ================= --}}
-<div class="section-card mb-4">
+{{-- <div class="section-card mb-4">
     <div class="section-title">Évolution des salaires</div>
     <canvas id="paieChart" height="90"></canvas>
-</div>
+</div> --}}
 
 {{-- ================= TABLE PAIE ================= --}}
 <div class="section-card">

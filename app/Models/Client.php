@@ -90,13 +90,11 @@ class Client extends Model
             default  => '🥉 Bronze',
         };
     }
-    public function recomputeTotals(): void
-    {
-        $this->loadMissing('sales');
-
-        $this->update([
-            'total_purchases' => $this->sales()->sum('total_amount'),
-            'total_orders'    => $this->sales()->count(),
-        ]);
-    }
+   public function recomputeTotals(): void
+{
+    $this->update([
+        'total_spent'  => $this->sales()->sum('total_amount'),
+        'total_visits' => $this->sales()->count(),
+    ]);
+}
 }

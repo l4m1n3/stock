@@ -20,37 +20,6 @@ use Illuminate\Support\Facades\Log as FacadesLog;
 class SaleController extends Controller
 {
     // ── POS — affichage ───────────────────────────────────────────────────────
-    // public function index()
-    // {
-    //     $branchId = auth()->user()->branch_id;
-
-    //     $products = Product::where('branch_id', $branchId)
-    //         ->where('stock_quantity', '>=', 0)
-    //         ->orderBy('name')->get();
-
-    //     $services = Service::orderBy('name')->get();
-
-    //     $confections = Confection::with('products')
-    //         ->where('branch_id', $branchId)
-    //         ->orderBy('name')->get();
-
-    //     // Liste clients pour l'autocomplete POS (toutes agences, trié par nom)
-    //     $clients = Client::orderBy('name')->get(['id', 'name', 'phone']);
-
-    //     $pCount = $products->count();
-    //     $sCount = $services->count();
-    //     $cCount = $confections->count();
-
-    //     activity_log(
-    //         'sale_index',
-    //         "Consultation POS : {$pCount} produits, {$sCount} services, {$cCount} confections"
-    //     );
-
-    //     return view('pos.pos', compact('products', 'services', 'confections', 'clients'));
-    // }
-
-    // Dans SaleController@index — remplacer le return view() existant par ceci :
-
     public function index()
     {
         $branchId = auth()->user()->branch_id;
@@ -226,6 +195,7 @@ class SaleController extends Controller
                                 'expense_date' => now(),
                                 'status'       => 'pending',
                                 'branch_id'    => $branchId,
+                                'user_id'      => auth()->id(),
                             ]);
                         }
                     } elseif ($line['type'] === 'confection') {
@@ -284,7 +254,6 @@ class SaleController extends Controller
             return back()->with('error', 'Une erreur est survenue lors de l\'enregistrement de la vente. Veuillez réessayer.');
         }
     }
-
     // ── Historique ────────────────────────────────────────────────────────────
     public function history()
     {

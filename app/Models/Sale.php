@@ -59,4 +59,8 @@ class Sale extends Model
     {
         return $this->belongsTo(Client::class);
     }
+    public function serviceSchedules()
+    {
+        return $this->hasMany(ServiceSchedule::class);
+    }
 }

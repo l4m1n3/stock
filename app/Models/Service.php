@@ -12,4 +12,8 @@ class Service extends Model
     {
         return $this->hasMany(SaleService::class);
     }
+    public function schedules()
+    {
+        return $this->hasMany(ServiceSchedule::class);
+    }
 }

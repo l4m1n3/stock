@@ -14,6 +14,8 @@
             --violet-dark: #4C1D95;
             --violet-light: #EEEDFE;
             --violet-hover: #5A3AA6;
+            --sidebar-width: 260px;
+            --sidebar-width-collapsed: 76px;
         }
 
         * { box-sizing: border-box; }
@@ -30,7 +32,7 @@
             min-height: 100vh;
             position: fixed;
             top: 0; left: 0;
-            width: 260px;
+            width: var(--sidebar-width);
             color: white;
             z-index: 1000;
             display: flex;
@@ -38,7 +40,33 @@
             padding: 0;
             box-shadow: 4px 0 24px rgba(75,29,149,0.18);
             overflow-y: auto;
+            overflow-x: hidden;
+            transition: width 0.28s cubic-bezier(0.4,0,0.2,1);
         }
+
+        /* Sidebar réduite (desktop) — icônes seules */
+        .sidebar.collapsed { width: var(--sidebar-width-collapsed); }
+
+        .sidebar.collapsed .sidebar-logo { padding: 24px 0; text-align: center; }
+        .sidebar.collapsed .sidebar-logo-title { font-size: 0; }
+        .sidebar.collapsed .sidebar-logo-title i { font-size: 20px; margin: 0 !important; }
+        .sidebar.collapsed .sidebar-logo-sub,
+        .sidebar.collapsed .nav-section,
+        .sidebar.collapsed .nav-label,
+        .sidebar.collapsed .nav-badge,
+        .sidebar.collapsed .sidebar-user-name,
+        .sidebar.collapsed .sidebar-user-role,
+        .sidebar.collapsed .sidebar-version,
+        .sidebar.collapsed .logout-label {
+            display: none;
+        }
+        .sidebar.collapsed .sidebar-nav .nav-link {
+            justify-content: center;
+            padding: 12px 0;
+        }
+        .sidebar.collapsed .sidebar-nav .nav-link i { margin: 0; }
+        .sidebar.collapsed .sidebar-footer-user { justify-content: center; }
+        .sidebar.collapsed .sidebar-logout-btn { padding: 10px 0; }
 
         /* Logo zone */
         .sidebar-logo {
@@ -46,6 +74,7 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
             margin-bottom: 12px;
             flex-shrink: 0;
+            transition: padding 0.2s;
         }
         .sidebar-logo-title {
             font-size: 24px;
@@ -53,6 +82,7 @@
             letter-spacing: 1px;
             color: white;
             line-height: 1;
+            white-space: nowrap;
         }
         .sidebar-logo-sub {
             font-size: 11px;
@@ -76,6 +106,7 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
             padding: 18px 12px 6px 12px;
+            white-space: nowrap;
         }
         .sidebar-nav .nav-item { margin-bottom: 2px; }
 
@@ -91,6 +122,7 @@
             text-decoration: none;
             transition: all 0.18s;
             position: relative;
+            white-space: nowrap;
         }
         .sidebar-nav .nav-link i {
             width: 18px;
@@ -117,6 +149,7 @@
             background: white;
             border-radius: 0 3px 3px 0;
         }
+        .sidebar.collapsed .sidebar-nav .nav-link.active::before { display: none; }
 
         /* Badge notification nav */
         .nav-badge {
@@ -136,6 +169,7 @@
             border-top: 1px solid rgba(255,255,255,0.1);
             margin-top: auto;
             flex-shrink: 0;
+            transition: padding 0.2s;
         }
         .sidebar-footer-user {
             display: flex;
@@ -150,9 +184,9 @@
             font-size: 13px; font-weight: 700; color: white;
             flex-shrink: 0;
         }
-        .sidebar-user-name  { font-size: 13px; font-weight: 600; color: white; line-height: 1.2; }
-        .sidebar-user-role  { font-size: 11px; color: rgba(255,255,255,0.5); }
-        .sidebar-version    { font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 10px; }
+        .sidebar-user-name  { font-size: 13px; font-weight: 600; color: white; line-height: 1.2; white-space: nowrap; }
+        .sidebar-user-role  { font-size: 11px; color: rgba(255,255,255,0.5); white-space: nowrap; }
+        .sidebar-version    { font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 10px; white-space: nowrap; }
 
         .sidebar-logout-btn {
             width: 100%;
@@ -170,6 +204,7 @@
             gap: 8px;
             transition: all 0.15s;
             margin-top: 12px;
+            white-space: nowrap;
         }
         .sidebar-logout-btn:hover {
             background: #E24B4A;
@@ -183,10 +218,12 @@
 
         /* ══════════════════════ MAIN CONTENT ══════════════════════ */
         .main-content {
-            margin-left: 260px;
+            margin-left: var(--sidebar-width);
             padding: 20px 24px;
             min-height: 100vh;
+            transition: margin-left 0.28s cubic-bezier(0.4,0,0.2,1);
         }
+        .main-content.collapsed { margin-left: var(--sidebar-width-collapsed); }
 
         /* ══════════════════════ TOPBAR ══════════════════════ */
         .topbar {
@@ -227,9 +264,9 @@
         .topbar-user-name  { font-size: 13px; font-weight: 600; color: white; line-height: 1.2; }
         .topbar-user-role  { font-size: 11px; color: rgba(255,255,255,0.65); }
 
-        /* Bouton hamburger mobile */
+        /* Bouton hamburger — visible desktop ET mobile */
         .topbar-menu-btn {
-            display: none;
+            display: flex;
             width: 36px; height: 36px;
             background: rgba(255,255,255,0.15);
             border-radius: 10px;
@@ -237,6 +274,7 @@
             color: white; font-size: 16px;
             cursor: pointer; border: none;
             transition: background 0.15s;
+            flex-shrink: 0;
         }
         .topbar-menu-btn:hover { background: rgba(255,255,255,0.25); }
 
@@ -306,10 +344,19 @@
             .sidebar {
                 transform: translateX(-100%);
                 transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+                width: var(--sidebar-width) !important; /* pas de mode réduit en mobile */
             }
             .sidebar.open { transform: translateX(0); }
-            .main-content { margin-left: 0; padding: 14px; }
-            .topbar-menu-btn { display: flex; }
+            .sidebar.collapsed .sidebar-logo-sub,
+            .sidebar.collapsed .nav-section,
+            .sidebar.collapsed .nav-label,
+            .sidebar.collapsed .sidebar-user-name,
+            .sidebar.collapsed .sidebar-user-role,
+            .sidebar.collapsed .sidebar-version,
+            .sidebar.collapsed .logout-label {
+                display: revert; /* on annule le mode "icônes seules" en mobile */
+            }
+            .main-content { margin-left: 0 !important; padding: 14px; }
         }
     </style>
 
@@ -326,7 +373,7 @@
     {{-- Logo --}}
     <div class="sidebar-logo">
         <div class="sidebar-logo-title">
-            <i class="fas fa-leaf me-2" style="color:rgba(255,255,255,0.6);font-size:18px;"></i>ILYKEN
+            <i class="fas fa-leaf me-2" style="color:rgba(255,255,255,0.6);font-size:18px;"></i><span class="nav-label">ILYKEN</span>
         </div>
         <div class="sidebar-logo-sub">Manager · v1.0</div>
     </div>
@@ -338,15 +385,17 @@
 
         <li class="nav-item">
             <a href="{{ route('dashboard') }}"
+               title="Tableau de bord"
                class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                <i class="fas fa-home"></i> Tableau de bord
+                <i class="fas fa-home"></i> <span class="nav-label">Tableau de bord</span>
             </a>
         </li>
 
         <li class="nav-item">
             <a href="{{ route('sales.index') }}"
+               title="Point de Vente"
                class="nav-link {{ request()->routeIs('sales.*') ? 'active' : '' }}">
-                <i class="fas fa-cash-register"></i> Point de Vente
+                <i class="fas fa-cash-register"></i> <span class="nav-label">Point de Vente</span>
             </a>
         </li>
 
@@ -354,8 +403,9 @@
 
         <li class="nav-item">
             <a href="{{ route('stock.index') }}"
+               title="Stock"
                class="nav-link {{ request()->routeIs('stock.*') ? 'active' : '' }}">
-                <i class="fas fa-boxes-stacked"></i> Stock
+                <i class="fas fa-boxes-stacked"></i> <span class="nav-label">Stock</span>
                 @if(isset($criticalStockCount) && $criticalStockCount > 0)
                     <span class="nav-badge">{{ $criticalStockCount }}</span>
                 @endif
@@ -364,15 +414,17 @@
 
         <li class="nav-item">
             <a href="{{ route('products.index') }}"
+               title="Produits & Services"
                class="nav-link {{ request()->routeIs('products.*') ? 'active' : '' }}">
-                <i class="fas fa-tag"></i> Produits & Services
+                <i class="fas fa-tag"></i> <span class="nav-label">Produits & Services</span>
             </a>
         </li>
 
         <li class="nav-item">
             <a href="{{ route('purchases.index') }}"
+               title="Réapprovisionnement"
                class="nav-link {{ request()->routeIs('purchases.*') ? 'active' : '' }}">
-                <i class="fas fa-truck-ramp-box"></i> Réapprovisionnement
+                <i class="fas fa-truck-ramp-box"></i> <span class="nav-label">Réapprovisionnement</span>
                 @if(isset($pendingOrdersCount) && $pendingOrdersCount > 0)
                     <span class="nav-badge">{{ $pendingOrdersCount }}</span>
                 @endif
@@ -381,17 +433,25 @@
 
         <li class="nav-item">
             <a href="{{ route('invoices.index') }}"
+               title="Facturation"
                class="nav-link {{ request()->routeIs('invoices.*') ? 'active' : '' }}">
-                <i class="fas fa-file-invoice"></i> Facturation
+                <i class="fas fa-file-invoice"></i> <span class="nav-label">Facturation</span>
             </a>
         </li>
-
+        <li class="nav-item">
+            <a href="{{ route('service-schedules.index') }}"
+               title="Plannification"
+               class="nav-link {{ request()->routeIs('service-schedules.*') ? 'active' : '' }}">
+                <i class="fas fa-calendar-alt"></i> <span class="nav-label">Plannification</span>
+            </a>
+        </li>
         <li class="nav-section">Rapports</li>
 
         <li class="nav-item">
             <a href="{{ route('expenses.index') }}"
+               title="Finances & Rapports"
                class="nav-link {{ request()->routeIs('expenses.*') ? 'active' : '' }}">
-                <i class="fas fa-chart-line"></i> Finances & Rapports
+                <i class="fas fa-chart-line"></i> <span class="nav-label">Finances & Rapports</span>
             </a>
         </li>
     </ul>
@@ -410,8 +470,8 @@
 
         <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button type="submit" class="sidebar-logout-btn">
-                <i class="fas fa-sign-out-alt"></i> Déconnexion
+            <button type="submit" class="sidebar-logout-btn" title="Déconnexion">
+                <i class="fas fa-sign-out-alt"></i> <span class="logout-label">Déconnexion</span>
             </button>
         </form>
 
@@ -421,12 +481,12 @@
 </div>
 
 {{-- ══════════════════════ MAIN ══════════════════════ --}}
-<div class="main-content">
+<div class="main-content" id="main-content">
 
     {{-- Topbar --}}
     <div class="topbar">
         <div style="display:flex;align-items:center;gap:12px;">
-            <button class="topbar-menu-btn" onclick="toggleSidebar()">
+            <button class="topbar-menu-btn" id="menu-toggle-btn" onclick="toggleSidebar()" title="Réduire / afficher le menu">
                 <i class="fas fa-bars"></i>
             </button>
             <h4 class="topbar-title">@yield('page-title', 'Ilyken Manager')</h4>
@@ -489,19 +549,39 @@
         }, 4000);
     });
 
-    // ── Sidebar mobile ────────────────────────────────────────────────────────
+    // ── Sidebar : mobile (overlay) + desktop (collapse) ──────────────────────
+    const MOBILE_BREAKPOINT = 768;
+
     function toggleSidebar() {
-        const sidebar  = document.getElementById('sidebar');
-        const overlay  = document.getElementById('sidebar-overlay');
-        const isOpen   = sidebar.classList.contains('open');
-        sidebar.classList.toggle('open', !isOpen);
-        overlay.classList.toggle('show', !isOpen);
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const mainContent = document.getElementById('main-content');
+        const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+
+        if (isMobile) {
+            const isOpen = sidebar.classList.contains('open');
+            sidebar.classList.toggle('open', !isOpen);
+            overlay.classList.toggle('show', !isOpen);
+        } else {
+            const isCollapsed = sidebar.classList.contains('collapsed');
+            sidebar.classList.toggle('collapsed', !isCollapsed);
+            mainContent.classList.toggle('collapsed', !isCollapsed);
+            localStorage.setItem('sidebarCollapsed', (!isCollapsed) ? '1' : '0');
+        }
     }
+
     function closeSidebar() {
         document.getElementById('sidebar').classList.remove('open');
         document.getElementById('sidebar-overlay').classList.remove('show');
     }
 
+    // ── Restaure la préférence de sidebar réduite (desktop uniquement) ───────
+    document.addEventListener('DOMContentLoaded', () => {
+        if (window.innerWidth > MOBILE_BREAKPOINT && localStorage.getItem('sidebarCollapsed') === '1') {
+            document.getElementById('sidebar').classList.add('collapsed');
+            document.getElementById('main-content').classList.add('collapsed');
+        }
+    });
 </script>
 
 @stack('scripts')

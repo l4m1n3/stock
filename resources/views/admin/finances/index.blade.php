@@ -215,6 +215,7 @@
                 <option value="week">Cette semaine</option>
                 <option value="month" selected>Ce mois</option>
                 <option value="year">Année {{ $year }}</option>
+                <option value="custom">Personnalisé...</option>
             </select>
         </div>
         <div class="col-md-2">
@@ -225,6 +226,26 @@
     </div>
 </form>
 
+
+{{-- ── Panneau plage personnalisée pour l'export PDF ── --}}
+<div id="pdfCustomRange"
+     class="section-card mb-4"
+     style="display:none; align-items:center; gap:12px; flex-wrap:wrap;">
+
+    <span style="font-size:12px;font-weight:700;color:#6B46C1;white-space:nowrap;">
+        <i class="fas fa-calendar-alt me-1"></i> Période personnalisée
+    </span>
+
+    <div class="d-flex align-items-center gap-2">
+        <label style="font-size:12px;color:#9e8fc0;font-weight:600;margin:0;">Du</label>
+        <input type="date" id="pdfStartDate" class="form-control" style="border-radius:10px;width:160px;">
+    </div>
+
+    <div class="d-flex align-items-center gap-2">
+        <label style="font-size:12px;color:#9e8fc0;font-weight:600;margin:0;">au</label>
+        <input type="date" id="pdfEndDate" class="form-control" style="border-radius:10px;width:160px;">
+    </div>
+</div>
 {{-- ══════════════════════════════════════════════════════════════
      APERÇUS RAPIDES : JOUR / SEMAINE / MOIS / ANNÉE
 ══════════════════════════════════════════════════════════════ --}}
@@ -413,13 +434,44 @@
 <script>
 // ── PDF link dynamique ───────────────────────────────────────────
 const pdfBase = "{{ route('admin.finances.pdf') }}?year={{ $year }}&branch_id={{ $branchId }}";
-const pdfLink = document.getElementById('pdfLink');
-const pdfSel  = document.getElementById('pdfPeriod');
+const pdfLink       = document.getElementById('pdfLink');
+const pdfSel        = document.getElementById('pdfPeriod');
+const pdfCustomBox  = document.getElementById('pdfCustomRange');
+const pdfStartInput = document.getElementById('pdfStartDate');
+const pdfEndInput   = document.getElementById('pdfEndDate');
 
 function updatePdfLink() {
-    pdfLink.href = pdfBase + '&period=' + pdfSel.value;
+    if (pdfSel.value === 'custom') {
+        pdfCustomBox.style.display = 'flex';
+
+        const start = pdfStartInput.value;
+        const end   = pdfEndInput.value;
+
+        if (!start || !end) {
+            // Lien désactivé tant que les 2 dates ne sont pas choisies
+            pdfLink.href = '#';
+            pdfLink.classList.add('disabled');
+            pdfLink.style.opacity = '0.5';
+            pdfLink.style.pointerEvents = 'none';
+            return;
+        }
+
+        pdfLink.classList.remove('disabled');
+        pdfLink.style.opacity = '';
+        pdfLink.style.pointerEvents = '';
+        pdfLink.href = pdfBase + '&period=custom&start_date=' + start + '&end_date=' + end;
+    } else {
+        pdfCustomBox.style.display = 'none';
+        pdfLink.classList.remove('disabled');
+        pdfLink.style.opacity = '';
+        pdfLink.style.pointerEvents = '';
+        pdfLink.href = pdfBase + '&period=' + pdfSel.value;
+    }
 }
+
 pdfSel.addEventListener('change', updatePdfLink);
+pdfStartInput.addEventListener('change', updatePdfLink);
+pdfEndInput.addEventListener('change', updatePdfLink);
 updatePdfLink();
 
 // ── Couleurs communes ────────────────────────────────────────────

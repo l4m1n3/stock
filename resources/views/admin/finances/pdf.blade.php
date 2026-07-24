@@ -2,7 +2,6 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rapport Financier</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -14,40 +13,40 @@ body {
     background: #fff;
 }
 
-/* ── En-tête ──────────────────────────────────────────────── */
-.header {
-    background: linear-gradient(135deg, #6B46C1, #4c2fa1);
+/* ── En-tête (table au lieu de flex) ─────────────────────── */
+.header-table {
+    width: 100%;
+    background: #6B46C1; /* dégradé non supporté correctement -> couleur pleine */
     color: white;
-    padding: 24px 28px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
-.header .logo { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
-.header .meta { text-align: right; font-size: 11px; opacity: .85; }
-.header .meta strong { display: block; font-size: 15px; font-weight: 700; opacity: 1; }
+.header-table td {
+    padding: 24px 28px;
+    vertical-align: middle;
+}
+.header-table .logo { font-size: 22px; font-weight: 800; }
+.header-table .tagline { font-size: 12px; opacity: .85; margin-top: 4px; }
+.header-table .meta { text-align: right; font-size: 11px; }
+.header-table .meta strong { display: block; font-size: 15px; font-weight: 700; }
 
-.report-title {
+.report-title-table {
+    width: 100%;
     background: #f5f0ff;
-    padding: 14px 28px;
     border-bottom: 2px solid #6B46C1;
+}
+.report-title-table td {
+    padding: 14px 28px;
     font-size: 13px;
     font-weight: 700;
     color: #6B46C1;
-    display: flex;
-    justify-content: space-between;
 }
+.report-title-table .right { text-align: right; }
 
 /* ── Corps ────────────────────────────────────────────────── */
 .body { padding: 24px 28px; }
 
-/* ── KPI grid ─────────────────────────────────────────────── */
-.kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin-bottom: 24px;
-}
+/* ── KPI grid (table au lieu de grid) ────────────────────── */
+.kpi-table { width: 100%; border-collapse: separate; border-spacing: 7px; margin-bottom: 10px; }
+.kpi-table td { width: 33.33%; vertical-align: top; }
 .kpi-card {
     border-radius: 12px;
     padding: 16px;
@@ -77,9 +76,7 @@ body {
 .kpi-sub { font-size: 10px; color: #9e8fc0; margin-top: 3px; }
 
 /* ── Sections ─────────────────────────────────────────────── */
-.section {
-    margin-bottom: 24px;
-}
+.section { margin-bottom: 24px; }
 .section-header {
     font-size: 13px;
     font-weight: 700;
@@ -87,48 +84,37 @@ body {
     border-bottom: 2px solid #f0ebff;
     padding-bottom: 8px;
     margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }
 .section-header .dot {
-    width: 10px;
-    height: 10px;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: #6B46C1;
-    flex-shrink: 0;
+    margin-right: 8px;
 }
 
-/* ── Tables ───────────────────────────────────────────────── */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 11.5px;
-}
-thead tr { background: #6B46C1; color: white; }
-thead th { padding: 9px 12px; text-align: left; font-weight: 600; letter-spacing: .03em; }
-thead th.right { text-align: right; }
-tbody tr { border-bottom: 1px solid #f0ebff; }
-tbody tr:nth-child(even) { background: #faf7ff; }
-tbody td { padding: 9px 12px; }
-tbody td.right { text-align: right; font-weight: 700; }
-tbody td.green  { color: #177f43; }
-tbody td.red    { color: #a32d2d; }
-tfoot tr { background: #f5f0ff; font-weight: 800; border-top: 2px solid #6B46C1; }
-tfoot td { padding: 10px 12px; }
-tfoot td.right { text-align: right; }
+/* ── Tables de données ───────────────────────────────────── */
+table.data { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+table.data thead tr { background: #6B46C1; color: white; }
+table.data thead th { padding: 9px 12px; text-align: left; font-weight: 600; letter-spacing: .03em; }
+table.data thead th.right { text-align: right; }
+table.data tbody tr { border-bottom: 1px solid #f0ebff; }
+table.data tbody tr.even { background: #faf7ff; }
+table.data tbody td { padding: 9px 12px; }
+table.data tbody td.right { text-align: right; font-weight: 700; }
+table.data tbody td.green  { color: #177f43; }
+table.data tbody td.red    { color: #a32d2d; }
+table.data tfoot tr { background: #f5f0ff; font-weight: 800; border-top: 2px solid #6B46C1; }
+table.data tfoot td { padding: 10px 12px; }
+table.data tfoot td.right { text-align: right; }
 
-/* ── Pied de page ─────────────────────────────────────────── */
-.footer {
-    margin-top: 30px;
-    padding-top: 14px;
-    border-top: 2px solid #f0ebff;
-    display: flex;
-    justify-content: space-between;
-    font-size: 10px;
-    color: #9e8fc0;
-}
-.footer .confidential {
+/* ── Pied de page (table au lieu de flex) ────────────────── */
+.footer-table { width: 100%; margin-top: 30px; padding-top: 14px; border-top: 2px solid #f0ebff; }
+.footer-table td { font-size: 10px; color: #9e8fc0; vertical-align: middle; }
+.footer-table .right { text-align: right; }
+.confidential {
+    display: inline-block;
     background: #f5f0ff;
     color: #6B46C1;
     padding: 3px 10px;
@@ -152,70 +138,87 @@ tfoot td.right { text-align: right; }
 <body>
 
 {{-- EN-TÊTE --}}
-<div class="header">
-    <div>
-        <div class="logo">Rapport Financier — Administration</div>
-        <div style="font-size:12px;opacity:.8;margin-top:4px;">Rapport Financier — Administration</div>
-    </div>
-    <div class="meta">
-        <strong>{{ $periodLabel }}</strong>
-        {{ $branchName }}<br>
-        Généré le {{ now()->format('d/m/Y à H:i') }}
-    </div>
-</div>
+<table class="header-table">
+    <tr>
+        <td style="width:60%;">
+            <div class="logo">Rapport Financier — Administration</div>
+            <div class="tagline">Rapport Financier — Administration</div>
+        </td>
+        <td class="meta">
+            <strong>{{ $periodLabel }}</strong>
+            {{ $branchName }}<br>
+            Généré le {{ now()->format('d/m/Y à H:i') }}
+        </td>
+    </tr>
+</table>
 
-<div class="report-title">
-    <span>📊 Rapport de performance financière</span>
-    <span>{{ $branchName }}</span>
-</div>
+<table class="report-title-table">
+    <tr>
+        <td>📊 Rapport de performance financière</td>
+        <td class="right">{{ $branchName }}</td>
+    </tr>
+</table>
 
 <div class="body">
 
     {{-- KPIs PRINCIPAUX --}}
-    <div class="kpi-grid" style="margin-bottom:24px;">
-        <div class="kpi-card green">
-            <div class="kpi-label">Revenus</div>
-            <div class="kpi-value green">{{ number_format($revenue, 0, ',', ' ') }}</div>
-            <div class="kpi-sub">FCFA</div>
-        </div>
-        <div class="kpi-card red">
-            <div class="kpi-label">Dépenses</div>
-            <div class="kpi-value red">{{ number_format($expenses, 0, ',', ' ') }}</div>
-            <div class="kpi-sub">FCFA</div>
-        </div>
-        <div class="kpi-card" style="border-top-color:{{ $profit >= 0 ? '#177f43' : '#a32d2d' }};">
-            <div class="kpi-label">Profit net</div>
-            <div class="kpi-value {{ $profit >= 0 ? 'green' : 'red' }}">{{ number_format($profit, 0, ',', ' ') }}</div>
-            <div class="kpi-sub">FCFA</div>
-        </div>
-    </div>
+    <table class="kpi-table">
+        <tr>
+            <td>
+                <div class="kpi-card green">
+                    <div class="kpi-label">Revenus</div>
+                    <div class="kpi-value green">{{ number_format($revenue, 0, ',', ' ') }}</div>
+                    <div class="kpi-sub">FCFA</div>
+                </div>
+            </td>
+            <td>
+                <div class="kpi-card red">
+                    <div class="kpi-label">Dépenses</div>
+                    <div class="kpi-value red">{{ number_format($expenses, 0, ',', ' ') }}</div>
+                    <div class="kpi-sub">FCFA</div>
+                </div>
+            </td>
+            <td>
+                <div class="kpi-card" style="border-top-color:{{ $profit >= 0 ? '#177f43' : '#a32d2d' }};">
+                    <div class="kpi-label">Profit net</div>
+                    <div class="kpi-value {{ $profit >= 0 ? 'green' : 'red' }}">{{ number_format($profit, 0, ',', ' ') }}</div>
+                    <div class="kpi-sub">FCFA</div>
+                </div>
+            </td>
+        </tr>
+    </table>
 
-    <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:28px;">
-        <div class="kpi-card">
-            <div class="kpi-label">Marge nette</div>
-            <div class="kpi-value violet">{{ $margin }} %</div>
-            <div class="kpi-sub">Profit / Revenus</div>
-        </div>
-        <div class="kpi-card">
-            <div class="kpi-label">Nombre de ventes</div>
-            <div class="kpi-value violet">{{ number_format($sales, 0, ',', ' ') }}</div>
-            <div class="kpi-sub">transactions</div>
-        </div>
-        <div class="kpi-card">
-            <div class="kpi-label">Ticket moyen</div>
-            <div class="kpi-value violet">{{ number_format($avgTicket, 0, ',', ' ') }}</div>
-            <div class="kpi-sub">FCFA / vente</div>
-        </div>
-    </div>
+    <table class="kpi-table" style="margin-bottom:28px;">
+        <tr>
+            <td>
+                <div class="kpi-card">
+                    <div class="kpi-label">Marge nette</div>
+                    <div class="kpi-value violet">{{ $margin }} %</div>
+                    <div class="kpi-sub">Profit / Revenus</div>
+                </div>
+            </td>
+            <td>
+                <div class="kpi-card">
+                    <div class="kpi-label">Nombre de ventes</div>
+                    <div class="kpi-value violet">{{ number_format($sales, 0, ',', ' ') }}</div>
+                    <div class="kpi-sub">transactions</div>
+                </div>
+            </td>
+            <td>
+                <div class="kpi-card">
+                    <div class="kpi-label">Ticket moyen</div>
+                    <div class="kpi-value violet">{{ number_format($avgTicket, 0, ',', ' ') }}</div>
+                    <div class="kpi-sub">FCFA / vente</div>
+                </div>
+            </td>
+        </tr>
+    </table>
 
     {{-- DÉPENSES PAR TYPE --}}
     @if($expensesByType->count())
     <div class="section">
-        <div class="section-header">
-            <span class="dot" style="background:#E24B4A;"></span>
-            Détail des dépenses par catégorie
-        </div>
-        <table>
+        <div class="section-header"><span class="dot" style="background:#E24B4A;"></span>Détail des dépenses par catégorie</div>
+        <table class="data">
             <thead>
                 <tr>
                     <th>Catégorie</th>
@@ -224,13 +227,11 @@ tfoot td.right { text-align: right; }
                 </tr>
             </thead>
             <tbody>
-                @foreach($expensesByType as $exp)
-                <tr>
+                @foreach($expensesByType as $i => $exp)
+                <tr class="{{ $i % 2 === 1 ? 'even' : '' }}">
                     <td>{{ $typeLabels[$exp->type] ?? ucfirst($exp->type) }}</td>
                     <td class="right red">{{ number_format($exp->total, 0, ',', ' ') }}</td>
-                    <td class="right">
-                        {{ $expenses > 0 ? round(($exp->total / $expenses) * 100, 1) : 0 }} %
-                    </td>
+                    <td class="right">{{ $expenses > 0 ? round(($exp->total / $expenses) * 100, 1) : 0 }} %</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -248,11 +249,8 @@ tfoot td.right { text-align: right; }
     {{-- REVENUS PAR MODE DE PAIEMENT --}}
     @if($salesByPayment->count())
     <div class="section">
-        <div class="section-header">
-            <span class="dot" style="background:#10B981;"></span>
-            Revenus par mode de paiement
-        </div>
-        <table>
+        <div class="section-header"><span class="dot" style="background:#10B981;"></span>Revenus par mode de paiement</div>
+        <table class="data">
             <thead>
                 <tr>
                     <th>Mode de paiement</th>
@@ -261,13 +259,11 @@ tfoot td.right { text-align: right; }
                 </tr>
             </thead>
             <tbody>
-                @foreach($salesByPayment as $pay)
-                <tr>
+                @foreach($salesByPayment as $i => $pay)
+                <tr class="{{ $i % 2 === 1 ? 'even' : '' }}">
                     <td>{{ $payLabels[$pay->payment_method] ?? ucfirst($pay->payment_method) }}</td>
                     <td class="right green">{{ number_format($pay->total, 0, ',', ' ') }}</td>
-                    <td class="right">
-                        {{ $revenue > 0 ? round(($pay->total / $revenue) * 100, 1) : 0 }} %
-                    </td>
+                    <td class="right">{{ $revenue > 0 ? round(($pay->total / $revenue) * 100, 1) : 0 }} %</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -285,11 +281,8 @@ tfoot td.right { text-align: right; }
     {{-- SITUATION PAR BRANCHE --}}
     @if($branchesSituation->count() > 1)
     <div class="section">
-        <div class="section-header">
-            <span class="dot" style="background:#F59E0B;"></span>
-            Situation par branche
-        </div>
-        <table>
+        <div class="section-header"><span class="dot" style="background:#F59E0B;"></span>Situation par branche</div>
+        <table class="data">
             <thead>
                 <tr>
                     <th>Branche</th>
@@ -300,21 +293,19 @@ tfoot td.right { text-align: right; }
                 </tr>
             </thead>
             <tbody>
-                @foreach($branchesSituation as $b)
+                @foreach($branchesSituation as $i => $b)
                 @php
                     $bRev  = $b->rev ?? 0;
                     $bExp  = $b->exp ?? 0;
                     $bProf = $b->profit;
                     $bMarg = $bRev > 0 ? round(($bProf / $bRev) * 100, 1) : 0;
                 @endphp
-                <tr>
+                <tr class="{{ $i % 2 === 1 ? 'even' : '' }}">
                     <td><strong>{{ $b->name }}</strong></td>
                     <td class="right green">{{ number_format($bRev, 0, ',', ' ') }}</td>
                     <td class="right red">{{ number_format($bExp, 0, ',', ' ') }}</td>
                     <td class="right {{ $bProf >= 0 ? 'green' : 'red' }}">{{ number_format($bProf, 0, ',', ' ') }}</td>
-                    <td class="right">
-                        <span class="profit-badge {{ $bProf >= 0 ? 'pos' : 'neg' }}">{{ $bMarg }}%</span>
-                    </td>
+                    <td class="right"><span class="profit-badge {{ $bProf >= 0 ? 'pos' : 'neg' }}">{{ $bMarg }}%</span></td>
                 </tr>
                 @endforeach
             </tbody>
@@ -324,11 +315,8 @@ tfoot td.right { text-align: right; }
 
     {{-- ANALYSE SYNTHÈSE --}}
     <div class="section">
-        <div class="section-header">
-            <span class="dot" style="background:#6B46C1;"></span>
-            Synthèse & analyse
-        </div>
-        <table>
+        <div class="section-header"><span class="dot" style="background:#6B46C1;"></span>Synthèse & analyse</div>
+        <table class="data">
             <tbody>
                 <tr>
                     <td style="width:40%;color:#666;">Solde (Revenus − Dépenses)</td>
@@ -342,9 +330,7 @@ tfoot td.right { text-align: right; }
                 </tr>
                 <tr>
                     <td style="color:#666;">Part des dépenses sur revenus</td>
-                    <td class="right">
-                        {{ $revenue > 0 ? round(($expenses / $revenue) * 100, 1) : 0 }} %
-                    </td>
+                    <td class="right">{{ $revenue > 0 ? round(($expenses / $revenue) * 100, 1) : 0 }} %</td>
                 </tr>
                 <tr>
                     <td style="color:#666;">Transactions réalisées</td>
@@ -361,15 +347,15 @@ tfoot td.right { text-align: right; }
 </div>{{-- /body --}}
 
 {{-- PIED DE PAGE --}}
-<div class="footer" style="padding:0 28px 20px;">
-    <div>
-        Document confidentiel — Usage interne uniquement<br>
-        Généré automatiquement par GestionPro le {{ now()->format('d/m/Y à H:i') }}
-    </div>
-    <div>
-        <span class="confidential">CONFIDENTIEL</span>
-    </div>
-</div>
+<table class="footer-table" style="padding:0 28px 20px;">
+    <tr>
+        <td>
+            Document confidentiel — Usage interne uniquement<br>
+            Généré automatiquement par GestionPro le {{ now()->format('d/m/Y à H:i') }}
+        </td>
+        <td class="right"><span class="confidential">CONFIDENTIEL</span></td>
+    </tr>
+</table>
 
 </body>
 </html>
