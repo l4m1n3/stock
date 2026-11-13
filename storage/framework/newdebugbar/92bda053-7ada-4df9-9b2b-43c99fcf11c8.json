@@ -1,0 +1,2859 @@
+{
+    "schema_version": 1,
+    "id": "92bda053-7ada-4df9-9b2b-43c99fcf11c8",
+    "recorded_at": "2026-10-24T19:04:59+01:00",
+    "profile_type": "http",
+    "environment": "local",
+    "metrics": {
+        "duration_ms": 82.04,
+        "peak_memory_mb": 4
+    },
+    "sections": {
+        "overview": {
+            "label": "Overview",
+            "summary": {
+                "duration_ms": 82.04,
+                "peak_memory_mb": 4
+            },
+            "payload": {
+                "runtime": {
+                    "environment": "local",
+                    "php": "8.4.19",
+                    "php_sapi": "cli-server",
+                    "runtime_type": "cli-server",
+                    "laravel": "13.5.0",
+                    "debug": true,
+                    "locale": "fr",
+                    "timezone": "Africa/Niamey"
+                },
+                "cache_state": {
+                    "configuration": false,
+                    "routes": false,
+                    "events": false
+                },
+                "drivers": {
+                    "database": "pgsql",
+                    "cache": "database",
+                    "queue": "database",
+                    "session": "database",
+                    "mail": "log",
+                    "broadcasting": "log"
+                },
+                "ecosystem": [],
+                "package": "dev-main"
+            }
+        },
+        "request": {
+            "label": "Request",
+            "summary": {
+                "method": "GET",
+                "status": 200,
+                "exit_code": null
+            },
+            "payload": {
+                "method": "GET",
+                "url": "http://localhost:8001/admin/finances",
+                "path": "/admin/finances",
+                "query": [],
+                "input": [],
+                "headers": {
+                    "host": [
+                        "localhost:8001"
+                    ],
+                    "connection": [
+                        "keep-alive"
+                    ],
+                    "sec-ch-ua": [
+                        "\"Brave\";v=\"155\", \"Chromium\";v=\"155\", \"Not(A:Brand\";v=\"24\""
+                    ],
+                    "sec-ch-ua-mobile": [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform": [
+                        "\"macOS\""
+                    ],
+                    "upgrade-insecure-requests": [
+                        "1"
+                    ],
+                    "user-agent": [
+                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+                    ],
+                    "accept": [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;q=0.8"
+                    ],
+                    "sec-gpc": [
+                        "1"
+                    ],
+                    "sec-fetch-site": [
+                        "same-origin"
+                    ],
+                    "sec-fetch-mode": [
+                        "navigate"
+                    ],
+                    "sec-fetch-user": [
+                        "?1"
+                    ],
+                    "sec-fetch-dest": [
+                        "document"
+                    ],
+                    "referer": [
+                        "http://localhost:8001/admin"
+                    ],
+                    "accept-encoding": [
+                        "gzip, deflate, br, zstd"
+                    ],
+                    "accept-language": [
+                        "fr-FR,fr;q=0.8"
+                    ],
+                    "cookie": "[redacted]"
+                },
+                "route": "admin.finances",
+                "action": "App\\Http\\Controllers\\AdminController@finances",
+                "parameters": [],
+                "middleware": [
+                    "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+                    "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestForgery",
+                    "Illuminate\\Auth\\Middleware\\Authenticate",
+                    "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                    "Laravel\\Boost\\Middleware\\InjectBoost"
+                ],
+                "status": 200,
+                "request_type": "full_page",
+                "content_type": "text/html; charset=utf-8",
+                "request_size_bytes": 0,
+                "response_size_bytes": 43391,
+                "session_present": false,
+                "authenticated": true,
+                "authentication": {
+                    "guard": "web",
+                    "authenticated": true,
+                    "model": "App\\Models\\User",
+                    "identifier": "hmac:50045f8e8ac31618",
+                    "identifier_policy": "keyed_hash"
+                },
+                "session": {
+                    "present": false,
+                    "driver": "database",
+                    "key_count": 0,
+                    "keys": [],
+                    "keys_dropped": 0,
+                    "flash_keys": [],
+                    "error_bag_present": false,
+                    "error_bags": []
+                },
+                "timing_scope": "global_middleware_entry",
+                "response_headers": {
+                    "content-type": [
+                        "text/html; charset=utf-8"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Sat, 24 Oct 2026 18:04:59 GMT"
+                    ],
+                    "set-cookie": "[redacted]"
+                }
+            }
+        },
+        "queries": {
+            "label": "Queries",
+            "summary": {
+                "count": 46,
+                "retained_count": 46,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 40.46,
+                "transaction_count": 0,
+                "transaction_retained_count": 0,
+                "transaction_dropped_count": 0,
+                "rollback_count": 0
+            },
+            "payload": {
+                "items": [
+                    {
+                        "sql": "select * from \"sessions\" where \"id\" = ? limit 1",
+                        "bindings": [
+                            "9vfB6qsrzNQXlE0A34qYGDe5xBeS94IdHpHkVoGJ"
+                        ],
+                        "runnable_sql": "select * from \"sessions\" where \"id\" = '9vfB6qsrzNQXlE0A34qYGDe5xBeS94IdHpHkVoGJ' limit 1",
+                        "duration_ms": 7.47,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 9.275,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"users\" where \"id\" = ? limit 1",
+                        "bindings": [
+                            1
+                        ],
+                        "runnable_sql": "select * from \"users\" where \"id\" = 1 limit 1",
+                        "duration_ms": 0.88,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 11.871,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"branches\" order by \"name\" asc",
+                        "bindings": [],
+                        "runnable_sql": "select * from \"branches\" order by \"name\" asc",
+                        "duration_ms": 0.84,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 337
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 337,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 14.704,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\"::date = ?",
+                        "bindings": [
+                            "2026-10-24"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\"::date = '2026-10-24'",
+                        "duration_ms": 4.71,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 363
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 363,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 23.05,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\"::date = ?",
+                        "bindings": [
+                            "2026-10-24"
+                        ],
+                        "runnable_sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\"::date = '2026-10-24'",
+                        "duration_ms": 1.02,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 364
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 364,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 24.886,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select count(*) as aggregate from \"sales\" where \"sold_at\"::date = ?",
+                        "bindings": [
+                            "2026-10-24"
+                        ],
+                        "runnable_sql": "select count(*) as aggregate from \"sales\" where \"sold_at\"::date = '2026-10-24'",
+                        "duration_ms": 0.68,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 365
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 365,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 26.394,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" >= ?",
+                        "bindings": [
+                            "2026-10-19T00:00:00+01:00"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" >= '2026-10-19 00:00:00'",
+                        "duration_ms": 0.71,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 371
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 371,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 27.444,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" >= ?",
+                        "bindings": [
+                            "2026-10-19"
+                        ],
+                        "runnable_sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" >= '2026-10-19'",
+                        "duration_ms": 0.59,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 372
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 372,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 28.314,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select count(*) as aggregate from \"sales\" where \"sold_at\" >= ?",
+                        "bindings": [
+                            "2026-10-19T00:00:00+01:00"
+                        ],
+                        "runnable_sql": "select count(*) as aggregate from \"sales\" where \"sold_at\" >= '2026-10-19 00:00:00'",
+                        "duration_ms": 0.59,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 373
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 373,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 29.202,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" >= ?",
+                        "bindings": [
+                            "2026-10-01T00:00:00+01:00"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" >= '2026-10-01 00:00:00'",
+                        "duration_ms": 0.65,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 379
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 379,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 30.214,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" >= ?",
+                        "bindings": [
+                            "2026-10-01"
+                        ],
+                        "runnable_sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" >= '2026-10-01'",
+                        "duration_ms": 0.36,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 380
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 380,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 30.901,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select count(*) as aggregate from \"sales\" where \"sold_at\" >= ?",
+                        "bindings": [
+                            "2026-10-01T00:00:00+01:00"
+                        ],
+                        "runnable_sql": "select count(*) as aggregate from \"sales\" where \"sold_at\" >= '2026-10-01 00:00:00'",
+                        "duration_ms": 0.38,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 381
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 381,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 31.541,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between ? and ?",
+                        "bindings": [
+                            "2026-01-01T00:00:00+01:00",
+                            "2026-12-31T23:59:59+01:00"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between '2026-01-01 00:00:00' and '2026-12-31 23:59:59'",
+                        "duration_ms": 0.42,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 387
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 387,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 32.272,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between ? and ?",
+                        "bindings": [
+                            "2026-01-01",
+                            "2026-12-31"
+                        ],
+                        "runnable_sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between '2026-01-01' and '2026-12-31'",
+                        "duration_ms": 0.62,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 388
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 388,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 33.158,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select count(*) as aggregate from \"sales\" where \"sold_at\" between ? and ?",
+                        "bindings": [
+                            "2026-01-01T00:00:00+01:00",
+                            "2026-12-31T23:59:59+01:00"
+                        ],
+                        "runnable_sql": "select count(*) as aggregate from \"sales\" where \"sold_at\" between '2026-01-01 00:00:00' and '2026-12-31 23:59:59'",
+                        "duration_ms": 0.61,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 389
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 389,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 34.034,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between ? and ?",
+                        "bindings": [
+                            "2026-01-01T00:00:00+01:00",
+                            "2026-01-31T23:59:59+01:00"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between '2026-01-01 00:00:00' and '2026-01-31 23:59:59'",
+                        "duration_ms": 0.56,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 401
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 401,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 35.024,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between ? and ?",
+                        "bindings": [
+                            "2026-01-01",
+                            "2026-01-31"
+                        ],
+                        "runnable_sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between '2026-01-01' and '2026-01-31'",
+                        "duration_ms": 0.64,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 402
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 402,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 35.933,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between ? and ?",
+                        "bindings": [
+                            "2026-02-01T00:00:00+01:00",
+                            "2026-02-28T23:59:59+01:00"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between '2026-02-01 00:00:00' and '2026-02-28 23:59:59'",
+                        "duration_ms": 0.62,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 401
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 401,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 37.117,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between ? and ?",
+                        "bindings": [
+                            "2026-02-01",
+                            "2026-02-28"
+                        ],
+                        "runnable_sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between '2026-02-01' and '2026-02-28'",
+                        "duration_ms": 0.56,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 402
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 402,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 37.998,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between ? and ?",
+                        "bindings": [
+                            "2026-03-01T00:00:00+01:00",
+                            "2026-03-31T23:59:59+01:00"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between '2026-03-01 00:00:00' and '2026-03-31 23:59:59'",
+                        "duration_ms": 0.56,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 401
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 401,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 38.914,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between ? and ?",
+                        "bindings": [
+                            "2026-03-01",
+                            "2026-03-31"
+                        ],
+                        "runnable_sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between '2026-03-01' and '2026-03-31'",
+                        "duration_ms": 0.53,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 402
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 402,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 39.719,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between ? and ?",
+                        "bindings": [
+                            "2026-04-01T00:00:00+01:00",
+                            "2026-04-30T23:59:59+01:00"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between '2026-04-01 00:00:00' and '2026-04-30 23:59:59'",
+                        "duration_ms": 0.56,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 401
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 401,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 40.629,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between ? and ?",
+                        "bindings": [
+                            "2026-04-01",
+                            "2026-04-30"
+                        ],
+                        "runnable_sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between '2026-04-01' and '2026-04-30'",
+                        "duration_ms": 0.55,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 402
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 402,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 41.442,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between ? and ?",
+                        "bindings": [
+                            "2026-05-01T00:00:00+01:00",
+                            "2026-05-31T23:59:59+01:00"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between '2026-05-01 00:00:00' and '2026-05-31 23:59:59'",
+                        "duration_ms": 0.6,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 401
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 401,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 42.363,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between ? and ?",
+                        "bindings": [
+                            "2026-05-01",
+                            "2026-05-31"
+                        ],
+                        "runnable_sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between '2026-05-01' and '2026-05-31'",
+                        "duration_ms": 0.56,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 402
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 402,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 43.202,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between ? and ?",
+                        "bindings": [
+                            "2026-06-01T00:00:00+01:00",
+                            "2026-06-30T23:59:59+01:00"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between '2026-06-01 00:00:00' and '2026-06-30 23:59:59'",
+                        "duration_ms": 0.68,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 401
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 401,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 44.23,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between ? and ?",
+                        "bindings": [
+                            "2026-06-01",
+                            "2026-06-30"
+                        ],
+                        "runnable_sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between '2026-06-01' and '2026-06-30'",
+                        "duration_ms": 0.55,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 402
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 402,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 45.06,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between ? and ?",
+                        "bindings": [
+                            "2026-07-01T00:00:00+01:00",
+                            "2026-07-31T23:59:59+01:00"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between '2026-07-01 00:00:00' and '2026-07-31 23:59:59'",
+                        "duration_ms": 0.57,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 401
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 401,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 46.056,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between ? and ?",
+                        "bindings": [
+                            "2026-07-01",
+                            "2026-07-31"
+                        ],
+                        "runnable_sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between '2026-07-01' and '2026-07-31'",
+                        "duration_ms": 0.58,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 402
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 402,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 47,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between ? and ?",
+                        "bindings": [
+                            "2026-08-01T00:00:00+01:00",
+                            "2026-08-31T23:59:59+01:00"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between '2026-08-01 00:00:00' and '2026-08-31 23:59:59'",
+                        "duration_ms": 0.38,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 401
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 401,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 47.744,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between ? and ?",
+                        "bindings": [
+                            "2026-08-01",
+                            "2026-08-31"
+                        ],
+                        "runnable_sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between '2026-08-01' and '2026-08-31'",
+                        "duration_ms": 0.37,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 402
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 402,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 48.373,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between ? and ?",
+                        "bindings": [
+                            "2026-09-01T00:00:00+01:00",
+                            "2026-09-30T23:59:59+01:00"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between '2026-09-01 00:00:00' and '2026-09-30 23:59:59'",
+                        "duration_ms": 0.37,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 401
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 401,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 49.057,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between ? and ?",
+                        "bindings": [
+                            "2026-09-01",
+                            "2026-09-30"
+                        ],
+                        "runnable_sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between '2026-09-01' and '2026-09-30'",
+                        "duration_ms": 0.36,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 402
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 402,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 49.678,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between ? and ?",
+                        "bindings": [
+                            "2026-10-01T00:00:00+01:00",
+                            "2026-10-31T23:59:59+01:00"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between '2026-10-01 00:00:00' and '2026-10-31 23:59:59'",
+                        "duration_ms": 0.47,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 401
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 401,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 50.467,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between ? and ?",
+                        "bindings": [
+                            "2026-10-01",
+                            "2026-10-31"
+                        ],
+                        "runnable_sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between '2026-10-01' and '2026-10-31'",
+                        "duration_ms": 0.56,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 402
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 402,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 51.29,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between ? and ?",
+                        "bindings": [
+                            "2026-11-01T00:00:00+01:00",
+                            "2026-11-30T23:59:59+01:00"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between '2026-11-01 00:00:00' and '2026-11-30 23:59:59'",
+                        "duration_ms": 0.61,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 401
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 401,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 52.217,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between ? and ?",
+                        "bindings": [
+                            "2026-11-01",
+                            "2026-11-30"
+                        ],
+                        "runnable_sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between '2026-11-01' and '2026-11-30'",
+                        "duration_ms": 0.74,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 402
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 402,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 53.222,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between ? and ?",
+                        "bindings": [
+                            "2026-12-01T00:00:00+01:00",
+                            "2026-12-31T23:59:59+01:00"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"issued_at\" between '2026-12-01 00:00:00' and '2026-12-31 23:59:59'",
+                        "duration_ms": 0.65,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 401
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 401,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 54.224,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between ? and ?",
+                        "bindings": [
+                            "2026-12-01",
+                            "2026-12-31"
+                        ],
+                        "runnable_sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"expense_date\" between '2026-12-01' and '2026-12-31'",
+                        "duration_ms": 0.57,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 402
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 402,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 397,
+                                "function": "Illuminate\\Support\\Collection->map"
+                            }
+                        ],
+                        "at_ms": 55.136,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select \"type\", SUM(amount) as total from \"expenses\" where \"expense_date\" between ? and ? group by \"type\" order by \"total\" desc",
+                        "bindings": [
+                            "2026-01-01",
+                            "2026-12-31"
+                        ],
+                        "runnable_sql": "select \"type\", SUM(amount) as total from \"expenses\" where \"expense_date\" between '2026-01-01' and '2026-12-31' group by \"type\" order by \"total\" desc",
+                        "duration_ms": 1.07,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 418
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 418,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 56.753,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select \"payment_method\", SUM(total_amount) as total from \"sales\" where \"sold_at\" between ? and ? group by \"payment_method\"",
+                        "bindings": [
+                            "2026-01-01T00:00:00+01:00",
+                            "2026-12-31T23:59:59+01:00"
+                        ],
+                        "runnable_sql": "select \"payment_method\", SUM(total_amount) as total from \"sales\" where \"sold_at\" between '2026-01-01 00:00:00' and '2026-12-31 23:59:59' group by \"payment_method\"",
+                        "duration_ms": 0.62,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 427
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 427,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 57.953,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select \"branches\".*, (select sum(\"sales\".\"total_amount\") from \"sales\" where \"branches\".\"id\" = \"sales\".\"branch_id\" and \"sold_at\" between ? and ?) as \"sales_sum_total_amount\", (select sum(\"expenses\".\"amount\") from \"expenses\" where \"branches\".\"id\" = \"expenses\".\"branch_id\" and \"expense_date\" between ? and ?) as \"expenses_sum_amount\" from \"branches\"",
+                        "bindings": [
+                            "2026-01-01T00:00:00+01:00",
+                            "2026-12-31T23:59:59+01:00",
+                            "2026-01-01",
+                            "2026-12-31"
+                        ],
+                        "runnable_sql": "select \"branches\".*, (select sum(\"sales\".\"total_amount\") from \"sales\" where \"branches\".\"id\" = \"sales\".\"branch_id\" and \"sold_at\" between '2026-01-01 00:00:00' and '2026-12-31 23:59:59') as \"sales_sum_total_amount\", (select sum(\"expenses\".\"amount\") from \"expenses\" where \"branches\".\"id\" = \"expenses\".\"branch_id\" and \"expense_date\" between '2026-01-01' and '2026-12-31') as \"expenses_sum_amount\" from \"branches\"",
+                        "duration_ms": 0.69,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 438
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 438,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 59.981,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"sales\" where \"sales\".\"branch_id\" in (1, 2) and \"sold_at\" between ? and ?",
+                        "bindings": [
+                            "2026-01-01T00:00:00+01:00",
+                            "2026-12-31T23:59:59+01:00"
+                        ],
+                        "runnable_sql": "select * from \"sales\" where \"sales\".\"branch_id\" in (1, 2) and \"sold_at\" between '2026-01-01 00:00:00' and '2026-12-31 23:59:59'",
+                        "duration_ms": 0.6,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 438
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 438,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 61.285,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"expenses\" where \"expenses\".\"branch_id\" in (1, 2) and \"expense_date\" between ? and ?",
+                        "bindings": [
+                            "2026-01-01",
+                            "2026-12-31"
+                        ],
+                        "runnable_sql": "select * from \"expenses\" where \"expenses\".\"branch_id\" in (1, 2) and \"expense_date\" between '2026-01-01' and '2026-12-31'",
+                        "duration_ms": 0.67,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 438
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 438,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 62.827,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "insert into \"activity_logs\" (\"user_id\", \"action\", \"description\", \"updated_at\", \"created_at\") values (?, ?, ?, ?, ?) returning \"id\"",
+                        "bindings": [
+                            1,
+                            "admin_finances_viewed",
+                            "Admin \u2014 consultation finances ann\u00e9e 2026",
+                            "2026-10-24 19:04:59",
+                            "2026-10-24 19:04:59"
+                        ],
+                        "runnable_sql": "insert into \"activity_logs\" (\"user_id\", \"action\", \"description\", \"updated_at\", \"created_at\") values (1, 'admin_finances_viewed', 'Admin \u2014 consultation finances ann\u00e9e 2026', '2026-10-24 19:04:59', '2026-10-24 19:04:59') returning \"id\"",
+                        "duration_ms": 1.42,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/helpers.php",
+                            "line": 6
+                        },
+                        "stack": [
+                            {
+                                "file": "app/helpers.php",
+                                "line": 6,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            },
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 443,
+                                "function": "activity_log"
+                            }
+                        ],
+                        "at_ms": 65.983,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "update \"sessions\" set \"payload\" = ?, \"last_activity\" = ?, \"user_id\" = ?, \"ip_address\" = ?, \"user_agent\" = ? where \"id\" = ?",
+                        "bindings": [
+                            "eyJfdG9rZW4iOiJ3cVRzbjUyakpWRW1hT2RWb1RRMFRLU0U2YUU4UjljYzhyM2NidWowIiwiX3ByZXZpb3VzIjp7InVybCI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4MDAxXC9hZG1pblwvZmluYW5jZXMiLCJyb3V0ZSI6ImFkbWluLmZpbmFuY2VzIn0sIl9mbGFzaCI6eyJvbGQiOltdLCJuZXciOltdfSwibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiOjF9",
+                            1792865099,
+                            1,
+                            "127.0.0.1",
+                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+                            "9vfB6qsrzNQXlE0A34qYGDe5xBeS94IdHpHkVoGJ"
+                        ],
+                        "runnable_sql": "update \"sessions\" set \"payload\" = 'eyJfdG9rZW4iOiJ3cVRzbjUyakpWRW1hT2RWb1RRMFRLU0U2YUU4UjljYzhyM2NidWowIiwiX3ByZXZpb3VzIjp7InVybCI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4MDAxXC9hZG1pblwvZmluYW5jZXMiLCJyb3V0ZSI6ImFkbWluLmZpbmFuY2VzIn0sIl9mbGFzaCI6eyJvbGQiOltdLCJuZXciOltdfSwibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiOjF9', \"last_activity\" = 1792865099, \"user_id\" = 1, \"ip_address\" = '127.0.0.1', \"user_agent\" = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36' where \"id\" = '9vfB6qsrzNQXlE0A34qYGDe5xBeS94IdHpHkVoGJ'",
+                        "duration_ms": 1.66,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 81.446,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    }
+                ],
+                "transactions": []
+            }
+        },
+        "http_client": {
+            "label": "HTTP Client",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "queue": {
+            "label": "Queue",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "queued_count": 0,
+                "executed_count": 0,
+                "failed_count": 0,
+                "duration_ms": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "mail": {
+            "label": "Mail",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "recipient_count": 0,
+                "attachment_count": 0,
+                "duration_ms": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "notifications": {
+            "label": "Notifications",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "sent_count": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "redis": {
+            "label": "Redis",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "models": {
+            "label": "Models",
+            "summary": {
+                "count": 35,
+                "retained_count": 35,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\User",
+                        "connection": null,
+                        "table": "users",
+                        "key": null,
+                        "at_ms": 10.12
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\User",
+                        "connection": null,
+                        "table": "users",
+                        "key": null,
+                        "at_ms": 10.611
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\User",
+                        "connection": "pgsql",
+                        "table": "users",
+                        "key": 1,
+                        "at_ms": 12.073
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Branch",
+                        "connection": null,
+                        "table": "branches",
+                        "key": null,
+                        "at_ms": 12.969
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Branch",
+                        "connection": null,
+                        "table": "branches",
+                        "key": null,
+                        "at_ms": 13.427
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Branch",
+                        "connection": "pgsql",
+                        "table": "branches",
+                        "key": 1,
+                        "at_ms": 14.863
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Branch",
+                        "connection": "pgsql",
+                        "table": "branches",
+                        "key": 2,
+                        "at_ms": 14.905
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Invoice",
+                        "connection": null,
+                        "table": "invoices",
+                        "key": null,
+                        "at_ms": 17.645
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Invoice",
+                        "connection": null,
+                        "table": "invoices",
+                        "key": null,
+                        "at_ms": 18.01
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Expense",
+                        "connection": null,
+                        "table": "expenses",
+                        "key": null,
+                        "at_ms": 23.232
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Expense",
+                        "connection": null,
+                        "table": "expenses",
+                        "key": null,
+                        "at_ms": 23.591
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Sale",
+                        "connection": null,
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 25.019
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Sale",
+                        "connection": null,
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 25.428
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Expense",
+                        "connection": "pgsql",
+                        "table": "expenses",
+                        "key": null,
+                        "at_ms": 56.921
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 58.112
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 58.157
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 58.195
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 58.235
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Branch",
+                        "connection": "pgsql",
+                        "table": "branches",
+                        "key": 1,
+                        "at_ms": 60.167
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Branch",
+                        "connection": "pgsql",
+                        "table": "branches",
+                        "key": 2,
+                        "at_ms": 60.212
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 6,
+                        "at_ms": 61.453
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 7,
+                        "at_ms": 61.509
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 8,
+                        "at_ms": 61.546
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 9,
+                        "at_ms": 61.578
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 10,
+                        "at_ms": 61.609
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 11,
+                        "at_ms": 61.64
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 13,
+                        "at_ms": 61.68
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 14,
+                        "at_ms": 61.711
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Expense",
+                        "connection": "pgsql",
+                        "table": "expenses",
+                        "key": 1,
+                        "at_ms": 62.968
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": null,
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 63.565
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": null,
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 63.99
+                    },
+                    {
+                        "event": "saving",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 64.152
+                    },
+                    {
+                        "event": "creating",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 64.179
+                    },
+                    {
+                        "event": "created",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": 9,
+                        "at_ms": 66.078
+                    },
+                    {
+                        "event": "saved",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": 9,
+                        "at_ms": 66.105
+                    }
+                ]
+            }
+        },
+        "cache": {
+            "label": "Cache",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "hits": 0,
+                "misses": 0,
+                "writes": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "views": {
+            "label": "Views",
+            "summary": {
+                "count": 2,
+                "retained_count": 2,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "admin.finances.index",
+                        "source": {
+                            "file": "resources/views/admin/finances/index.blade.php",
+                            "line": 1
+                        },
+                        "composers": [],
+                        "data": {
+                            "day": {
+                                "revenue": 0,
+                                "expenses": 0,
+                                "sales": 0,
+                                "profit": 0
+                            },
+                            "week": {
+                                "revenue": 0,
+                                "expenses": 0,
+                                "sales": 0,
+                                "profit": 0
+                            },
+                            "month": {
+                                "revenue": 0,
+                                "expenses": 0,
+                                "sales": 0,
+                                "profit": 0
+                            },
+                            "annual": {
+                                "revenue": 342000,
+                                "expenses": 10000,
+                                "sales": 8,
+                                "profit": 332000,
+                                "margin": 97.1
+                            },
+                            "months": [
+                                {
+                                    "label": "janv.",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "f\u00e9vr.",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "mars",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "avr.",
+                                    "revenue": 342000,
+                                    "expenses": 10000,
+                                    "profit": 332000
+                                },
+                                {
+                                    "label": "mai",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "juin",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "juil.",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "ao\u00fbt",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "sept.",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "oct.",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "nov.",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "d\u00e9c.",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                }
+                            ],
+                            "expensesByType": {
+                                "materiel": 10000
+                            },
+                            "salesByPayment": {
+                                "amana": 115000,
+                                "cash": 45000,
+                                "nita": 4000,
+                                "wave": 178000
+                            },
+                            "branchesSituation": [
+                                {
+                                    "id": 1,
+                                    "name": "Maradi",
+                                    "city": "maradi",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "sales_sum_total_amount": "342000.00",
+                                    "expenses_sum_amount": "10000.00",
+                                    "profit": 332000,
+                                    "sales": [
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]"
+                                    ],
+                                    "expenses": [
+                                        "[maximum depth reached]"
+                                    ]
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Zinder",
+                                    "city": "zinder",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "sales_sum_total_amount": null,
+                                    "expenses_sum_amount": null,
+                                    "profit": 0,
+                                    "sales": [],
+                                    "expenses": []
+                                }
+                            ],
+                            "branches": [
+                                {
+                                    "id": 1,
+                                    "name": "Maradi",
+                                    "city": "maradi",
+                                    "created_at": null,
+                                    "updated_at": null
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Zinder",
+                                    "city": "zinder",
+                                    "created_at": null,
+                                    "updated_at": null
+                                }
+                            ],
+                            "years": [
+                                2026,
+                                2025,
+                                2024,
+                                2023,
+                                2022
+                            ],
+                            "year": 2026,
+                            "branchId": null
+                        },
+                        "timing": "composition_marker",
+                        "at_ms": 73.193
+                    },
+                    {
+                        "name": "layouts.apps",
+                        "source": {
+                            "file": "resources/views/layouts/apps.blade.php",
+                            "line": 1
+                        },
+                        "composers": [],
+                        "data": {
+                            "__env": "[Illuminate\\View\\Factory]",
+                            "app": "[Illuminate\\Foundation\\Application]",
+                            "errors": "[]",
+                            "day": {
+                                "revenue": 0,
+                                "expenses": 0,
+                                "sales": 0,
+                                "profit": 0
+                            },
+                            "week": {
+                                "revenue": 0,
+                                "expenses": 0,
+                                "sales": 0,
+                                "profit": 0
+                            },
+                            "month": {
+                                "revenue": 0,
+                                "expenses": 0,
+                                "sales": 0,
+                                "profit": 0
+                            },
+                            "annual": {
+                                "revenue": 342000,
+                                "expenses": 10000,
+                                "sales": 8,
+                                "profit": 332000,
+                                "margin": 97.1
+                            },
+                            "months": [
+                                {
+                                    "label": "janv.",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "f\u00e9vr.",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "mars",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "avr.",
+                                    "revenue": 342000,
+                                    "expenses": 10000,
+                                    "profit": 332000
+                                },
+                                {
+                                    "label": "mai",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "juin",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "juil.",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "ao\u00fbt",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "sept.",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "oct.",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "nov.",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                },
+                                {
+                                    "label": "d\u00e9c.",
+                                    "revenue": 0,
+                                    "expenses": 0,
+                                    "profit": 0
+                                }
+                            ],
+                            "expensesByType": {
+                                "materiel": 10000
+                            },
+                            "salesByPayment": {
+                                "amana": 115000,
+                                "cash": 45000,
+                                "nita": 4000,
+                                "wave": 178000
+                            },
+                            "branchesSituation": [
+                                {
+                                    "id": 1,
+                                    "name": "Maradi",
+                                    "city": "maradi",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "sales_sum_total_amount": "342000.00",
+                                    "expenses_sum_amount": "10000.00",
+                                    "profit": 332000,
+                                    "sales": [
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]"
+                                    ],
+                                    "expenses": [
+                                        "[maximum depth reached]"
+                                    ]
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Zinder",
+                                    "city": "zinder",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "sales_sum_total_amount": null,
+                                    "expenses_sum_amount": null,
+                                    "profit": 0,
+                                    "sales": [],
+                                    "expenses": []
+                                }
+                            ],
+                            "branches": [
+                                {
+                                    "id": 1,
+                                    "name": "Maradi",
+                                    "city": "maradi",
+                                    "created_at": null,
+                                    "updated_at": null
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Zinder",
+                                    "city": "zinder",
+                                    "created_at": null,
+                                    "updated_at": null
+                                }
+                            ],
+                            "years": [
+                                2026,
+                                2025,
+                                2024,
+                                2023,
+                                2022
+                            ],
+                            "year": 2026,
+                            "branchId": null,
+                            "__currentLoopData": [
+                                {
+                                    "id": 1,
+                                    "name": "Maradi",
+                                    "city": "maradi",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "sales_sum_total_amount": "342000.00",
+                                    "expenses_sum_amount": "10000.00",
+                                    "profit": 332000,
+                                    "sales": [
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]",
+                                        "[maximum depth reached]"
+                                    ],
+                                    "expenses": [
+                                        "[maximum depth reached]"
+                                    ]
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Zinder",
+                                    "city": "zinder",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "sales_sum_total_amount": null,
+                                    "expenses_sum_amount": null,
+                                    "profit": 0,
+                                    "sales": [],
+                                    "expenses": []
+                                }
+                            ],
+                            "y": 2022,
+                            "loop": null,
+                            "b": {
+                                "id": 2,
+                                "name": "Zinder",
+                                "city": "zinder",
+                                "created_at": null,
+                                "updated_at": null,
+                                "sales_sum_total_amount": null,
+                                "expenses_sum_amount": null,
+                                "profit": 0,
+                                "sales": [],
+                                "expenses": []
+                            }
+                        },
+                        "timing": "composition_marker",
+                        "at_ms": 78.119
+                    }
+                ]
+            }
+        },
+        "events": {
+            "label": "Events",
+            "summary": {
+                "count": 47,
+                "retained_count": 47,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "Illuminate\\Database\\Events\\ConnectionEstablished",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\ConnectionEstablished"
+                        ],
+                        "at_ms": 1.323
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 7.465
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 10.81
+                    },
+                    {
+                        "name": "Illuminate\\Auth\\Events\\Authenticated",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Auth\\Events\\Authenticated"
+                        ],
+                        "at_ms": 12.311
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 13.678
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 18.195
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 23.759
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 25.593
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 26.612
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 27.619
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 28.499
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 29.417
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 30.437
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 31.067
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 31.75
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 32.438
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 33.326
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 34.289
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 35.189
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 36.378
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 37.333
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 38.242
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 39.084
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 39.941
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 40.794
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 41.658
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 42.54
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 43.441
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 44.391
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 45.325
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 46.23
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 47.26
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 47.908
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 48.583
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 49.222
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 49.888
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 50.626
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 51.5
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 52.375
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 53.435
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 54.464
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 55.568
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 57.211
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 59.075
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 60.529
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 62.035
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 64.368
+                    }
+                ]
+            }
+        },
+        "authorization": {
+            "label": "Authorization",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "validation": {
+            "label": "Validation",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "lifecycle": {
+            "label": "Lifecycle",
+            "summary": {
+                "count": 4,
+                "retained_count": 4,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "Route matching",
+                        "duration_ms": 0.42,
+                        "at_ms": 0.548
+                    },
+                    {
+                        "name": "Route middleware, binding, controller and rendering",
+                        "duration_ms": 65.83,
+                        "at_ms": 66.379
+                    },
+                    {
+                        "name": "Route response preparation",
+                        "duration_ms": 12.63,
+                        "at_ms": 79.011
+                    },
+                    {
+                        "name": "Final response preparation",
+                        "duration_ms": 0.06,
+                        "at_ms": 81.639
+                    }
+                ]
+            }
+        },
+        "messages": {
+            "label": "Messages",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "logs": {
+            "label": "Logs",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "errors": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "exceptions": {
+            "label": "Exceptions",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        }
+    }
+}

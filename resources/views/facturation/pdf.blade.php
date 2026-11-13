@@ -141,6 +141,10 @@ body {
     padding: 3px;
 }
 
+.total-discount td {
+    color: #A32D2D;
+}
+
 .total-final {
     background: #f9f9f9;
     color: #000000;
@@ -264,9 +268,22 @@ body {
         <div class="totals">
             <table>
                 <tr>
-                    <td>Total</td>
-                    <td class="right">{{ number_format($invoice->total_amount, 0, ',', ' ') }} FCFA</td>
+                    <td>Sous-total</td>
+                    <td class="right">{{ number_format($invoice->subtotal, 0, ',', ' ') }} FCFA</td>
                 </tr>
+                @if($invoice->discount_amount > 0)
+                <tr class="total-discount">
+                    <td>
+                        Remise
+                        @if($invoice->sale->discount_type === 'percentage')
+                            ({{ rtrim(rtrim(number_format($invoice->sale->discount_value, 2), '0'), '.') }}%)
+                        @elseif($invoice->sale->discount_type === 'fixed')
+                            (montant fixe)
+                        @endif
+                    </td>
+                    <td class="right">- {{ number_format($invoice->discount_amount, 0, ',', ' ') }} FCFA</td>
+                </tr>
+                @endif
                 <tr class="total-final">
                     <td>A payer</td>
                     <td class="right">{{ number_format($invoice->total_amount, 0, ',', ' ') }} FCFA</td>
@@ -385,9 +402,22 @@ body {
         <div class="totals">
             <table>
                 <tr>
-                    <td>Total</td>
-                    <td class="right">{{ number_format($invoice->total_amount, 0, ',', ' ') }} FCFA</td>
+                    <td>Sous-total</td>
+                    <td class="right">{{ number_format($invoice->subtotal, 0, ',', ' ') }} FCFA</td>
                 </tr>
+                @if($invoice->discount_amount > 0)
+                <tr class="total-discount">
+                    <td>
+                        Remise
+                        @if($invoice->sale->discount_type === 'percentage')
+                            ({{ rtrim(rtrim(number_format($invoice->sale->discount_value, 2), '0'), '.') }}%)
+                        @elseif($invoice->sale->discount_type === 'fixed')
+                            (montant fixe)
+                        @endif
+                    </td>
+                    <td class="right">- {{ number_format($invoice->discount_amount, 0, ',', ' ') }} FCFA</td>
+                </tr>
+                @endif
                 <tr class="total-final">
                     <td>A payer</td>
                     <td class="right">{{ number_format($invoice->total_amount, 0, ',', ' ') }} FCFA</td>

@@ -1,0 +1,1393 @@
+{
+    "schema_version": 1,
+    "id": "8770200c-f6f3-4305-930c-ce7f4e44e803",
+    "recorded_at": "2026-10-24T19:04:55+01:00",
+    "profile_type": "http",
+    "environment": "local",
+    "metrics": {
+        "duration_ms": 49.52,
+        "peak_memory_mb": 4
+    },
+    "sections": {
+        "overview": {
+            "label": "Overview",
+            "summary": {
+                "duration_ms": 49.52,
+                "peak_memory_mb": 4
+            },
+            "payload": {
+                "runtime": {
+                    "environment": "local",
+                    "php": "8.4.19",
+                    "php_sapi": "cli-server",
+                    "runtime_type": "cli-server",
+                    "laravel": "13.5.0",
+                    "debug": true,
+                    "locale": "fr",
+                    "timezone": "Africa/Niamey"
+                },
+                "cache_state": {
+                    "configuration": false,
+                    "routes": false,
+                    "events": false
+                },
+                "drivers": {
+                    "database": "pgsql",
+                    "cache": "database",
+                    "queue": "database",
+                    "session": "database",
+                    "mail": "log",
+                    "broadcasting": "log"
+                },
+                "ecosystem": [],
+                "package": "dev-main"
+            }
+        },
+        "request": {
+            "label": "Request",
+            "summary": {
+                "method": "GET",
+                "status": 200,
+                "exit_code": null
+            },
+            "payload": {
+                "method": "GET",
+                "url": "http://localhost:8001/admin",
+                "path": "/admin",
+                "query": [],
+                "input": [],
+                "headers": {
+                    "host": [
+                        "localhost:8001"
+                    ],
+                    "connection": [
+                        "keep-alive"
+                    ],
+                    "cache-control": [
+                        "max-age=0"
+                    ],
+                    "upgrade-insecure-requests": [
+                        "1"
+                    ],
+                    "user-agent": [
+                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+                    ],
+                    "accept": [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;q=0.8"
+                    ],
+                    "sec-gpc": [
+                        "1"
+                    ],
+                    "sec-fetch-site": [
+                        "same-origin"
+                    ],
+                    "sec-fetch-mode": [
+                        "navigate"
+                    ],
+                    "sec-fetch-user": [
+                        "?1"
+                    ],
+                    "sec-fetch-dest": [
+                        "document"
+                    ],
+                    "sec-ch-ua": [
+                        "\"Brave\";v=\"155\", \"Chromium\";v=\"155\", \"Not(A:Brand\";v=\"24\""
+                    ],
+                    "sec-ch-ua-mobile": [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform": [
+                        "\"macOS\""
+                    ],
+                    "referer": [
+                        "http://localhost:8001/"
+                    ],
+                    "accept-encoding": [
+                        "gzip, deflate, br, zstd"
+                    ],
+                    "accept-language": [
+                        "fr-FR,fr;q=0.8"
+                    ],
+                    "cookie": "[redacted]"
+                },
+                "route": "admin.index",
+                "action": "App\\Http\\Controllers\\AdminController@index",
+                "parameters": [],
+                "middleware": [
+                    "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+                    "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestForgery",
+                    "Illuminate\\Auth\\Middleware\\Authenticate",
+                    "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                    "Laravel\\Boost\\Middleware\\InjectBoost"
+                ],
+                "status": 200,
+                "request_type": "full_page",
+                "content_type": "text/html; charset=utf-8",
+                "request_size_bytes": 0,
+                "response_size_bytes": 32315,
+                "session_present": false,
+                "authenticated": true,
+                "authentication": {
+                    "guard": "web",
+                    "authenticated": true,
+                    "model": "App\\Models\\User",
+                    "identifier": "hmac:50045f8e8ac31618",
+                    "identifier_policy": "keyed_hash"
+                },
+                "session": {
+                    "present": false,
+                    "driver": "database",
+                    "key_count": 0,
+                    "keys": [],
+                    "keys_dropped": 0,
+                    "flash_keys": [],
+                    "error_bag_present": false,
+                    "error_bags": []
+                },
+                "timing_scope": "global_middleware_entry",
+                "response_headers": {
+                    "content-type": [
+                        "text/html; charset=utf-8"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Sat, 24 Oct 2026 18:04:55 GMT"
+                    ],
+                    "set-cookie": "[redacted]"
+                }
+            }
+        },
+        "queries": {
+            "label": "Queries",
+            "summary": {
+                "count": 14,
+                "retained_count": 14,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 35.15,
+                "transaction_count": 0,
+                "transaction_retained_count": 0,
+                "transaction_dropped_count": 0,
+                "rollback_count": 0
+            },
+            "payload": {
+                "items": [
+                    {
+                        "sql": "select * from \"sessions\" where \"id\" = ? limit 1",
+                        "bindings": [
+                            "9vfB6qsrzNQXlE0A34qYGDe5xBeS94IdHpHkVoGJ"
+                        ],
+                        "runnable_sql": "select * from \"sessions\" where \"id\" = '9vfB6qsrzNQXlE0A34qYGDe5xBeS94IdHpHkVoGJ' limit 1",
+                        "duration_ms": 5.5,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 7.736,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"users\" where \"id\" = ? limit 1",
+                        "bindings": [
+                            1
+                        ],
+                        "runnable_sql": "select * from \"users\" where \"id\" = 1 limit 1",
+                        "duration_ms": 0.64,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 9.003,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select count(*) as aggregate from \"branches\"",
+                        "bindings": [],
+                        "runnable_sql": "select count(*) as aggregate from \"branches\"",
+                        "duration_ms": 4.92,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 31
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 31,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            }
+                        ],
+                        "at_ms": 14.813,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select count(*) as aggregate from \"users\"",
+                        "bindings": [],
+                        "runnable_sql": "select count(*) as aggregate from \"users\"",
+                        "duration_ms": 0.36,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 32
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 32,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            }
+                        ],
+                        "at_ms": 15.291,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select count(*) as aggregate from \"products\"",
+                        "bindings": [],
+                        "runnable_sql": "select count(*) as aggregate from \"products\"",
+                        "duration_ms": 2.57,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 33
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 33,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            }
+                        ],
+                        "at_ms": 18.617,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"sales\"",
+                        "bindings": [],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"sales\"",
+                        "duration_ms": 3.28,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 35
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 35,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            }
+                        ],
+                        "at_ms": 22.437,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"amount\") as aggregate from \"expenses\"",
+                        "bindings": [],
+                        "runnable_sql": "select sum(\"amount\") as aggregate from \"expenses\"",
+                        "duration_ms": 3.01,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 36
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 36,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            }
+                        ],
+                        "at_ms": 26.008,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"sales\" where extract(month from \"sold_at\") = ? and extract(year from \"sold_at\") = ?",
+                        "bindings": [
+                            "10",
+                            2026
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"sales\" where extract(month from \"sold_at\") = '10' and extract(year from \"sold_at\") = 2026",
+                        "duration_ms": 2.51,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 41
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 41,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 28.703,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select count(*) as aggregate from \"purchase_orders\" where \"status\" = ?",
+                        "bindings": [
+                            "pending"
+                        ],
+                        "runnable_sql": "select count(*) as aggregate from \"purchase_orders\" where \"status\" = 'pending'",
+                        "duration_ms": 4.3,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 43
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 43,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 33.693,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select count(*) as aggregate from \"products\" where \"stock_quantity\" <= \"alert_threshold\"",
+                        "bindings": [],
+                        "runnable_sql": "select count(*) as aggregate from \"products\" where \"stock_quantity\" <= \"alert_threshold\"",
+                        "duration_ms": 0.39,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 44
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 44,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 34.211,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select \"branches\".*, (select sum(\"sales\".\"total_amount\") from \"sales\" where \"branches\".\"id\" = \"sales\".\"branch_id\") as \"sales_sum_total_amount\" from \"branches\"",
+                        "bindings": [],
+                        "runnable_sql": "select \"branches\".*, (select sum(\"sales\".\"total_amount\") from \"sales\" where \"branches\".\"id\" = \"sales\".\"branch_id\") as \"sales_sum_total_amount\" from \"branches\"",
+                        "duration_ms": 2.05,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 47
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 47,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 39.264,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select DATE(sold_at) as date, SUM(total_amount) as total from \"sales\" where \"sold_at\" >= ? group by \"date\" order by \"date\" asc",
+                        "bindings": [
+                            "2026-09-25T19:04:55+01:00"
+                        ],
+                        "runnable_sql": "select DATE(sold_at) as date, SUM(total_amount) as total from \"sales\" where \"sold_at\" >= '2026-09-25 19:04:55' group by \"date\" order by \"date\" asc",
+                        "duration_ms": 3.67,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 57
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 57,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 43.502,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select \"branches\".*, (select sum(\"sales\".\"total_amount\") from \"sales\" where \"branches\".\"id\" = \"sales\".\"branch_id\") as \"sales_sum_total_amount\" from \"branches\" order by \"sales_sum_total_amount\" desc limit 5",
+                        "bindings": [],
+                        "runnable_sql": "select \"branches\".*, (select sum(\"sales\".\"total_amount\") from \"sales\" where \"branches\".\"id\" = \"sales\".\"branch_id\") as \"sales_sum_total_amount\" from \"branches\" order by \"sales_sum_total_amount\" desc limit 5",
+                        "duration_ms": 0.94,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 74
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 74,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 45.173,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "update \"sessions\" set \"payload\" = ?, \"last_activity\" = ?, \"user_id\" = ?, \"ip_address\" = ?, \"user_agent\" = ? where \"id\" = ?",
+                        "bindings": [
+                            "eyJfdG9rZW4iOiJ3cVRzbjUyakpWRW1hT2RWb1RRMFRLU0U2YUU4UjljYzhyM2NidWowIiwiX3ByZXZpb3VzIjp7InVybCI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4MDAxXC9hZG1pbiIsInJvdXRlIjoiYWRtaW4uaW5kZXgifSwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI6MX0=",
+                            1792865095,
+                            1,
+                            "127.0.0.1",
+                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+                            "9vfB6qsrzNQXlE0A34qYGDe5xBeS94IdHpHkVoGJ"
+                        ],
+                        "runnable_sql": "update \"sessions\" set \"payload\" = 'eyJfdG9rZW4iOiJ3cVRzbjUyakpWRW1hT2RWb1RRMFRLU0U2YUU4UjljYzhyM2NidWowIiwiX3ByZXZpb3VzIjp7InVybCI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4MDAxXC9hZG1pbiIsInJvdXRlIjoiYWRtaW4uaW5kZXgifSwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI6MX0=', \"last_activity\" = 1792865095, \"user_id\" = 1, \"ip_address\" = '127.0.0.1', \"user_agent\" = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36' where \"id\" = '9vfB6qsrzNQXlE0A34qYGDe5xBeS94IdHpHkVoGJ'",
+                        "duration_ms": 1.01,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 49.192,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    }
+                ],
+                "transactions": []
+            }
+        },
+        "http_client": {
+            "label": "HTTP Client",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "queue": {
+            "label": "Queue",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "queued_count": 0,
+                "executed_count": 0,
+                "failed_count": 0,
+                "duration_ms": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "mail": {
+            "label": "Mail",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "recipient_count": 0,
+                "attachment_count": 0,
+                "duration_ms": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "notifications": {
+            "label": "Notifications",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "sent_count": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "redis": {
+            "label": "Redis",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "models": {
+            "label": "Models",
+            "summary": {
+                "count": 17,
+                "retained_count": 17,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\User",
+                        "connection": null,
+                        "table": "users",
+                        "key": null,
+                        "at_ms": 7.997
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\User",
+                        "connection": null,
+                        "table": "users",
+                        "key": null,
+                        "at_ms": 8.218
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\User",
+                        "connection": "pgsql",
+                        "table": "users",
+                        "key": 1,
+                        "at_ms": 9.069
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Branch",
+                        "connection": null,
+                        "table": "branches",
+                        "key": null,
+                        "at_ms": 9.576
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Branch",
+                        "connection": null,
+                        "table": "branches",
+                        "key": null,
+                        "at_ms": 9.742
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Product",
+                        "connection": null,
+                        "table": "products",
+                        "key": null,
+                        "at_ms": 15.784
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Product",
+                        "connection": null,
+                        "table": "products",
+                        "key": null,
+                        "at_ms": 15.954
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Sale",
+                        "connection": null,
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 18.888
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Sale",
+                        "connection": null,
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 19.06
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Expense",
+                        "connection": null,
+                        "table": "expenses",
+                        "key": null,
+                        "at_ms": 22.734
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Expense",
+                        "connection": null,
+                        "table": "expenses",
+                        "key": null,
+                        "at_ms": 22.898
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\PurchaseOrder",
+                        "connection": null,
+                        "table": "purchase_orders",
+                        "key": null,
+                        "at_ms": 29.094
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\PurchaseOrder",
+                        "connection": null,
+                        "table": "purchase_orders",
+                        "key": null,
+                        "at_ms": 29.272
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Branch",
+                        "connection": "pgsql",
+                        "table": "branches",
+                        "key": 1,
+                        "at_ms": 39.339
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Branch",
+                        "connection": "pgsql",
+                        "table": "branches",
+                        "key": 2,
+                        "at_ms": 39.362
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Branch",
+                        "connection": "pgsql",
+                        "table": "branches",
+                        "key": 2,
+                        "at_ms": 45.241
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Branch",
+                        "connection": "pgsql",
+                        "table": "branches",
+                        "key": 1,
+                        "at_ms": 45.262
+                    }
+                ]
+            }
+        },
+        "cache": {
+            "label": "Cache",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "hits": 0,
+                "misses": 0,
+                "writes": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "views": {
+            "label": "Views",
+            "summary": {
+                "count": 2,
+                "retained_count": 2,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "admin.dashboard",
+                        "source": {
+                            "file": "resources/views/admin/dashboard.blade.php",
+                            "line": 1
+                        },
+                        "composers": [],
+                        "data": {
+                            "totalBranches": 2,
+                            "totalUsers": 2,
+                            "totalProducts": 1,
+                            "totalRevenue": "342000.00",
+                            "totalExpenses": "10000.00",
+                            "netProfit": 332000,
+                            "monthRevenue": 0,
+                            "pendingOrders": 0,
+                            "criticalStock": 0,
+                            "salesByBranch": [
+                                {
+                                    "id": 1,
+                                    "name": "Maradi",
+                                    "city": "maradi",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "sales_sum_total_amount": "342000.00"
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Zinder",
+                                    "city": "zinder",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "sales_sum_total_amount": null
+                                }
+                            ],
+                            "salesChart": [
+                                {
+                                    "date": "25/09",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "26/09",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "27/09",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "28/09",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "29/09",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "30/09",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "01/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "02/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "03/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "04/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "05/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "06/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "07/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "08/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "09/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "10/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "11/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "12/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "13/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "14/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "15/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "16/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "17/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "18/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "19/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "20/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "21/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "22/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "23/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "24/10",
+                                    "total": 0
+                                }
+                            ],
+                            "topBranches": [
+                                {
+                                    "id": 2,
+                                    "name": "Zinder",
+                                    "city": "zinder",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "sales_sum_total_amount": null
+                                },
+                                {
+                                    "id": 1,
+                                    "name": "Maradi",
+                                    "city": "maradi",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "sales_sum_total_amount": "342000.00"
+                                }
+                            ]
+                        },
+                        "timing": "composition_marker",
+                        "at_ms": 45.682
+                    },
+                    {
+                        "name": "layouts.apps",
+                        "source": {
+                            "file": "resources/views/layouts/apps.blade.php",
+                            "line": 1
+                        },
+                        "composers": [],
+                        "data": {
+                            "__env": "[Illuminate\\View\\Factory]",
+                            "app": "[Illuminate\\Foundation\\Application]",
+                            "errors": "[]",
+                            "totalBranches": 2,
+                            "totalUsers": 2,
+                            "totalProducts": 1,
+                            "totalRevenue": "342000.00",
+                            "totalExpenses": "10000.00",
+                            "netProfit": 332000,
+                            "monthRevenue": 0,
+                            "pendingOrders": 0,
+                            "criticalStock": 0,
+                            "salesByBranch": [
+                                {
+                                    "id": 1,
+                                    "name": "Maradi",
+                                    "city": "maradi",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "sales_sum_total_amount": "342000.00"
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Zinder",
+                                    "city": "zinder",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "sales_sum_total_amount": null
+                                }
+                            ],
+                            "salesChart": [
+                                {
+                                    "date": "25/09",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "26/09",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "27/09",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "28/09",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "29/09",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "30/09",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "01/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "02/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "03/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "04/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "05/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "06/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "07/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "08/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "09/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "10/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "11/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "12/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "13/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "14/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "15/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "16/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "17/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "18/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "19/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "20/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "21/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "22/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "23/10",
+                                    "total": 0
+                                },
+                                {
+                                    "date": "24/10",
+                                    "total": 0
+                                }
+                            ],
+                            "topBranches": [
+                                {
+                                    "id": 2,
+                                    "name": "Zinder",
+                                    "city": "zinder",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "sales_sum_total_amount": null
+                                },
+                                {
+                                    "id": 1,
+                                    "name": "Maradi",
+                                    "city": "maradi",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "sales_sum_total_amount": "342000.00"
+                                }
+                            ],
+                            "maxSales": "342000.00",
+                            "__currentLoopData": [
+                                {
+                                    "id": 2,
+                                    "name": "Zinder",
+                                    "city": "zinder",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "sales_sum_total_amount": null
+                                },
+                                {
+                                    "id": 1,
+                                    "name": "Maradi",
+                                    "city": "maradi",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "sales_sum_total_amount": "342000.00"
+                                }
+                            ],
+                            "branch": {
+                                "id": 1,
+                                "name": "Maradi",
+                                "city": "maradi",
+                                "created_at": null,
+                                "updated_at": null,
+                                "sales_sum_total_amount": "342000.00"
+                            },
+                            "loop": null
+                        },
+                        "timing": "composition_marker",
+                        "at_ms": 46.63
+                    }
+                ]
+            }
+        },
+        "events": {
+            "label": "Events",
+            "summary": {
+                "count": 15,
+                "retained_count": 15,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "Illuminate\\Database\\Events\\ConnectionEstablished",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\ConnectionEstablished"
+                        ],
+                        "at_ms": 1.997
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 6.268
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 8.292
+                    },
+                    {
+                        "name": "Illuminate\\Auth\\Events\\Authenticated",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Auth\\Events\\Authenticated"
+                        ],
+                        "at_ms": 9.097
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 9.812
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 14.893
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 16.01
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 19.116
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 22.95
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 26.14
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 29.345
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 33.779
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 37.162
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 39.771
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 44.175
+                    }
+                ]
+            }
+        },
+        "authorization": {
+            "label": "Authorization",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "validation": {
+            "label": "Validation",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "lifecycle": {
+            "label": "Lifecycle",
+            "summary": {
+                "count": 4,
+                "retained_count": 4,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "Route matching",
+                        "duration_ms": 0.14,
+                        "at_ms": 0.199
+                    },
+                    {
+                        "name": "Route middleware, binding, controller and rendering",
+                        "duration_ms": 45.18,
+                        "at_ms": 45.375
+                    },
+                    {
+                        "name": "Route response preparation",
+                        "duration_ms": 2.43,
+                        "at_ms": 47.808
+                    },
+                    {
+                        "name": "Final response preparation",
+                        "duration_ms": 0.03,
+                        "at_ms": 49.301
+                    }
+                ]
+            }
+        },
+        "messages": {
+            "label": "Messages",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "logs": {
+            "label": "Logs",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "errors": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "exceptions": {
+            "label": "Exceptions",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        }
+    }
+}

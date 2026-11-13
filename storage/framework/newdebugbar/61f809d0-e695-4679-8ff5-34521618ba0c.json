@@ -1,0 +1,973 @@
+{
+    "schema_version": 1,
+    "id": "61f809d0-e695-4679-8ff5-34521618ba0c",
+    "recorded_at": "2026-10-24T19:06:10+01:00",
+    "profile_type": "http",
+    "environment": "local",
+    "metrics": {
+        "duration_ms": 26.24,
+        "peak_memory_mb": 4
+    },
+    "sections": {
+        "overview": {
+            "label": "Overview",
+            "summary": {
+                "duration_ms": 26.24,
+                "peak_memory_mb": 4
+            },
+            "payload": {
+                "runtime": {
+                    "environment": "local",
+                    "php": "8.4.19",
+                    "php_sapi": "cli-server",
+                    "runtime_type": "cli-server",
+                    "laravel": "13.5.0",
+                    "debug": true,
+                    "locale": "fr",
+                    "timezone": "Africa/Niamey"
+                },
+                "cache_state": {
+                    "configuration": false,
+                    "routes": false,
+                    "events": false
+                },
+                "drivers": {
+                    "database": "pgsql",
+                    "cache": "database",
+                    "queue": "database",
+                    "session": "database",
+                    "mail": "log",
+                    "broadcasting": "log"
+                },
+                "ecosystem": [],
+                "package": "dev-main"
+            }
+        },
+        "request": {
+            "label": "Request",
+            "summary": {
+                "method": "GET",
+                "status": 200,
+                "exit_code": null
+            },
+            "payload": {
+                "method": "GET",
+                "url": "http://localhost:8001/dashboard",
+                "path": "/dashboard",
+                "query": [],
+                "input": [],
+                "headers": {
+                    "host": [
+                        "localhost:8001"
+                    ],
+                    "connection": [
+                        "keep-alive"
+                    ],
+                    "cache-control": [
+                        "max-age=0"
+                    ],
+                    "upgrade-insecure-requests": [
+                        "1"
+                    ],
+                    "user-agent": [
+                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+                    ],
+                    "accept": [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;q=0.8"
+                    ],
+                    "sec-gpc": [
+                        "1"
+                    ],
+                    "sec-fetch-site": [
+                        "same-origin"
+                    ],
+                    "sec-fetch-mode": [
+                        "navigate"
+                    ],
+                    "sec-fetch-user": [
+                        "?1"
+                    ],
+                    "sec-fetch-dest": [
+                        "document"
+                    ],
+                    "sec-ch-ua": [
+                        "\"Brave\";v=\"155\", \"Chromium\";v=\"155\", \"Not(A:Brand\";v=\"24\""
+                    ],
+                    "sec-ch-ua-mobile": [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform": [
+                        "\"macOS\""
+                    ],
+                    "referer": [
+                        "http://localhost:8001/"
+                    ],
+                    "accept-encoding": [
+                        "gzip, deflate, br, zstd"
+                    ],
+                    "accept-language": [
+                        "fr-FR,fr;q=0.8"
+                    ],
+                    "cookie": "[redacted]"
+                },
+                "route": "dashboard",
+                "action": "App\\Http\\Controllers\\DashboardController@index",
+                "parameters": [],
+                "middleware": [
+                    "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+                    "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestForgery",
+                    "Illuminate\\Auth\\Middleware\\Authenticate",
+                    "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                    "Laravel\\Boost\\Middleware\\InjectBoost",
+                    "Illuminate\\Auth\\Middleware\\EnsureEmailIsVerified"
+                ],
+                "status": 200,
+                "request_type": "full_page",
+                "content_type": "text/html; charset=utf-8",
+                "request_size_bytes": 0,
+                "response_size_bytes": 32937,
+                "session_present": false,
+                "authenticated": true,
+                "authentication": {
+                    "guard": "web",
+                    "authenticated": true,
+                    "model": "App\\Models\\User",
+                    "identifier": "hmac:e60fc39bb70a945b",
+                    "identifier_policy": "keyed_hash"
+                },
+                "session": {
+                    "present": false,
+                    "driver": "database",
+                    "key_count": 0,
+                    "keys": [],
+                    "keys_dropped": 0,
+                    "flash_keys": [],
+                    "error_bag_present": false,
+                    "error_bags": []
+                },
+                "timing_scope": "global_middleware_entry",
+                "response_headers": {
+                    "content-type": [
+                        "text/html; charset=utf-8"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Sat, 24 Oct 2026 18:06:10 GMT"
+                    ],
+                    "set-cookie": "[redacted]"
+                }
+            }
+        },
+        "queries": {
+            "label": "Queries",
+            "summary": {
+                "count": 11,
+                "retained_count": 11,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 17.66,
+                "transaction_count": 0,
+                "transaction_retained_count": 0,
+                "transaction_dropped_count": 0,
+                "rollback_count": 0
+            },
+            "payload": {
+                "items": [
+                    {
+                        "sql": "select * from \"sessions\" where \"id\" = ? limit 1",
+                        "bindings": [
+                            "9xMh54A2BADb3jpEZPmmQytCFmW4ot82fdpi3xhN"
+                        ],
+                        "runnable_sql": "select * from \"sessions\" where \"id\" = '9xMh54A2BADb3jpEZPmmQytCFmW4ot82fdpi3xhN' limit 1",
+                        "duration_ms": 7.61,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 9.573,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"users\" where \"id\" = ? limit 1",
+                        "bindings": [
+                            3
+                        ],
+                        "runnable_sql": "select * from \"users\" where \"id\" = 3 limit 1",
+                        "duration_ms": 1.57,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 11.821,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"sales\" where \"branch_id\" is null and \"sold_at\"::date = ?",
+                        "bindings": [
+                            "2026-10-24"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"sales\" where \"branch_id\" is null and \"sold_at\"::date = '2026-10-24'",
+                        "duration_ms": 0.96,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/DashboardController.php",
+                            "line": 21
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/DashboardController.php",
+                                "line": 21,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 13.409,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"sales\" where \"branch_id\" is null and \"sold_at\"::date = ?",
+                        "bindings": [
+                            "2026-10-23"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"sales\" where \"branch_id\" is null and \"sold_at\"::date = '2026-10-23'",
+                        "duration_ms": 0.32,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/DashboardController.php",
+                            "line": 26
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/DashboardController.php",
+                                "line": 26,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 13.887,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"sales\" where \"branch_id\" is null and extract(month from \"sold_at\") = ? and extract(year from \"sold_at\") = ?",
+                        "bindings": [
+                            "10",
+                            2026
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"sales\" where \"branch_id\" is null and extract(month from \"sold_at\") = '10' and extract(year from \"sold_at\") = 2026",
+                        "duration_ms": 0.45,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/DashboardController.php",
+                            "line": 36
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/DashboardController.php",
+                                "line": 36,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 14.493,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select count(*) as aggregate from \"purchase_orders\" where \"branch_id\" is null and \"status\" = ?",
+                        "bindings": [
+                            "pending"
+                        ],
+                        "runnable_sql": "select count(*) as aggregate from \"purchase_orders\" where \"branch_id\" is null and \"status\" = 'pending'",
+                        "duration_ms": 0.94,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/DashboardController.php",
+                            "line": 41
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/DashboardController.php",
+                                "line": 41,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 15.774,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"products\" where \"branch_id\" is null and \"stock_quantity\" <= \"alert_threshold\" order by \"stock_quantity\" asc",
+                        "bindings": [],
+                        "runnable_sql": "select * from \"products\" where \"branch_id\" is null and \"stock_quantity\" <= \"alert_threshold\" order by \"stock_quantity\" asc",
+                        "duration_ms": 1.25,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/DashboardController.php",
+                            "line": 47
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/DashboardController.php",
+                                "line": 47,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 17.371,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select DATE(sold_at) as date, SUM(total_amount) as total from \"sales\" where \"branch_id\" is null and \"sold_at\" >= ? group by \"date\" order by \"date\" asc",
+                        "bindings": [
+                            "2026-10-18T00:00:00+01:00"
+                        ],
+                        "runnable_sql": "select DATE(sold_at) as date, SUM(total_amount) as total from \"sales\" where \"branch_id\" is null and \"sold_at\" >= '2026-10-18 00:00:00' group by \"date\" order by \"date\" asc",
+                        "duration_ms": 0.87,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/DashboardController.php",
+                            "line": 58
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/DashboardController.php",
+                                "line": 58,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 18.526,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"sales\" where \"branch_id\" is null order by \"sold_at\" desc limit 5",
+                        "bindings": [],
+                        "runnable_sql": "select * from \"sales\" where \"branch_id\" is null order by \"sold_at\" desc limit 5",
+                        "duration_ms": 0.95,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/DashboardController.php",
+                            "line": 75
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/DashboardController.php",
+                                "line": 75,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 20.463,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"branch_id\" is null and extract(month from \"expense_date\") = ? and extract(year from \"expense_date\") = ?",
+                        "bindings": [
+                            "10",
+                            2026
+                        ],
+                        "runnable_sql": "select sum(\"amount\") as aggregate from \"expenses\" where \"branch_id\" is null and extract(month from \"expense_date\") = '10' and extract(year from \"expense_date\") = 2026",
+                        "duration_ms": 1.26,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/DashboardController.php",
+                            "line": 81
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/DashboardController.php",
+                                "line": 81,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 22.171,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "update \"sessions\" set \"payload\" = ?, \"last_activity\" = ?, \"user_id\" = ?, \"ip_address\" = ?, \"user_agent\" = ? where \"id\" = ?",
+                        "bindings": [
+                            "eyJfdG9rZW4iOiJ1aXRnUHRhandKMDVQM0VMUXltOU9EYk5Yb3lTZjAxOXdXN25Edzg0IiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDFcL2Rhc2hib2FyZCIsInJvdXRlIjoiZGFzaGJvYXJkIn0sImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjozfQ==",
+                            1792865170,
+                            3,
+                            "127.0.0.1",
+                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+                            "9xMh54A2BADb3jpEZPmmQytCFmW4ot82fdpi3xhN"
+                        ],
+                        "runnable_sql": "update \"sessions\" set \"payload\" = 'eyJfdG9rZW4iOiJ1aXRnUHRhandKMDVQM0VMUXltOU9EYk5Yb3lTZjAxOXdXN25Edzg0IiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDFcL2Rhc2hib2FyZCIsInJvdXRlIjoiZGFzaGJvYXJkIn0sImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjozfQ==', \"last_activity\" = 1792865170, \"user_id\" = 3, \"ip_address\" = '127.0.0.1', \"user_agent\" = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36' where \"id\" = '9xMh54A2BADb3jpEZPmmQytCFmW4ot82fdpi3xhN'",
+                        "duration_ms": 1.48,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 25.917,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    }
+                ],
+                "transactions": []
+            }
+        },
+        "http_client": {
+            "label": "HTTP Client",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "queue": {
+            "label": "Queue",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "queued_count": 0,
+                "executed_count": 0,
+                "failed_count": 0,
+                "duration_ms": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "mail": {
+            "label": "Mail",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "recipient_count": 0,
+                "attachment_count": 0,
+                "duration_ms": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "notifications": {
+            "label": "Notifications",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "sent_count": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "redis": {
+            "label": "Redis",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "models": {
+            "label": "Models",
+            "summary": {
+                "count": 11,
+                "retained_count": 11,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\User",
+                        "connection": null,
+                        "table": "users",
+                        "key": null,
+                        "at_ms": 9.856
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\User",
+                        "connection": null,
+                        "table": "users",
+                        "key": null,
+                        "at_ms": 10.092
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\User",
+                        "connection": "pgsql",
+                        "table": "users",
+                        "key": 3,
+                        "at_ms": 11.895
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Sale",
+                        "connection": null,
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 12.086
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Sale",
+                        "connection": null,
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 12.257
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\PurchaseOrder",
+                        "connection": null,
+                        "table": "purchase_orders",
+                        "key": null,
+                        "at_ms": 14.554
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\PurchaseOrder",
+                        "connection": null,
+                        "table": "purchase_orders",
+                        "key": null,
+                        "at_ms": 14.721
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Product",
+                        "connection": null,
+                        "table": "products",
+                        "key": null,
+                        "at_ms": 15.829
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Product",
+                        "connection": null,
+                        "table": "products",
+                        "key": null,
+                        "at_ms": 15.991
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Expense",
+                        "connection": null,
+                        "table": "expenses",
+                        "key": null,
+                        "at_ms": 20.573
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Expense",
+                        "connection": null,
+                        "table": "expenses",
+                        "key": null,
+                        "at_ms": 20.767
+                    }
+                ]
+            }
+        },
+        "cache": {
+            "label": "Cache",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "hits": 0,
+                "misses": 0,
+                "writes": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "views": {
+            "label": "Views",
+            "summary": {
+                "count": 2,
+                "retained_count": 2,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "dashboard",
+                        "source": {
+                            "file": "resources/views/dashboard.blade.php",
+                            "line": 1
+                        },
+                        "composers": [],
+                        "data": {
+                            "todaySales": 0,
+                            "todayVariation": null,
+                            "yesterdaySales": 0,
+                            "monthSales": 0,
+                            "monthExpenses": 0,
+                            "monthProfit": 0,
+                            "pendingOrders": 0,
+                            "criticalProducts": [],
+                            "salesChart": [
+                                {
+                                    "label": "dim. 18",
+                                    "total": 0
+                                },
+                                {
+                                    "label": "lun. 19",
+                                    "total": 0
+                                },
+                                {
+                                    "label": "mar. 20",
+                                    "total": 0
+                                },
+                                {
+                                    "label": "mer. 21",
+                                    "total": 0
+                                },
+                                {
+                                    "label": "jeu. 22",
+                                    "total": 0
+                                },
+                                {
+                                    "label": "ven. 23",
+                                    "total": 0
+                                },
+                                {
+                                    "label": "sam. 24",
+                                    "total": 0
+                                }
+                            ],
+                            "latestSales": []
+                        },
+                        "timing": "composition_marker",
+                        "at_ms": 22.365
+                    },
+                    {
+                        "name": "layouts.app",
+                        "source": {
+                            "file": "resources/views/layouts/app.blade.php",
+                            "line": 1
+                        },
+                        "composers": [],
+                        "data": {
+                            "__env": "[Illuminate\\View\\Factory]",
+                            "app": "[Illuminate\\Foundation\\Application]",
+                            "errors": "[]",
+                            "todaySales": 0,
+                            "todayVariation": null,
+                            "yesterdaySales": 0,
+                            "monthSales": 0,
+                            "monthExpenses": 0,
+                            "monthProfit": 0,
+                            "pendingOrders": 0,
+                            "criticalProducts": [],
+                            "salesChart": [
+                                {
+                                    "label": "dim. 18",
+                                    "total": 0
+                                },
+                                {
+                                    "label": "lun. 19",
+                                    "total": 0
+                                },
+                                {
+                                    "label": "mar. 20",
+                                    "total": 0
+                                },
+                                {
+                                    "label": "mer. 21",
+                                    "total": 0
+                                },
+                                {
+                                    "label": "jeu. 22",
+                                    "total": 0
+                                },
+                                {
+                                    "label": "ven. 23",
+                                    "total": 0
+                                },
+                                {
+                                    "label": "sam. 24",
+                                    "total": 0
+                                }
+                            ],
+                            "latestSales": [],
+                            "__currentLoopData": [],
+                            "loop": null,
+                            "__empty_1": true
+                        },
+                        "timing": "composition_marker",
+                        "at_ms": 23.112
+                    }
+                ]
+            }
+        },
+        "events": {
+            "label": "Events",
+            "summary": {
+                "count": 12,
+                "retained_count": 12,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "Illuminate\\Database\\Events\\ConnectionEstablished",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\ConnectionEstablished"
+                        ],
+                        "at_ms": 1.72
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 7.116
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 10.171
+                    },
+                    {
+                        "name": "Illuminate\\Auth\\Events\\Authenticated",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Auth\\Events\\Authenticated"
+                        ],
+                        "at_ms": 11.926
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 12.365
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 13.519
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 13.989
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 14.785
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 16.061
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 17.594
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 19.468
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 20.854
+                    }
+                ]
+            }
+        },
+        "authorization": {
+            "label": "Authorization",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "validation": {
+            "label": "Validation",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "lifecycle": {
+            "label": "Lifecycle",
+            "summary": {
+                "count": 4,
+                "retained_count": 4,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "Route matching",
+                        "duration_ms": 0.27,
+                        "at_ms": 0.332
+                    },
+                    {
+                        "name": "Route middleware, binding, controller and rendering",
+                        "duration_ms": 21.96,
+                        "at_ms": 22.291
+                    },
+                    {
+                        "name": "Route response preparation",
+                        "duration_ms": 1.78,
+                        "at_ms": 24.067
+                    },
+                    {
+                        "name": "Final response preparation",
+                        "duration_ms": 0.03,
+                        "at_ms": 26.025
+                    }
+                ]
+            }
+        },
+        "messages": {
+            "label": "Messages",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "logs": {
+            "label": "Logs",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "errors": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "exceptions": {
+            "label": "Exceptions",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        }
+    }
+}

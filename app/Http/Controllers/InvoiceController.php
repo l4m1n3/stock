@@ -216,7 +216,7 @@ class InvoiceController extends Controller
             'sale.saleConfections.confection',
         ])
 
-            ->when($isStaff, fn($q) => $q->where('user_id', $userId)) // 🔒 staff = ses dépenses uniquement, manager = tout
+            // ->when($isStaff, fn($q) => $q->where('user_id', $userId)) // 🔒 staff = ses dépenses uniquement, manager = tout
             ->where('branch_id', $branchId);
 
         if ($isStaff) {

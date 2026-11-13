@@ -7,7 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Invoice extends Model
 {
     // Invoice.php
-    protected $fillable = ['sale_id', 'invoice_number', 'total_amount', 'issued_at', 'branch_id', 'status'];
+    protected $fillable = [
+        'sale_id',
+        'invoice_number',
+        'subtotal',
+        'discount_amount',
+        'total_amount',
+        'issued_at',
+        'branch_id',
+        'status',
+    ];
 
     public function branch()
     {

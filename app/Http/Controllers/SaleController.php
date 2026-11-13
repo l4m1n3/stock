@@ -103,12 +103,14 @@ class SaleController extends Controller
     {
         try {
             $request->validate([
-                'payment_method' => 'required|in:cash,amana,nita,western_union,moneygram,wave',
-                'cart_data'      => 'required|json',
-                'is_anonymous'   => 'nullable|boolean',
-                'client_id'      => 'nullable|exists:clients,id',
-                'client_name'    => 'nullable|string|max:255',
-                'client_phone'   => 'nullable|string|max:30',
+                'payment_method'  => 'required|in:cash,amana,nita,western_union,moneygram,wave',
+                'cart_data'       => 'required|json',
+                'is_anonymous'    => 'nullable|boolean',
+                'client_id'       => 'nullable|exists:clients,id',
+                'client_name'     => 'nullable|string|max:255',
+                'client_phone'    => 'nullable|string|max:30',
+                'discount_type'   => 'nullable|in:percentage,fixed',
+                'discount_value'  => 'nullable|numeric|min:0',
             ]);
 
             $cartData = json_decode($request->cart_data, true);
@@ -142,19 +144,37 @@ class SaleController extends Controller
                     // Si ni client_id ni client_name → vente sans client (mode 'none')
                 }
 
-                // ── 2. Création de la vente ───────────────────────────────────
-                $totalAmount = collect($cartData)->sum('total');
+                // ── 2. Calcul du sous-total et de la remise ────────────────────
+                $subtotal = collect($cartData)->sum('total');
 
+                $discountType  = $request->filled('discount_type') ? $request->discount_type : null;
+                $discountValue = (float) ($request->discount_value ?? 0);
+
+                $discountAmount = match ($discountType) {
+                    'percentage' => round($subtotal * ($discountValue / 100), 2),
+                    'fixed'      => min($discountValue, $subtotal), // ne jamais dépasser le sous-total
+                    default      => 0,
+                };
+
+                // Sécurité : une remise ne peut jamais rendre le total négatif
+                $discountAmount = max(0, min($discountAmount, $subtotal));
+                $totalAmount    = $subtotal - $discountAmount;
+
+                // ── 3. Création de la vente ────────────────────────────────────
                 $sale = Sale::create([
-                    'user_id'        => auth()->id(),
-                    'client_id'      => $clientId,   // nullable
-                    'total_amount'   => $totalAmount,
-                    'payment_method' => $request->payment_method,
-                    'sold_at'        => now(),
-                    'branch_id'      => $branchId,
+                    'user_id'         => auth()->id(),
+                    'client_id'       => $clientId,   // nullable
+                    'subtotal'        => $subtotal,
+                    'discount_type'   => $discountType,
+                    'discount_value'  => $discountValue,
+                    'discount_amount' => $discountAmount,
+                    'total_amount'    => $totalAmount,
+                    'payment_method'  => $request->payment_method,
+                    'sold_at'         => now(),
+                    'branch_id'       => $branchId,
                 ]);
 
-                // ── 3. Lignes du panier ───────────────────────────────────────
+                // ── 4. Lignes du panier ────────────────────────────────────────
                 foreach ($cartData as $line) {
 
                     if ($line['type'] === 'produit') {
@@ -225,16 +245,20 @@ class SaleController extends Controller
                     }
                 }
 
-                // ── 4. Facture ────────────────────────────────────────────────
+                // ── 5. Facture ─────────────────────────────────────────────────
+                // On copie subtotal/discount_amount sur la facture pour qu'elle
+                // reste figée même si la vente est modifiée par la suite.
                 Invoice::create([
-                    'sale_id'        => $sale->id,
-                    'invoice_number' => 'INV-' . str_pad($sale->id, 6, '0', STR_PAD_LEFT),
-                    'total_amount'   => $totalAmount,
-                    'issued_at'      => now(),
-                    'branch_id'      => $branchId,
+                    'sale_id'         => $sale->id,
+                    'invoice_number'  => 'INV-' . str_pad($sale->id, 6, '0', STR_PAD_LEFT),
+                    'subtotal'        => $subtotal,
+                    'discount_amount' => $discountAmount,
+                    'total_amount'    => $totalAmount,
+                    'issued_at'       => now(),
+                    'branch_id'       => $branchId,
                 ]);
 
-                // ── 5. Mise à jour des totaux client ──────────────────────────
+                // ── 6. Mise à jour des totaux client ───────────────────────────
                 if ($clientId) {
                     Client::findOrFail($clientId)->recomputeTotals();
                 }
@@ -244,7 +268,11 @@ class SaleController extends Controller
                 ? "client #{$sale->client_id}"
                 : ($request->boolean('is_anonymous') ? 'vente anonyme' : 'sans client');
 
-            activity_log('sale_created', "Vente #{$sale->id} créée ({$clientLabel})");
+            $discountLabel = $sale->discount_amount > 0
+                ? sprintf(', remise %s FCFA', number_format($sale->discount_amount, 0, ',', ' '))
+                : '';
+
+            activity_log('sale_created', "Vente #{$sale->id} créée ({$clientLabel}{$discountLabel})");
 
             return redirect()->back()->with('success', 'Vente enregistrée et facture générée avec succès.');
         } catch (\Throwable $th) {

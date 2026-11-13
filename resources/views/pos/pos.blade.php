@@ -180,6 +180,7 @@
     .summary-line {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         font-size: 13px;
         color: #9e8fc0;
         margin-bottom: 6px;
@@ -194,6 +195,46 @@
         border-top: 1px solid #e0d9f7;
         margin-top: 4px;
     }
+
+    /* Remise */
+    .discount-toggle-btn {
+        font-size: 12px;
+        color: var(--violet);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        text-decoration: underline;
+    }
+    .discount-toggle-btn:hover { color: var(--violet-hover); }
+    .discount-remove-btn {
+        background: none; border: none; cursor: pointer;
+        color: #c0b0d8; font-size: 13px; padding: 0 0 0 6px;
+        transition: color 0.1s;
+    }
+    .discount-remove-btn:hover { color: #E24B4A; }
+    .discount-form {
+        display: none;
+        margin: 8px 0;
+        gap: 8px;
+        flex-direction: column;
+    }
+    .discount-form.open { display: flex; }
+    .discount-form-row { display: flex; gap: 8px; }
+    .discount-form select,
+    .discount-form input {
+        flex: 1;
+        padding: 7px 10px;
+        border: 1px solid #e0d9f7;
+        border-radius: 8px;
+        font-size: 12px;
+        color: #2d2d2d;
+        background: white;
+        outline: none;
+        transition: border-color 0.15s;
+    }
+    .discount-form select:focus,
+    .discount-form input:focus { border-color: var(--violet); }
 
     /* ═══════════════════ CLIENT SECTION ═══════════════════ */
     .client-section {
@@ -612,6 +653,32 @@
 
         <div class="pos-summary" id="pos-summary" style="display:none;">
             <div class="summary-line"><span>Sous-total</span><span id="pos-subtotal">0 FCFA</span></div>
+
+            {{-- Ligne de remise (visible seulement si une remise est appliquée) --}}
+            <div class="summary-line" id="pos-discount-line" style="display:none;">
+                <span>Remise <span id="pos-discount-label" style="color:#b0a0d0;"></span></span>
+                <span>
+                    <span id="pos-discount-amount" style="color:#E24B4A;">- 0 FCFA</span>
+                    <button type="button" class="discount-remove-btn" onclick="posClearDiscount()" title="Retirer la remise">✕</button>
+                </span>
+            </div>
+
+            {{-- Bouton pour ouvrir/fermer le formulaire de remise --}}
+            <button type="button" class="discount-toggle-btn" id="pos-discount-toggle-btn" onclick="posToggleDiscountForm()">
+                <i class="fas fa-tag me-1"></i> Ajouter une remise
+            </button>
+
+            <div class="discount-form" id="pos-discount-form">
+                <div class="discount-form-row">
+                    <select id="pos-discount-type">
+                        <option value="percentage">% Pourcentage</option>
+                        <option value="fixed">FCFA Montant fixe</option>
+                    </select>
+                    <input type="number" id="pos-discount-value" min="0" step="0.01" placeholder="Valeur">
+                    <button type="button" class="btn-new-client-confirm" onclick="posApplyDiscount()">OK</button>
+                </div>
+            </div>
+
             <div class="summary-total"><span>Total TTC</span><span id="pos-total">0 FCFA</span></div>
         </div>
 
@@ -646,6 +713,8 @@
                 <input type="hidden" name="client_name"    id="input-client-name"  value="">
                 <input type="hidden" name="client_phone"   id="input-client-phone" value="">
                 <input type="hidden" name="is_anonymous"   id="input-is-anonymous" value="0">
+                <input type="hidden" name="discount_type"  id="input-discount-type"  value="">
+                <input type="hidden" name="discount_value" id="input-discount-value" value="0">
 
                 <button type="button" class="checkout-btn" id="pos-checkout-btn" disabled onclick="posCheckout()">
                     <i class="fas fa-file-invoice me-2"></i> Générer Facture & Imprimer
@@ -684,6 +753,15 @@
 
                 <div id="confirm-items" class="mb-3"></div>
 
+                <div class="d-flex justify-content-between align-items-center px-1 mb-1" style="font-size:13px;color:#9e8fc0;">
+                    <span>Sous-total</span>
+                    <span id="confirm-subtotal">0 FCFA</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center px-1 mb-2" id="confirm-discount-row" style="font-size:13px;color:#E24B4A;display:none;">
+                    <span>Remise</span>
+                    <span id="confirm-discount">- 0 FCFA</span>
+                </div>
+
                 <div class="d-flex justify-content-between align-items-center p-3 rounded-3" style="background:#faf8ff;">
                     <span class="fw-semibold" style="color:#6B46C1;">Total</span>
                     <span class="fw-bold fs-5" style="color:#6B46C1;" id="confirm-total">0 FCFA</span>
@@ -715,9 +793,12 @@ let posPayMethod = 'cash';
 // { mode: 'none' | 'existing' | 'new' | 'anonymous', id, name, phone }
 let posClient = { mode: 'none', id: null, name: '', phone: '' };
 
+// { type: 'percentage' | 'fixed', value: number }
+let posDiscount = { type: 'percentage', value: 0 };
+
 // ─── Utilitaires ──────────────────────────────────────────────────────────────
 function posFmt(n) {
-    return n.toLocaleString('fr-FR') + ' FCFA';
+    return Math.round(n).toLocaleString('fr-FR') + ' FCFA';
 }
 
 function posInitials(name) {
@@ -735,6 +816,42 @@ function posStockBadge(item) {
     if (item.stock > 5) return `<span class="badge-stock badge-green">En stock (${item.stock})</span>`;
     if (item.stock > 0) return `<span class="badge-stock badge-amber">Limité (${item.stock})</span>`;
     return '<span class="badge-stock badge-red">Rupture</span>';
+}
+
+// ─── REMISE ────────────────────────────────────────────────────────────────────
+function posToggleDiscountForm() {
+    const form = document.getElementById('pos-discount-form');
+    const opening = !form.classList.contains('open');
+    form.classList.toggle('open');
+    if (opening) {
+        document.getElementById('pos-discount-type').value  = posDiscount.type;
+        document.getElementById('pos-discount-value').value = posDiscount.value || '';
+        document.getElementById('pos-discount-value').focus();
+    }
+}
+
+function posApplyDiscount() {
+    const type  = document.getElementById('pos-discount-type').value;
+    const value = parseFloat(document.getElementById('pos-discount-value').value) || 0;
+    posDiscount = { type, value: value < 0 ? 0 : value };
+    document.getElementById('pos-discount-form').classList.remove('open');
+    posRenderCart();
+}
+
+function posClearDiscount() {
+    posDiscount = { type: 'percentage', value: 0 };
+    document.getElementById('pos-discount-value').value = '';
+    document.getElementById('pos-discount-form').classList.remove('open');
+    posRenderCart();
+}
+
+// Calcule le montant de la remise en FCFA, plafonné au sous-total
+function posComputeDiscountAmount(subtotal) {
+    if (!posDiscount.value || subtotal <= 0) return 0;
+    let amount = posDiscount.type === 'percentage'
+        ? subtotal * (posDiscount.value / 100)
+        : posDiscount.value;
+    return Math.min(amount, subtotal);
 }
 
 // ─── CLIENT — autocomplete ────────────────────────────────────────────────────
@@ -952,9 +1069,26 @@ function posRenderCart() {
         </div>
     `).join('');
 
-    const total = posCart.reduce((s, c) => s + c.price * c.qty, 0);
-    document.getElementById('pos-subtotal').textContent   = posFmt(total);
-    document.getElementById('pos-total').textContent      = posFmt(total);
+    const subtotal       = posCart.reduce((s, c) => s + c.price * c.qty, 0);
+    const discountAmount = posComputeDiscountAmount(subtotal);
+    const total          = subtotal - discountAmount;
+
+    document.getElementById('pos-subtotal').textContent = posFmt(subtotal);
+    document.getElementById('pos-total').textContent    = posFmt(total);
+
+    const discountLine = document.getElementById('pos-discount-line');
+    const toggleBtn     = document.getElementById('pos-discount-toggle-btn');
+    if (discountAmount > 0) {
+        discountLine.style.display = 'flex';
+        document.getElementById('pos-discount-amount').textContent = '- ' + posFmt(discountAmount);
+        document.getElementById('pos-discount-label').textContent =
+            posDiscount.type === 'percentage' ? `(${posDiscount.value}%)` : '';
+        toggleBtn.innerHTML = '<i class="fas fa-pen me-1"></i> Modifier la remise';
+    } else {
+        discountLine.style.display = 'none';
+        toggleBtn.innerHTML = '<i class="fas fa-tag me-1"></i> Ajouter une remise';
+    }
+
     document.getElementById('pos-summary').style.display  = 'block';
     document.getElementById('pos-checkout-btn').disabled  = false;
 }
@@ -974,6 +1108,7 @@ function posRemoveFromCart(id) {
 
 function posClearCart() {
     posCart = [];
+    posDiscount = { type: 'percentage', value: 0 };
     posRenderCart();
 }
 
@@ -997,7 +1132,10 @@ const payLabels = {
 function posCheckout() {
     if (!posCart.length) return;
 
-    const total     = posCart.reduce((s, c) => s + c.price * c.qty, 0);
+    const subtotal        = posCart.reduce((s, c) => s + c.price * c.qty, 0);
+    const discountAmount  = posComputeDiscountAmount(subtotal);
+    const total           = subtotal - discountAmount;
+
     const isAnon    = posClient.mode === 'anonymous';
     const hasClient = posClient.mode === 'existing' || posClient.mode === 'new';
 
@@ -1041,6 +1179,16 @@ function posCheckout() {
         </div>
     `).join('');
 
+    document.getElementById('confirm-subtotal').textContent = posFmt(subtotal);
+
+    const discountRow = document.getElementById('confirm-discount-row');
+    if (discountAmount > 0) {
+        discountRow.style.display = 'flex';
+        document.getElementById('confirm-discount').textContent = '- ' + posFmt(discountAmount);
+    } else {
+        discountRow.style.display = 'none';
+    }
+
     document.getElementById('confirm-total').textContent = posFmt(total);
     document.getElementById('confirm-pay').textContent   = payLabels[posPayMethod] || posPayMethod;
 
@@ -1065,6 +1213,9 @@ function posSubmit() {
     document.getElementById('input-client-id').value     = posClient.id    ?? '';
     document.getElementById('input-client-name').value   = posClient.name  ?? '';
     document.getElementById('input-client-phone').value  = posClient.phone ?? '';
+
+    document.getElementById('input-discount-type').value  = posDiscount.value > 0 ? posDiscount.type : '';
+    document.getElementById('input-discount-value').value = posDiscount.value > 0 ? posDiscount.value : 0;
 
     bootstrap.Modal.getInstance(document.getElementById('confirmModal')).hide();
 
