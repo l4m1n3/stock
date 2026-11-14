@@ -1,0 +1,1499 @@
+{
+    "schema_version": 1,
+    "id": "ec383ab5-9856-43e1-a453-914979fe6a47",
+    "recorded_at": "2026-11-14T18:00:50+01:00",
+    "profile_type": "http",
+    "environment": "local",
+    "metrics": {
+        "duration_ms": 28.28,
+        "peak_memory_mb": 4
+    },
+    "sections": {
+        "overview": {
+            "label": "Overview",
+            "summary": {
+                "duration_ms": 28.28,
+                "peak_memory_mb": 4
+            },
+            "payload": {
+                "runtime": {
+                    "environment": "local",
+                    "php": "8.4.19",
+                    "php_sapi": "cli-server",
+                    "runtime_type": "cli-server",
+                    "laravel": "13.5.0",
+                    "debug": true,
+                    "locale": "en",
+                    "timezone": "Africa/Niamey"
+                },
+                "cache_state": {
+                    "configuration": false,
+                    "routes": false,
+                    "events": false
+                },
+                "drivers": {
+                    "database": "pgsql",
+                    "cache": "database",
+                    "queue": "database",
+                    "session": "database",
+                    "mail": "log",
+                    "broadcasting": "log"
+                },
+                "ecosystem": [],
+                "package": "dev-main"
+            }
+        },
+        "request": {
+            "label": "Request",
+            "summary": {
+                "method": "GET",
+                "status": 200,
+                "exit_code": null
+            },
+            "payload": {
+                "method": "GET",
+                "url": "http://localhost:8000/stock",
+                "path": "/stock",
+                "query": [],
+                "input": [],
+                "headers": {
+                    "host": [
+                        "localhost:8000"
+                    ],
+                    "connection": [
+                        "keep-alive"
+                    ],
+                    "sec-ch-ua": [
+                        "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Brave\";v=\"156\""
+                    ],
+                    "sec-ch-ua-mobile": [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform": [
+                        "\"macOS\""
+                    ],
+                    "upgrade-insecure-requests": [
+                        "1"
+                    ],
+                    "user-agent": [
+                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+                    ],
+                    "accept": [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;q=0.8"
+                    ],
+                    "sec-gpc": [
+                        "1"
+                    ],
+                    "sec-fetch-site": [
+                        "same-origin"
+                    ],
+                    "sec-fetch-mode": [
+                        "navigate"
+                    ],
+                    "sec-fetch-user": [
+                        "?1"
+                    ],
+                    "sec-fetch-dest": [
+                        "document"
+                    ],
+                    "referer": [
+                        "http://localhost:8000/produits"
+                    ],
+                    "accept-encoding": [
+                        "gzip, deflate, br, zstd"
+                    ],
+                    "accept-language": [
+                        "fr-FR,fr;q=0.9"
+                    ],
+                    "cookie": "[redacted]"
+                },
+                "route": "stock.index",
+                "action": "App\\Http\\Controllers\\StockMovementController@index",
+                "parameters": [],
+                "middleware": [
+                    "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+                    "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestForgery",
+                    "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                    "Laravel\\Boost\\Middleware\\InjectBoost"
+                ],
+                "status": 200,
+                "request_type": "full_page",
+                "content_type": "text/html; charset=utf-8",
+                "request_size_bytes": 0,
+                "response_size_bytes": 47412,
+                "session_present": false,
+                "authenticated": true,
+                "authentication": {
+                    "guard": "web",
+                    "authenticated": true,
+                    "model": "App\\Models\\User",
+                    "identifier": "hmac:2dffea64817b6601",
+                    "identifier_policy": "keyed_hash"
+                },
+                "session": {
+                    "present": false,
+                    "driver": "database",
+                    "key_count": 0,
+                    "keys": [],
+                    "keys_dropped": 0,
+                    "flash_keys": [],
+                    "error_bag_present": false,
+                    "error_bags": []
+                },
+                "timing_scope": "global_middleware_entry",
+                "response_headers": {
+                    "content-type": [
+                        "text/html; charset=utf-8"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Sat, 14 Nov 2026 17:00:50 GMT"
+                    ],
+                    "set-cookie": "[redacted]"
+                }
+            }
+        },
+        "queries": {
+            "label": "Queries",
+            "summary": {
+                "count": 9,
+                "retained_count": 9,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 15.57,
+                "transaction_count": 0,
+                "transaction_retained_count": 0,
+                "transaction_dropped_count": 0,
+                "rollback_count": 0
+            },
+            "payload": {
+                "items": [
+                    {
+                        "sql": "select * from \"sessions\" where \"id\" = ? limit 1",
+                        "bindings": [
+                            "WB71MQQaoRVtRuDccaA7NHalQy9ywF4LcU7lNjKB"
+                        ],
+                        "runnable_sql": "select * from \"sessions\" where \"id\" = 'WB71MQQaoRVtRuDccaA7NHalQy9ywF4LcU7lNjKB' limit 1",
+                        "duration_ms": 6.23,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 7.28,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"users\" where \"id\" = ? limit 1",
+                        "bindings": [
+                            2
+                        ],
+                        "runnable_sql": "select * from \"users\" where \"id\" = 2 limit 1",
+                        "duration_ms": 1.19,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/StockMovementController.php",
+                            "line": 15
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/StockMovementController.php",
+                                "line": 15,
+                                "function": "Illuminate\\Auth\\AuthManager->__call"
+                            }
+                        ],
+                        "at_ms": 9.391,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"products\" where \"branch_id\" = ? order by \"name\" asc",
+                        "bindings": [
+                            1
+                        ],
+                        "runnable_sql": "select * from \"products\" where \"branch_id\" = 1 order by \"name\" asc",
+                        "duration_ms": 1.25,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/StockMovementController.php",
+                            "line": 19
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/StockMovementController.php",
+                                "line": 19,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 11.074,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select \"poi\".\"product_id\", \"poi\".\"purchase_price\" from \"purchase_order_items\" as \"poi\" inner join \"purchase_orders\" as \"po\" on \"poi\".\"purchase_order_id\" = \"po\".\"id\" where \"po\".\"branch_id\" = ? and \"po\".\"status\" = ? order by \"po\".\"received_at\" desc",
+                        "bindings": [
+                            1,
+                            "received"
+                        ],
+                        "runnable_sql": "select \"poi\".\"product_id\", \"poi\".\"purchase_price\" from \"purchase_order_items\" as \"poi\" inner join \"purchase_orders\" as \"po\" on \"poi\".\"purchase_order_id\" = \"po\".\"id\" where \"po\".\"branch_id\" = 1 and \"po\".\"status\" = 'received' order by \"po\".\"received_at\" desc",
+                        "duration_ms": 1.55,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/StockMovementController.php",
+                            "line": 29
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/StockMovementController.php",
+                                "line": 29,
+                                "function": "Illuminate\\Database\\Query\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 12.895,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select count(*) as aggregate from \"stock_movements\" where \"branch_id\" = ? and \"created_at\" >= ?",
+                        "bindings": [
+                            1,
+                            "2026-10-15T18:00:50+01:00"
+                        ],
+                        "runnable_sql": "select count(*) as aggregate from \"stock_movements\" where \"branch_id\" = 1 and \"created_at\" >= '2026-10-15 18:00:50'",
+                        "duration_ms": 1.43,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/StockMovementController.php",
+                            "line": 53
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/StockMovementController.php",
+                                "line": 53,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 14.774,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"stock_movements\" where \"branch_id\" = ? order by \"created_at\" desc limit 10",
+                        "bindings": [
+                            1
+                        ],
+                        "runnable_sql": "select * from \"stock_movements\" where \"branch_id\" = 1 order by \"created_at\" desc limit 10",
+                        "duration_ms": 0.77,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/StockMovementController.php",
+                            "line": 56
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/StockMovementController.php",
+                                "line": 56,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 15.67,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"products\" where \"products\".\"id\" in (4)",
+                        "bindings": [],
+                        "runnable_sql": "select * from \"products\" where \"products\".\"id\" in (4)",
+                        "duration_ms": 0.84,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/StockMovementController.php",
+                            "line": 56
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/StockMovementController.php",
+                                "line": 56,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 16.895,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "insert into \"activity_logs\" (\"user_id\", \"action\", \"description\", \"updated_at\", \"created_at\") values (?, ?, ?, ?, ?) returning \"id\"",
+                        "bindings": [
+                            2,
+                            "stock_movements",
+                            "Consultation mouvements de stock : 0 mouvements r\u00e9cents, 0 produits critiques",
+                            "2026-11-14 18:00:50",
+                            "2026-11-14 18:00:50"
+                        ],
+                        "runnable_sql": "insert into \"activity_logs\" (\"user_id\", \"action\", \"description\", \"updated_at\", \"created_at\") values (2, 'stock_movements', 'Consultation mouvements de stock : 0 mouvements r\u00e9cents, 0 produits critiques', '2026-11-14 18:00:50', '2026-11-14 18:00:50') returning \"id\"",
+                        "duration_ms": 1.68,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/helpers.php",
+                            "line": 6
+                        },
+                        "stack": [
+                            {
+                                "file": "app/helpers.php",
+                                "line": 6,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            },
+                            {
+                                "file": "app/Http/Controllers/StockMovementController.php",
+                                "line": 57,
+                                "function": "activity_log"
+                            }
+                        ],
+                        "at_ms": 19.078,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "update \"sessions\" set \"payload\" = ?, \"last_activity\" = ?, \"user_id\" = ?, \"ip_address\" = ?, \"user_agent\" = ? where \"id\" = ?",
+                        "bindings": [
+                            "eyJfdG9rZW4iOiJoTFhRb0lrWEFKYXEwdGpjOG93bVNOY2lVaDdxMXM5Umkwa0VQMGVxIiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDBcL3N0b2NrIiwicm91dGUiOiJzdG9jay5pbmRleCJ9LCJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI6Mn0=",
+                            1794675650,
+                            2,
+                            "127.0.0.1",
+                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+                            "WB71MQQaoRVtRuDccaA7NHalQy9ywF4LcU7lNjKB"
+                        ],
+                        "runnable_sql": "update \"sessions\" set \"payload\" = 'eyJfdG9rZW4iOiJoTFhRb0lrWEFKYXEwdGpjOG93bVNOY2lVaDdxMXM5Umkwa0VQMGVxIiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDBcL3N0b2NrIiwicm91dGUiOiJzdG9jay5pbmRleCJ9LCJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI6Mn0=', \"last_activity\" = 1794675650, \"user_id\" = 2, \"ip_address\" = '127.0.0.1', \"user_agent\" = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36' where \"id\" = 'WB71MQQaoRVtRuDccaA7NHalQy9ywF4LcU7lNjKB'",
+                        "duration_ms": 0.63,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 27.967,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    }
+                ],
+                "transactions": []
+            }
+        },
+        "http_client": {
+            "label": "HTTP Client",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "queue": {
+            "label": "Queue",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "queued_count": 0,
+                "executed_count": 0,
+                "failed_count": 0,
+                "duration_ms": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "mail": {
+            "label": "Mail",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "recipient_count": 0,
+                "attachment_count": 0,
+                "duration_ms": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "notifications": {
+            "label": "Notifications",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "sent_count": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "redis": {
+            "label": "Redis",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "models": {
+            "label": "Models",
+            "summary": {
+                "count": 25,
+                "retained_count": 25,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\User",
+                        "connection": null,
+                        "table": "users",
+                        "key": null,
+                        "at_ms": 7.82
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\User",
+                        "connection": null,
+                        "table": "users",
+                        "key": null,
+                        "at_ms": 8.039
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\User",
+                        "connection": "pgsql",
+                        "table": "users",
+                        "key": 2,
+                        "at_ms": 9.458
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Product",
+                        "connection": null,
+                        "table": "products",
+                        "key": null,
+                        "at_ms": 9.574
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Product",
+                        "connection": null,
+                        "table": "products",
+                        "key": null,
+                        "at_ms": 9.714
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Product",
+                        "connection": "pgsql",
+                        "table": "products",
+                        "key": 4,
+                        "at_ms": 11.149
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\StockMovement",
+                        "connection": null,
+                        "table": "stock_movements",
+                        "key": null,
+                        "at_ms": 13.034
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\StockMovement",
+                        "connection": null,
+                        "table": "stock_movements",
+                        "key": null,
+                        "at_ms": 13.186
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\StockMovement",
+                        "connection": "pgsql",
+                        "table": "stock_movements",
+                        "key": 15,
+                        "at_ms": 15.728
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\StockMovement",
+                        "connection": "pgsql",
+                        "table": "stock_movements",
+                        "key": 14,
+                        "at_ms": 15.746
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\StockMovement",
+                        "connection": "pgsql",
+                        "table": "stock_movements",
+                        "key": 13,
+                        "at_ms": 15.761
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\StockMovement",
+                        "connection": "pgsql",
+                        "table": "stock_movements",
+                        "key": 12,
+                        "at_ms": 15.773
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\StockMovement",
+                        "connection": "pgsql",
+                        "table": "stock_movements",
+                        "key": 11,
+                        "at_ms": 15.785
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\StockMovement",
+                        "connection": "pgsql",
+                        "table": "stock_movements",
+                        "key": 10,
+                        "at_ms": 15.797
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\StockMovement",
+                        "connection": "pgsql",
+                        "table": "stock_movements",
+                        "key": 9,
+                        "at_ms": 15.809
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\StockMovement",
+                        "connection": "pgsql",
+                        "table": "stock_movements",
+                        "key": 8,
+                        "at_ms": 15.821
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\StockMovement",
+                        "connection": "pgsql",
+                        "table": "stock_movements",
+                        "key": 7,
+                        "at_ms": 15.833
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\StockMovement",
+                        "connection": "pgsql",
+                        "table": "stock_movements",
+                        "key": 6,
+                        "at_ms": 15.845
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Product",
+                        "connection": "pgsql",
+                        "table": "products",
+                        "key": 4,
+                        "at_ms": 16.948
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": null,
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 17.03
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": null,
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 17.171
+                    },
+                    {
+                        "event": "saving",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 17.234
+                    },
+                    {
+                        "event": "creating",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 17.245
+                    },
+                    {
+                        "event": "created",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": 55,
+                        "at_ms": 19.117
+                    },
+                    {
+                        "event": "saved",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": 55,
+                        "at_ms": 19.127
+                    }
+                ]
+            }
+        },
+        "cache": {
+            "label": "Cache",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "hits": 0,
+                "misses": 0,
+                "writes": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "views": {
+            "label": "Views",
+            "summary": {
+                "count": 2,
+                "retained_count": 2,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "stock.stock",
+                        "source": {
+                            "file": "resources/views/stock/stock.blade.php",
+                            "line": 1
+                        },
+                        "composers": [],
+                        "data": {
+                            "products": [
+                                {
+                                    "id": 4,
+                                    "name": "Tiges de roses",
+                                    "description": "descripotion",
+                                    "price": "2000.00",
+                                    "stock_quantity": 100,
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-23T11:03:41.000000Z",
+                                    "updated_at": "2026-04-29T18:44:41.000000Z",
+                                    "alert_threshold": 10,
+                                    "last_purchase_price": null,
+                                    "margin": null
+                                }
+                            ],
+                            "criticalCount": 0,
+                            "stockValue": 200000,
+                            "recentMovements": 0,
+                            "recentMovementsData": [
+                                {
+                                    "id": 15,
+                                    "product_id": 4,
+                                    "type": "in",
+                                    "quantity": 3,
+                                    "reason": "R\u00e9ception commande #2 \u2014 Fleurs du sahel",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-29T18:44:41.000000Z",
+                                    "updated_at": "2026-04-29T18:44:41.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                },
+                                {
+                                    "id": 14,
+                                    "product_id": 4,
+                                    "type": "in",
+                                    "quantity": 15,
+                                    "reason": "R\u00e9ception commande #1 \u2014 Fleurs du sahel",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-29T18:33:56.000000Z",
+                                    "updated_at": "2026-04-29T18:33:56.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                },
+                                {
+                                    "id": 13,
+                                    "product_id": 4,
+                                    "type": "out",
+                                    "quantity": 30,
+                                    "reason": "Confection \"Bouquet roses\" \u2014 Vente #14",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-29T14:01:21.000000Z",
+                                    "updated_at": "2026-04-29T14:01:21.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                },
+                                {
+                                    "id": 12,
+                                    "product_id": 4,
+                                    "type": "out",
+                                    "quantity": 30,
+                                    "reason": "Confection \"Bouquet roses\" \u2014 Vente #13",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-29T13:20:31.000000Z",
+                                    "updated_at": "2026-04-29T13:20:31.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                },
+                                {
+                                    "id": 11,
+                                    "product_id": 4,
+                                    "type": "out",
+                                    "quantity": 20,
+                                    "reason": "Vente #10",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-25T10:38:56.000000Z",
+                                    "updated_at": "2026-04-25T10:38:56.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                },
+                                {
+                                    "id": 10,
+                                    "product_id": 4,
+                                    "type": "out",
+                                    "quantity": 2,
+                                    "reason": "Vente #9",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-25T10:36:13.000000Z",
+                                    "updated_at": "2026-04-25T10:36:13.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                },
+                                {
+                                    "id": 9,
+                                    "product_id": 4,
+                                    "type": "out",
+                                    "quantity": 7,
+                                    "reason": "Vente #8",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-23T12:24:06.000000Z",
+                                    "updated_at": "2026-04-23T12:24:06.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                },
+                                {
+                                    "id": 8,
+                                    "product_id": 4,
+                                    "type": "out",
+                                    "quantity": 25,
+                                    "reason": "Vente #7",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-23T11:31:58.000000Z",
+                                    "updated_at": "2026-04-23T11:31:58.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                },
+                                {
+                                    "id": 7,
+                                    "product_id": 4,
+                                    "type": "out",
+                                    "quantity": 1,
+                                    "reason": null,
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-23T11:31:36.000000Z",
+                                    "updated_at": "2026-04-23T11:31:36.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                },
+                                {
+                                    "id": 6,
+                                    "product_id": 4,
+                                    "type": "out",
+                                    "quantity": 3,
+                                    "reason": "Vente #6",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-23T11:26:08.000000Z",
+                                    "updated_at": "2026-04-23T11:26:08.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                }
+                            ]
+                        },
+                        "timing": "composition_marker",
+                        "at_ms": 20.703
+                    },
+                    {
+                        "name": "layouts.app",
+                        "source": {
+                            "file": "resources/views/layouts/app.blade.php",
+                            "line": 1
+                        },
+                        "composers": [],
+                        "data": {
+                            "__env": "[Illuminate\\View\\Factory]",
+                            "app": "[Illuminate\\Foundation\\Application]",
+                            "errors": "[]",
+                            "products": [
+                                {
+                                    "id": 4,
+                                    "name": "Tiges de roses",
+                                    "description": "descripotion",
+                                    "price": "2000.00",
+                                    "stock_quantity": 100,
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-23T11:03:41.000000Z",
+                                    "updated_at": "2026-04-29T18:44:41.000000Z",
+                                    "alert_threshold": 10,
+                                    "last_purchase_price": null,
+                                    "margin": null
+                                }
+                            ],
+                            "criticalCount": 0,
+                            "stockValue": 200000,
+                            "recentMovements": 0,
+                            "recentMovementsData": [
+                                {
+                                    "id": 15,
+                                    "product_id": 4,
+                                    "type": "in",
+                                    "quantity": 3,
+                                    "reason": "R\u00e9ception commande #2 \u2014 Fleurs du sahel",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-29T18:44:41.000000Z",
+                                    "updated_at": "2026-04-29T18:44:41.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                },
+                                {
+                                    "id": 14,
+                                    "product_id": 4,
+                                    "type": "in",
+                                    "quantity": 15,
+                                    "reason": "R\u00e9ception commande #1 \u2014 Fleurs du sahel",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-29T18:33:56.000000Z",
+                                    "updated_at": "2026-04-29T18:33:56.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                },
+                                {
+                                    "id": 13,
+                                    "product_id": 4,
+                                    "type": "out",
+                                    "quantity": 30,
+                                    "reason": "Confection \"Bouquet roses\" \u2014 Vente #14",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-29T14:01:21.000000Z",
+                                    "updated_at": "2026-04-29T14:01:21.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                },
+                                {
+                                    "id": 12,
+                                    "product_id": 4,
+                                    "type": "out",
+                                    "quantity": 30,
+                                    "reason": "Confection \"Bouquet roses\" \u2014 Vente #13",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-29T13:20:31.000000Z",
+                                    "updated_at": "2026-04-29T13:20:31.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                },
+                                {
+                                    "id": 11,
+                                    "product_id": 4,
+                                    "type": "out",
+                                    "quantity": 20,
+                                    "reason": "Vente #10",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-25T10:38:56.000000Z",
+                                    "updated_at": "2026-04-25T10:38:56.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                },
+                                {
+                                    "id": 10,
+                                    "product_id": 4,
+                                    "type": "out",
+                                    "quantity": 2,
+                                    "reason": "Vente #9",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-25T10:36:13.000000Z",
+                                    "updated_at": "2026-04-25T10:36:13.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                },
+                                {
+                                    "id": 9,
+                                    "product_id": 4,
+                                    "type": "out",
+                                    "quantity": 7,
+                                    "reason": "Vente #8",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-23T12:24:06.000000Z",
+                                    "updated_at": "2026-04-23T12:24:06.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                },
+                                {
+                                    "id": 8,
+                                    "product_id": 4,
+                                    "type": "out",
+                                    "quantity": 25,
+                                    "reason": "Vente #7",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-23T11:31:58.000000Z",
+                                    "updated_at": "2026-04-23T11:31:58.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                },
+                                {
+                                    "id": 7,
+                                    "product_id": 4,
+                                    "type": "out",
+                                    "quantity": 1,
+                                    "reason": null,
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-23T11:31:36.000000Z",
+                                    "updated_at": "2026-04-23T11:31:36.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                },
+                                {
+                                    "id": 6,
+                                    "product_id": 4,
+                                    "type": "out",
+                                    "quantity": 3,
+                                    "reason": "Vente #6",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-23T11:26:08.000000Z",
+                                    "updated_at": "2026-04-23T11:26:08.000000Z",
+                                    "product": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]"
+                                    }
+                                }
+                            ],
+                            "margeProduits": [],
+                            "margeMoy": null,
+                            "__currentLoopData": [
+                                {
+                                    "id": 4,
+                                    "name": "Tiges de roses",
+                                    "description": "descripotion",
+                                    "price": "2000.00",
+                                    "stock_quantity": 100,
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-23T11:03:41.000000Z",
+                                    "updated_at": "2026-04-29T18:44:41.000000Z",
+                                    "alert_threshold": 10,
+                                    "last_purchase_price": null,
+                                    "margin": null
+                                }
+                            ],
+                            "product": {
+                                "id": 4,
+                                "name": "Tiges de roses",
+                                "description": "descripotion",
+                                "price": "2000.00",
+                                "stock_quantity": 100,
+                                "branch_id": 1,
+                                "created_at": "2026-04-23T11:03:41.000000Z",
+                                "updated_at": "2026-04-29T18:44:41.000000Z",
+                                "alert_threshold": 10,
+                                "last_purchase_price": null,
+                                "margin": null
+                            },
+                            "loop": null,
+                            "pct": 100,
+                            "statusKey": "ok",
+                            "barColor": "#639922",
+                            "badges": {
+                                "ok": "<span class=\"badge-status badge-ok\"><span class=\"status-dot dot-ok\"></span>OK</span>",
+                                "low": "<span class=\"badge-status badge-low\"><span class=\"status-dot dot-low\"></span>Bas</span>",
+                                "critical": "<span class=\"badge-status badge-critical\"><span class=\"status-dot dot-critical\"></span>Critique</span>",
+                                "rupture": "<span class=\"badge-status badge-rupture\"><span class=\"status-dot dot-rupture\"></span>Rupture</span>"
+                            },
+                            "__empty_1": false,
+                            "mvt": {
+                                "id": 6,
+                                "product_id": 4,
+                                "type": "out",
+                                "quantity": 3,
+                                "reason": "Vente #6",
+                                "branch_id": 1,
+                                "created_at": "2026-04-23T11:26:08.000000Z",
+                                "updated_at": "2026-04-23T11:26:08.000000Z",
+                                "product": {
+                                    "id": 4,
+                                    "name": "Tiges de roses",
+                                    "description": "descripotion",
+                                    "price": "2000.00",
+                                    "stock_quantity": 100,
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-23T11:03:41.000000Z",
+                                    "updated_at": "2026-04-29T18:44:41.000000Z",
+                                    "alert_threshold": 10
+                                }
+                            },
+                            "mvtIcons": {
+                                "in": "\u2191",
+                                "out": "\u2193",
+                                "loss": "\u2715"
+                            },
+                            "mvtClasses": {
+                                "in": "mvt-in",
+                                "out": "mvt-out",
+                                "loss": "mvt-loss"
+                            },
+                            "mvtColors": {
+                                "in": "#3B6D11",
+                                "out": "#854F0B",
+                                "loss": "#A32D2D"
+                            },
+                            "p": {
+                                "id": 4,
+                                "name": "Tiges de roses",
+                                "description": "descripotion",
+                                "price": "2000.00",
+                                "stock_quantity": 100,
+                                "branch_id": 1,
+                                "created_at": "2026-04-23T11:03:41.000000Z",
+                                "updated_at": "2026-04-29T18:44:41.000000Z",
+                                "alert_threshold": 10,
+                                "last_purchase_price": null,
+                                "margin": null
+                            }
+                        },
+                        "timing": "composition_marker",
+                        "at_ms": 26.52
+                    }
+                ]
+            }
+        },
+        "events": {
+            "label": "Events",
+            "summary": {
+                "count": 10,
+                "retained_count": 10,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "Illuminate\\Database\\Events\\ConnectionEstablished",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\ConnectionEstablished"
+                        ],
+                        "at_ms": 0.75
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 5.558
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 8.115
+                    },
+                    {
+                        "name": "Illuminate\\Auth\\Events\\Authenticated",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Auth\\Events\\Authenticated"
+                        ],
+                        "at_ms": 9.523
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 9.77
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 11.27
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 13.295
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 14.857
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 16.006
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 17.319
+                    }
+                ]
+            }
+        },
+        "authorization": {
+            "label": "Authorization",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "validation": {
+            "label": "Validation",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "lifecycle": {
+            "label": "Lifecycle",
+            "summary": {
+                "count": 4,
+                "retained_count": 4,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "Route matching",
+                        "duration_ms": 0.29,
+                        "at_ms": 0.351
+                    },
+                    {
+                        "name": "Route middleware, binding, controller and rendering",
+                        "duration_ms": 18.9,
+                        "at_ms": 19.246
+                    },
+                    {
+                        "name": "Route response preparation",
+                        "duration_ms": 7.73,
+                        "at_ms": 26.978
+                    },
+                    {
+                        "name": "Final response preparation",
+                        "duration_ms": 0.03,
+                        "at_ms": 28.069
+                    }
+                ]
+            }
+        },
+        "messages": {
+            "label": "Messages",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "logs": {
+            "label": "Logs",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "errors": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "exceptions": {
+            "label": "Exceptions",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        }
+    }
+}

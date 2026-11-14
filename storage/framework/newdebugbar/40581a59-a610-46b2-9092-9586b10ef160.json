@@ -1,29 +1,29 @@
 {
     "schema_version": 1,
-    "id": "85ed53b4-e012-4cb1-bc63-389c83d56e4f",
-    "recorded_at": "2026-10-24T19:06:30+01:00",
-    "profile_type": "http",
+    "id": "40581a59-a610-46b2-9092-9586b10ef160",
+    "recorded_at": "2026-11-14T18:04:32+01:00",
+    "profile_type": "artisan",
     "environment": "local",
     "metrics": {
-        "duration_ms": 1.28,
-        "peak_memory_mb": 10
+        "duration_ms": 187809.84,
+        "peak_memory_mb": 52.5
     },
     "sections": {
         "overview": {
             "label": "Overview",
             "summary": {
-                "duration_ms": 1.28,
-                "peak_memory_mb": 10
+                "duration_ms": 187809.84,
+                "peak_memory_mb": 52.5
             },
             "payload": {
                 "runtime": {
                     "environment": "local",
                     "php": "8.4.19",
-                    "php_sapi": "cli-server",
-                    "runtime_type": "cli-server",
+                    "php_sapi": "cli",
+                    "runtime_type": "CLI",
                     "laravel": "13.5.0",
                     "debug": true,
-                    "locale": "fr",
+                    "locale": "en",
                     "timezone": "Africa/Niamey"
                 },
                 "cache_state": {
@@ -44,127 +44,50 @@
             }
         },
         "request": {
-            "label": "Request",
+            "label": "Runtime",
             "summary": {
-                "method": "POST",
-                "status": 200,
-                "exit_code": null
+                "method": "CLI",
+                "status": 0,
+                "exit_code": 0
             },
             "payload": {
-                "method": "POST",
-                "url": "http://localhost:8001/_boost/browser-logs",
-                "path": "/_boost/browser-logs",
+                "method": "CLI",
+                "url": null,
+                "path": "artisan:tinker",
                 "query": [],
-                "input": {
-                    "logs": [
-                        {
-                            "type": "warn",
-                            "timestamp": "2026-10-24T18:06:29.972Z",
-                            "data": [
-                                "Detected multiple instances of Alpine running"
-                            ],
-                            "url": "http://localhost:8001/finances",
-                            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
-                        }
+                "input": [],
+                "headers": [],
+                "runtime_type": "artisan",
+                "name": "tinker",
+                "context": {
+                    "argument_names": [
+                        "command",
+                        "include"
+                    ],
+                    "option_names": [
+                        "execute",
+                        "help",
+                        "silent",
+                        "quiet",
+                        "verbose",
+                        "version",
+                        "ansi",
+                        "no-interaction",
+                        "env"
                     ]
                 },
-                "headers": {
-                    "host": [
-                        "localhost:8001"
-                    ],
-                    "connection": [
-                        "keep-alive"
-                    ],
-                    "content-length": [
-                        "293"
-                    ],
-                    "sec-ch-ua-platform": [
-                        "\"macOS\""
-                    ],
-                    "x-requested-with": [
-                        "XMLHttpRequest"
-                    ],
-                    "user-agent": [
-                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
-                    ],
-                    "sec-ch-ua": [
-                        "\"Brave\";v=\"155\", \"Chromium\";v=\"155\", \"Not(A:Brand\";v=\"24\""
-                    ],
-                    "content-type": [
-                        "application/json"
-                    ],
-                    "sec-ch-ua-mobile": [
-                        "?0"
-                    ],
-                    "accept": [
-                        "*/*"
-                    ],
-                    "sec-gpc": [
-                        "1"
-                    ],
-                    "origin": [
-                        "http://localhost:8001"
-                    ],
-                    "sec-fetch-site": [
-                        "same-origin"
-                    ],
-                    "sec-fetch-mode": [
-                        "cors"
-                    ],
-                    "sec-fetch-dest": [
-                        "empty"
-                    ],
-                    "referer": [
-                        "http://localhost:8001/finances"
-                    ],
-                    "accept-encoding": [
-                        "gzip, deflate, br, zstd"
-                    ],
-                    "accept-language": [
-                        "fr-FR,fr;q=0.8"
-                    ],
-                    "cookie": "[redacted]"
-                },
-                "route": "boost.browser-logs",
-                "action": "Closure",
+                "route": null,
+                "action": null,
                 "parameters": [],
                 "middleware": [],
-                "status": 200,
-                "request_type": "ajax",
-                "content_type": "application/json",
-                "request_size_bytes": 293,
-                "response_size_bytes": 19,
+                "status": 0,
+                "exit_code": 0,
+                "content_type": null,
+                "request_size_bytes": 0,
+                "response_size_bytes": 0,
                 "session_present": false,
                 "authenticated": false,
-                "authentication": {
-                    "guard": "web",
-                    "authenticated": false,
-                    "model": null,
-                    "identifier": null,
-                    "identifier_policy": "keyed_hash"
-                },
-                "session": {
-                    "present": false,
-                    "driver": "database",
-                    "key_count": 0,
-                    "keys": [],
-                    "keys_dropped": 0,
-                    "flash_keys": [],
-                    "error_bag_present": false,
-                    "error_bags": []
-                },
-                "timing_scope": "global_middleware_entry",
-                "response_headers": {
-                    "cache-control": [
-                        "no-cache, private"
-                    ],
-                    "date": [
-                        "Sat, 24 Oct 2026 18:06:30 GMT"
-                    ],
-                    "content-type": [
-                        "application/json"
-                    ]
-                }
+                "response_headers": []
             }
         },
         "queries": {
@@ -314,7 +237,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\ConnectionEstablished"
                         ],
-                        "at_ms": 0.904
+                        "at_ms": 27.173
                     }
                 ]
             }
@@ -346,34 +269,13 @@
         "lifecycle": {
             "label": "Lifecycle",
             "summary": {
-                "count": 4,
-                "retained_count": 4,
+                "count": 0,
+                "retained_count": 0,
                 "dropped_count": 0,
                 "truncated": false
             },
             "payload": {
-                "items": [
-                    {
-                        "name": "Route matching",
-                        "duration_ms": 0.05,
-                        "at_ms": 0.11
-                    },
-                    {
-                        "name": "Route middleware, binding, controller and rendering",
-                        "duration_ms": 0.9,
-                        "at_ms": 1.013
-                    },
-                    {
-                        "name": "Route response preparation",
-                        "duration_ms": 0.02,
-                        "at_ms": 1.036
-                    },
-                    {
-                        "name": "Final response preparation",
-                        "duration_ms": 0.01,
-                        "at_ms": 1.05
-                    }
-                ]
+                "items": []
             }
         },
         "messages": {
@@ -391,27 +293,14 @@
         "logs": {
             "label": "Logs",
             "summary": {
-                "count": 1,
-                "retained_count": 1,
+                "count": 0,
+                "retained_count": 0,
                 "dropped_count": 0,
                 "truncated": false,
                 "errors": 0
             },
             "payload": {
-                "items": [
-                    {
-                        "level": "warning",
-                        "message": "Detected multiple instances of Alpine running",
-                        "context": {
-                            "url": "http://localhost:8001/finances",
-                            "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
-                            "timestamp": "2026-10-24T18:06:29.972Z"
-                        },
-                        "callsite": null,
-                        "stack": [],
-                        "at_ms": 0.765
-                    }
-                ]
+                "items": []
             }
         },
         "exceptions": {

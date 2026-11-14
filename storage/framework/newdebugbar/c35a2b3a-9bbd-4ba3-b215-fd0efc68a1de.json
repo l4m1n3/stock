@@ -1,0 +1,1744 @@
+{
+    "schema_version": 1,
+    "id": "c35a2b3a-9bbd-4ba3-b215-fd0efc68a1de",
+    "recorded_at": "2026-11-14T18:02:20+01:00",
+    "profile_type": "http",
+    "environment": "local",
+    "metrics": {
+        "duration_ms": 69.47,
+        "peak_memory_mb": 4
+    },
+    "sections": {
+        "overview": {
+            "label": "Overview",
+            "summary": {
+                "duration_ms": 69.47,
+                "peak_memory_mb": 4
+            },
+            "payload": {
+                "runtime": {
+                    "environment": "local",
+                    "php": "8.4.19",
+                    "php_sapi": "cli-server",
+                    "runtime_type": "cli-server",
+                    "laravel": "13.5.0",
+                    "debug": true,
+                    "locale": "en",
+                    "timezone": "Africa/Niamey"
+                },
+                "cache_state": {
+                    "configuration": false,
+                    "routes": false,
+                    "events": false
+                },
+                "drivers": {
+                    "database": "pgsql",
+                    "cache": "database",
+                    "queue": "database",
+                    "session": "database",
+                    "mail": "log",
+                    "broadcasting": "log"
+                },
+                "ecosystem": [],
+                "package": "dev-main"
+            }
+        },
+        "request": {
+            "label": "Request",
+            "summary": {
+                "method": "POST",
+                "status": 302,
+                "exit_code": null
+            },
+            "payload": {
+                "method": "POST",
+                "url": "http://localhost:8000/pos",
+                "path": "/pos",
+                "query": [],
+                "input": {
+                    "_token": "[redacted]",
+                    "payment_method": "cash",
+                    "cart_data": "[{\"type\":\"produit\",\"db_id\":4,\"qty\":50,\"unit_price\":2000,\"total\":100000},{\"type\":\"service\",\"db_id\":2,\"qty\":1,\"unit_price\":1500,\"total\":1500},{\"type\":\"service\",\"db_id\":4,\"qty\":1,\"unit_price\":25000,\"total\":25000}]",
+                    "client_id": null,
+                    "client_name": "Issa",
+                    "client_phone": "Maman",
+                    "is_anonymous": "0",
+                    "discount_type": null,
+                    "discount_value": "0"
+                },
+                "headers": {
+                    "host": [
+                        "localhost:8000"
+                    ],
+                    "connection": [
+                        "keep-alive"
+                    ],
+                    "content-length": [
+                        "528"
+                    ],
+                    "cache-control": [
+                        "max-age=0"
+                    ],
+                    "sec-ch-ua": [
+                        "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Brave\";v=\"156\""
+                    ],
+                    "sec-ch-ua-mobile": [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform": [
+                        "\"macOS\""
+                    ],
+                    "upgrade-insecure-requests": [
+                        "1"
+                    ],
+                    "content-type": [
+                        "application/x-www-form-urlencoded"
+                    ],
+                    "user-agent": [
+                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+                    ],
+                    "origin": [
+                        "http://localhost:8000"
+                    ],
+                    "accept": [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;q=0.8"
+                    ],
+                    "sec-gpc": [
+                        "1"
+                    ],
+                    "sec-fetch-site": [
+                        "same-origin"
+                    ],
+                    "sec-fetch-mode": [
+                        "navigate"
+                    ],
+                    "sec-fetch-user": [
+                        "?1"
+                    ],
+                    "sec-fetch-dest": [
+                        "document"
+                    ],
+                    "referer": [
+                        "http://localhost:8000/pos"
+                    ],
+                    "accept-encoding": [
+                        "gzip, deflate, br, zstd"
+                    ],
+                    "accept-language": [
+                        "fr-FR,fr;q=0.9"
+                    ],
+                    "cookie": "[redacted]"
+                },
+                "route": "sales.store",
+                "action": "App\\Http\\Controllers\\SaleController@store",
+                "parameters": [],
+                "middleware": [
+                    "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+                    "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestForgery",
+                    "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                    "Laravel\\Boost\\Middleware\\InjectBoost"
+                ],
+                "status": 302,
+                "request_type": "redirect",
+                "content_type": "text/html; charset=utf-8",
+                "request_size_bytes": 528,
+                "response_size_bytes": 346,
+                "session_present": false,
+                "authenticated": true,
+                "authentication": {
+                    "guard": "web",
+                    "authenticated": true,
+                    "model": "App\\Models\\User",
+                    "identifier": "hmac:2dffea64817b6601",
+                    "identifier_policy": "keyed_hash"
+                },
+                "session": {
+                    "present": false,
+                    "driver": "database",
+                    "key_count": 0,
+                    "keys": [],
+                    "keys_dropped": 0,
+                    "flash_keys": [],
+                    "error_bag_present": false,
+                    "error_bags": []
+                },
+                "timing_scope": "global_middleware_entry",
+                "response_headers": {
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Sat, 14 Nov 2026 17:02:20 GMT"
+                    ],
+                    "location": [
+                        "http://localhost:8000/pos"
+                    ],
+                    "content-type": [
+                        "text/html; charset=utf-8"
+                    ],
+                    "set-cookie": "[redacted]"
+                }
+            }
+        },
+        "queries": {
+            "label": "Queries",
+            "summary": {
+                "count": 19,
+                "retained_count": 19,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 42.45,
+                "transaction_count": 2,
+                "transaction_retained_count": 2,
+                "transaction_dropped_count": 0,
+                "rollback_count": 0
+            },
+            "payload": {
+                "items": [
+                    {
+                        "sql": "select * from \"sessions\" where \"id\" = ? limit 1",
+                        "bindings": [
+                            "WB71MQQaoRVtRuDccaA7NHalQy9ywF4LcU7lNjKB"
+                        ],
+                        "runnable_sql": "select * from \"sessions\" where \"id\" = 'WB71MQQaoRVtRuDccaA7NHalQy9ywF4LcU7lNjKB' limit 1",
+                        "duration_ms": 14.52,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 16.985,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"users\" where \"id\" = ? limit 1",
+                        "bindings": [
+                            2
+                        ],
+                        "runnable_sql": "select * from \"users\" where \"id\" = 2 limit 1",
+                        "duration_ms": 1.32,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/SaleController.php",
+                            "line": 129
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 129,
+                                "function": "Illuminate\\Auth\\AuthManager->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 124,
+                                "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
+                            }
+                        ],
+                        "at_ms": 23.902,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "insert into \"clients\" (\"name\", \"phone\", \"branch_id\", \"updated_at\", \"created_at\") values (?, ?, ?, ?, ?) returning \"id\"",
+                        "bindings": [
+                            "Issa",
+                            "Maman",
+                            1,
+                            "2026-11-14 18:02:20",
+                            "2026-11-14 18:02:20"
+                        ],
+                        "runnable_sql": "insert into \"clients\" (\"name\", \"phone\", \"branch_id\", \"updated_at\", \"created_at\") values ('Issa', 'Maman', 1, '2026-11-14 18:02:20', '2026-11-14 18:02:20') returning \"id\"",
+                        "duration_ms": 4.43,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/SaleController.php",
+                            "line": 137
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 137,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 124,
+                                "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
+                            }
+                        ],
+                        "at_ms": 29.762,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "insert into \"sales\" (\"user_id\", \"client_id\", \"subtotal\", \"discount_type\", \"discount_value\", \"discount_amount\", \"total_amount\", \"payment_method\", \"sold_at\", \"branch_id\", \"updated_at\", \"created_at\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) returning \"id\"",
+                        "bindings": [
+                            2,
+                            1,
+                            126500,
+                            null,
+                            0,
+                            0,
+                            126500,
+                            "cash",
+                            "2026-11-14 18:02:20",
+                            1,
+                            "2026-11-14 18:02:20",
+                            "2026-11-14 18:02:20"
+                        ],
+                        "runnable_sql": "insert into \"sales\" (\"user_id\", \"client_id\", \"subtotal\", \"discount_type\", \"discount_value\", \"discount_amount\", \"total_amount\", \"payment_method\", \"sold_at\", \"branch_id\", \"updated_at\", \"created_at\") values (2, 1, 126500, null, 0, 0, 126500, 'cash', '2026-11-14 18:02:20', 1, '2026-11-14 18:02:20', '2026-11-14 18:02:20') returning \"id\"",
+                        "duration_ms": 3.18,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/SaleController.php",
+                            "line": 164
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 164,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 124,
+                                "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
+                            }
+                        ],
+                        "at_ms": 34.606,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "insert into \"sale_items\" (\"sale_id\", \"product_id\", \"quantity\", \"unit_price\", \"total_price\", \"updated_at\", \"created_at\") values (?, ?, ?, ?, ?, ?, ?) returning \"id\"",
+                        "bindings": [
+                            15,
+                            4,
+                            50,
+                            2000,
+                            100000,
+                            "2026-11-14 18:02:20",
+                            "2026-11-14 18:02:20"
+                        ],
+                        "runnable_sql": "insert into \"sale_items\" (\"sale_id\", \"product_id\", \"quantity\", \"unit_price\", \"total_price\", \"updated_at\", \"created_at\") values (15, 4, 50, 2000, 100000, '2026-11-14 18:02:20', '2026-11-14 18:02:20') returning \"id\"",
+                        "duration_ms": 1.93,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/SaleController.php",
+                            "line": 182
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 182,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 124,
+                                "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
+                            }
+                        ],
+                        "at_ms": 37.524,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"products\" where \"products\".\"id\" = ? limit 1",
+                        "bindings": [
+                            4
+                        ],
+                        "runnable_sql": "select * from \"products\" where \"products\".\"id\" = 4 limit 1",
+                        "duration_ms": 0.49,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/SaleController.php",
+                            "line": 190
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 190,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 124,
+                                "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
+                            }
+                        ],
+                        "at_ms": 39.153,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "update \"products\" set \"stock_quantity\" = \"stock_quantity\" - 50, \"updated_at\" = ? where \"id\" = ?",
+                        "bindings": [
+                            "2026-11-14 18:02:20",
+                            4
+                        ],
+                        "runnable_sql": "update \"products\" set \"stock_quantity\" = \"stock_quantity\" - 50, \"updated_at\" = '2026-11-14 18:02:20' where \"id\" = 4",
+                        "duration_ms": 3,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/SaleController.php",
+                            "line": 191
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 191,
+                                "function": "Illuminate\\Database\\Eloquent\\Model->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 124,
+                                "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
+                            }
+                        ],
+                        "at_ms": 43.211,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "insert into \"stock_movements\" (\"product_id\", \"type\", \"quantity\", \"reason\", \"branch_id\", \"updated_at\", \"created_at\") values (?, ?, ?, ?, ?, ?, ?) returning \"id\"",
+                        "bindings": [
+                            4,
+                            "out",
+                            50,
+                            "Vente #15",
+                            1,
+                            "2026-11-14 18:02:20",
+                            "2026-11-14 18:02:20"
+                        ],
+                        "runnable_sql": "insert into \"stock_movements\" (\"product_id\", \"type\", \"quantity\", \"reason\", \"branch_id\", \"updated_at\", \"created_at\") values (4, 'out', 50, 'Vente #15', 1, '2026-11-14 18:02:20', '2026-11-14 18:02:20') returning \"id\"",
+                        "duration_ms": 3.13,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/SaleController.php",
+                            "line": 193
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 193,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 124,
+                                "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
+                            }
+                        ],
+                        "at_ms": 47.294,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"services\" where \"services\".\"id\" = ? limit 1",
+                        "bindings": [
+                            2
+                        ],
+                        "runnable_sql": "select * from \"services\" where \"services\".\"id\" = 2 limit 1",
+                        "duration_ms": 1.09,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/SaleController.php",
+                            "line": 202
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 202,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 124,
+                                "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
+                            }
+                        ],
+                        "at_ms": 49.146,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "insert into \"sale_services\" (\"sale_id\", \"service_id\", \"price\", \"updated_at\", \"created_at\") values (?, ?, ?, ?, ?) returning \"id\"",
+                        "bindings": [
+                            15,
+                            2,
+                            1500,
+                            "2026-11-14 18:02:20",
+                            "2026-11-14 18:02:20"
+                        ],
+                        "runnable_sql": "insert into \"sale_services\" (\"sale_id\", \"service_id\", \"price\", \"updated_at\", \"created_at\") values (15, 2, 1500, '2026-11-14 18:02:20', '2026-11-14 18:02:20') returning \"id\"",
+                        "duration_ms": 1.34,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/SaleController.php",
+                            "line": 204
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 204,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 124,
+                                "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
+                            }
+                        ],
+                        "at_ms": 51.367,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"services\" where \"services\".\"id\" = ? limit 1",
+                        "bindings": [
+                            4
+                        ],
+                        "runnable_sql": "select * from \"services\" where \"services\".\"id\" = 4 limit 1",
+                        "duration_ms": 0.34,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/SaleController.php",
+                            "line": 202
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 202,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 124,
+                                "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
+                            }
+                        ],
+                        "at_ms": 52.036,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "insert into \"sale_services\" (\"sale_id\", \"service_id\", \"price\", \"updated_at\", \"created_at\") values (?, ?, ?, ?, ?) returning \"id\"",
+                        "bindings": [
+                            15,
+                            4,
+                            25000,
+                            "2026-11-14 18:02:20",
+                            "2026-11-14 18:02:20"
+                        ],
+                        "runnable_sql": "insert into \"sale_services\" (\"sale_id\", \"service_id\", \"price\", \"updated_at\", \"created_at\") values (15, 4, 25000, '2026-11-14 18:02:20', '2026-11-14 18:02:20') returning \"id\"",
+                        "duration_ms": 0.67,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/SaleController.php",
+                            "line": 204
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 204,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 124,
+                                "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
+                            }
+                        ],
+                        "at_ms": 53.347,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "insert into \"invoices\" (\"sale_id\", \"invoice_number\", \"subtotal\", \"discount_amount\", \"total_amount\", \"issued_at\", \"branch_id\", \"updated_at\", \"created_at\") values (?, ?, ?, ?, ?, ?, ?, ?, ?) returning \"id\"",
+                        "bindings": [
+                            15,
+                            "INV-000015",
+                            126500,
+                            0,
+                            126500,
+                            "2026-11-14T18:02:20+01:00",
+                            1,
+                            "2026-11-14 18:02:20",
+                            "2026-11-14 18:02:20"
+                        ],
+                        "runnable_sql": "insert into \"invoices\" (\"sale_id\", \"invoice_number\", \"subtotal\", \"discount_amount\", \"total_amount\", \"issued_at\", \"branch_id\", \"updated_at\", \"created_at\") values (15, 'INV-000015', 126500, 0, 126500, '2026-11-14 18:02:20', 1, '2026-11-14 18:02:20', '2026-11-14 18:02:20') returning \"id\"",
+                        "duration_ms": 2.71,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/SaleController.php",
+                            "line": 251
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 251,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 124,
+                                "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
+                            }
+                        ],
+                        "at_ms": 56.927,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"clients\" where \"clients\".\"id\" = ? limit 1",
+                        "bindings": [
+                            1
+                        ],
+                        "runnable_sql": "select * from \"clients\" where \"clients\".\"id\" = 1 limit 1",
+                        "duration_ms": 0.39,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/SaleController.php",
+                            "line": 263
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 263,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 124,
+                                "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
+                            }
+                        ],
+                        "at_ms": 57.622,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"sales\" where \"sales\".\"client_id\" = ? and \"sales\".\"client_id\" is not null",
+                        "bindings": [
+                            1
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"sales\" where \"sales\".\"client_id\" = 1 and \"sales\".\"client_id\" is not null",
+                        "duration_ms": 0.8,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Models/Client.php",
+                            "line": 96
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Models/Client.php",
+                                "line": 96,
+                                "function": "Illuminate\\Database\\Eloquent\\Relations\\Relation->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 263,
+                                "function": "App\\Models\\Client->recomputeTotals"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 124,
+                                "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
+                            }
+                        ],
+                        "at_ms": 58.879,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select count(*) as aggregate from \"sales\" where \"sales\".\"client_id\" = ? and \"sales\".\"client_id\" is not null",
+                        "bindings": [
+                            1
+                        ],
+                        "runnable_sql": "select count(*) as aggregate from \"sales\" where \"sales\".\"client_id\" = 1 and \"sales\".\"client_id\" is not null",
+                        "duration_ms": 0.59,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Models/Client.php",
+                            "line": 97
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Models/Client.php",
+                                "line": 97,
+                                "function": "Illuminate\\Database\\Eloquent\\Relations\\Relation->__call"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 263,
+                                "function": "App\\Models\\Client->recomputeTotals"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 124,
+                                "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
+                            }
+                        ],
+                        "at_ms": 59.661,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "update \"clients\" set \"total_spent\" = ?, \"total_visits\" = ?, \"updated_at\" = ? where \"id\" = ?",
+                        "bindings": [
+                            "126500.00",
+                            1,
+                            "2026-11-14 18:02:20",
+                            1
+                        ],
+                        "runnable_sql": "update \"clients\" set \"total_spent\" = '126500.00', \"total_visits\" = 1, \"updated_at\" = '2026-11-14 18:02:20' where \"id\" = 1",
+                        "duration_ms": 1.05,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Models/Client.php",
+                            "line": 95
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Models/Client.php",
+                                "line": 95,
+                                "function": "Illuminate\\Database\\Eloquent\\Model->update"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 263,
+                                "function": "App\\Models\\Client->recomputeTotals"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 124,
+                                "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
+                            }
+                        ],
+                        "at_ms": 61.172,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "insert into \"activity_logs\" (\"user_id\", \"action\", \"description\", \"updated_at\", \"created_at\") values (?, ?, ?, ?, ?) returning \"id\"",
+                        "bindings": [
+                            2,
+                            "sale_created",
+                            "Vente #15 cr\u00e9\u00e9e (client #1)",
+                            "2026-11-14 18:02:20",
+                            "2026-11-14 18:02:20"
+                        ],
+                        "runnable_sql": "insert into \"activity_logs\" (\"user_id\", \"action\", \"description\", \"updated_at\", \"created_at\") values (2, 'sale_created', 'Vente #15 cr\u00e9\u00e9e (client #1)', '2026-11-14 18:02:20', '2026-11-14 18:02:20') returning \"id\"",
+                        "duration_ms": 1.01,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/helpers.php",
+                            "line": 6
+                        },
+                        "stack": [
+                            {
+                                "file": "app/helpers.php",
+                                "line": 6,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            },
+                            {
+                                "file": "app/Http/Controllers/SaleController.php",
+                                "line": 275,
+                                "function": "activity_log"
+                            }
+                        ],
+                        "at_ms": 67.457,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "update \"sessions\" set \"payload\" = ?, \"last_activity\" = ?, \"user_id\" = ?, \"ip_address\" = ?, \"user_agent\" = ? where \"id\" = ?",
+                        "bindings": [
+                            "eyJfdG9rZW4iOiJoTFhRb0lrWEFKYXEwdGpjOG93bVNOY2lVaDdxMXM5Umkwa0VQMGVxIiwiX2ZsYXNoIjp7Im9sZCI6WyJzdWNjZXNzIl0sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDBcL3BvcyIsInJvdXRlIjoic2FsZXMuaW5kZXgifSwibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiOjIsInN1Y2Nlc3MiOiJWZW50ZSBlbnJlZ2lzdHJcdTAwZTllIGV0IGZhY3R1cmUgZ1x1MDBlOW5cdTAwZTlyXHUwMGU5ZSBhdmVjIHN1Y2NcdTAwZThzLiJ9",
+                            1794675740,
+                            2,
+                            "127.0.0.1",
+                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+                            "WB71MQQaoRVtRuDccaA7NHalQy9ywF4LcU7lNjKB"
+                        ],
+                        "runnable_sql": "update \"sessions\" set \"payload\" = 'eyJfdG9rZW4iOiJoTFhRb0lrWEFKYXEwdGpjOG93bVNOY2lVaDdxMXM5Umkwa0VQMGVxIiwiX2ZsYXNoIjp7Im9sZCI6WyJzdWNjZXNzIl0sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDBcL3BvcyIsInJvdXRlIjoic2FsZXMuaW5kZXgifSwibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiOjIsInN1Y2Nlc3MiOiJWZW50ZSBlbnJlZ2lzdHJcdTAwZTllIGV0IGZhY3R1cmUgZ1x1MDBlOW5cdTAwZTlyXHUwMGU5ZSBhdmVjIHN1Y2NcdTAwZThzLiJ9', \"last_activity\" = 1794675740, \"user_id\" = 2, \"ip_address\" = '127.0.0.1', \"user_agent\" = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36' where \"id\" = 'WB71MQQaoRVtRuDccaA7NHalQy9ywF4LcU7lNjKB'",
+                        "duration_ms": 0.46,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 69.038,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    }
+                ],
+                "transactions": [
+                    {
+                        "kind": "begin",
+                        "connection": "pgsql",
+                        "at_ms": 21.033
+                    },
+                    {
+                        "kind": "commit",
+                        "connection": "pgsql",
+                        "at_ms": 63.319
+                    }
+                ]
+            }
+        },
+        "http_client": {
+            "label": "HTTP Client",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "queue": {
+            "label": "Queue",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "queued_count": 0,
+                "executed_count": 0,
+                "failed_count": 0,
+                "duration_ms": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "mail": {
+            "label": "Mail",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "recipient_count": 0,
+                "attachment_count": 0,
+                "duration_ms": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "notifications": {
+            "label": "Notifications",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "sent_count": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "redis": {
+            "label": "Redis",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "models": {
+            "label": "Models",
+            "summary": {
+                "count": 63,
+                "retained_count": 63,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\User",
+                        "connection": null,
+                        "table": "users",
+                        "key": null,
+                        "at_ms": 21.711
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\User",
+                        "connection": null,
+                        "table": "users",
+                        "key": null,
+                        "at_ms": 22.178
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\User",
+                        "connection": "pgsql",
+                        "table": "users",
+                        "key": 2,
+                        "at_ms": 24.069
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Client",
+                        "connection": null,
+                        "table": "clients",
+                        "key": null,
+                        "at_ms": 24.365
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Client",
+                        "connection": null,
+                        "table": "clients",
+                        "key": null,
+                        "at_ms": 24.631
+                    },
+                    {
+                        "event": "saving",
+                        "model": "App\\Models\\Client",
+                        "connection": "pgsql",
+                        "table": "clients",
+                        "key": null,
+                        "at_ms": 24.763
+                    },
+                    {
+                        "event": "creating",
+                        "model": "App\\Models\\Client",
+                        "connection": "pgsql",
+                        "table": "clients",
+                        "key": null,
+                        "at_ms": 24.787
+                    },
+                    {
+                        "event": "created",
+                        "model": "App\\Models\\Client",
+                        "connection": "pgsql",
+                        "table": "clients",
+                        "key": 1,
+                        "at_ms": 29.961
+                    },
+                    {
+                        "event": "saved",
+                        "model": "App\\Models\\Client",
+                        "connection": "pgsql",
+                        "table": "clients",
+                        "key": 1,
+                        "at_ms": 29.985
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Sale",
+                        "connection": null,
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 30.553
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Sale",
+                        "connection": null,
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 30.876
+                    },
+                    {
+                        "event": "saving",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 31.113
+                    },
+                    {
+                        "event": "creating",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 31.133
+                    },
+                    {
+                        "event": "created",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 15,
+                        "at_ms": 34.716
+                    },
+                    {
+                        "event": "saved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 15,
+                        "at_ms": 34.737
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\SaleItem",
+                        "connection": null,
+                        "table": "sale_items",
+                        "key": null,
+                        "at_ms": 34.909
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\SaleItem",
+                        "connection": null,
+                        "table": "sale_items",
+                        "key": null,
+                        "at_ms": 35.192
+                    },
+                    {
+                        "event": "saving",
+                        "model": "App\\Models\\SaleItem",
+                        "connection": "pgsql",
+                        "table": "sale_items",
+                        "key": null,
+                        "at_ms": 35.335
+                    },
+                    {
+                        "event": "creating",
+                        "model": "App\\Models\\SaleItem",
+                        "connection": "pgsql",
+                        "table": "sale_items",
+                        "key": null,
+                        "at_ms": 35.354
+                    },
+                    {
+                        "event": "created",
+                        "model": "App\\Models\\SaleItem",
+                        "connection": "pgsql",
+                        "table": "sale_items",
+                        "key": 9,
+                        "at_ms": 37.6
+                    },
+                    {
+                        "event": "saved",
+                        "model": "App\\Models\\SaleItem",
+                        "connection": "pgsql",
+                        "table": "sale_items",
+                        "key": 9,
+                        "at_ms": 37.619
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Product",
+                        "connection": null,
+                        "table": "products",
+                        "key": null,
+                        "at_ms": 37.716
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Product",
+                        "connection": null,
+                        "table": "products",
+                        "key": null,
+                        "at_ms": 37.965
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Product",
+                        "connection": "pgsql",
+                        "table": "products",
+                        "key": 4,
+                        "at_ms": 39.265
+                    },
+                    {
+                        "event": "updating",
+                        "model": "App\\Models\\Product",
+                        "connection": "pgsql",
+                        "table": "products",
+                        "key": 4,
+                        "at_ms": 39.909
+                    },
+                    {
+                        "event": "updated",
+                        "model": "App\\Models\\Product",
+                        "connection": "pgsql",
+                        "table": "products",
+                        "key": 4,
+                        "at_ms": 43.299
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\StockMovement",
+                        "connection": null,
+                        "table": "stock_movements",
+                        "key": null,
+                        "at_ms": 43.407
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\StockMovement",
+                        "connection": null,
+                        "table": "stock_movements",
+                        "key": null,
+                        "at_ms": 43.667
+                    },
+                    {
+                        "event": "saving",
+                        "model": "App\\Models\\StockMovement",
+                        "connection": "pgsql",
+                        "table": "stock_movements",
+                        "key": null,
+                        "at_ms": 43.782
+                    },
+                    {
+                        "event": "creating",
+                        "model": "App\\Models\\StockMovement",
+                        "connection": "pgsql",
+                        "table": "stock_movements",
+                        "key": null,
+                        "at_ms": 43.801
+                    },
+                    {
+                        "event": "created",
+                        "model": "App\\Models\\StockMovement",
+                        "connection": "pgsql",
+                        "table": "stock_movements",
+                        "key": 16,
+                        "at_ms": 47.387
+                    },
+                    {
+                        "event": "saved",
+                        "model": "App\\Models\\StockMovement",
+                        "connection": "pgsql",
+                        "table": "stock_movements",
+                        "key": 16,
+                        "at_ms": 47.406
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Service",
+                        "connection": null,
+                        "table": "services",
+                        "key": null,
+                        "at_ms": 47.568
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Service",
+                        "connection": null,
+                        "table": "services",
+                        "key": null,
+                        "at_ms": 47.831
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Service",
+                        "connection": "pgsql",
+                        "table": "services",
+                        "key": 2,
+                        "at_ms": 49.286
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\SaleService",
+                        "connection": null,
+                        "table": "sale_services",
+                        "key": null,
+                        "at_ms": 49.417
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\SaleService",
+                        "connection": null,
+                        "table": "sale_services",
+                        "key": null,
+                        "at_ms": 49.656
+                    },
+                    {
+                        "event": "saving",
+                        "model": "App\\Models\\SaleService",
+                        "connection": "pgsql",
+                        "table": "sale_services",
+                        "key": null,
+                        "at_ms": 49.768
+                    },
+                    {
+                        "event": "creating",
+                        "model": "App\\Models\\SaleService",
+                        "connection": "pgsql",
+                        "table": "sale_services",
+                        "key": null,
+                        "at_ms": 49.785
+                    },
+                    {
+                        "event": "created",
+                        "model": "App\\Models\\SaleService",
+                        "connection": "pgsql",
+                        "table": "sale_services",
+                        "key": 6,
+                        "at_ms": 51.434
+                    },
+                    {
+                        "event": "saved",
+                        "model": "App\\Models\\SaleService",
+                        "connection": "pgsql",
+                        "table": "sale_services",
+                        "key": 6,
+                        "at_ms": 51.452
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Service",
+                        "connection": "pgsql",
+                        "table": "services",
+                        "key": 4,
+                        "at_ms": 52.149
+                    },
+                    {
+                        "event": "saving",
+                        "model": "App\\Models\\SaleService",
+                        "connection": "pgsql",
+                        "table": "sale_services",
+                        "key": null,
+                        "at_ms": 52.263
+                    },
+                    {
+                        "event": "creating",
+                        "model": "App\\Models\\SaleService",
+                        "connection": "pgsql",
+                        "table": "sale_services",
+                        "key": null,
+                        "at_ms": 52.279
+                    },
+                    {
+                        "event": "created",
+                        "model": "App\\Models\\SaleService",
+                        "connection": "pgsql",
+                        "table": "sale_services",
+                        "key": 7,
+                        "at_ms": 53.409
+                    },
+                    {
+                        "event": "saved",
+                        "model": "App\\Models\\SaleService",
+                        "connection": "pgsql",
+                        "table": "sale_services",
+                        "key": 7,
+                        "at_ms": 53.423
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Invoice",
+                        "connection": null,
+                        "table": "invoices",
+                        "key": null,
+                        "at_ms": 53.622
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Invoice",
+                        "connection": null,
+                        "table": "invoices",
+                        "key": null,
+                        "at_ms": 53.86
+                    },
+                    {
+                        "event": "saving",
+                        "model": "App\\Models\\Invoice",
+                        "connection": "pgsql",
+                        "table": "invoices",
+                        "key": null,
+                        "at_ms": 53.977
+                    },
+                    {
+                        "event": "creating",
+                        "model": "App\\Models\\Invoice",
+                        "connection": "pgsql",
+                        "table": "invoices",
+                        "key": null,
+                        "at_ms": 53.994
+                    },
+                    {
+                        "event": "created",
+                        "model": "App\\Models\\Invoice",
+                        "connection": "pgsql",
+                        "table": "invoices",
+                        "key": 11,
+                        "at_ms": 56.999
+                    },
+                    {
+                        "event": "saved",
+                        "model": "App\\Models\\Invoice",
+                        "connection": "pgsql",
+                        "table": "invoices",
+                        "key": 11,
+                        "at_ms": 57.016
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Client",
+                        "connection": "pgsql",
+                        "table": "clients",
+                        "key": 1,
+                        "at_ms": 57.724
+                    },
+                    {
+                        "event": "saving",
+                        "model": "App\\Models\\Client",
+                        "connection": "pgsql",
+                        "table": "clients",
+                        "key": 1,
+                        "at_ms": 59.744
+                    },
+                    {
+                        "event": "updating",
+                        "model": "App\\Models\\Client",
+                        "connection": "pgsql",
+                        "table": "clients",
+                        "key": 1,
+                        "at_ms": 59.864
+                    },
+                    {
+                        "event": "updated",
+                        "model": "App\\Models\\Client",
+                        "connection": "pgsql",
+                        "table": "clients",
+                        "key": 1,
+                        "at_ms": 61.261
+                    },
+                    {
+                        "event": "saved",
+                        "model": "App\\Models\\Client",
+                        "connection": "pgsql",
+                        "table": "clients",
+                        "key": 1,
+                        "at_ms": 61.275
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": null,
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 65.867
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": null,
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 66.102
+                    },
+                    {
+                        "event": "saving",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 66.216
+                    },
+                    {
+                        "event": "creating",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 66.232
+                    },
+                    {
+                        "event": "created",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": 57,
+                        "at_ms": 67.523
+                    },
+                    {
+                        "event": "saved",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": 57,
+                        "at_ms": 67.54
+                    }
+                ]
+            }
+        },
+        "cache": {
+            "label": "Cache",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "hits": 0,
+                "misses": 0,
+                "writes": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "views": {
+            "label": "Views",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "events": {
+            "label": "Events",
+            "summary": {
+                "count": 19,
+                "retained_count": 19,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "Illuminate\\Database\\Events\\ConnectionEstablished",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\ConnectionEstablished"
+                        ],
+                        "at_ms": 1.803
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 14.743
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 22.375
+                    },
+                    {
+                        "name": "Illuminate\\Auth\\Events\\Authenticated",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Auth\\Events\\Authenticated"
+                        ],
+                        "at_ms": 24.218
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 24.958
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 31.288
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 35.477
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 38.578
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 43.913
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 47.965
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 49.914
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 51.609
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 52.382
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 54.101
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 57.163
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 57.99
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 59.008
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\TransactionCommitting",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\TransactionCommitting"
+                        ],
+                        "at_ms": 61.714
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 66.349
+                    }
+                ]
+            }
+        },
+        "authorization": {
+            "label": "Authorization",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "validation": {
+            "label": "Validation",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "lifecycle": {
+            "label": "Lifecycle",
+            "summary": {
+                "count": 4,
+                "retained_count": 4,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "Route matching",
+                        "duration_ms": 0.47,
+                        "at_ms": 0.652
+                    },
+                    {
+                        "name": "Route middleware, binding, controller and rendering",
+                        "duration_ms": 67.5,
+                        "at_ms": 68.151
+                    },
+                    {
+                        "name": "Route response preparation",
+                        "duration_ms": 0.06,
+                        "at_ms": 68.207
+                    },
+                    {
+                        "name": "Final response preparation",
+                        "duration_ms": 0.04,
+                        "at_ms": 69.181
+                    }
+                ]
+            }
+        },
+        "messages": {
+            "label": "Messages",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "logs": {
+            "label": "Logs",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "errors": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "exceptions": {
+            "label": "Exceptions",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        }
+    }
+}

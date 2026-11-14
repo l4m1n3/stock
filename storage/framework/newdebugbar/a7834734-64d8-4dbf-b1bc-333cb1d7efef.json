@@ -1,0 +1,1979 @@
+{
+    "schema_version": 1,
+    "id": "a7834734-64d8-4dbf-b1bc-333cb1d7efef",
+    "recorded_at": "2026-11-14T18:03:11+01:00",
+    "profile_type": "http",
+    "environment": "local",
+    "metrics": {
+        "duration_ms": 43.01,
+        "peak_memory_mb": 4
+    },
+    "sections": {
+        "overview": {
+            "label": "Overview",
+            "summary": {
+                "duration_ms": 43.01,
+                "peak_memory_mb": 4
+            },
+            "payload": {
+                "runtime": {
+                    "environment": "local",
+                    "php": "8.4.19",
+                    "php_sapi": "cli-server",
+                    "runtime_type": "cli-server",
+                    "laravel": "13.5.0",
+                    "debug": true,
+                    "locale": "en",
+                    "timezone": "Africa/Niamey"
+                },
+                "cache_state": {
+                    "configuration": false,
+                    "routes": false,
+                    "events": false
+                },
+                "drivers": {
+                    "database": "pgsql",
+                    "cache": "database",
+                    "queue": "database",
+                    "session": "database",
+                    "mail": "log",
+                    "broadcasting": "log"
+                },
+                "ecosystem": [],
+                "package": "dev-main"
+            }
+        },
+        "request": {
+            "label": "Request",
+            "summary": {
+                "method": "GET",
+                "status": 200,
+                "exit_code": null
+            },
+            "payload": {
+                "method": "GET",
+                "url": "http://localhost:8000/admin/invoices",
+                "path": "/admin/invoices",
+                "query": [],
+                "input": [],
+                "headers": {
+                    "host": [
+                        "localhost:8000"
+                    ],
+                    "connection": [
+                        "keep-alive"
+                    ],
+                    "sec-ch-ua": [
+                        "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Brave\";v=\"156\""
+                    ],
+                    "sec-ch-ua-mobile": [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform": [
+                        "\"macOS\""
+                    ],
+                    "upgrade-insecure-requests": [
+                        "1"
+                    ],
+                    "user-agent": [
+                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+                    ],
+                    "accept": [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;q=0.8"
+                    ],
+                    "sec-gpc": [
+                        "1"
+                    ],
+                    "sec-fetch-site": [
+                        "same-origin"
+                    ],
+                    "sec-fetch-mode": [
+                        "navigate"
+                    ],
+                    "sec-fetch-user": [
+                        "?1"
+                    ],
+                    "sec-fetch-dest": [
+                        "document"
+                    ],
+                    "referer": [
+                        "http://localhost:8000/admin/stock"
+                    ],
+                    "accept-encoding": [
+                        "gzip, deflate, br, zstd"
+                    ],
+                    "accept-language": [
+                        "fr-FR,fr;q=0.9"
+                    ],
+                    "cookie": "[redacted]"
+                },
+                "route": "admin.invoices",
+                "action": "App\\Http\\Controllers\\AdminController@invoices",
+                "parameters": [],
+                "middleware": [
+                    "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+                    "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestForgery",
+                    "Illuminate\\Auth\\Middleware\\Authenticate",
+                    "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                    "Laravel\\Boost\\Middleware\\InjectBoost"
+                ],
+                "status": 200,
+                "request_type": "full_page",
+                "content_type": "text/html; charset=utf-8",
+                "request_size_bytes": 0,
+                "response_size_bytes": 41630,
+                "session_present": false,
+                "authenticated": true,
+                "authentication": {
+                    "guard": "web",
+                    "authenticated": true,
+                    "model": "App\\Models\\User",
+                    "identifier": "hmac:574203d5a604be87",
+                    "identifier_policy": "keyed_hash"
+                },
+                "session": {
+                    "present": false,
+                    "driver": "database",
+                    "key_count": 0,
+                    "keys": [],
+                    "keys_dropped": 0,
+                    "flash_keys": [],
+                    "error_bag_present": false,
+                    "error_bags": []
+                },
+                "timing_scope": "global_middleware_entry",
+                "response_headers": {
+                    "content-type": [
+                        "text/html; charset=utf-8"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Sat, 14 Nov 2026 17:03:11 GMT"
+                    ],
+                    "set-cookie": "[redacted]"
+                }
+            }
+        },
+        "queries": {
+            "label": "Queries",
+            "summary": {
+                "count": 12,
+                "retained_count": 12,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 18.88,
+                "transaction_count": 0,
+                "transaction_retained_count": 0,
+                "transaction_dropped_count": 0,
+                "rollback_count": 0
+            },
+            "payload": {
+                "items": [
+                    {
+                        "sql": "select * from \"sessions\" where \"id\" = ? limit 1",
+                        "bindings": [
+                            "WHV6JQW3B32BiFvgLnMURXGcCSuamY6PyldsmLR6"
+                        ],
+                        "runnable_sql": "select * from \"sessions\" where \"id\" = 'WHV6JQW3B32BiFvgLnMURXGcCSuamY6PyldsmLR6' limit 1",
+                        "duration_ms": 9.4,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 10.197,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"users\" where \"id\" = ? limit 1",
+                        "bindings": [
+                            1
+                        ],
+                        "runnable_sql": "select * from \"users\" where \"id\" = 1 limit 1",
+                        "duration_ms": 1.16,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 12.178,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select count(*) as aggregate from \"invoices\"",
+                        "bindings": [],
+                        "runnable_sql": "select count(*) as aggregate from \"invoices\"",
+                        "duration_ms": 1.13,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 222
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 222,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->paginate"
+                            }
+                        ],
+                        "at_ms": 14.992,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"invoices\" order by \"issued_at\" desc limit 20 offset 0",
+                        "bindings": [],
+                        "runnable_sql": "select * from \"invoices\" order by \"issued_at\" desc limit 20 offset 0",
+                        "duration_ms": 0.78,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 222
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 222,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->paginate"
+                            }
+                        ],
+                        "at_ms": 15.892,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"sales\" where \"sales\".\"id\" in (6, 7, 8, 9, 10, 11, 13, 14, 15)",
+                        "bindings": [],
+                        "runnable_sql": "select * from \"sales\" where \"sales\".\"id\" in (6, 7, 8, 9, 10, 11, 13, 14, 15)",
+                        "duration_ms": 0.93,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 222
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 222,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->paginate"
+                            }
+                        ],
+                        "at_ms": 17.683,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"users\" where \"users\".\"id\" in (1, 2)",
+                        "bindings": [],
+                        "runnable_sql": "select * from \"users\" where \"users\".\"id\" in (1, 2)",
+                        "duration_ms": 0.71,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 222
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 222,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->paginate"
+                            }
+                        ],
+                        "at_ms": 19.009,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"branches\" where \"branches\".\"id\" in (1)",
+                        "bindings": [],
+                        "runnable_sql": "select * from \"branches\" where \"branches\".\"id\" in (1)",
+                        "duration_ms": 0.96,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 222
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 222,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->paginate"
+                            }
+                        ],
+                        "at_ms": 24.27,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"branches\" order by \"name\" asc",
+                        "bindings": [],
+                        "runnable_sql": "select * from \"branches\" order by \"name\" asc",
+                        "duration_ms": 0.5,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 223
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 223,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 25.109,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\"",
+                        "bindings": [],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\"",
+                        "duration_ms": 0.44,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 225
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 225,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 25.776,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select count(*) as aggregate from \"invoices\"",
+                        "bindings": [],
+                        "runnable_sql": "select count(*) as aggregate from \"invoices\"",
+                        "duration_ms": 0.44,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 226
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 226,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 26.536,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where extract(month from \"issued_at\") = ?",
+                        "bindings": [
+                            "11"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where extract(month from \"issued_at\") = '11'",
+                        "duration_ms": 0.63,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 229
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 229,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                            }
+                        ],
+                        "at_ms": 27.402,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "update \"sessions\" set \"payload\" = ?, \"last_activity\" = ?, \"user_id\" = ?, \"ip_address\" = ?, \"user_agent\" = ? where \"id\" = ?",
+                        "bindings": [
+                            "eyJfdG9rZW4iOiJOcktGMnl3d2VrN1FCS24xdjhFeU1yVUp0RlRSdHNoMkE0ZnljcGp5IiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDBcL2FkbWluXC9pbnZvaWNlcyIsInJvdXRlIjoiYWRtaW4uaW52b2ljZXMifSwibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiOjF9",
+                            1794675791,
+                            1,
+                            "127.0.0.1",
+                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+                            "WHV6JQW3B32BiFvgLnMURXGcCSuamY6PyldsmLR6"
+                        ],
+                        "runnable_sql": "update \"sessions\" set \"payload\" = 'eyJfdG9rZW4iOiJOcktGMnl3d2VrN1FCS24xdjhFeU1yVUp0RlRSdHNoMkE0ZnljcGp5IiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDBcL2FkbWluXC9pbnZvaWNlcyIsInJvdXRlIjoiYWRtaW4uaW52b2ljZXMifSwibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiOjF9', \"last_activity\" = 1794675791, \"user_id\" = 1, \"ip_address\" = '127.0.0.1', \"user_agent\" = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36' where \"id\" = 'WHV6JQW3B32BiFvgLnMURXGcCSuamY6PyldsmLR6'",
+                        "duration_ms": 1.8,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 42.675,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    }
+                ],
+                "transactions": []
+            }
+        },
+        "http_client": {
+            "label": "HTTP Client",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "queue": {
+            "label": "Queue",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "queued_count": 0,
+                "executed_count": 0,
+                "failed_count": 0,
+                "duration_ms": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "mail": {
+            "label": "Mail",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "recipient_count": 0,
+                "attachment_count": 0,
+                "duration_ms": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "notifications": {
+            "label": "Notifications",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "sent_count": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "redis": {
+            "label": "Redis",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "models": {
+            "label": "Models",
+            "summary": {
+                "count": 32,
+                "retained_count": 32,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\User",
+                        "connection": null,
+                        "table": "users",
+                        "key": null,
+                        "at_ms": 10.618
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\User",
+                        "connection": null,
+                        "table": "users",
+                        "key": null,
+                        "at_ms": 10.836
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\User",
+                        "connection": "pgsql",
+                        "table": "users",
+                        "key": 1,
+                        "at_ms": 12.266
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Invoice",
+                        "connection": null,
+                        "table": "invoices",
+                        "key": null,
+                        "at_ms": 13.453
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Invoice",
+                        "connection": null,
+                        "table": "invoices",
+                        "key": null,
+                        "at_ms": 13.654
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Invoice",
+                        "connection": "pgsql",
+                        "table": "invoices",
+                        "key": 11,
+                        "at_ms": 15.971
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Invoice",
+                        "connection": "pgsql",
+                        "table": "invoices",
+                        "key": 10,
+                        "at_ms": 15.99
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Invoice",
+                        "connection": "pgsql",
+                        "table": "invoices",
+                        "key": 9,
+                        "at_ms": 16.005
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Invoice",
+                        "connection": "pgsql",
+                        "table": "invoices",
+                        "key": 8,
+                        "at_ms": 16.018
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Invoice",
+                        "connection": "pgsql",
+                        "table": "invoices",
+                        "key": 7,
+                        "at_ms": 16.031
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Invoice",
+                        "connection": "pgsql",
+                        "table": "invoices",
+                        "key": 6,
+                        "at_ms": 16.044
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Invoice",
+                        "connection": "pgsql",
+                        "table": "invoices",
+                        "key": 5,
+                        "at_ms": 16.056
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Invoice",
+                        "connection": "pgsql",
+                        "table": "invoices",
+                        "key": 4,
+                        "at_ms": 16.069
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Invoice",
+                        "connection": "pgsql",
+                        "table": "invoices",
+                        "key": 3,
+                        "at_ms": 16.081
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Sale",
+                        "connection": null,
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 16.15
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Sale",
+                        "connection": null,
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 16.313
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 6,
+                        "at_ms": 17.808
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 7,
+                        "at_ms": 17.833
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 8,
+                        "at_ms": 17.852
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 9,
+                        "at_ms": 17.901
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 10,
+                        "at_ms": 17.92
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 11,
+                        "at_ms": 17.935
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 13,
+                        "at_ms": 17.95
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 14,
+                        "at_ms": 17.964
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Sale",
+                        "connection": "pgsql",
+                        "table": "sales",
+                        "key": 15,
+                        "at_ms": 17.977
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\User",
+                        "connection": "pgsql",
+                        "table": "users",
+                        "key": 1,
+                        "at_ms": 22.038
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\User",
+                        "connection": "pgsql",
+                        "table": "users",
+                        "key": 2,
+                        "at_ms": 22.219
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Branch",
+                        "connection": null,
+                        "table": "branches",
+                        "key": null,
+                        "at_ms": 22.829
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Branch",
+                        "connection": null,
+                        "table": "branches",
+                        "key": null,
+                        "at_ms": 23.094
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Branch",
+                        "connection": "pgsql",
+                        "table": "branches",
+                        "key": 1,
+                        "at_ms": 24.361
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Branch",
+                        "connection": "pgsql",
+                        "table": "branches",
+                        "key": 1,
+                        "at_ms": 25.184
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Branch",
+                        "connection": "pgsql",
+                        "table": "branches",
+                        "key": 2,
+                        "at_ms": 25.201
+                    }
+                ]
+            }
+        },
+        "cache": {
+            "label": "Cache",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "hits": 0,
+                "misses": 0,
+                "writes": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "views": {
+            "label": "Views",
+            "summary": {
+                "count": 3,
+                "retained_count": 3,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "admin.invoices.index",
+                        "source": {
+                            "file": "resources/views/admin/invoices/index.blade.php",
+                            "line": 1
+                        },
+                        "composers": [],
+                        "data": {
+                            "invoices": {
+                                "current_page": 1,
+                                "data": [
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    }
+                                ],
+                                "first_page_url": "http://localhost:8000/admin/invoices?page=1",
+                                "from": 1,
+                                "last_page": 1,
+                                "last_page_url": "http://localhost:8000/admin/invoices?page=1",
+                                "links": [
+                                    {
+                                        "url": "[maximum depth reached]",
+                                        "label": "[maximum depth reached]",
+                                        "page": "[maximum depth reached]",
+                                        "active": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "url": "[maximum depth reached]",
+                                        "label": "[maximum depth reached]",
+                                        "page": "[maximum depth reached]",
+                                        "active": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "url": "[maximum depth reached]",
+                                        "label": "[maximum depth reached]",
+                                        "page": "[maximum depth reached]",
+                                        "active": "[maximum depth reached]"
+                                    }
+                                ],
+                                "next_page_url": null,
+                                "path": "http://localhost:8000/admin/invoices",
+                                "per_page": 20,
+                                "prev_page_url": null,
+                                "to": 9,
+                                "total": 9
+                            },
+                            "branches": [
+                                {
+                                    "id": 1,
+                                    "name": "Maradi",
+                                    "city": "maradi",
+                                    "created_at": null,
+                                    "updated_at": null
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Zinder",
+                                    "city": "zinder",
+                                    "created_at": null,
+                                    "updated_at": null
+                                }
+                            ],
+                            "branchId": null,
+                            "totalAmount": "468500.00",
+                            "totalInvoices": 9,
+                            "monthAmount": "126500.00"
+                        },
+                        "timing": "composition_marker",
+                        "at_ms": 30.395
+                    },
+                    {
+                        "name": "pagination::tailwind",
+                        "source": {
+                            "file": "vendor/laravel/framework/src/Illuminate/Pagination/resources/views/tailwind.blade.php",
+                            "line": 1
+                        },
+                        "composers": [],
+                        "data": {
+                            "paginator": {
+                                "current_page": 1,
+                                "data": [
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    }
+                                ],
+                                "first_page_url": "http://localhost:8000/admin/invoices?page=1",
+                                "from": 1,
+                                "last_page": 1,
+                                "last_page_url": "http://localhost:8000/admin/invoices?page=1",
+                                "links": [
+                                    {
+                                        "url": "[maximum depth reached]",
+                                        "label": "[maximum depth reached]",
+                                        "page": "[maximum depth reached]",
+                                        "active": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "url": "[maximum depth reached]",
+                                        "label": "[maximum depth reached]",
+                                        "page": "[maximum depth reached]",
+                                        "active": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "url": "[maximum depth reached]",
+                                        "label": "[maximum depth reached]",
+                                        "page": "[maximum depth reached]",
+                                        "active": "[maximum depth reached]"
+                                    }
+                                ],
+                                "next_page_url": null,
+                                "path": "http://localhost:8000/admin/invoices",
+                                "per_page": 20,
+                                "prev_page_url": null,
+                                "to": 9,
+                                "total": 9
+                            },
+                            "elements": [
+                                {
+                                    "1": "http://localhost:8000/admin/invoices?page=1"
+                                }
+                            ]
+                        },
+                        "timing": "composition_marker",
+                        "at_ms": 35.712
+                    },
+                    {
+                        "name": "layouts.apps",
+                        "source": {
+                            "file": "resources/views/layouts/apps.blade.php",
+                            "line": 1
+                        },
+                        "composers": [],
+                        "data": {
+                            "__env": "[Illuminate\\View\\Factory]",
+                            "app": "[Illuminate\\Foundation\\Application]",
+                            "errors": "[]",
+                            "invoices": {
+                                "current_page": 1,
+                                "data": [
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    }
+                                ],
+                                "first_page_url": "http://localhost:8000/admin/invoices?page=1",
+                                "from": 1,
+                                "last_page": 1,
+                                "last_page_url": "http://localhost:8000/admin/invoices?page=1",
+                                "links": [
+                                    {
+                                        "url": "[maximum depth reached]",
+                                        "label": "[maximum depth reached]",
+                                        "page": "[maximum depth reached]",
+                                        "active": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "url": "[maximum depth reached]",
+                                        "label": "[maximum depth reached]",
+                                        "page": "[maximum depth reached]",
+                                        "active": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "url": "[maximum depth reached]",
+                                        "label": "[maximum depth reached]",
+                                        "page": "[maximum depth reached]",
+                                        "active": "[maximum depth reached]"
+                                    }
+                                ],
+                                "next_page_url": null,
+                                "path": "http://localhost:8000/admin/invoices",
+                                "per_page": 20,
+                                "prev_page_url": null,
+                                "to": 9,
+                                "total": 9
+                            },
+                            "branches": [
+                                {
+                                    "id": 1,
+                                    "name": "Maradi",
+                                    "city": "maradi",
+                                    "created_at": null,
+                                    "updated_at": null
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Zinder",
+                                    "city": "zinder",
+                                    "created_at": null,
+                                    "updated_at": null
+                                }
+                            ],
+                            "branchId": null,
+                            "totalAmount": "468500.00",
+                            "totalInvoices": 9,
+                            "monthAmount": "126500.00",
+                            "__currentLoopData": {
+                                "current_page": 1,
+                                "data": [
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "sale_id": "[maximum depth reached]",
+                                        "invoice_number": "[maximum depth reached]",
+                                        "total_amount": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "issued_at": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "client_id": "[maximum depth reached]",
+                                        "client_name": "[maximum depth reached]",
+                                        "client_phone": "[maximum depth reached]",
+                                        "status": "[maximum depth reached]",
+                                        "subtotal": "[maximum depth reached]",
+                                        "discount_amount": "[maximum depth reached]",
+                                        "sale": "[maximum depth reached]",
+                                        "branch": "[maximum depth reached]"
+                                    }
+                                ],
+                                "first_page_url": "http://localhost:8000/admin/invoices?page=1",
+                                "from": 1,
+                                "last_page": 1,
+                                "last_page_url": "http://localhost:8000/admin/invoices?page=1",
+                                "links": [
+                                    {
+                                        "url": "[maximum depth reached]",
+                                        "label": "[maximum depth reached]",
+                                        "page": "[maximum depth reached]",
+                                        "active": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "url": "[maximum depth reached]",
+                                        "label": "[maximum depth reached]",
+                                        "page": "[maximum depth reached]",
+                                        "active": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "url": "[maximum depth reached]",
+                                        "label": "[maximum depth reached]",
+                                        "page": "[maximum depth reached]",
+                                        "active": "[maximum depth reached]"
+                                    }
+                                ],
+                                "next_page_url": null,
+                                "path": "http://localhost:8000/admin/invoices",
+                                "per_page": 20,
+                                "prev_page_url": null,
+                                "to": 9,
+                                "total": 9
+                            },
+                            "branch": {
+                                "id": 2,
+                                "name": "Zinder",
+                                "city": "zinder",
+                                "created_at": null,
+                                "updated_at": null
+                            },
+                            "loop": null,
+                            "__empty_1": false,
+                            "invoice": {
+                                "id": 3,
+                                "sale_id": 6,
+                                "invoice_number": "INV-000006",
+                                "total_amount": "6000.00",
+                                "branch_id": 1,
+                                "issued_at": "2026-04-23 12:26:08",
+                                "created_at": "2026-04-23T11:26:08.000000Z",
+                                "updated_at": "2026-04-23T11:26:08.000000Z",
+                                "client_id": null,
+                                "client_name": null,
+                                "client_phone": null,
+                                "status": "active",
+                                "subtotal": "0.00",
+                                "discount_amount": "0.00",
+                                "sale": {
+                                    "id": 6,
+                                    "user_id": 1,
+                                    "total_amount": "6000.00",
+                                    "payment_method": "cash",
+                                    "branch_id": 1,
+                                    "sold_at": "2026-04-23T11:26:08.000000Z",
+                                    "created_at": "2026-04-23T11:26:08.000000Z",
+                                    "updated_at": "2026-04-23T11:26:08.000000Z",
+                                    "client_id": null,
+                                    "subtotal": "0.00",
+                                    "discount_type": null,
+                                    "discount_value": "0.00",
+                                    "discount_amount": "0.00",
+                                    "user": {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "email": "[maximum depth reached]",
+                                        "email_verified_at": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "role": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]"
+                                    }
+                                },
+                                "branch": {
+                                    "id": 1,
+                                    "name": "Maradi",
+                                    "city": "maradi",
+                                    "created_at": null,
+                                    "updated_at": null
+                                }
+                            }
+                        },
+                        "timing": "composition_marker",
+                        "at_ms": 39.905
+                    }
+                ]
+            }
+        },
+        "events": {
+            "label": "Events",
+            "summary": {
+                "count": 13,
+                "retained_count": 13,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "Illuminate\\Database\\Events\\ConnectionEstablished",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\ConnectionEstablished"
+                        ],
+                        "at_ms": 0.431
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 6.997
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 10.923
+                    },
+                    {
+                        "name": "Illuminate\\Auth\\Events\\Authenticated",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Auth\\Events\\Authenticated"
+                        ],
+                        "at_ms": 12.305
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 13.746
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 15.066
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 16.586
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 18.112
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 23.275
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 24.511
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 25.275
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 26.042
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 26.709
+                    }
+                ]
+            }
+        },
+        "authorization": {
+            "label": "Authorization",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "validation": {
+            "label": "Validation",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "lifecycle": {
+            "label": "Lifecycle",
+            "summary": {
+                "count": 4,
+                "retained_count": 4,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "Route matching",
+                        "duration_ms": 0.15,
+                        "at_ms": 0.208
+                    },
+                    {
+                        "name": "Route middleware, binding, controller and rendering",
+                        "duration_ms": 27.32,
+                        "at_ms": 27.531
+                    },
+                    {
+                        "name": "Route response preparation",
+                        "duration_ms": 12.89,
+                        "at_ms": 40.425
+                    },
+                    {
+                        "name": "Final response preparation",
+                        "duration_ms": 0.03,
+                        "at_ms": 42.794
+                    }
+                ]
+            }
+        },
+        "messages": {
+            "label": "Messages",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "logs": {
+            "label": "Logs",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "errors": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "exceptions": {
+            "label": "Exceptions",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        }
+    }
+}

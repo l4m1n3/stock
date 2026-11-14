@@ -1,19 +1,19 @@
 {
     "schema_version": 1,
-    "id": "3dbc8cb5-18f7-448c-adea-ac859093b552",
-    "recorded_at": "2026-10-24T19:05:24+01:00",
+    "id": "dd860c53-afb2-415c-b180-32fc1b4ead24",
+    "recorded_at": "2026-11-14T18:03:07+01:00",
     "profile_type": "http",
     "environment": "local",
     "metrics": {
-        "duration_ms": 283.69,
-        "peak_memory_mb": 2
+        "duration_ms": 18.43,
+        "peak_memory_mb": 4
     },
     "sections": {
         "overview": {
             "label": "Overview",
             "summary": {
-                "duration_ms": 283.69,
-                "peak_memory_mb": 2
+                "duration_ms": 18.43,
+                "peak_memory_mb": 4
             },
             "payload": {
                 "runtime": {
@@ -23,7 +23,7 @@
                     "runtime_type": "cli-server",
                     "laravel": "13.5.0",
                     "debug": true,
-                    "locale": "fr",
+                    "locale": "en",
                     "timezone": "Africa/Niamey"
                 },
                 "cache_state": {
@@ -46,35 +46,25 @@
         "request": {
             "label": "Request",
             "summary": {
-                "method": "POST",
-                "status": 302,
+                "method": "GET",
+                "status": 200,
                 "exit_code": null
             },
             "payload": {
-                "method": "POST",
-                "url": "http://localhost:8001/login",
-                "path": "/login",
+                "method": "GET",
+                "url": "http://localhost:8000/admin/branches",
+                "path": "/admin/branches",
                 "query": [],
-                "input": {
-                    "_token": "[redacted]",
-                    "email": "mahamanelmn8@gmail.com",
-                    "password": "[redacted]"
-                },
+                "input": [],
                 "headers": {
                     "host": [
-                        "localhost:8001"
+                        "localhost:8000"
                     ],
                     "connection": [
                         "keep-alive"
                     ],
-                    "content-length": [
-                        "96"
-                    ],
-                    "cache-control": [
-                        "max-age=0"
-                    ],
                     "sec-ch-ua": [
-                        "\"Brave\";v=\"155\", \"Chromium\";v=\"155\", \"Not(A:Brand\";v=\"24\""
+                        "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Brave\";v=\"156\""
                     ],
                     "sec-ch-ua-mobile": [
                         "?0"
@@ -85,14 +75,8 @@
                     "upgrade-insecure-requests": [
                         "1"
                     ],
-                    "content-type": [
-                        "application/x-www-form-urlencoded"
-                    ],
                     "user-agent": [
-                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
-                    ],
-                    "origin": [
-                        "http://localhost:8001"
+                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
                     ],
                     "accept": [
                         "text/html,application/xhtml+xml,application/xml;q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;q=0.8"
@@ -113,18 +97,18 @@
                         "document"
                     ],
                     "referer": [
-                        "http://localhost:8001/"
+                        "http://localhost:8000/admin"
                     ],
                     "accept-encoding": [
                         "gzip, deflate, br, zstd"
                     ],
                     "accept-language": [
-                        "fr-FR,fr;q=0.8"
+                        "fr-FR,fr;q=0.9"
                     ],
                     "cookie": "[redacted]"
                 },
-                "route": null,
-                "action": "App\\Http\\Controllers\\Auth\\AuthController@login",
+                "route": "admin.branches",
+                "action": "App\\Http\\Controllers\\AdminController@branches",
                 "parameters": [],
                 "middleware": [
                     "Illuminate\\Cookie\\Middleware\\EncryptCookies",
@@ -132,22 +116,22 @@
                     "Illuminate\\Session\\Middleware\\StartSession",
                     "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
                     "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestForgery",
+                    "Illuminate\\Auth\\Middleware\\Authenticate",
                     "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-                    "Laravel\\Boost\\Middleware\\InjectBoost",
-                    "Illuminate\\Auth\\Middleware\\RedirectIfAuthenticated"
+                    "Laravel\\Boost\\Middleware\\InjectBoost"
                 ],
-                "status": 302,
-                "request_type": "redirect",
+                "status": 200,
+                "request_type": "full_page",
                 "content_type": "text/html; charset=utf-8",
-                "request_size_bytes": 96,
-                "response_size_bytes": 354,
+                "request_size_bytes": 0,
+                "response_size_bytes": 29364,
                 "session_present": false,
                 "authenticated": true,
                 "authentication": {
                     "guard": "web",
                     "authenticated": true,
                     "model": "App\\Models\\User",
-                    "identifier": "hmac:50045f8e8ac31618",
+                    "identifier": "hmac:574203d5a604be87",
                     "identifier_policy": "keyed_hash"
                 },
                 "session": {
@@ -162,17 +146,14 @@
                 },
                 "timing_scope": "global_middleware_entry",
                 "response_headers": {
+                    "content-type": [
+                        "text/html; charset=utf-8"
+                    ],
                     "cache-control": [
                         "no-cache, private"
                     ],
                     "date": [
-                        "Sat, 24 Oct 2026 18:05:24 GMT"
-                    ],
-                    "location": [
-                        "http://localhost:8001/admin"
-                    ],
-                    "content-type": [
-                        "text/html; charset=utf-8"
+                        "Sat, 14 Nov 2026 17:03:07 GMT"
                     ],
                     "set-cookie": "[redacted]"
                 }
@@ -181,11 +162,11 @@
         "queries": {
             "label": "Queries",
             "summary": {
-                "count": 6,
-                "retained_count": 6,
+                "count": 4,
+                "retained_count": 4,
                 "dropped_count": 0,
                 "truncated": false,
-                "duration_ms": 13.83,
+                "duration_ms": 11.94,
                 "transaction_count": 0,
                 "transaction_retained_count": 0,
                 "transaction_dropped_count": 0,
@@ -196,141 +177,78 @@
                     {
                         "sql": "select * from \"sessions\" where \"id\" = ? limit 1",
                         "bindings": [
-                            "0t6oQrg6YHRLzY1XAbRwqtnYQUBr8tNk6YzlH0Rn"
+                            "WHV6JQW3B32BiFvgLnMURXGcCSuamY6PyldsmLR6"
                         ],
-                        "runnable_sql": "select * from \"sessions\" where \"id\" = '0t6oQrg6YHRLzY1XAbRwqtnYQUBr8tNk6YzlH0Rn' limit 1",
-                        "duration_ms": 8.46,
+                        "runnable_sql": "select * from \"sessions\" where \"id\" = 'WHV6JQW3B32BiFvgLnMURXGcCSuamY6PyldsmLR6' limit 1",
+                        "duration_ms": 7.84,
                         "connection": "pgsql",
                         "type": "write",
                         "callsite": null,
                         "stack": [],
-                        "at_ms": 10.393,
+                        "at_ms": 8.6,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
                         "runnable_available": true
                     },
                     {
-                        "sql": "select * from \"users\" where \"email\" = ? limit 1",
+                        "sql": "select * from \"users\" where \"id\" = ? limit 1",
                         "bindings": [
-                            "mahamanelmn8@gmail.com"
+                            1
                         ],
-                        "runnable_sql": "select * from \"users\" where \"email\" = 'mahamanelmn8@gmail.com' limit 1",
-                        "duration_ms": 1.76,
-                        "connection": "pgsql",
-                        "type": "write",
-                        "callsite": {
-                            "file": "app/Http/Controllers/Auth/AuthController.php",
-                            "line": 29
-                        },
-                        "stack": [
-                            {
-                                "file": "app/Http/Controllers/Auth/AuthController.php",
-                                "line": 29,
-                                "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
-                            }
-                        ],
-                        "at_ms": 15.23,
-                        "source_preserved": true,
-                        "binding_policy": "full",
-                        "bindings_complete": true,
-                        "runnable_available": true
-                    },
-                    {
-                        "sql": "delete from \"sessions\" where \"id\" = ?",
-                        "bindings": [
-                            "0t6oQrg6YHRLzY1XAbRwqtnYQUBr8tNk6YzlH0Rn"
-                        ],
-                        "runnable_sql": "delete from \"sessions\" where \"id\" = '0t6oQrg6YHRLzY1XAbRwqtnYQUBr8tNk6YzlH0Rn'",
-                        "duration_ms": 1.26,
-                        "connection": "pgsql",
-                        "type": "write",
-                        "callsite": {
-                            "file": "app/Http/Controllers/Auth/AuthController.php",
-                            "line": 29
-                        },
-                        "stack": [
-                            {
-                                "file": "app/Http/Controllers/Auth/AuthController.php",
-                                "line": 29,
-                                "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
-                            }
-                        ],
-                        "at_ms": 279.903,
-                        "source_preserved": true,
-                        "binding_policy": "full",
-                        "bindings_complete": true,
-                        "runnable_available": true
-                    },
-                    {
-                        "sql": "insert into \"activity_logs\" (\"user_id\", \"action\", \"description\", \"updated_at\", \"created_at\") values (?, ?, ?, ?, ?) returning \"id\"",
-                        "bindings": [
-                            1,
-                            "login_success",
-                            "Connexion r\u00e9ussie : mahamanelmn8@gmail.com",
-                            "2026-10-24 19:05:24",
-                            "2026-10-24 19:05:24"
-                        ],
-                        "runnable_sql": "insert into \"activity_logs\" (\"user_id\", \"action\", \"description\", \"updated_at\", \"created_at\") values (1, 'login_success', 'Connexion r\u00e9ussie : mahamanelmn8@gmail.com', '2026-10-24 19:05:24', '2026-10-24 19:05:24') returning \"id\"",
-                        "duration_ms": 1.29,
-                        "connection": "pgsql",
-                        "type": "write",
-                        "callsite": {
-                            "file": "app/helpers.php",
-                            "line": 6
-                        },
-                        "stack": [
-                            {
-                                "file": "app/helpers.php",
-                                "line": 6,
-                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
-                            },
-                            {
-                                "file": "app/Http/Controllers/Auth/AuthController.php",
-                                "line": 36,
-                                "function": "activity_log"
-                            }
-                        ],
-                        "at_ms": 281.755,
-                        "source_preserved": true,
-                        "binding_policy": "full",
-                        "bindings_complete": true,
-                        "runnable_available": true
-                    },
-                    {
-                        "sql": "select * from \"sessions\" where \"id\" = ? limit 1",
-                        "bindings": [
-                            "9CwBWW9sXGQClv15WNvweXTBGyijZZulDvWYhlcQ"
-                        ],
-                        "runnable_sql": "select * from \"sessions\" where \"id\" = '9CwBWW9sXGQClv15WNvweXTBGyijZZulDvWYhlcQ' limit 1",
-                        "duration_ms": 0.37,
+                        "runnable_sql": "select * from \"users\" where \"id\" = 1 limit 1",
+                        "duration_ms": 0.89,
                         "connection": "pgsql",
                         "type": "write",
                         "callsite": null,
                         "stack": [],
-                        "at_ms": 282.624,
+                        "at_ms": 10.155,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
                         "runnable_available": true
                     },
                     {
-                        "sql": "insert into \"sessions\" (\"payload\", \"last_activity\", \"user_id\", \"ip_address\", \"user_agent\", \"id\") values (?, ?, ?, ?, ?, ?)",
+                        "sql": "select \"branches\".*, (select count(*) from \"users\" where \"branches\".\"id\" = \"users\".\"branch_id\") as \"users_count\", (select count(*) from \"products\" where \"branches\".\"id\" = \"products\".\"branch_id\") as \"products_count\", (select count(*) from \"sales\" where \"branches\".\"id\" = \"sales\".\"branch_id\") as \"sales_count\", (select sum(\"sales\".\"total_amount\") from \"sales\" where \"branches\".\"id\" = \"sales\".\"branch_id\") as \"sales_sum_total_amount\", (select sum(\"expenses\".\"amount\") from \"expenses\" where \"branches\".\"id\" = \"expenses\".\"branch_id\") as \"expenses_sum_amount\" from \"branches\" order by \"name\" asc",
+                        "bindings": [],
+                        "runnable_sql": "select \"branches\".*, (select count(*) from \"users\" where \"branches\".\"id\" = \"users\".\"branch_id\") as \"users_count\", (select count(*) from \"products\" where \"branches\".\"id\" = \"products\".\"branch_id\") as \"products_count\", (select count(*) from \"sales\" where \"branches\".\"id\" = \"sales\".\"branch_id\") as \"sales_count\", (select sum(\"sales\".\"total_amount\") from \"sales\" where \"branches\".\"id\" = \"sales\".\"branch_id\") as \"sales_sum_total_amount\", (select sum(\"expenses\".\"amount\") from \"expenses\" where \"branches\".\"id\" = \"expenses\".\"branch_id\") as \"expenses_sum_amount\" from \"branches\" order by \"name\" asc",
+                        "duration_ms": 2.14,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/AdminController.php",
+                            "line": 102
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/AdminController.php",
+                                "line": 102,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 13.764,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "update \"sessions\" set \"payload\" = ?, \"last_activity\" = ?, \"user_id\" = ?, \"ip_address\" = ?, \"user_agent\" = ? where \"id\" = ?",
                         "bindings": [
-                            "eyJfdG9rZW4iOiJ2bVdBYThFbnlFaG5qY3F4U3hDTnoyOWFUWjNLdzdubDFzQkxvTGhvIiwiX2ZsYXNoIjp7Im9sZCI6WyJzdWNjZXNzIl0sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDEiLCJyb3V0ZSI6bnVsbH0sImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjoxLCJzdWNjZXNzIjoiQmllbnZlbnVlIEFkbWluIFx1ZDgzZFx1ZGM0YiJ9",
-                            1792865124,
+                            "eyJfdG9rZW4iOiJOcktGMnl3d2VrN1FCS24xdjhFeU1yVUp0RlRSdHNoMkE0ZnljcGp5IiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDBcL2FkbWluXC9icmFuY2hlcyIsInJvdXRlIjoiYWRtaW4uYnJhbmNoZXMifSwibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiOjF9",
+                            1794675787,
                             1,
                             "127.0.0.1",
-                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
-                            "9CwBWW9sXGQClv15WNvweXTBGyijZZulDvWYhlcQ"
+                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+                            "WHV6JQW3B32BiFvgLnMURXGcCSuamY6PyldsmLR6"
                         ],
-                        "runnable_sql": "insert into \"sessions\" (\"payload\", \"last_activity\", \"user_id\", \"ip_address\", \"user_agent\", \"id\") values ('eyJfdG9rZW4iOiJ2bVdBYThFbnlFaG5qY3F4U3hDTnoyOWFUWjNLdzdubDFzQkxvTGhvIiwiX2ZsYXNoIjp7Im9sZCI6WyJzdWNjZXNzIl0sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDEiLCJyb3V0ZSI6bnVsbH0sImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjoxLCJzdWNjZXNzIjoiQmllbnZlbnVlIEFkbWluIFx1ZDgzZFx1ZGM0YiJ9', 1792865124, 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36', '9CwBWW9sXGQClv15WNvweXTBGyijZZulDvWYhlcQ')",
-                        "duration_ms": 0.69,
+                        "runnable_sql": "update \"sessions\" set \"payload\" = 'eyJfdG9rZW4iOiJOcktGMnl3d2VrN1FCS24xdjhFeU1yVUp0RlRSdHNoMkE0ZnljcGp5IiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDBcL2FkbWluXC9icmFuY2hlcyIsInJvdXRlIjoiYWRtaW4uYnJhbmNoZXMifSwibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiOjF9', \"last_activity\" = 1794675787, \"user_id\" = 1, \"ip_address\" = '127.0.0.1', \"user_agent\" = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36' where \"id\" = 'WHV6JQW3B32BiFvgLnMURXGcCSuamY6PyldsmLR6'",
+                        "duration_ms": 1.07,
                         "connection": "pgsql",
                         "type": "write",
                         "callsite": null,
                         "stack": [],
-                        "at_ms": 283.429,
+                        "at_ms": 18.108,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
@@ -416,8 +334,8 @@
         "models": {
             "label": "Models",
             "summary": {
-                "count": 9,
-                "retained_count": 9,
+                "count": 13,
+                "retained_count": 13,
                 "dropped_count": 0,
                 "truncated": false
             },
@@ -429,7 +347,7 @@
                         "connection": null,
                         "table": "users",
                         "key": null,
-                        "at_ms": 12.525
+                        "at_ms": 8.904
                     },
                     {
                         "event": "booted",
@@ -437,7 +355,7 @@
                         "connection": null,
                         "table": "users",
                         "key": null,
-                        "at_ms": 13.048
+                        "at_ms": 9.114
                     },
                     {
                         "event": "retrieved",
@@ -445,55 +363,87 @@
                         "connection": "pgsql",
                         "table": "users",
                         "key": 1,
-                        "at_ms": 15.394
+                        "at_ms": 10.224
                     },
                     {
                         "event": "booting",
-                        "model": "App\\Models\\ActivityLog",
+                        "model": "App\\Models\\Branch",
                         "connection": null,
-                        "table": "activity_logs",
+                        "table": "branches",
                         "key": null,
-                        "at_ms": 280.067
+                        "at_ms": 10.359
                     },
                     {
                         "event": "booted",
-                        "model": "App\\Models\\ActivityLog",
+                        "model": "App\\Models\\Branch",
                         "connection": null,
-                        "table": "activity_logs",
+                        "table": "branches",
                         "key": null,
-                        "at_ms": 280.221
+                        "at_ms": 10.517
                     },
                     {
-                        "event": "saving",
-                        "model": "App\\Models\\ActivityLog",
-                        "connection": "pgsql",
-                        "table": "activity_logs",
+                        "event": "booting",
+                        "model": "App\\Models\\Product",
+                        "connection": null,
+                        "table": "products",
                         "key": null,
-                        "at_ms": 280.292
+                        "at_ms": 10.676
                     },
                     {
-                        "event": "creating",
-                        "model": "App\\Models\\ActivityLog",
-                        "connection": "pgsql",
-                        "table": "activity_logs",
+                        "event": "booted",
+                        "model": "App\\Models\\Product",
+                        "connection": null,
+                        "table": "products",
                         "key": null,
-                        "at_ms": 280.304
+                        "at_ms": 10.829
                     },
                     {
-                        "event": "created",
-                        "model": "App\\Models\\ActivityLog",
-                        "connection": "pgsql",
-                        "table": "activity_logs",
-                        "key": 11,
-                        "at_ms": 281.795
+                        "event": "booting",
+                        "model": "App\\Models\\Sale",
+                        "connection": null,
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 10.928
                     },
                     {
-                        "event": "saved",
-                        "model": "App\\Models\\ActivityLog",
+                        "event": "booted",
+                        "model": "App\\Models\\Sale",
+                        "connection": null,
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 11.079
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Expense",
+                        "connection": null,
+                        "table": "expenses",
+                        "key": null,
+                        "at_ms": 11.244
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Expense",
+                        "connection": null,
+                        "table": "expenses",
+                        "key": null,
+                        "at_ms": 11.393
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Branch",
                         "connection": "pgsql",
-                        "table": "activity_logs",
-                        "key": 11,
-                        "at_ms": 281.806
+                        "table": "branches",
+                        "key": 1,
+                        "at_ms": 13.83
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Branch",
+                        "connection": "pgsql",
+                        "table": "branches",
+                        "key": 2,
+                        "at_ms": 13.849
                     }
                 ]
             }
@@ -516,20 +466,140 @@
         "views": {
             "label": "Views",
             "summary": {
-                "count": 0,
-                "retained_count": 0,
+                "count": 2,
+                "retained_count": 2,
                 "dropped_count": 0,
                 "truncated": false
             },
             "payload": {
-                "items": []
+                "items": [
+                    {
+                        "name": "admin.branches.index",
+                        "source": {
+                            "file": "resources/views/admin/branches/index.blade.php",
+                            "line": 1
+                        },
+                        "composers": [],
+                        "data": {
+                            "branches": [
+                                {
+                                    "id": 1,
+                                    "name": "Maradi",
+                                    "city": "maradi",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "users_count": 3,
+                                    "products_count": 1,
+                                    "sales_count": 9,
+                                    "sales_sum_total_amount": "468500.00",
+                                    "expenses_sum_amount": "10000.00"
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Zinder",
+                                    "city": "zinder",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "users_count": 0,
+                                    "products_count": 0,
+                                    "sales_count": 0,
+                                    "sales_sum_total_amount": null,
+                                    "expenses_sum_amount": null
+                                }
+                            ]
+                        },
+                        "timing": "composition_marker",
+                        "at_ms": 14.12
+                    },
+                    {
+                        "name": "layouts.apps",
+                        "source": {
+                            "file": "resources/views/layouts/apps.blade.php",
+                            "line": 1
+                        },
+                        "composers": [],
+                        "data": {
+                            "__env": "[Illuminate\\View\\Factory]",
+                            "app": "[Illuminate\\Foundation\\Application]",
+                            "errors": "[]",
+                            "branches": [
+                                {
+                                    "id": 1,
+                                    "name": "Maradi",
+                                    "city": "maradi",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "users_count": 3,
+                                    "products_count": 1,
+                                    "sales_count": 9,
+                                    "sales_sum_total_amount": "468500.00",
+                                    "expenses_sum_amount": "10000.00"
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Zinder",
+                                    "city": "zinder",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "users_count": 0,
+                                    "products_count": 0,
+                                    "sales_count": 0,
+                                    "sales_sum_total_amount": null,
+                                    "expenses_sum_amount": null
+                                }
+                            ],
+                            "__empty_1": false,
+                            "__currentLoopData": [
+                                {
+                                    "id": 1,
+                                    "name": "Maradi",
+                                    "city": "maradi",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "users_count": 3,
+                                    "products_count": 1,
+                                    "sales_count": 9,
+                                    "sales_sum_total_amount": "468500.00",
+                                    "expenses_sum_amount": "10000.00"
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Zinder",
+                                    "city": "zinder",
+                                    "created_at": null,
+                                    "updated_at": null,
+                                    "users_count": 0,
+                                    "products_count": 0,
+                                    "sales_count": 0,
+                                    "sales_sum_total_amount": null,
+                                    "expenses_sum_amount": null
+                                }
+                            ],
+                            "branch": {
+                                "id": 2,
+                                "name": "Zinder",
+                                "city": "zinder",
+                                "created_at": null,
+                                "updated_at": null,
+                                "users_count": 0,
+                                "products_count": 0,
+                                "sales_count": 0,
+                                "sales_sum_total_amount": null,
+                                "expenses_sum_amount": null
+                            },
+                            "loop": null
+                        },
+                        "timing": "composition_marker",
+                        "at_ms": 16.255
+                    }
+                ]
             }
         },
         "events": {
             "label": "Events",
             "summary": {
-                "count": 9,
-                "retained_count": 9,
+                "count": 5,
+                "retained_count": 5,
                 "dropped_count": 0,
                 "truncated": false
             },
@@ -542,7 +612,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\ConnectionEstablished"
                         ],
-                        "at_ms": 1.349
+                        "at_ms": 0.429
                     },
                     {
                         "name": "Illuminate\\Database\\Events\\StatementPrepared",
@@ -551,16 +621,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\StatementPrepared"
                         ],
-                        "at_ms": 8.442
-                    },
-                    {
-                        "name": "Illuminate\\Auth\\Events\\Attempting",
-                        "listeners": [],
-                        "broadcast": false,
-                        "payload_types": [
-                            "Illuminate\\Auth\\Events\\Attempting"
-                        ],
-                        "at_ms": 12.257
+                        "at_ms": 6.001
                     },
                     {
                         "name": "Illuminate\\Database\\Events\\StatementPrepared",
@@ -569,25 +630,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\StatementPrepared"
                         ],
-                        "at_ms": 13.224
-                    },
-                    {
-                        "name": "Illuminate\\Auth\\Events\\Validated",
-                        "listeners": [],
-                        "broadcast": false,
-                        "payload_types": [
-                            "Illuminate\\Auth\\Events\\Validated"
-                        ],
-                        "at_ms": 278.462
-                    },
-                    {
-                        "name": "Illuminate\\Auth\\Events\\Login",
-                        "listeners": [],
-                        "broadcast": false,
-                        "payload_types": [
-                            "Illuminate\\Auth\\Events\\Login"
-                        ],
-                        "at_ms": 279.959
+                        "at_ms": 9.193
                     },
                     {
                         "name": "Illuminate\\Auth\\Events\\Authenticated",
@@ -596,7 +639,7 @@
                         "payload_types": [
                             "Illuminate\\Auth\\Events\\Authenticated"
                         ],
-                        "at_ms": 279.977
+                        "at_ms": 10.254
                     },
                     {
                         "name": "Illuminate\\Database\\Events\\StatementPrepared",
@@ -605,16 +648,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\StatementPrepared"
                         ],
-                        "at_ms": 280.389
-                    },
-                    {
-                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
-                        "listeners": [],
-                        "broadcast": false,
-                        "payload_types": [
-                            "Illuminate\\Database\\Events\\StatementPrepared"
-                        ],
-                        "at_ms": 282.206
+                        "at_ms": 11.492
                     }
                 ]
             }
@@ -655,23 +689,23 @@
                 "items": [
                     {
                         "name": "Route matching",
-                        "duration_ms": 0.3,
-                        "at_ms": 0.464
+                        "duration_ms": 0.14,
+                        "at_ms": 0.192
                     },
                     {
                         "name": "Route middleware, binding, controller and rendering",
-                        "duration_ms": 281.57,
-                        "at_ms": 282.03
+                        "duration_ms": 13.72,
+                        "at_ms": 13.911
                     },
                     {
                         "name": "Route response preparation",
-                        "duration_ms": 0.03,
-                        "at_ms": 282.061
+                        "duration_ms": 2.69,
+                        "at_ms": 16.597
                     },
                     {
                         "name": "Final response preparation",
                         "duration_ms": 0.03,
-                        "at_ms": 283.525
+                        "at_ms": 18.224
                     }
                 ]
             }

@@ -1,18 +1,18 @@
 {
     "schema_version": 1,
-    "id": "c23983f6-cb61-4cb1-8789-a6c615a9b493",
-    "recorded_at": "2026-10-24T19:04:55+01:00",
+    "id": "2a9c48af-c3ef-4be5-a78c-7ca5b4cd42e8",
+    "recorded_at": "2026-11-14T18:03:05+01:00",
     "profile_type": "http",
     "environment": "local",
     "metrics": {
-        "duration_ms": 261.83,
+        "duration_ms": 283.82,
         "peak_memory_mb": 2
     },
     "sections": {
         "overview": {
             "label": "Overview",
             "summary": {
-                "duration_ms": 261.83,
+                "duration_ms": 283.82,
                 "peak_memory_mb": 2
             },
             "payload": {
@@ -23,7 +23,7 @@
                     "runtime_type": "cli-server",
                     "laravel": "13.5.0",
                     "debug": true,
-                    "locale": "fr",
+                    "locale": "en",
                     "timezone": "Africa/Niamey"
                 },
                 "cache_state": {
@@ -52,7 +52,7 @@
             },
             "payload": {
                 "method": "POST",
-                "url": "http://localhost:8001/login",
+                "url": "http://localhost:8000/login",
                 "path": "/login",
                 "query": [],
                 "input": {
@@ -62,7 +62,7 @@
                 },
                 "headers": {
                     "host": [
-                        "localhost:8001"
+                        "localhost:8000"
                     ],
                     "connection": [
                         "keep-alive"
@@ -74,7 +74,7 @@
                         "max-age=0"
                     ],
                     "sec-ch-ua": [
-                        "\"Brave\";v=\"155\", \"Chromium\";v=\"155\", \"Not(A:Brand\";v=\"24\""
+                        "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Brave\";v=\"156\""
                     ],
                     "sec-ch-ua-mobile": [
                         "?0"
@@ -89,10 +89,10 @@
                         "application/x-www-form-urlencoded"
                     ],
                     "user-agent": [
-                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
                     ],
                     "origin": [
-                        "http://localhost:8001"
+                        "http://localhost:8000"
                     ],
                     "accept": [
                         "text/html,application/xhtml+xml,application/xml;q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;q=0.8"
@@ -113,13 +113,13 @@
                         "document"
                     ],
                     "referer": [
-                        "http://localhost:8001/"
+                        "http://localhost:8000/"
                     ],
                     "accept-encoding": [
                         "gzip, deflate, br, zstd"
                     ],
                     "accept-language": [
-                        "fr-FR,fr;q=0.8"
+                        "fr-FR,fr;q=0.9"
                     ],
                     "cookie": "[redacted]"
                 },
@@ -147,7 +147,7 @@
                     "guard": "web",
                     "authenticated": true,
                     "model": "App\\Models\\User",
-                    "identifier": "hmac:50045f8e8ac31618",
+                    "identifier": "hmac:574203d5a604be87",
                     "identifier_policy": "keyed_hash"
                 },
                 "session": {
@@ -166,10 +166,10 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Sat, 24 Oct 2026 18:04:55 GMT"
+                        "Sat, 14 Nov 2026 17:03:05 GMT"
                     ],
                     "location": [
-                        "http://localhost:8001/admin"
+                        "http://localhost:8000/admin"
                     ],
                     "content-type": [
                         "text/html; charset=utf-8"
@@ -185,7 +185,7 @@
                 "retained_count": 6,
                 "dropped_count": 0,
                 "truncated": false,
-                "duration_ms": 13.06,
+                "duration_ms": 12.34,
                 "transaction_count": 0,
                 "transaction_retained_count": 0,
                 "transaction_dropped_count": 0,
@@ -196,15 +196,15 @@
                     {
                         "sql": "select * from \"sessions\" where \"id\" = ? limit 1",
                         "bindings": [
-                            "6EOaasMtJ4t1Ab1QOEEgeg9wWx5BY2xGCxeIl59u"
+                            "7QdT8gDgHkCPAEbqL5xBObFkZ7h3sqorW6WNgzfj"
                         ],
-                        "runnable_sql": "select * from \"sessions\" where \"id\" = '6EOaasMtJ4t1Ab1QOEEgeg9wWx5BY2xGCxeIl59u' limit 1",
-                        "duration_ms": 6.66,
+                        "runnable_sql": "select * from \"sessions\" where \"id\" = '7QdT8gDgHkCPAEbqL5xBObFkZ7h3sqorW6WNgzfj' limit 1",
+                        "duration_ms": 7.74,
                         "connection": "pgsql",
                         "type": "write",
                         "callsite": null,
                         "stack": [],
-                        "at_ms": 7.669,
+                        "at_ms": 9.458,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
@@ -216,7 +216,7 @@
                             "mahamanelmn8@gmail.com"
                         ],
                         "runnable_sql": "select * from \"users\" where \"email\" = 'mahamanelmn8@gmail.com' limit 1",
-                        "duration_ms": 1.2,
+                        "duration_ms": 1.14,
                         "connection": "pgsql",
                         "type": "write",
                         "callsite": {
@@ -230,7 +230,7 @@
                                 "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
                             }
                         ],
-                        "at_ms": 10.605,
+                        "at_ms": 14.613,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
@@ -239,10 +239,10 @@
                     {
                         "sql": "delete from \"sessions\" where \"id\" = ?",
                         "bindings": [
-                            "6EOaasMtJ4t1Ab1QOEEgeg9wWx5BY2xGCxeIl59u"
+                            "7QdT8gDgHkCPAEbqL5xBObFkZ7h3sqorW6WNgzfj"
                         ],
-                        "runnable_sql": "delete from \"sessions\" where \"id\" = '6EOaasMtJ4t1Ab1QOEEgeg9wWx5BY2xGCxeIl59u'",
-                        "duration_ms": 1.21,
+                        "runnable_sql": "delete from \"sessions\" where \"id\" = '7QdT8gDgHkCPAEbqL5xBObFkZ7h3sqorW6WNgzfj'",
+                        "duration_ms": 0.76,
                         "connection": "pgsql",
                         "type": "write",
                         "callsite": {
@@ -256,7 +256,7 @@
                                 "function": "Illuminate\\Support\\Facades\\Facade::__callStatic"
                             }
                         ],
-                        "at_ms": 255.052,
+                        "at_ms": 279.654,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
@@ -268,11 +268,11 @@
                             1,
                             "login_success",
                             "Connexion r\u00e9ussie : mahamanelmn8@gmail.com",
-                            "2026-10-24 19:04:55",
-                            "2026-10-24 19:04:55"
+                            "2026-11-14 18:03:05",
+                            "2026-11-14 18:03:05"
                         ],
-                        "runnable_sql": "insert into \"activity_logs\" (\"user_id\", \"action\", \"description\", \"updated_at\", \"created_at\") values (1, 'login_success', 'Connexion r\u00e9ussie : mahamanelmn8@gmail.com', '2026-10-24 19:04:55', '2026-10-24 19:04:55') returning \"id\"",
-                        "duration_ms": 2.87,
+                        "runnable_sql": "insert into \"activity_logs\" (\"user_id\", \"action\", \"description\", \"updated_at\", \"created_at\") values (1, 'login_success', 'Connexion r\u00e9ussie : mahamanelmn8@gmail.com', '2026-11-14 18:03:05', '2026-11-14 18:03:05') returning \"id\"",
+                        "duration_ms": 1.18,
                         "connection": "pgsql",
                         "type": "write",
                         "callsite": {
@@ -291,7 +291,7 @@
                                 "function": "activity_log"
                             }
                         ],
-                        "at_ms": 259.777,
+                        "at_ms": 281.434,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
@@ -300,15 +300,15 @@
                     {
                         "sql": "select * from \"sessions\" where \"id\" = ? limit 1",
                         "bindings": [
-                            "9vfB6qsrzNQXlE0A34qYGDe5xBeS94IdHpHkVoGJ"
+                            "WHV6JQW3B32BiFvgLnMURXGcCSuamY6PyldsmLR6"
                         ],
-                        "runnable_sql": "select * from \"sessions\" where \"id\" = '9vfB6qsrzNQXlE0A34qYGDe5xBeS94IdHpHkVoGJ' limit 1",
-                        "duration_ms": 0.55,
+                        "runnable_sql": "select * from \"sessions\" where \"id\" = 'WHV6JQW3B32BiFvgLnMURXGcCSuamY6PyldsmLR6' limit 1",
+                        "duration_ms": 0.59,
                         "connection": "pgsql",
                         "type": "write",
                         "callsite": null,
                         "stack": [],
-                        "at_ms": 260.877,
+                        "at_ms": 282.541,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
@@ -317,20 +317,20 @@
                     {
                         "sql": "insert into \"sessions\" (\"payload\", \"last_activity\", \"user_id\", \"ip_address\", \"user_agent\", \"id\") values (?, ?, ?, ?, ?, ?)",
                         "bindings": [
-                            "eyJfdG9rZW4iOiJ3cVRzbjUyakpWRW1hT2RWb1RRMFRLU0U2YUU4UjljYzhyM2NidWowIiwiX3ByZXZpb3VzIjp7InVybCI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4MDAxIiwicm91dGUiOm51bGx9LCJfZmxhc2giOnsib2xkIjpbInN1Y2Nlc3MiXSwibmV3IjpbXX0sImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjoxLCJzdWNjZXNzIjoiQmllbnZlbnVlIEFkbWluIFx1ZDgzZFx1ZGM0YiJ9",
-                            1792865095,
+                            "eyJfdG9rZW4iOiJOcktGMnl3d2VrN1FCS24xdjhFeU1yVUp0RlRSdHNoMkE0ZnljcGp5IiwiX2ZsYXNoIjp7Im9sZCI6WyJzdWNjZXNzIl0sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDAiLCJyb3V0ZSI6bnVsbH0sImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjoxLCJzdWNjZXNzIjoiQmllbnZlbnVlIEFkbWluIFx1ZDgzZFx1ZGM0YiJ9",
+                            1794675785,
                             1,
                             "127.0.0.1",
-                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
-                            "9vfB6qsrzNQXlE0A34qYGDe5xBeS94IdHpHkVoGJ"
+                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+                            "WHV6JQW3B32BiFvgLnMURXGcCSuamY6PyldsmLR6"
                         ],
-                        "runnable_sql": "insert into \"sessions\" (\"payload\", \"last_activity\", \"user_id\", \"ip_address\", \"user_agent\", \"id\") values ('eyJfdG9rZW4iOiJ3cVRzbjUyakpWRW1hT2RWb1RRMFRLU0U2YUU4UjljYzhyM2NidWowIiwiX3ByZXZpb3VzIjp7InVybCI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4MDAxIiwicm91dGUiOm51bGx9LCJfZmxhc2giOnsib2xkIjpbInN1Y2Nlc3MiXSwibmV3IjpbXX0sImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjoxLCJzdWNjZXNzIjoiQmllbnZlbnVlIEFkbWluIFx1ZDgzZFx1ZGM0YiJ9', 1792865095, 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36', '9vfB6qsrzNQXlE0A34qYGDe5xBeS94IdHpHkVoGJ')",
-                        "duration_ms": 0.57,
+                        "runnable_sql": "insert into \"sessions\" (\"payload\", \"last_activity\", \"user_id\", \"ip_address\", \"user_agent\", \"id\") values ('eyJfdG9rZW4iOiJOcktGMnl3d2VrN1FCS24xdjhFeU1yVUp0RlRSdHNoMkE0ZnljcGp5IiwiX2ZsYXNoIjp7Im9sZCI6WyJzdWNjZXNzIl0sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDAiLCJyb3V0ZSI6bnVsbH0sImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjoxLCJzdWNjZXNzIjoiQmllbnZlbnVlIEFkbWluIFx1ZDgzZFx1ZGM0YiJ9', 1794675785, 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'WHV6JQW3B32BiFvgLnMURXGcCSuamY6PyldsmLR6')",
+                        "duration_ms": 0.93,
                         "connection": "pgsql",
                         "type": "write",
                         "callsite": null,
                         "stack": [],
-                        "at_ms": 261.552,
+                        "at_ms": 283.573,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
@@ -429,7 +429,7 @@
                         "connection": null,
                         "table": "users",
                         "key": null,
-                        "at_ms": 8.933
+                        "at_ms": 12.343
                     },
                     {
                         "event": "booted",
@@ -437,7 +437,7 @@
                         "connection": null,
                         "table": "users",
                         "key": null,
-                        "at_ms": 9.196
+                        "at_ms": 13.055
                     },
                     {
                         "event": "retrieved",
@@ -445,7 +445,7 @@
                         "connection": "pgsql",
                         "table": "users",
                         "key": 1,
-                        "at_ms": 10.695
+                        "at_ms": 14.771
                     },
                     {
                         "event": "booting",
@@ -453,7 +453,7 @@
                         "connection": null,
                         "table": "activity_logs",
                         "key": null,
-                        "at_ms": 256.481
+                        "at_ms": 279.833
                     },
                     {
                         "event": "booted",
@@ -461,7 +461,7 @@
                         "connection": null,
                         "table": "activity_logs",
                         "key": null,
-                        "at_ms": 256.645
+                        "at_ms": 279.991
                     },
                     {
                         "event": "saving",
@@ -469,7 +469,7 @@
                         "connection": "pgsql",
                         "table": "activity_logs",
                         "key": null,
-                        "at_ms": 256.72
+                        "at_ms": 280.074
                     },
                     {
                         "event": "creating",
@@ -477,23 +477,23 @@
                         "connection": "pgsql",
                         "table": "activity_logs",
                         "key": null,
-                        "at_ms": 256.731
+                        "at_ms": 280.09
                     },
                     {
                         "event": "created",
                         "model": "App\\Models\\ActivityLog",
                         "connection": "pgsql",
                         "table": "activity_logs",
-                        "key": 8,
-                        "at_ms": 259.82
+                        "key": 61,
+                        "at_ms": 281.473
                     },
                     {
                         "event": "saved",
                         "model": "App\\Models\\ActivityLog",
                         "connection": "pgsql",
                         "table": "activity_logs",
-                        "key": 8,
-                        "at_ms": 259.831
+                        "key": 61,
+                        "at_ms": 281.484
                     }
                 ]
             }
@@ -542,7 +542,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\ConnectionEstablished"
                         ],
-                        "at_ms": 0.645
+                        "at_ms": 1.222
                     },
                     {
                         "name": "Illuminate\\Database\\Events\\StatementPrepared",
@@ -551,7 +551,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\StatementPrepared"
                         ],
-                        "at_ms": 5.601
+                        "at_ms": 7.585
                     },
                     {
                         "name": "Illuminate\\Auth\\Events\\Attempting",
@@ -560,7 +560,7 @@
                         "payload_types": [
                             "Illuminate\\Auth\\Events\\Attempting"
                         ],
-                        "at_ms": 8.771
+                        "at_ms": 11.987
                     },
                     {
                         "name": "Illuminate\\Database\\Events\\StatementPrepared",
@@ -569,7 +569,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\StatementPrepared"
                         ],
-                        "at_ms": 9.287
+                        "at_ms": 13.277
                     },
                     {
                         "name": "Illuminate\\Auth\\Events\\Validated",
@@ -578,7 +578,7 @@
                         "payload_types": [
                             "Illuminate\\Auth\\Events\\Validated"
                         ],
-                        "at_ms": 253.621
+                        "at_ms": 278.718
                     },
                     {
                         "name": "Illuminate\\Auth\\Events\\Login",
@@ -587,7 +587,7 @@
                         "payload_types": [
                             "Illuminate\\Auth\\Events\\Login"
                         ],
-                        "at_ms": 256.137
+                        "at_ms": 279.715
                     },
                     {
                         "name": "Illuminate\\Auth\\Events\\Authenticated",
@@ -596,7 +596,7 @@
                         "payload_types": [
                             "Illuminate\\Auth\\Events\\Authenticated"
                         ],
-                        "at_ms": 256.373
+                        "at_ms": 279.733
                     },
                     {
                         "name": "Illuminate\\Database\\Events\\StatementPrepared",
@@ -605,7 +605,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\StatementPrepared"
                         ],
-                        "at_ms": 256.824
+                        "at_ms": 280.18
                     },
                     {
                         "name": "Illuminate\\Database\\Events\\StatementPrepared",
@@ -614,7 +614,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\StatementPrepared"
                         ],
-                        "at_ms": 260.279
+                        "at_ms": 281.904
                     }
                 ]
             }
@@ -655,23 +655,23 @@
                 "items": [
                     {
                         "name": "Route matching",
-                        "duration_ms": 0.14,
-                        "at_ms": 0.222
+                        "duration_ms": 0.27,
+                        "at_ms": 0.415
                     },
                     {
                         "name": "Route middleware, binding, controller and rendering",
-                        "duration_ms": 259.86,
-                        "at_ms": 260.085
+                        "duration_ms": 281.31,
+                        "at_ms": 281.724
                     },
                     {
                         "name": "Route response preparation",
                         "duration_ms": 0.03,
-                        "at_ms": 260.118
+                        "at_ms": 281.754
                     },
                     {
                         "name": "Final response preparation",
                         "duration_ms": 0.03,
-                        "at_ms": 261.658
+                        "at_ms": 283.663
                     }
                 ]
             }

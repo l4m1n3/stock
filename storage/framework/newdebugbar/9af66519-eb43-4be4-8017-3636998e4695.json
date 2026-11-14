@@ -1,18 +1,18 @@
 {
     "schema_version": 1,
-    "id": "4e4de083-61d2-4c15-8c64-3e0e35ead097",
-    "recorded_at": "2026-10-24T19:05:29+01:00",
+    "id": "9af66519-eb43-4be4-8017-3636998e4695",
+    "recorded_at": "2026-11-14T18:00:42+01:00",
     "profile_type": "http",
     "environment": "local",
     "metrics": {
-        "duration_ms": 46.13,
+        "duration_ms": 21.26,
         "peak_memory_mb": 4
     },
     "sections": {
         "overview": {
             "label": "Overview",
             "summary": {
-                "duration_ms": 46.13,
+                "duration_ms": 21.26,
                 "peak_memory_mb": 4
             },
             "payload": {
@@ -23,7 +23,7 @@
                     "runtime_type": "cli-server",
                     "laravel": "13.5.0",
                     "debug": true,
-                    "locale": "fr",
+                    "locale": "en",
                     "timezone": "Africa/Niamey"
                 },
                 "cache_state": {
@@ -52,19 +52,19 @@
             },
             "payload": {
                 "method": "GET",
-                "url": "http://localhost:8001/admin/users",
-                "path": "/admin/users",
+                "url": "http://localhost:8000/factures",
+                "path": "/factures",
                 "query": [],
                 "input": [],
                 "headers": {
                     "host": [
-                        "localhost:8001"
+                        "localhost:8000"
                     ],
                     "connection": [
                         "keep-alive"
                     ],
                     "sec-ch-ua": [
-                        "\"Brave\";v=\"155\", \"Chromium\";v=\"155\", \"Not(A:Brand\";v=\"24\""
+                        "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Brave\";v=\"156\""
                     ],
                     "sec-ch-ua-mobile": [
                         "?0"
@@ -76,7 +76,7 @@
                         "1"
                     ],
                     "user-agent": [
-                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
                     ],
                     "accept": [
                         "text/html,application/xhtml+xml,application/xml;q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;q=0.8"
@@ -97,18 +97,18 @@
                         "document"
                     ],
                     "referer": [
-                        "http://localhost:8001/admin"
+                        "http://localhost:8000/service-schedules"
                     ],
                     "accept-encoding": [
                         "gzip, deflate, br, zstd"
                     ],
                     "accept-language": [
-                        "fr-FR,fr;q=0.8"
+                        "fr-FR,fr;q=0.9"
                     ],
                     "cookie": "[redacted]"
                 },
-                "route": "admin.users",
-                "action": "App\\Http\\Controllers\\AdminController@users",
+                "route": "invoices.index",
+                "action": "App\\Http\\Controllers\\InvoiceController@index",
                 "parameters": [],
                 "middleware": [
                     "Illuminate\\Cookie\\Middleware\\EncryptCookies",
@@ -116,7 +116,6 @@
                     "Illuminate\\Session\\Middleware\\StartSession",
                     "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
                     "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestForgery",
-                    "Illuminate\\Auth\\Middleware\\Authenticate",
                     "Illuminate\\Routing\\Middleware\\SubstituteBindings",
                     "Laravel\\Boost\\Middleware\\InjectBoost"
                 ],
@@ -124,14 +123,14 @@
                 "request_type": "full_page",
                 "content_type": "text/html; charset=utf-8",
                 "request_size_bytes": 0,
-                "response_size_bytes": 39174,
+                "response_size_bytes": 40347,
                 "session_present": false,
                 "authenticated": true,
                 "authentication": {
                     "guard": "web",
                     "authenticated": true,
                     "model": "App\\Models\\User",
-                    "identifier": "hmac:50045f8e8ac31618",
+                    "identifier": "hmac:2dffea64817b6601",
                     "identifier_policy": "keyed_hash"
                 },
                 "session": {
@@ -153,7 +152,7 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Sat, 24 Oct 2026 18:05:29 GMT"
+                        "Sat, 14 Nov 2026 17:00:42 GMT"
                     ],
                     "set-cookie": "[redacted]"
                 }
@@ -162,11 +161,11 @@
         "queries": {
             "label": "Queries",
             "summary": {
-                "count": 10,
-                "retained_count": 10,
+                "count": 11,
+                "retained_count": 11,
                 "dropped_count": 0,
                 "truncated": false,
-                "duration_ms": 18.38,
+                "duration_ms": 13.33,
                 "transaction_count": 0,
                 "transaction_retained_count": 0,
                 "transaction_dropped_count": 0,
@@ -177,15 +176,15 @@
                     {
                         "sql": "select * from \"sessions\" where \"id\" = ? limit 1",
                         "bindings": [
-                            "9CwBWW9sXGQClv15WNvweXTBGyijZZulDvWYhlcQ"
+                            "WB71MQQaoRVtRuDccaA7NHalQy9ywF4LcU7lNjKB"
                         ],
-                        "runnable_sql": "select * from \"sessions\" where \"id\" = '9CwBWW9sXGQClv15WNvweXTBGyijZZulDvWYhlcQ' limit 1",
-                        "duration_ms": 10.47,
+                        "runnable_sql": "select * from \"sessions\" where \"id\" = 'WB71MQQaoRVtRuDccaA7NHalQy9ywF4LcU7lNjKB' limit 1",
+                        "duration_ms": 6.08,
                         "connection": "pgsql",
                         "type": "write",
                         "callsite": null,
                         "stack": [],
-                        "at_ms": 12.122,
+                        "at_ms": 7.309,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
@@ -194,187 +193,254 @@
                     {
                         "sql": "select * from \"users\" where \"id\" = ? limit 1",
                         "bindings": [
-                            1
+                            2
                         ],
-                        "runnable_sql": "select * from \"users\" where \"id\" = 1 limit 1",
-                        "duration_ms": 1.39,
+                        "runnable_sql": "select * from \"users\" where \"id\" = 2 limit 1",
+                        "duration_ms": 0.9,
                         "connection": "pgsql",
                         "type": "write",
-                        "callsite": null,
-                        "stack": [],
-                        "at_ms": 14.996,
+                        "callsite": {
+                            "file": "app/Http/Controllers/InvoiceController.php",
+                            "line": 206
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/InvoiceController.php",
+                                "line": 206,
+                                "function": "Illuminate\\Auth\\AuthManager->__call"
+                            }
+                        ],
+                        "at_ms": 9.377,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
                         "runnable_available": true
                     },
                     {
-                        "sql": "select count(*) as aggregate from \"users\"",
-                        "bindings": [],
-                        "runnable_sql": "select count(*) as aggregate from \"users\"",
-                        "duration_ms": 0.52,
+                        "sql": "select count(*) as aggregate from \"invoices\" where \"branch_id\" = ? and \"issued_at\"::date = ?",
+                        "bindings": [
+                            1,
+                            "2026-11-14"
+                        ],
+                        "runnable_sql": "select count(*) as aggregate from \"invoices\" where \"branch_id\" = 1 and \"issued_at\"::date = '2026-11-14'",
+                        "duration_ms": 1.24,
                         "connection": "pgsql",
                         "type": "write",
                         "callsite": {
-                            "file": "app/Http/Controllers/AdminController.php",
-                            "line": 601
+                            "file": "app/Http/Controllers/InvoiceController.php",
+                            "line": 226
                         },
                         "stack": [
                             {
-                                "file": "app/Http/Controllers/AdminController.php",
-                                "line": 601,
+                                "file": "app/Http/Controllers/InvoiceController.php",
+                                "line": 226,
                                 "function": "Illuminate\\Database\\Eloquent\\Builder->paginate"
                             }
                         ],
-                        "at_ms": 16.479,
+                        "at_ms": 11.442,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
                         "runnable_available": true
                     },
                     {
-                        "sql": "select * from \"users\" order by \"name\" asc limit 20 offset 0",
-                        "bindings": [],
-                        "runnable_sql": "select * from \"users\" order by \"name\" asc limit 20 offset 0",
-                        "duration_ms": 0.85,
+                        "sql": "select count(*) as aggregate from \"invoices\" where \"branch_id\" = ? and \"issued_at\"::date = ?",
+                        "bindings": [
+                            1,
+                            "2026-11-14"
+                        ],
+                        "runnable_sql": "select count(*) as aggregate from \"invoices\" where \"branch_id\" = 1 and \"issued_at\"::date = '2026-11-14'",
+                        "duration_ms": 0.38,
                         "connection": "pgsql",
                         "type": "write",
                         "callsite": {
-                            "file": "app/Http/Controllers/AdminController.php",
-                            "line": 601
+                            "file": "app/Http/Controllers/InvoiceController.php",
+                            "line": 229
                         },
                         "stack": [
                             {
-                                "file": "app/Http/Controllers/AdminController.php",
-                                "line": 601,
-                                "function": "Illuminate\\Database\\Eloquent\\Builder->paginate"
+                                "file": "app/Http/Controllers/InvoiceController.php",
+                                "line": 229,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
                             }
                         ],
-                        "at_ms": 17.519,
+                        "at_ms": 12.053,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
                         "runnable_available": true
                     },
                     {
-                        "sql": "select * from \"branches\" where \"branches\".\"id\" in (1)",
-                        "bindings": [],
-                        "runnable_sql": "select * from \"branches\" where \"branches\".\"id\" in (1)",
-                        "duration_ms": 1.64,
+                        "sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"branch_id\" = ? and \"issued_at\"::date = ?",
+                        "bindings": [
+                            1,
+                            "2026-11-14"
+                        ],
+                        "runnable_sql": "select sum(\"total_amount\") as aggregate from \"invoices\" where \"branch_id\" = 1 and \"issued_at\"::date = '2026-11-14'",
+                        "duration_ms": 0.4,
                         "connection": "pgsql",
                         "type": "write",
                         "callsite": {
-                            "file": "app/Http/Controllers/AdminController.php",
-                            "line": 601
+                            "file": "app/Http/Controllers/InvoiceController.php",
+                            "line": 230
                         },
                         "stack": [
                             {
-                                "file": "app/Http/Controllers/AdminController.php",
-                                "line": 601,
-                                "function": "Illuminate\\Database\\Eloquent\\Builder->paginate"
+                                "file": "app/Http/Controllers/InvoiceController.php",
+                                "line": 230,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
                             }
                         ],
-                        "at_ms": 23.483,
+                        "at_ms": 12.603,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
                         "runnable_available": true
                     },
                     {
-                        "sql": "select * from \"branches\" order by \"name\" asc",
-                        "bindings": [],
-                        "runnable_sql": "select * from \"branches\" order by \"name\" asc",
-                        "duration_ms": 0.53,
+                        "sql": "select sales.payment_method, SUM(invoices.total_amount) as total, COUNT(invoices.id) as count from \"invoices\" inner join \"sales\" on \"invoices\".\"sale_id\" = \"sales\".\"id\" where \"invoices\".\"branch_id\" = ? and \"invoices\".\"issued_at\"::date = ? group by \"sales\".\"payment_method\"",
+                        "bindings": [
+                            1,
+                            "2026-11-14"
+                        ],
+                        "runnable_sql": "select sales.payment_method, SUM(invoices.total_amount) as total, COUNT(invoices.id) as count from \"invoices\" inner join \"sales\" on \"invoices\".\"sale_id\" = \"sales\".\"id\" where \"invoices\".\"branch_id\" = 1 and \"invoices\".\"issued_at\"::date = '2026-11-14' group by \"sales\".\"payment_method\"",
+                        "duration_ms": 1.06,
                         "connection": "pgsql",
                         "type": "write",
                         "callsite": {
-                            "file": "app/Http/Controllers/AdminController.php",
-                            "line": 602
+                            "file": "app/Http/Controllers/InvoiceController.php",
+                            "line": 237
                         },
                         "stack": [
                             {
-                                "file": "app/Http/Controllers/AdminController.php",
-                                "line": 602,
+                                "file": "app/Http/Controllers/InvoiceController.php",
+                                "line": 237,
                                 "function": "Illuminate\\Database\\Eloquent\\Builder->get"
                             }
                         ],
-                        "at_ms": 26.285,
+                        "at_ms": 13.926,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
                         "runnable_available": true
                     },
                     {
-                        "sql": "select count(*) as aggregate from \"users\"",
-                        "bindings": [],
-                        "runnable_sql": "select count(*) as aggregate from \"users\"",
-                        "duration_ms": 0.51,
+                        "sql": "select \"sale_id\" from \"invoices\" where \"branch_id\" = ?",
+                        "bindings": [
+                            1
+                        ],
+                        "runnable_sql": "select \"sale_id\" from \"invoices\" where \"branch_id\" = 1",
+                        "duration_ms": 0.32,
                         "connection": "pgsql",
                         "type": "write",
                         "callsite": {
-                            "file": "app/Http/Controllers/AdminController.php",
-                            "line": 604
+                            "file": "app/Http/Controllers/InvoiceController.php",
+                            "line": 259
                         },
                         "stack": [
                             {
-                                "file": "app/Http/Controllers/AdminController.php",
-                                "line": 604,
+                                "file": "app/Http/Controllers/InvoiceController.php",
+                                "line": 259,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->pluck"
+                            }
+                        ],
+                        "at_ms": 14.399,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"sales\" where \"branch_id\" = ? and \"id\" not in (?, ?, ?, ?, ?, ?, ?, ?) order by \"sold_at\" desc",
+                        "bindings": [
+                            1,
+                            6,
+                            7,
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14
+                        ],
+                        "runnable_sql": "select * from \"sales\" where \"branch_id\" = 1 and \"id\" not in (6, 7, 8, 9, 10, 11, 13, 14) order by \"sold_at\" desc",
+                        "duration_ms": 0.54,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/InvoiceController.php",
+                            "line": 262
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/InvoiceController.php",
+                                "line": 262,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 15.365,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"invoices\" where \"branch_id\" = ? and \"issued_at\"::date = ?",
+                        "bindings": [
+                            1,
+                            "2026-11-14"
+                        ],
+                        "runnable_sql": "select * from \"invoices\" where \"branch_id\" = 1 and \"issued_at\"::date = '2026-11-14'",
+                        "duration_ms": 0.36,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/InvoiceController.php",
+                            "line": 277
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/InvoiceController.php",
+                                "line": 277,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 15.918,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "insert into \"activity_logs\" (\"user_id\", \"action\", \"description\", \"updated_at\", \"created_at\") values (?, ?, ?, ?, ?) returning \"id\"",
+                        "bindings": [
+                            2,
+                            "invoices_viewed",
+                            "Consultation factures : 0 factures, CA du jour 0",
+                            "2026-11-14 18:00:42",
+                            "2026-11-14 18:00:42"
+                        ],
+                        "runnable_sql": "insert into \"activity_logs\" (\"user_id\", \"action\", \"description\", \"updated_at\", \"created_at\") values (2, 'invoices_viewed', 'Consultation factures : 0 factures, CA du jour 0', '2026-11-14 18:00:42', '2026-11-14 18:00:42') returning \"id\"",
+                        "duration_ms": 1.39,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/helpers.php",
+                            "line": 6
+                        },
+                        "stack": [
+                            {
+                                "file": "app/helpers.php",
+                                "line": 6,
                                 "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
-                            }
-                        ],
-                        "at_ms": 27.168,
-                        "source_preserved": true,
-                        "binding_policy": "full",
-                        "bindings_complete": true,
-                        "runnable_available": true
-                    },
-                    {
-                        "sql": "select count(*) as aggregate from \"users\" where \"role\" = ?",
-                        "bindings": [
-                            "admin"
-                        ],
-                        "runnable_sql": "select count(*) as aggregate from \"users\" where \"role\" = 'admin'",
-                        "duration_ms": 0.56,
-                        "connection": "pgsql",
-                        "type": "write",
-                        "callsite": {
-                            "file": "app/Http/Controllers/AdminController.php",
-                            "line": 605
-                        },
-                        "stack": [
+                            },
                             {
-                                "file": "app/Http/Controllers/AdminController.php",
-                                "line": 605,
-                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
+                                "file": "app/Http/Controllers/InvoiceController.php",
+                                "line": 322,
+                                "function": "activity_log"
                             }
                         ],
-                        "at_ms": 27.966,
-                        "source_preserved": true,
-                        "binding_policy": "full",
-                        "bindings_complete": true,
-                        "runnable_available": true
-                    },
-                    {
-                        "sql": "select count(*) as aggregate from \"users\" where \"role\" = ?",
-                        "bindings": [
-                            "staff"
-                        ],
-                        "runnable_sql": "select count(*) as aggregate from \"users\" where \"role\" = 'staff'",
-                        "duration_ms": 0.5,
-                        "connection": "pgsql",
-                        "type": "write",
-                        "callsite": {
-                            "file": "app/Http/Controllers/AdminController.php",
-                            "line": 606
-                        },
-                        "stack": [
-                            {
-                                "file": "app/Http/Controllers/AdminController.php",
-                                "line": 606,
-                                "function": "Illuminate\\Database\\Eloquent\\Builder->__call"
-                            }
-                        ],
-                        "at_ms": 28.686,
+                        "at_ms": 17.885,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
@@ -383,20 +449,20 @@
                     {
                         "sql": "update \"sessions\" set \"payload\" = ?, \"last_activity\" = ?, \"user_id\" = ?, \"ip_address\" = ?, \"user_agent\" = ? where \"id\" = ?",
                         "bindings": [
-                            "eyJfdG9rZW4iOiJ2bVdBYThFbnlFaG5qY3F4U3hDTnoyOWFUWjNLdzdubDFzQkxvTGhvIiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDFcL2FkbWluXC91c2VycyIsInJvdXRlIjoiYWRtaW4udXNlcnMifSwibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiOjF9",
-                            1792865129,
-                            1,
+                            "eyJfdG9rZW4iOiJoTFhRb0lrWEFKYXEwdGpjOG93bVNOY2lVaDdxMXM5Umkwa0VQMGVxIiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDBcL2ZhY3R1cmVzIiwicm91dGUiOiJpbnZvaWNlcy5pbmRleCJ9LCJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI6Mn0=",
+                            1794675642,
+                            2,
                             "127.0.0.1",
-                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
-                            "9CwBWW9sXGQClv15WNvweXTBGyijZZulDvWYhlcQ"
+                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+                            "WB71MQQaoRVtRuDccaA7NHalQy9ywF4LcU7lNjKB"
                         ],
-                        "runnable_sql": "update \"sessions\" set \"payload\" = 'eyJfdG9rZW4iOiJ2bVdBYThFbnlFaG5qY3F4U3hDTnoyOWFUWjNLdzdubDFzQkxvTGhvIiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDFcL2FkbWluXC91c2VycyIsInJvdXRlIjoiYWRtaW4udXNlcnMifSwibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiOjF9', \"last_activity\" = 1792865129, \"user_id\" = 1, \"ip_address\" = '127.0.0.1', \"user_agent\" = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36' where \"id\" = '9CwBWW9sXGQClv15WNvweXTBGyijZZulDvWYhlcQ'",
-                        "duration_ms": 1.41,
+                        "runnable_sql": "update \"sessions\" set \"payload\" = 'eyJfdG9rZW4iOiJoTFhRb0lrWEFKYXEwdGpjOG93bVNOY2lVaDdxMXM5Umkwa0VQMGVxIiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDBcL2ZhY3R1cmVzIiwicm91dGUiOiJpbnZvaWNlcy5pbmRleCJ9LCJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI6Mn0=', \"last_activity\" = 1794675642, \"user_id\" = 2, \"ip_address\" = '127.0.0.1', \"user_agent\" = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36' where \"id\" = 'WB71MQQaoRVtRuDccaA7NHalQy9ywF4LcU7lNjKB'",
+                        "duration_ms": 0.66,
                         "connection": "pgsql",
                         "type": "write",
                         "callsite": null,
                         "stack": [],
-                        "at_ms": 45.453,
+                        "at_ms": 20.915,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
@@ -482,8 +548,8 @@
         "models": {
             "label": "Models",
             "summary": {
-                "count": 10,
-                "retained_count": 10,
+                "count": 13,
+                "retained_count": 13,
                 "dropped_count": 0,
                 "truncated": false
             },
@@ -495,7 +561,7 @@
                         "connection": null,
                         "table": "users",
                         "key": null,
-                        "at_ms": 12.868
+                        "at_ms": 7.967
                     },
                     {
                         "event": "booted",
@@ -503,15 +569,7 @@
                         "connection": null,
                         "table": "users",
                         "key": null,
-                        "at_ms": 13.294
-                    },
-                    {
-                        "event": "retrieved",
-                        "model": "App\\Models\\User",
-                        "connection": "pgsql",
-                        "table": "users",
-                        "key": 1,
-                        "at_ms": 15.151
+                        "at_ms": 8.221
                     },
                     {
                         "event": "retrieved",
@@ -519,55 +577,87 @@
                         "connection": "pgsql",
                         "table": "users",
                         "key": 2,
-                        "at_ms": 17.652
-                    },
-                    {
-                        "event": "retrieved",
-                        "model": "App\\Models\\User",
-                        "connection": "pgsql",
-                        "table": "users",
-                        "key": 1,
-                        "at_ms": 17.69
+                        "at_ms": 9.519
                     },
                     {
                         "event": "booting",
-                        "model": "App\\Models\\Branch",
+                        "model": "App\\Models\\Invoice",
                         "connection": null,
-                        "table": "branches",
+                        "table": "invoices",
                         "key": null,
-                        "at_ms": 17.833
+                        "at_ms": 9.793
                     },
                     {
                         "event": "booted",
-                        "model": "App\\Models\\Branch",
+                        "model": "App\\Models\\Invoice",
                         "connection": null,
-                        "table": "branches",
+                        "table": "invoices",
                         "key": null,
-                        "at_ms": 18.138
+                        "at_ms": 9.981
                     },
                     {
-                        "event": "retrieved",
-                        "model": "App\\Models\\Branch",
-                        "connection": "pgsql",
-                        "table": "branches",
-                        "key": 1,
-                        "at_ms": 23.625
+                        "event": "booting",
+                        "model": "App\\Models\\Sale",
+                        "connection": null,
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 14.516
                     },
                     {
-                        "event": "retrieved",
-                        "model": "App\\Models\\Branch",
-                        "connection": "pgsql",
-                        "table": "branches",
-                        "key": 1,
-                        "at_ms": 26.397
+                        "event": "booted",
+                        "model": "App\\Models\\Sale",
+                        "connection": null,
+                        "table": "sales",
+                        "key": null,
+                        "at_ms": 14.68
                     },
                     {
-                        "event": "retrieved",
-                        "model": "App\\Models\\Branch",
+                        "event": "booting",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": null,
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 16.052
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": null,
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 16.208
+                    },
+                    {
+                        "event": "saving",
+                        "model": "App\\Models\\ActivityLog",
                         "connection": "pgsql",
-                        "table": "branches",
-                        "key": 2,
-                        "at_ms": 26.431
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 16.282
+                    },
+                    {
+                        "event": "creating",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 16.293
+                    },
+                    {
+                        "event": "created",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": 51,
+                        "at_ms": 17.939
+                    },
+                    {
+                        "event": "saved",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": 51,
+                        "at_ms": 17.951
                     }
                 ]
             }
@@ -598,43 +688,20 @@
             "payload": {
                 "items": [
                     {
-                        "name": "admin.users.index",
+                        "name": "facturation.index",
                         "source": {
-                            "file": "resources/views/admin/users/index.blade.php",
+                            "file": "resources/views/facturation/index.blade.php",
                             "line": 1
                         },
                         "composers": [],
                         "data": {
-                            "users": {
+                            "invoices": {
                                 "current_page": 1,
-                                "data": [
-                                    {
-                                        "id": "[maximum depth reached]",
-                                        "name": "[maximum depth reached]",
-                                        "email": "[maximum depth reached]",
-                                        "email_verified_at": "[maximum depth reached]",
-                                        "branch_id": "[maximum depth reached]",
-                                        "role": "[maximum depth reached]",
-                                        "created_at": "[maximum depth reached]",
-                                        "updated_at": "[maximum depth reached]",
-                                        "branch": "[maximum depth reached]"
-                                    },
-                                    {
-                                        "id": "[maximum depth reached]",
-                                        "name": "[maximum depth reached]",
-                                        "email": "[maximum depth reached]",
-                                        "email_verified_at": "[maximum depth reached]",
-                                        "branch_id": "[maximum depth reached]",
-                                        "role": "[maximum depth reached]",
-                                        "created_at": "[maximum depth reached]",
-                                        "updated_at": "[maximum depth reached]",
-                                        "branch": "[maximum depth reached]"
-                                    }
-                                ],
-                                "first_page_url": "http://localhost:8001/admin/users?page=1",
-                                "from": 1,
+                                "data": [],
+                                "first_page_url": "http://localhost:8000/factures?page=1",
+                                "from": null,
                                 "last_page": 1,
-                                "last_page_url": "http://localhost:8001/admin/users?page=1",
+                                "last_page_url": "http://localhost:8000/factures?page=1",
                                 "links": [
                                     {
                                         "url": "[maximum depth reached]",
@@ -656,34 +723,24 @@
                                     }
                                 ],
                                 "next_page_url": null,
-                                "path": "http://localhost:8001/admin/users",
+                                "path": "http://localhost:8000/factures",
                                 "per_page": 20,
                                 "prev_page_url": null,
-                                "to": 2,
-                                "total": 2
+                                "to": null,
+                                "total": 0
                             },
-                            "branches": [
-                                {
-                                    "id": 1,
-                                    "name": "Maradi",
-                                    "city": "maradi",
-                                    "created_at": null,
-                                    "updated_at": null
-                                },
-                                {
-                                    "id": 2,
-                                    "name": "Zinder",
-                                    "city": "zinder",
-                                    "created_at": null,
-                                    "updated_at": null
-                                }
-                            ],
-                            "totalUsers": 2,
-                            "adminCount": 1,
-                            "staffCount": 1
+                            "invoicesData": [],
+                            "uninvoicedSales": [],
+                            "isStaff": true,
+                            "dayCount": 0,
+                            "dayRevenue": 0,
+                            "dayByPayment": [],
+                            "monthCount": null,
+                            "monthRevenue": null,
+                            "monthByPayment": []
                         },
                         "timing": "composition_marker",
-                        "at_ms": 31.438
+                        "at_ms": 18.363
                     },
                     {
                         "name": "pagination::tailwind",
@@ -695,34 +752,11 @@
                         "data": {
                             "paginator": {
                                 "current_page": 1,
-                                "data": [
-                                    {
-                                        "id": "[maximum depth reached]",
-                                        "name": "[maximum depth reached]",
-                                        "email": "[maximum depth reached]",
-                                        "email_verified_at": "[maximum depth reached]",
-                                        "branch_id": "[maximum depth reached]",
-                                        "role": "[maximum depth reached]",
-                                        "created_at": "[maximum depth reached]",
-                                        "updated_at": "[maximum depth reached]",
-                                        "branch": "[maximum depth reached]"
-                                    },
-                                    {
-                                        "id": "[maximum depth reached]",
-                                        "name": "[maximum depth reached]",
-                                        "email": "[maximum depth reached]",
-                                        "email_verified_at": "[maximum depth reached]",
-                                        "branch_id": "[maximum depth reached]",
-                                        "role": "[maximum depth reached]",
-                                        "created_at": "[maximum depth reached]",
-                                        "updated_at": "[maximum depth reached]",
-                                        "branch": "[maximum depth reached]"
-                                    }
-                                ],
-                                "first_page_url": "http://localhost:8001/admin/users?page=1",
-                                "from": 1,
+                                "data": [],
+                                "first_page_url": "http://localhost:8000/factures?page=1",
+                                "from": null,
                                 "last_page": 1,
-                                "last_page_url": "http://localhost:8001/admin/users?page=1",
+                                "last_page_url": "http://localhost:8000/factures?page=1",
                                 "links": [
                                     {
                                         "url": "[maximum depth reached]",
@@ -744,25 +778,25 @@
                                     }
                                 ],
                                 "next_page_url": null,
-                                "path": "http://localhost:8001/admin/users",
+                                "path": "http://localhost:8000/factures",
                                 "per_page": 20,
                                 "prev_page_url": null,
-                                "to": 2,
-                                "total": 2
+                                "to": null,
+                                "total": 0
                             },
                             "elements": [
                                 {
-                                    "1": "http://localhost:8001/admin/users?page=1"
+                                    "1": "http://localhost:8000/factures?page=1"
                                 }
                             ]
                         },
                         "timing": "composition_marker",
-                        "at_ms": 40.648
+                        "at_ms": 19.23
                     },
                     {
-                        "name": "layouts.apps",
+                        "name": "layouts.app",
                         "source": {
-                            "file": "resources/views/layouts/apps.blade.php",
+                            "file": "resources/views/layouts/app.blade.php",
                             "line": 1
                         },
                         "composers": [],
@@ -770,36 +804,13 @@
                             "__env": "[Illuminate\\View\\Factory]",
                             "app": "[Illuminate\\Foundation\\Application]",
                             "errors": "[]",
-                            "users": {
+                            "invoices": {
                                 "current_page": 1,
-                                "data": [
-                                    {
-                                        "id": "[maximum depth reached]",
-                                        "name": "[maximum depth reached]",
-                                        "email": "[maximum depth reached]",
-                                        "email_verified_at": "[maximum depth reached]",
-                                        "branch_id": "[maximum depth reached]",
-                                        "role": "[maximum depth reached]",
-                                        "created_at": "[maximum depth reached]",
-                                        "updated_at": "[maximum depth reached]",
-                                        "branch": "[maximum depth reached]"
-                                    },
-                                    {
-                                        "id": "[maximum depth reached]",
-                                        "name": "[maximum depth reached]",
-                                        "email": "[maximum depth reached]",
-                                        "email_verified_at": "[maximum depth reached]",
-                                        "branch_id": "[maximum depth reached]",
-                                        "role": "[maximum depth reached]",
-                                        "created_at": "[maximum depth reached]",
-                                        "updated_at": "[maximum depth reached]",
-                                        "branch": "[maximum depth reached]"
-                                    }
-                                ],
-                                "first_page_url": "http://localhost:8001/admin/users?page=1",
-                                "from": 1,
+                                "data": [],
+                                "first_page_url": "http://localhost:8000/factures?page=1",
+                                "from": null,
                                 "last_page": 1,
-                                "last_page_url": "http://localhost:8001/admin/users?page=1",
+                                "last_page_url": "http://localhost:8000/factures?page=1",
                                 "links": [
                                     {
                                         "url": "[maximum depth reached]",
@@ -821,76 +832,85 @@
                                     }
                                 ],
                                 "next_page_url": null,
-                                "path": "http://localhost:8001/admin/users",
+                                "path": "http://localhost:8000/factures",
                                 "per_page": 20,
                                 "prev_page_url": null,
-                                "to": 2,
-                                "total": 2
+                                "to": null,
+                                "total": 0
                             },
-                            "branches": [
-                                {
-                                    "id": 1,
-                                    "name": "Maradi",
-                                    "city": "maradi",
-                                    "created_at": null,
-                                    "updated_at": null
+                            "invoicesData": [],
+                            "uninvoicedSales": [],
+                            "isStaff": true,
+                            "dayCount": 0,
+                            "dayRevenue": 0,
+                            "dayByPayment": [],
+                            "monthCount": null,
+                            "monthRevenue": null,
+                            "monthByPayment": [],
+                            "payLabels": {
+                                "cash": {
+                                    "label": "Esp\u00e8ces",
+                                    "icon": "fa-money-bill-wave"
                                 },
-                                {
-                                    "id": 2,
-                                    "name": "Zinder",
-                                    "city": "zinder",
-                                    "created_at": null,
-                                    "updated_at": null
-                                }
-                            ],
-                            "totalUsers": 2,
-                            "adminCount": 1,
-                            "staffCount": 1,
-                            "__currentLoopData": [
-                                {
-                                    "id": 1,
-                                    "name": "Maradi",
-                                    "city": "maradi",
-                                    "created_at": null,
-                                    "updated_at": null
+                                "amana": {
+                                    "label": "Amanata",
+                                    "icon": "fa-mobile-alt"
                                 },
-                                {
-                                    "id": 2,
-                                    "name": "Zinder",
-                                    "city": "zinder",
-                                    "created_at": null,
-                                    "updated_at": null
+                                "nita": {
+                                    "label": "MyNita",
+                                    "icon": "fa-mobile"
+                                },
+                                "western_union": {
+                                    "label": "Western Union",
+                                    "icon": "fa-globe"
+                                },
+                                "moneygram": {
+                                    "label": "MoneyGram",
+                                    "icon": "fa-credit-card"
+                                },
+                                "wave": {
+                                    "label": "Wave",
+                                    "icon": "fa-water"
                                 }
-                            ],
-                            "branch": {
-                                "id": 2,
-                                "name": "Zinder",
-                                "city": "zinder",
-                                "created_at": null,
-                                "updated_at": null
                             },
-                            "loop": null,
-                            "__empty_1": false,
-                            "user": {
-                                "id": 1,
-                                "name": "Mahamane Lamine Abdou Malam Laouali",
-                                "email": "mahamanelmn8@gmail.com",
-                                "email_verified_at": null,
-                                "branch_id": 1,
-                                "role": "admin",
-                                "created_at": "2026-04-21T17:00:11.000000Z",
-                                "updated_at": "2026-04-21T17:00:11.000000Z",
-                                "branch": {
-                                    "id": 1,
-                                    "name": "Maradi",
-                                    "city": "maradi",
-                                    "created_at": null,
-                                    "updated_at": null
-                                }
-                            }
+                            "__currentLoopData": {
+                                "current_page": 1,
+                                "data": [],
+                                "first_page_url": "http://localhost:8000/factures?page=1",
+                                "from": null,
+                                "last_page": 1,
+                                "last_page_url": "http://localhost:8000/factures?page=1",
+                                "links": [
+                                    {
+                                        "url": "[maximum depth reached]",
+                                        "label": "[maximum depth reached]",
+                                        "page": "[maximum depth reached]",
+                                        "active": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "url": "[maximum depth reached]",
+                                        "label": "[maximum depth reached]",
+                                        "page": "[maximum depth reached]",
+                                        "active": "[maximum depth reached]"
+                                    },
+                                    {
+                                        "url": "[maximum depth reached]",
+                                        "label": "[maximum depth reached]",
+                                        "page": "[maximum depth reached]",
+                                        "active": "[maximum depth reached]"
+                                    }
+                                ],
+                                "next_page_url": null,
+                                "path": "http://localhost:8000/factures",
+                                "per_page": 20,
+                                "prev_page_url": null,
+                                "to": null,
+                                "total": 0
+                            },
+                            "loop": null
                         },
                         "timing": "composition_marker",
-                        "at_ms": 42.48
+                        "at_ms": 19.362
                     }
                 ]
             }
@@ -898,8 +918,8 @@
         "events": {
             "label": "Events",
             "summary": {
-                "count": 11,
-                "retained_count": 11,
+                "count": 12,
+                "retained_count": 12,
                 "dropped_count": 0,
                 "truncated": false
             },
@@ -912,7 +932,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\ConnectionEstablished"
                         ],
-                        "at_ms": 1.201
+                        "at_ms": 0.916
                     },
                     {
                         "name": "Illuminate\\Database\\Events\\StatementPrepared",
@@ -921,7 +941,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\StatementPrepared"
                         ],
-                        "at_ms": 8.853
+                        "at_ms": 5.568
                     },
                     {
                         "name": "Illuminate\\Database\\Events\\StatementPrepared",
@@ -930,7 +950,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\StatementPrepared"
                         ],
-                        "at_ms": 13.448
+                        "at_ms": 8.34
                     },
                     {
                         "name": "Illuminate\\Auth\\Events\\Authenticated",
@@ -939,7 +959,7 @@
                         "payload_types": [
                             "Illuminate\\Auth\\Events\\Authenticated"
                         ],
-                        "at_ms": 15.283
+                        "at_ms": 9.627
                     },
                     {
                         "name": "Illuminate\\Database\\Events\\StatementPrepared",
@@ -948,7 +968,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\StatementPrepared"
                         ],
-                        "at_ms": 15.801
+                        "at_ms": 10.134
                     },
                     {
                         "name": "Illuminate\\Database\\Events\\StatementPrepared",
@@ -957,7 +977,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\StatementPrepared"
                         ],
-                        "at_ms": 16.618
+                        "at_ms": 11.629
                     },
                     {
                         "name": "Illuminate\\Database\\Events\\StatementPrepared",
@@ -966,7 +986,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\StatementPrepared"
                         ],
-                        "at_ms": 21.75
+                        "at_ms": 12.137
                     },
                     {
                         "name": "Illuminate\\Database\\Events\\StatementPrepared",
@@ -975,7 +995,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\StatementPrepared"
                         ],
-                        "at_ms": 25.677
+                        "at_ms": 12.796
                     },
                     {
                         "name": "Illuminate\\Database\\Events\\StatementPrepared",
@@ -984,7 +1004,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\StatementPrepared"
                         ],
-                        "at_ms": 26.554
+                        "at_ms": 14.036
                     },
                     {
                         "name": "Illuminate\\Database\\Events\\StatementPrepared",
@@ -993,7 +1013,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\StatementPrepared"
                         ],
-                        "at_ms": 27.308
+                        "at_ms": 14.768
                     },
                     {
                         "name": "Illuminate\\Database\\Events\\StatementPrepared",
@@ -1002,7 +1022,16 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\StatementPrepared"
                         ],
-                        "at_ms": 28.104
+                        "at_ms": 15.504
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 16.383
                     }
                 ]
             }
@@ -1043,23 +1072,23 @@
                 "items": [
                     {
                         "name": "Route matching",
-                        "duration_ms": 0.38,
-                        "at_ms": 0.513
+                        "duration_ms": 0.36,
+                        "at_ms": 0.445
                     },
                     {
                         "name": "Route middleware, binding, controller and rendering",
-                        "duration_ms": 28.38,
-                        "at_ms": 28.886
+                        "duration_ms": 17.66,
+                        "at_ms": 18.103
                     },
                     {
                         "name": "Route response preparation",
-                        "duration_ms": 14.32,
-                        "at_ms": 43.206
+                        "duration_ms": 1.76,
+                        "at_ms": 19.86
                     },
                     {
                         "name": "Final response preparation",
-                        "duration_ms": 0.06,
-                        "at_ms": 45.662
+                        "duration_ms": 0.03,
+                        "at_ms": 21.025
                     }
                 ]
             }

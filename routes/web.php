@@ -147,8 +147,9 @@ Route::post('/confections',            [ConfectionController::class, 'store'])->
 Route::put('/confections/{confection}', [ConfectionController::class, 'update'])->name('confections.update');
 Route::delete('/confections/{confection}', [ConfectionController::class, 'destroy'])->name('confections.destroy');
 // Fournisseurs
-Route::resource('fournisseurs', SupplierController::class)->except(['show', 'edit', 'create']);
-
+// Route::resource('fournisseurs', SupplierController::class)->except(['show', 'edit', 'create']);
+Route::resource('fournisseurs', SupplierController::class)
+    ->parameters(['fournisseurs' => 'supplier']);
 // Bons de commande / réapprovisionnement
 
 Route::get('/reapprovisionnement',                        [PurchaseOrderController::class, 'index'])->name('purchases.index');

@@ -1,0 +1,1123 @@
+{
+    "schema_version": 1,
+    "id": "aaed5d18-4b7c-4890-aa57-3f40c1a3b51d",
+    "recorded_at": "2026-11-14T18:00:48+01:00",
+    "profile_type": "http",
+    "environment": "local",
+    "metrics": {
+        "duration_ms": 38.63,
+        "peak_memory_mb": 4
+    },
+    "sections": {
+        "overview": {
+            "label": "Overview",
+            "summary": {
+                "duration_ms": 38.63,
+                "peak_memory_mb": 4
+            },
+            "payload": {
+                "runtime": {
+                    "environment": "local",
+                    "php": "8.4.19",
+                    "php_sapi": "cli-server",
+                    "runtime_type": "cli-server",
+                    "laravel": "13.5.0",
+                    "debug": true,
+                    "locale": "en",
+                    "timezone": "Africa/Niamey"
+                },
+                "cache_state": {
+                    "configuration": false,
+                    "routes": false,
+                    "events": false
+                },
+                "drivers": {
+                    "database": "pgsql",
+                    "cache": "database",
+                    "queue": "database",
+                    "session": "database",
+                    "mail": "log",
+                    "broadcasting": "log"
+                },
+                "ecosystem": [],
+                "package": "dev-main"
+            }
+        },
+        "request": {
+            "label": "Request",
+            "summary": {
+                "method": "GET",
+                "status": 200,
+                "exit_code": null
+            },
+            "payload": {
+                "method": "GET",
+                "url": "http://localhost:8000/produits",
+                "path": "/produits",
+                "query": [],
+                "input": [],
+                "headers": {
+                    "host": [
+                        "localhost:8000"
+                    ],
+                    "connection": [
+                        "keep-alive"
+                    ],
+                    "sec-ch-ua": [
+                        "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Brave\";v=\"156\""
+                    ],
+                    "sec-ch-ua-mobile": [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform": [
+                        "\"macOS\""
+                    ],
+                    "upgrade-insecure-requests": [
+                        "1"
+                    ],
+                    "user-agent": [
+                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+                    ],
+                    "accept": [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;q=0.8"
+                    ],
+                    "sec-gpc": [
+                        "1"
+                    ],
+                    "sec-fetch-site": [
+                        "same-origin"
+                    ],
+                    "sec-fetch-mode": [
+                        "navigate"
+                    ],
+                    "sec-fetch-user": [
+                        "?1"
+                    ],
+                    "sec-fetch-dest": [
+                        "document"
+                    ],
+                    "referer": [
+                        "http://localhost:8000/reapprovisionnement"
+                    ],
+                    "accept-encoding": [
+                        "gzip, deflate, br, zstd"
+                    ],
+                    "accept-language": [
+                        "fr-FR,fr;q=0.9"
+                    ],
+                    "cookie": "[redacted]"
+                },
+                "route": "products.index",
+                "action": "App\\Http\\Controllers\\ProductController@index",
+                "parameters": [],
+                "middleware": [
+                    "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+                    "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestForgery",
+                    "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                    "Laravel\\Boost\\Middleware\\InjectBoost"
+                ],
+                "status": 200,
+                "request_type": "full_page",
+                "content_type": "text/html; charset=utf-8",
+                "request_size_bytes": 0,
+                "response_size_bytes": 76714,
+                "session_present": false,
+                "authenticated": true,
+                "authentication": {
+                    "guard": "web",
+                    "authenticated": true,
+                    "model": "App\\Models\\User",
+                    "identifier": "hmac:2dffea64817b6601",
+                    "identifier_policy": "keyed_hash"
+                },
+                "session": {
+                    "present": false,
+                    "driver": "database",
+                    "key_count": 0,
+                    "keys": [],
+                    "keys_dropped": 0,
+                    "flash_keys": [],
+                    "error_bag_present": false,
+                    "error_bags": []
+                },
+                "timing_scope": "global_middleware_entry",
+                "response_headers": {
+                    "content-type": [
+                        "text/html; charset=utf-8"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Sat, 14 Nov 2026 17:00:48 GMT"
+                    ],
+                    "set-cookie": "[redacted]"
+                }
+            }
+        },
+        "queries": {
+            "label": "Queries",
+            "summary": {
+                "count": 9,
+                "retained_count": 9,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 19.31,
+                "transaction_count": 0,
+                "transaction_retained_count": 0,
+                "transaction_dropped_count": 0,
+                "rollback_count": 0
+            },
+            "payload": {
+                "items": [
+                    {
+                        "sql": "select * from \"sessions\" where \"id\" = ? limit 1",
+                        "bindings": [
+                            "WB71MQQaoRVtRuDccaA7NHalQy9ywF4LcU7lNjKB"
+                        ],
+                        "runnable_sql": "select * from \"sessions\" where \"id\" = 'WB71MQQaoRVtRuDccaA7NHalQy9ywF4LcU7lNjKB' limit 1",
+                        "duration_ms": 6.81,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 8.688,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"users\" where \"id\" = ? limit 1",
+                        "bindings": [
+                            2
+                        ],
+                        "runnable_sql": "select * from \"users\" where \"id\" = 2 limit 1",
+                        "duration_ms": 0.96,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/ProductController.php",
+                            "line": 14
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/ProductController.php",
+                                "line": 14,
+                                "function": "Illuminate\\Auth\\AuthManager->__call"
+                            }
+                        ],
+                        "at_ms": 10.544,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"products\" where \"branch_id\" = ? order by \"name\" asc",
+                        "bindings": [
+                            1
+                        ],
+                        "runnable_sql": "select * from \"products\" where \"branch_id\" = 1 order by \"name\" asc",
+                        "duration_ms": 0.78,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/ProductController.php",
+                            "line": 15
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/ProductController.php",
+                                "line": 15,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 11.745,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"services\" order by \"name\" asc",
+                        "bindings": [],
+                        "runnable_sql": "select * from \"services\" order by \"name\" asc",
+                        "duration_ms": 1.04,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/ProductController.php",
+                            "line": 16
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/ProductController.php",
+                                "line": 16,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 13.119,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select * from \"confections\" where \"branch_id\" = ? order by \"name\" asc",
+                        "bindings": [
+                            1
+                        ],
+                        "runnable_sql": "select * from \"confections\" where \"branch_id\" = 1 order by \"name\" asc",
+                        "duration_ms": 3.21,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/Http/Controllers/ProductController.php",
+                            "line": 17
+                        },
+                        "stack": [
+                            {
+                                "file": "app/Http/Controllers/ProductController.php",
+                                "line": 17,
+                                "function": "Illuminate\\Database\\Eloquent\\Builder->get"
+                            }
+                        ],
+                        "at_ms": 17.138,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "insert into \"activity_logs\" (\"user_id\", \"action\", \"description\", \"updated_at\", \"created_at\") values (?, ?, ?, ?, ?) returning \"id\"",
+                        "bindings": [
+                            2,
+                            "view_products",
+                            "Consultation produits/services/confections : 1 produits, 3 services, 1 confections",
+                            "2026-11-14 18:00:48",
+                            "2026-11-14 18:00:48"
+                        ],
+                        "runnable_sql": "insert into \"activity_logs\" (\"user_id\", \"action\", \"description\", \"updated_at\", \"created_at\") values (2, 'view_products', 'Consultation produits/services/confections : 1 produits, 3 services, 1 confections', '2026-11-14 18:00:48', '2026-11-14 18:00:48') returning \"id\"",
+                        "duration_ms": 1.36,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": {
+                            "file": "app/helpers.php",
+                            "line": 6
+                        },
+                        "stack": [
+                            {
+                                "file": "app/helpers.php",
+                                "line": 6,
+                                "function": "Illuminate\\Database\\Eloquent\\Model::__callStatic"
+                            },
+                            {
+                                "file": "app/Http/Controllers/ProductController.php",
+                                "line": 24,
+                                "function": "activity_log"
+                            }
+                        ],
+                        "at_ms": 19.034,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select \"products\".*, \"confection_products\".\"confection_id\" as \"pivot_confection_id\", \"confection_products\".\"product_id\" as \"pivot_product_id\", \"confection_products\".\"quantity\" as \"pivot_quantity\", \"confection_products\".\"created_at\" as \"pivot_created_at\", \"confection_products\".\"updated_at\" as \"pivot_updated_at\" from \"products\" inner join \"confection_products\" on \"products\".\"id\" = \"confection_products\".\"product_id\" where \"confection_products\".\"confection_id\" = ?",
+                        "bindings": [
+                            1
+                        ],
+                        "runnable_sql": "select \"products\".*, \"confection_products\".\"confection_id\" as \"pivot_confection_id\", \"confection_products\".\"product_id\" as \"pivot_product_id\", \"confection_products\".\"quantity\" as \"pivot_quantity\", \"confection_products\".\"created_at\" as \"pivot_created_at\", \"confection_products\".\"updated_at\" as \"pivot_updated_at\" from \"products\" inner join \"confection_products\" on \"products\".\"id\" = \"confection_products\".\"product_id\" where \"confection_products\".\"confection_id\" = 1",
+                        "duration_ms": 2.68,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 30.205,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "select \"products\".*, \"confection_products\".\"confection_id\" as \"pivot_confection_id\", \"confection_products\".\"product_id\" as \"pivot_product_id\", \"confection_products\".\"quantity\" as \"pivot_quantity\", \"confection_products\".\"created_at\" as \"pivot_created_at\", \"confection_products\".\"updated_at\" as \"pivot_updated_at\" from \"products\" inner join \"confection_products\" on \"products\".\"id\" = \"confection_products\".\"product_id\" where \"confection_products\".\"confection_id\" in (1)",
+                        "bindings": [],
+                        "runnable_sql": "select \"products\".*, \"confection_products\".\"confection_id\" as \"pivot_confection_id\", \"confection_products\".\"product_id\" as \"pivot_product_id\", \"confection_products\".\"quantity\" as \"pivot_quantity\", \"confection_products\".\"created_at\" as \"pivot_created_at\", \"confection_products\".\"updated_at\" as \"pivot_updated_at\" from \"products\" inner join \"confection_products\" on \"products\".\"id\" = \"confection_products\".\"product_id\" where \"confection_products\".\"confection_id\" in (1)",
+                        "duration_ms": 1.43,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 34.449,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    },
+                    {
+                        "sql": "update \"sessions\" set \"payload\" = ?, \"last_activity\" = ?, \"user_id\" = ?, \"ip_address\" = ?, \"user_agent\" = ? where \"id\" = ?",
+                        "bindings": [
+                            "eyJfdG9rZW4iOiJoTFhRb0lrWEFKYXEwdGpjOG93bVNOY2lVaDdxMXM5Umkwa0VQMGVxIiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDBcL3Byb2R1aXRzIiwicm91dGUiOiJwcm9kdWN0cy5pbmRleCJ9LCJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI6Mn0=",
+                            1794675648,
+                            2,
+                            "127.0.0.1",
+                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+                            "WB71MQQaoRVtRuDccaA7NHalQy9ywF4LcU7lNjKB"
+                        ],
+                        "runnable_sql": "update \"sessions\" set \"payload\" = 'eyJfdG9rZW4iOiJoTFhRb0lrWEFKYXEwdGpjOG93bVNOY2lVaDdxMXM5Umkwa0VQMGVxIiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDBcL3Byb2R1aXRzIiwicm91dGUiOiJwcm9kdWN0cy5pbmRleCJ9LCJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI6Mn0=', \"last_activity\" = 1794675648, \"user_id\" = 2, \"ip_address\" = '127.0.0.1', \"user_agent\" = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36' where \"id\" = 'WB71MQQaoRVtRuDccaA7NHalQy9ywF4LcU7lNjKB'",
+                        "duration_ms": 1.04,
+                        "connection": "pgsql",
+                        "type": "write",
+                        "callsite": null,
+                        "stack": [],
+                        "at_ms": 38.256,
+                        "source_preserved": true,
+                        "binding_policy": "full",
+                        "bindings_complete": true,
+                        "runnable_available": true
+                    }
+                ],
+                "transactions": []
+            }
+        },
+        "http_client": {
+            "label": "HTTP Client",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "queue": {
+            "label": "Queue",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "queued_count": 0,
+                "executed_count": 0,
+                "failed_count": 0,
+                "duration_ms": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "mail": {
+            "label": "Mail",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "recipient_count": 0,
+                "attachment_count": 0,
+                "duration_ms": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "notifications": {
+            "label": "Notifications",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "sent_count": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "redis": {
+            "label": "Redis",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "duration_ms": 0,
+                "failed_count": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "models": {
+            "label": "Models",
+            "summary": {
+                "count": 24,
+                "retained_count": 24,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\User",
+                        "connection": null,
+                        "table": "users",
+                        "key": null,
+                        "at_ms": 9.17
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\User",
+                        "connection": null,
+                        "table": "users",
+                        "key": null,
+                        "at_ms": 9.395
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\User",
+                        "connection": "pgsql",
+                        "table": "users",
+                        "key": 2,
+                        "at_ms": 10.622
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Product",
+                        "connection": null,
+                        "table": "products",
+                        "key": null,
+                        "at_ms": 10.711
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Product",
+                        "connection": null,
+                        "table": "products",
+                        "key": null,
+                        "at_ms": 10.857
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Product",
+                        "connection": "pgsql",
+                        "table": "products",
+                        "key": 4,
+                        "at_ms": 11.803
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Service",
+                        "connection": null,
+                        "table": "services",
+                        "key": null,
+                        "at_ms": 11.858
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Service",
+                        "connection": null,
+                        "table": "services",
+                        "key": null,
+                        "at_ms": 11.995
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Service",
+                        "connection": "pgsql",
+                        "table": "services",
+                        "key": 2,
+                        "at_ms": 13.172
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Service",
+                        "connection": "pgsql",
+                        "table": "services",
+                        "key": 3,
+                        "at_ms": 13.189
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Service",
+                        "connection": "pgsql",
+                        "table": "services",
+                        "key": 4,
+                        "at_ms": 13.202
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\Confection",
+                        "connection": null,
+                        "table": "confections",
+                        "key": null,
+                        "at_ms": 13.689
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\Confection",
+                        "connection": null,
+                        "table": "confections",
+                        "key": null,
+                        "at_ms": 13.827
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Confection",
+                        "connection": "pgsql",
+                        "table": "confections",
+                        "key": 1,
+                        "at_ms": 17.199
+                    },
+                    {
+                        "event": "booting",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": null,
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 17.266
+                    },
+                    {
+                        "event": "booted",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": null,
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 17.404
+                    },
+                    {
+                        "event": "saving",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 17.473
+                    },
+                    {
+                        "event": "creating",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": null,
+                        "at_ms": 17.485
+                    },
+                    {
+                        "event": "created",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": 54,
+                        "at_ms": 19.074
+                    },
+                    {
+                        "event": "saved",
+                        "model": "App\\Models\\ActivityLog",
+                        "connection": "pgsql",
+                        "table": "activity_logs",
+                        "key": 54,
+                        "at_ms": 19.086
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Product",
+                        "connection": "pgsql",
+                        "table": "products",
+                        "key": 4,
+                        "at_ms": 30.319
+                    },
+                    {
+                        "event": "booting",
+                        "model": "Illuminate\\Database\\Eloquent\\Relations\\Pivot",
+                        "connection": null,
+                        "table": "pivot",
+                        "key": null,
+                        "at_ms": 31.831
+                    },
+                    {
+                        "event": "booted",
+                        "model": "Illuminate\\Database\\Eloquent\\Relations\\Pivot",
+                        "connection": null,
+                        "table": "pivot",
+                        "key": null,
+                        "at_ms": 31.998
+                    },
+                    {
+                        "event": "retrieved",
+                        "model": "App\\Models\\Product",
+                        "connection": "pgsql",
+                        "table": "products",
+                        "key": 4,
+                        "at_ms": 34.529
+                    }
+                ]
+            }
+        },
+        "cache": {
+            "label": "Cache",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "hits": 0,
+                "misses": 0,
+                "writes": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "views": {
+            "label": "Views",
+            "summary": {
+                "count": 2,
+                "retained_count": 2,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "products.index",
+                        "source": {
+                            "file": "resources/views/products/index.blade.php",
+                            "line": 1
+                        },
+                        "composers": [],
+                        "data": {
+                            "products": [
+                                {
+                                    "id": 4,
+                                    "name": "Tiges de roses",
+                                    "description": "descripotion",
+                                    "price": "2000.00",
+                                    "stock_quantity": 100,
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-23T11:03:41.000000Z",
+                                    "updated_at": "2026-04-29T18:44:41.000000Z",
+                                    "alert_threshold": 10
+                                }
+                            ],
+                            "services": [
+                                {
+                                    "id": 2,
+                                    "name": "Frais de livraison",
+                                    "price": "1500.00",
+                                    "created_at": "2026-04-28T12:58:17.000000Z",
+                                    "updated_at": "2026-04-28T12:58:17.000000Z"
+                                },
+                                {
+                                    "id": 3,
+                                    "name": "Frais de livraison",
+                                    "price": "1000.00",
+                                    "created_at": "2026-04-28T14:49:51.000000Z",
+                                    "updated_at": "2026-04-28T14:49:51.000000Z"
+                                },
+                                {
+                                    "id": 4,
+                                    "name": "Prestation surprise format simple( droit de publier )",
+                                    "price": "25000.00",
+                                    "created_at": "2026-04-29T12:11:46.000000Z",
+                                    "updated_at": "2026-04-29T12:11:46.000000Z"
+                                }
+                            ],
+                            "confections": [
+                                {
+                                    "id": 1,
+                                    "name": "Bouquet roses",
+                                    "description": "bouquet de fleurs de 30 tiqges de roses",
+                                    "making_price": "15000.00",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-29T12:37:35.000000Z",
+                                    "updated_at": "2026-04-29T12:37:35.000000Z"
+                                }
+                            ]
+                        },
+                        "timing": "composition_marker",
+                        "at_ms": 19.816
+                    },
+                    {
+                        "name": "layouts.app",
+                        "source": {
+                            "file": "resources/views/layouts/app.blade.php",
+                            "line": 1
+                        },
+                        "composers": [],
+                        "data": {
+                            "__env": "[Illuminate\\View\\Factory]",
+                            "app": "[Illuminate\\Foundation\\Application]",
+                            "errors": "[]",
+                            "products": [
+                                {
+                                    "id": 4,
+                                    "name": "Tiges de roses",
+                                    "description": "descripotion",
+                                    "price": "2000.00",
+                                    "stock_quantity": 100,
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-23T11:03:41.000000Z",
+                                    "updated_at": "2026-04-29T18:44:41.000000Z",
+                                    "alert_threshold": 10
+                                }
+                            ],
+                            "services": [
+                                {
+                                    "id": 2,
+                                    "name": "Frais de livraison",
+                                    "price": "1500.00",
+                                    "created_at": "2026-04-28T12:58:17.000000Z",
+                                    "updated_at": "2026-04-28T12:58:17.000000Z"
+                                },
+                                {
+                                    "id": 3,
+                                    "name": "Frais de livraison",
+                                    "price": "1000.00",
+                                    "created_at": "2026-04-28T14:49:51.000000Z",
+                                    "updated_at": "2026-04-28T14:49:51.000000Z"
+                                },
+                                {
+                                    "id": 4,
+                                    "name": "Prestation surprise format simple( droit de publier )",
+                                    "price": "25000.00",
+                                    "created_at": "2026-04-29T12:11:46.000000Z",
+                                    "updated_at": "2026-04-29T12:11:46.000000Z"
+                                }
+                            ],
+                            "confections": [
+                                {
+                                    "id": 1,
+                                    "name": "Bouquet roses",
+                                    "description": "bouquet de fleurs de 30 tiqges de roses",
+                                    "making_price": "15000.00",
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-29T12:37:35.000000Z",
+                                    "updated_at": "2026-04-29T12:37:35.000000Z",
+                                    "products": [
+                                        "[maximum depth reached]"
+                                    ]
+                                }
+                            ],
+                            "__empty_1": false,
+                            "__currentLoopData": [
+                                {
+                                    "id": 4,
+                                    "name": "Tiges de roses",
+                                    "description": "descripotion",
+                                    "price": "2000.00",
+                                    "stock_quantity": 100,
+                                    "branch_id": 1,
+                                    "created_at": "2026-04-23T11:03:41.000000Z",
+                                    "updated_at": "2026-04-29T18:44:41.000000Z",
+                                    "alert_threshold": 10,
+                                    "pivot": {
+                                        "confection_id": "[maximum depth reached]",
+                                        "product_id": "[maximum depth reached]",
+                                        "quantity": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]"
+                                    }
+                                }
+                            ],
+                            "product": {
+                                "id": 4,
+                                "name": "Tiges de roses",
+                                "description": "descripotion",
+                                "price": "2000.00",
+                                "stock_quantity": 100,
+                                "branch_id": 1,
+                                "created_at": "2026-04-23T11:03:41.000000Z",
+                                "updated_at": "2026-04-29T18:44:41.000000Z",
+                                "alert_threshold": 10
+                            },
+                            "loop": null,
+                            "sk": "ok",
+                            "si": "\u2705",
+                            "icons": {
+                                "ok": "\ud83d\udce6",
+                                "low": "\ud83d\udce6",
+                                "critical": "\ud83d\udce6"
+                            },
+                            "emojis": {
+                                "1": "\ud83c\udf38",
+                                "2": "\ud83e\udeb4",
+                                "3": "\ud83c\udf81",
+                                "4": "\ud83c\udffa",
+                                "5": "\ud83c\udf3a"
+                            },
+                            "em": "\ud83c\udf3a",
+                            "sl": "OK",
+                            "service": {
+                                "id": 4,
+                                "name": "Prestation surprise format simple( droit de publier )",
+                                "price": "25000.00",
+                                "created_at": "2026-04-29T12:11:46.000000Z",
+                                "updated_at": "2026-04-29T12:11:46.000000Z"
+                            },
+                            "typeLabels": {
+                                "simple": "Simple",
+                                "semi_prive": "Semi-priv\u00e9",
+                                "prive": "Priv\u00e9"
+                            },
+                            "typeIcons": {
+                                "simple": "\ud83c\udf38",
+                                "semi_prive": "\ud83d\udc90",
+                                "prive": "\ud83d\udc51"
+                            },
+                            "confection": {
+                                "id": 1,
+                                "name": "Bouquet roses",
+                                "description": "bouquet de fleurs de 30 tiqges de roses",
+                                "making_price": "15000.00",
+                                "branch_id": 1,
+                                "created_at": "2026-04-29T12:37:35.000000Z",
+                                "updated_at": "2026-04-29T12:37:35.000000Z",
+                                "products": [
+                                    {
+                                        "id": "[maximum depth reached]",
+                                        "name": "[maximum depth reached]",
+                                        "description": "[maximum depth reached]",
+                                        "price": "[maximum depth reached]",
+                                        "stock_quantity": "[maximum depth reached]",
+                                        "branch_id": "[maximum depth reached]",
+                                        "created_at": "[maximum depth reached]",
+                                        "updated_at": "[maximum depth reached]",
+                                        "alert_threshold": "[maximum depth reached]",
+                                        "pivot": "[maximum depth reached]"
+                                    }
+                                ]
+                            },
+                            "p": {
+                                "id": 4,
+                                "name": "Tiges de roses",
+                                "description": "descripotion",
+                                "price": "2000.00",
+                                "stock_quantity": 100,
+                                "branch_id": 1,
+                                "created_at": "2026-04-23T11:03:41.000000Z",
+                                "updated_at": "2026-04-29T18:44:41.000000Z",
+                                "alert_threshold": 10,
+                                "pivot": {
+                                    "confection_id": 1,
+                                    "product_id": 4,
+                                    "quantity": 30,
+                                    "created_at": "2026-04-29T12:37:35.000000Z",
+                                    "updated_at": "2026-04-29T12:37:35.000000Z"
+                                }
+                            }
+                        },
+                        "timing": "composition_marker",
+                        "at_ms": 36.096
+                    }
+                ]
+            }
+        },
+        "events": {
+            "label": "Events",
+            "summary": {
+                "count": 10,
+                "retained_count": 10,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "Illuminate\\Database\\Events\\ConnectionEstablished",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\ConnectionEstablished"
+                        ],
+                        "at_ms": 1.527
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 6.282
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 9.485
+                    },
+                    {
+                        "name": "Illuminate\\Auth\\Events\\Authenticated",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Auth\\Events\\Authenticated"
+                        ],
+                        "at_ms": 10.658
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 10.92
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 12.04
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 13.881
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 17.59
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 27.293
+                    },
+                    {
+                        "name": "Illuminate\\Database\\Events\\StatementPrepared",
+                        "listeners": [],
+                        "broadcast": false,
+                        "payload_types": [
+                            "Illuminate\\Database\\Events\\StatementPrepared"
+                        ],
+                        "at_ms": 32.889
+                    }
+                ]
+            }
+        },
+        "authorization": {
+            "label": "Authorization",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "validation": {
+            "label": "Validation",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "lifecycle": {
+            "label": "Lifecycle",
+            "summary": {
+                "count": 4,
+                "retained_count": 4,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": [
+                    {
+                        "name": "Route matching",
+                        "duration_ms": 0.3,
+                        "at_ms": 0.361
+                    },
+                    {
+                        "name": "Route middleware, binding, controller and rendering",
+                        "duration_ms": 18.81,
+                        "at_ms": 19.172
+                    },
+                    {
+                        "name": "Route response preparation",
+                        "duration_ms": 17.52,
+                        "at_ms": 36.687
+                    },
+                    {
+                        "name": "Final response preparation",
+                        "duration_ms": 0.04,
+                        "at_ms": 38.387
+                    }
+                ]
+            }
+        },
+        "messages": {
+            "label": "Messages",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "logs": {
+            "label": "Logs",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false,
+                "errors": 0
+            },
+            "payload": {
+                "items": []
+            }
+        },
+        "exceptions": {
+            "label": "Exceptions",
+            "summary": {
+                "count": 0,
+                "retained_count": 0,
+                "dropped_count": 0,
+                "truncated": false
+            },
+            "payload": {
+                "items": []
+            }
+        }
+    }
+}

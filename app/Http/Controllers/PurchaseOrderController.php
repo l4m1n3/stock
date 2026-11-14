@@ -324,7 +324,7 @@ public function receive(Request $request, PurchaseOrder $order)
 
         activity_log('purchase_order_viewed', "Commande #{$order->id} consultée");
 
-        return view('purchases.show', compact('order'));
+        return view('purchase.show', compact('order'));
     }
 
     // ═══════════════════════════════════════════════════════════════

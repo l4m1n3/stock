@@ -1,19 +1,19 @@
 {
     "schema_version": 1,
-    "id": "c1dd420e-1474-41f8-bcc3-b3c2e6aa76bb",
-    "recorded_at": "2026-10-24T19:05:06+01:00",
+    "id": "2282c9b8-99ac-4ece-8c02-0c61bf18c9ac",
+    "recorded_at": "2026-11-14T18:02:59+01:00",
     "profile_type": "http",
     "environment": "local",
     "metrics": {
-        "duration_ms": 15.8,
-        "peak_memory_mb": 2
+        "duration_ms": 12.84,
+        "peak_memory_mb": 6
     },
     "sections": {
         "overview": {
             "label": "Overview",
             "summary": {
-                "duration_ms": 15.8,
-                "peak_memory_mb": 2
+                "duration_ms": 12.84,
+                "peak_memory_mb": 6
             },
             "payload": {
                 "runtime": {
@@ -23,7 +23,7 @@
                     "runtime_type": "cli-server",
                     "laravel": "13.5.0",
                     "debug": true,
-                    "locale": "fr",
+                    "locale": "en",
                     "timezone": "Africa/Niamey"
                 },
                 "cache_state": {
@@ -52,13 +52,13 @@
             },
             "payload": {
                 "method": "GET",
-                "url": "http://localhost:8001",
+                "url": "http://localhost:8000",
                 "path": "/",
                 "query": [],
                 "input": [],
                 "headers": {
                     "host": [
-                        "localhost:8001"
+                        "localhost:8000"
                     ],
                     "connection": [
                         "keep-alive"
@@ -70,7 +70,7 @@
                         "1"
                     ],
                     "user-agent": [
-                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
                     ],
                     "accept": [
                         "text/html,application/xhtml+xml,application/xml;q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;q=0.8"
@@ -91,7 +91,7 @@
                         "document"
                     ],
                     "sec-ch-ua": [
-                        "\"Brave\";v=\"155\", \"Chromium\";v=\"155\", \"Not(A:Brand\";v=\"24\""
+                        "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Brave\";v=\"156\""
                     ],
                     "sec-ch-ua-mobile": [
                         "?0"
@@ -100,13 +100,13 @@
                         "\"macOS\""
                     ],
                     "referer": [
-                        "http://localhost:8001/admin/finances"
+                        "http://localhost:8000/factures"
                     ],
                     "accept-encoding": [
                         "gzip, deflate, br, zstd"
                     ],
                     "accept-language": [
-                        "fr-FR,fr;q=0.8"
+                        "fr-FR,fr;q=0.9"
                     ],
                     "cookie": "[redacted]"
                 },
@@ -155,7 +155,7 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Sat, 24 Oct 2026 18:05:06 GMT"
+                        "Sat, 14 Nov 2026 17:02:59 GMT"
                     ],
                     "set-cookie": "[redacted]"
                 }
@@ -168,7 +168,7 @@
                 "retained_count": 2,
                 "dropped_count": 0,
                 "truncated": false,
-                "duration_ms": 12.14,
+                "duration_ms": 9.01,
                 "transaction_count": 0,
                 "transaction_retained_count": 0,
                 "transaction_dropped_count": 0,
@@ -179,15 +179,15 @@
                     {
                         "sql": "select * from \"sessions\" where \"id\" = ? limit 1",
                         "bindings": [
-                            "0t6oQrg6YHRLzY1XAbRwqtnYQUBr8tNk6YzlH0Rn"
+                            "7QdT8gDgHkCPAEbqL5xBObFkZ7h3sqorW6WNgzfj"
                         ],
-                        "runnable_sql": "select * from \"sessions\" where \"id\" = '0t6oQrg6YHRLzY1XAbRwqtnYQUBr8tNk6YzlH0Rn' limit 1",
-                        "duration_ms": 11.01,
+                        "runnable_sql": "select * from \"sessions\" where \"id\" = '7QdT8gDgHkCPAEbqL5xBObFkZ7h3sqorW6WNgzfj' limit 1",
+                        "duration_ms": 8.17,
                         "connection": "pgsql",
                         "type": "write",
                         "callsite": null,
                         "stack": [],
-                        "at_ms": 12.454,
+                        "at_ms": 9.575,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
@@ -196,20 +196,20 @@
                     {
                         "sql": "update \"sessions\" set \"payload\" = ?, \"last_activity\" = ?, \"user_id\" = ?, \"ip_address\" = ?, \"user_agent\" = ? where \"id\" = ?",
                         "bindings": [
-                            "eyJfdG9rZW4iOiI3NHpDcmlUSDNGQU00TXJsTkRoRzlDZ0lEbGpEYnhMNG5vOTU2UU1sIiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDEiLCJyb3V0ZSI6bnVsbH19",
-                            1792865106,
+                            "eyJfdG9rZW4iOiJxbXh2aEUzV2tnSlI0ZmNGdzRoNEt5YW9WOTBzRktmQTk5VzRLV3l5IiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDAiLCJyb3V0ZSI6bnVsbH19",
+                            1794675779,
                             null,
                             "127.0.0.1",
-                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
-                            "0t6oQrg6YHRLzY1XAbRwqtnYQUBr8tNk6YzlH0Rn"
+                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+                            "7QdT8gDgHkCPAEbqL5xBObFkZ7h3sqorW6WNgzfj"
                         ],
-                        "runnable_sql": "update \"sessions\" set \"payload\" = 'eyJfdG9rZW4iOiI3NHpDcmlUSDNGQU00TXJsTkRoRzlDZ0lEbGpEYnhMNG5vOTU2UU1sIiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDEiLCJyb3V0ZSI6bnVsbH19', \"last_activity\" = 1792865106, \"user_id\" = null, \"ip_address\" = '127.0.0.1', \"user_agent\" = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36' where \"id\" = '0t6oQrg6YHRLzY1XAbRwqtnYQUBr8tNk6YzlH0Rn'",
-                        "duration_ms": 1.13,
+                        "runnable_sql": "update \"sessions\" set \"payload\" = 'eyJfdG9rZW4iOiJxbXh2aEUzV2tnSlI0ZmNGdzRoNEt5YW9WOTBzRktmQTk5VzRLV3l5IiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDAiLCJyb3V0ZSI6bnVsbH19', \"last_activity\" = 1794675779, \"user_id\" = null, \"ip_address\" = '127.0.0.1', \"user_agent\" = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36' where \"id\" = '7QdT8gDgHkCPAEbqL5xBObFkZ7h3sqorW6WNgzfj'",
+                        "duration_ms": 0.84,
                         "connection": "pgsql",
                         "type": "write",
                         "callsite": null,
                         "stack": [],
-                        "at_ms": 15.241,
+                        "at_ms": 12.382,
                         "source_preserved": true,
                         "binding_policy": "full",
                         "bindings_complete": true,
@@ -338,7 +338,7 @@
                         "composers": [],
                         "data": [],
                         "timing": "composition_marker",
-                        "at_ms": 13.058
+                        "at_ms": 10.361
                     }
                 ]
             }
@@ -360,7 +360,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\ConnectionEstablished"
                         ],
-                        "at_ms": 0.968
+                        "at_ms": 0.923
                     },
                     {
                         "name": "Illuminate\\Database\\Events\\StatementPrepared",
@@ -369,7 +369,7 @@
                         "payload_types": [
                             "Illuminate\\Database\\Events\\StatementPrepared"
                         ],
-                        "at_ms": 9.126
+                        "at_ms": 7.297
                     }
                 ]
             }
@@ -410,23 +410,23 @@
                 "items": [
                     {
                         "name": "Route matching",
-                        "duration_ms": 0.46,
-                        "at_ms": 0.581
+                        "duration_ms": 0.44,
+                        "at_ms": 0.551
                     },
                     {
                         "name": "Route middleware, binding, controller and rendering",
-                        "duration_ms": 12.38,
-                        "at_ms": 12.957
+                        "duration_ms": 9.69,
+                        "at_ms": 10.234
                     },
                     {
                         "name": "Route response preparation",
-                        "duration_ms": 0.46,
-                        "at_ms": 13.416
+                        "duration_ms": 0.56,
+                        "at_ms": 10.797
                     },
                     {
                         "name": "Final response preparation",
                         "duration_ms": 0.05,
-                        "at_ms": 15.453
+                        "at_ms": 12.545
                     }
                 ]
             }
